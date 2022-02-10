@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.HomeFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:title="Eco help"
+            android:background="#19D320"
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/eco_help"
+            app:menu="@menu/my_menu"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/all_videos_cv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="2dp"
+        app:cardCornerRadius="15dp"
+        app:cardBackgroundColor="#19D320"
+        android:layout_marginTop="50dp"
+        app:layout_constraintRight_toLeftOf="@id/eco_videos_cv"
+        app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <TextView
+            android:id="@+id/all_video_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="All\nvideos"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="normal"
+            android:textSize="20sp"
+            android:padding="30dp"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/eco_videos_cv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="2dp"
+        app:cardCornerRadius="15dp"
+        app:cardBackgroundColor="#19D320"
+        android:layout_marginTop="50dp"
+        app:layout_constraintRight_toLeftOf="@id/my_videos_cv"
+        app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
+        app:layout_constraintLeft_toRightOf="@id/all_videos_cv">
+
+        <TextView
+            android:id="@+id/eco_video_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Eco\nvideos"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="normal"
+            android:textSize="20sp"
+            android:padding="30dp"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/my_videos_cv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="2dp"
+        app:cardCornerRadius="15dp"
+        app:cardBackgroundColor="#19D320"
+        android:layout_marginTop="50dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
+        app:layout_constraintLeft_toRightOf="@id/eco_videos_cv">
+
+        <TextView
+            android:id="@+id/my_video_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My\nvideos"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="normal"
+            android:textSize="20sp"
+            android:padding="30dp"
+            />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/ic_launcher_background"
+        app:layout_constraintTop_toBottomOf="@id/all_videos_cv"
+        />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
