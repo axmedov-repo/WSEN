@@ -1,4 +1,4 @@
-package uz.targetsoftwaredevelopment.myapplication.ui
+package uz.targetsoftwaredevelopment.myapplication.presentation.ui
 
 // create by khumoyun 11.02.2022
 
