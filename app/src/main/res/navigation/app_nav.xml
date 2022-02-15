@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/app_nav">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_nav"
+    app:startDestination="@id/homeScreen">
+
+    <fragment
+        android:id="@+id/homeScreen"
+        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.HomeScreen"
+        android:label="screen_home"
+        tools:layout="@layout/screen_home" />
 
 </navigation>

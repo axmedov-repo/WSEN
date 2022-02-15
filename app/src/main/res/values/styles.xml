@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="footer_images_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:adjustViewBounds">true</item>
+    </style>
+
+    <style name="footer_headers_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="paddingStart">2dp</item>
+        <item name="paddingEnd">2dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="footer_descriptions_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white2</item>
+        <item name="paddingStart">2dp</item>
+        <item name="paddingEnd">2dp</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>
