@@ -7,4 +7,7 @@
     <string name="language">Language</string>
     <string name="add_video">Add video</string>
     <string name="logout">Logout</string>
+
+    <string name="save">Save</string>
+
 </resources>

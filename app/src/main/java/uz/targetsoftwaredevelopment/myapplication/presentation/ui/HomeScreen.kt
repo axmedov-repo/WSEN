@@ -3,11 +3,13 @@ package uz.targetsoftwaredevelopment.myapplication.presentation.ui
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -47,11 +49,36 @@ class HomeScreen : Fragment(R.layout.screen_home), OnMapReadyCallback,
 
 //        navigationView.setCheckedItem()
         navigationDrawer()
+        onClickListener()
 
 
         val mapFragment =
             childFragmentManager.findFragmentById(R.id.mapVolunteers) as SupportMapFragment
         mapFragment.getMapAsync(this)
+    }
+
+    private fun onClickListener() {
+        binding.apply {
+
+            allVideosCv.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString("Title","All videos")
+                findNavController().navigate(R.id.videosItemFragment,bundle)
+            }
+
+            ecoVideosCv.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString("Title","Ecology videos")
+                findNavController().navigate(R.id.videosItemFragment,bundle)
+            }
+
+            myVideosCv.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString("Title","My Videos")
+                findNavController().navigate(R.id.myVideosFragment,bundle)
+            }
+
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -62,6 +89,22 @@ class HomeScreen : Fragment(R.layout.screen_home), OnMapReadyCallback,
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.nav_profile->{
+                findNavController().navigate(R.id.profileFragment)
+            }
+            R.id.nav_add_video->{
+
+            }
+            R.id.nav_language->{
+                findNavController().navigate(R.id.languageFragment)
+            }
+            R.id.nav_logout->{
+                Toast.makeText(requireContext(), "Logout", Toast.LENGTH_SHORT).show()
+            }
+
+
+        }
         return true
     }
 

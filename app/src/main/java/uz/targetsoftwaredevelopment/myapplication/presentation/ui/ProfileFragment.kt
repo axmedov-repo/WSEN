@@ -17,12 +17,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
+import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogCameraBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogPermissionBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentProfileBinding
@@ -32,133 +35,159 @@ import java.io.IOException
 
 class ProfileFragment : Fragment() {
 
-    private lateinit var binding: FragmentProfileBinding
-
+    private lateinit var binding:FragmentProfileBinding
     var OLD_REQUEST_CODE = 1
     var CAMERA_REQUEST_CODE = 1
     lateinit var currentImagePath: String
     lateinit var uri:Uri
 
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentProfileBinding.inflate(inflater,container,false)
 
-        binding.addImg.setOnClickListener {
-            val dialog = AlertDialog.Builder(requireContext())
-            val dialogCameraBinding = DialogCameraBinding.inflate(layoutInflater)
-            dialog.setView(dialogCameraBinding.root)
-            val builder = dialog.create()
-            builder.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        binding.apply {
 
-            dialogCameraBinding.galleryView.setOnClickListener {
-                builder.dismiss()
-                Dexter.withContext(requireContext())
-                    .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                    .withListener(object :PermissionListener{
-                        override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                            Toast.makeText(requireContext(), "Allowed", Toast.LENGTH_SHORT).show()
-
-                            // open gallery
-                            getGalleryImage.launch("image/*")
-
-                        }
-
-                        override fun onPermissionDenied(response: PermissionDeniedResponse) {
-                            Toast.makeText(requireContext(), "Deny", Toast.LENGTH_SHORT).show()
-                            if(response.isPermanentlyDenied){
-                                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                                val uri: Uri = Uri.fromParts("package",activity?.packageName,null)
-                                intent.data = uri
-                                startActivity(intent)
-                            }
-                        }
-
-                        override fun onPermissionRationaleShouldBeShown(
-                            requset: PermissionRequest?,
-                            token: PermissionToken?
-                        ) {
-                            val dialogGallery = AlertDialog.Builder(requireContext())
-                            val dialogPermissionBinding = DialogPermissionBinding.inflate(layoutInflater)
-                            dialogGallery.setView(dialogPermissionBinding.root)
-                            val builderGallery = dialogGallery.create()
-                            builderGallery.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-                            dialogPermissionBinding.cancelCv.setOnClickListener {
-                                token?.cancelPermissionRequest()
-                                builderGallery.dismiss()
-                            }
-
-                            dialogPermissionBinding.allowCv.setOnClickListener {
-                                token?.continuePermissionRequest()
-                                builderGallery.dismiss()
-                            }
-                            builderGallery.show()
-                        }
-                    }).check()
+            addImg.setOnClickListener {
+                onClickAddImg()
             }
 
-            dialogCameraBinding.cameraView.setOnClickListener {
-                builder.dismiss()
-                Dexter.withContext(requireContext())
-                    .withPermission(Manifest.permission.CAMERA)
-                    .withListener(object :PermissionListener{
-                        override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
-                            Toast.makeText(requireContext(), "Allowed", Toast.LENGTH_SHORT).show()
-
-                            //open camera
-                            val imageFile = createImageFile()
-                            uri = FileProvider.getUriForFile(requireContext(),uz.targetsoftwaredevelopment.myapplication.BuildConfig.APPLICATION_ID,imageFile)
-                            takePhoto.launch(uri)
-                        }
-
-                        override fun onPermissionDenied(response: PermissionDeniedResponse) {
-                            Toast.makeText(requireContext(), "Deny", Toast.LENGTH_SHORT).show()
-                            if(response.isPermanentlyDenied){
-                                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                                val uri:Uri = Uri.fromParts("package",activity?.packageName,null)
-                                intent.data = uri
-                                startActivity(intent)
-                            }
-
-                        }
-
-                        override fun onPermissionRationaleShouldBeShown(
-                            request: PermissionRequest?,
-                            token: PermissionToken?
-                        ) {
-                            Toast.makeText(requireContext(), "Beshown", Toast.LENGTH_SHORT).show()
-                            val dialogCamera= AlertDialog.Builder(requireContext())
-                            val dialogPermissionBinding = DialogPermissionBinding.inflate(layoutInflater)
-                            dialogCamera.setView(dialogPermissionBinding.root)
-                            val builderCamera = dialogCamera.create()
-                            builderCamera.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-                            dialogPermissionBinding.cancelCv.setOnClickListener {
-                                token?.cancelPermissionRequest()
-                                builderCamera.dismiss()
-                            }
-
-                            dialogPermissionBinding.allowCv.setOnClickListener {
-                                token?.continuePermissionRequest()
-                                builderCamera.dismiss()
-                            }
-                            builderCamera.show()
-
-                        }
-                    }).check()
-
+            toolbar.setNavigationOnClickListener {
+                findNavController().popBackStack(R.id.homeScreen,false)
             }
 
-            builder.show()
+
         }
-
         return binding.root
     }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
+    private fun onClickAddImg() {
+        val dialog = AlertDialog.Builder(requireContext())
+        val dialogCameraBinding = DialogCameraBinding.inflate(layoutInflater)
+        dialog.setView(dialogCameraBinding.root)
+        val builder = dialog.create()
+        builder.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialogCameraBinding.galleryView.setOnClickListener {
+            builder.dismiss()
+            getGalleryPermission()
+        }
+
+        dialogCameraBinding.cameraView.setOnClickListener {
+            builder.dismiss()
+            getCameraPermission()
+        }
+
+        builder.show()
+
+    }
+
+    private fun getCameraPermission() {
+        Dexter.withContext(requireContext())
+            .withPermission(Manifest.permission.CAMERA)
+            .withListener(object :PermissionListener{
+                override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
+                    Toast.makeText(requireContext(), "Allowed", Toast.LENGTH_SHORT).show()
+
+                    //open camera
+                    val imageFile = createImageFile()
+                    uri = FileProvider.getUriForFile(requireContext(),uz.targetsoftwaredevelopment.myapplication.BuildConfig.APPLICATION_ID,imageFile)
+                    takePhoto.launch(uri)
+                }
+
+                override fun onPermissionDenied(response: PermissionDeniedResponse) {
+                    Toast.makeText(requireContext(), "Deny", Toast.LENGTH_SHORT).show()
+                    if(response.isPermanentlyDenied){
+                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                        val uri:Uri = Uri.fromParts("package",activity?.packageName,null)
+                        intent.data = uri
+                        startActivity(intent)
+                    }
+
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    request: PermissionRequest?,
+                    token: PermissionToken?
+                ) {
+                    Toast.makeText(requireContext(), "Beshown", Toast.LENGTH_SHORT).show()
+                    val dialogCamera= AlertDialog.Builder(requireContext())
+                    val dialogPermissionBinding = DialogPermissionBinding.inflate(layoutInflater)
+                    dialogCamera.setView(dialogPermissionBinding.root)
+                    val builderCamera = dialogCamera.create()
+                    builderCamera.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+                    dialogPermissionBinding.cancelCv.setOnClickListener {
+                        token?.cancelPermissionRequest()
+                        builderCamera.dismiss()
+                    }
+
+                    dialogPermissionBinding.allowCv.setOnClickListener {
+                        token?.continuePermissionRequest()
+                        builderCamera.dismiss()
+                    }
+                    builderCamera.show()
+
+                }
+            }).check()
+
+
+    }
+
+    private fun getGalleryPermission() {
+        Dexter.withContext(requireContext())
+            .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+            .withListener(object :PermissionListener{
+                override fun onPermissionGranted(response: PermissionGrantedResponse?) {
+                    Toast.makeText(requireContext(), "Allowed", Toast.LENGTH_SHORT).show()
+
+                    // open gallery
+                    getGalleryImage.launch("image/*")
+
+                }
+
+                override fun onPermissionDenied(response: PermissionDeniedResponse) {
+                    Toast.makeText(requireContext(), "Deny", Toast.LENGTH_SHORT).show()
+                    if(response.isPermanentlyDenied){
+                        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                        val uri: Uri = Uri.fromParts("package",activity?.packageName,null)
+                        intent.data = uri
+                        startActivity(intent)
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    requset: PermissionRequest?,
+                    token: PermissionToken?
+                ) {
+                    val dialogGallery = AlertDialog.Builder(requireContext())
+                    val dialogPermissionBinding = DialogPermissionBinding.inflate(layoutInflater)
+                    dialogGallery.setView(dialogPermissionBinding.root)
+                    val builderGallery = dialogGallery.create()
+                    builderGallery.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+                    dialogPermissionBinding.cancelCv.setOnClickListener {
+                        token?.cancelPermissionRequest()
+                        builderGallery.dismiss()
+                    }
+
+                    dialogPermissionBinding.allowCv.setOnClickListener {
+                        token?.continuePermissionRequest()
+                        builderGallery.dismiss()
+                    }
+                    builderGallery.show()
+                }
+            }).check()
+
+    }
 
     private var getGalleryImage =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
@@ -171,7 +200,6 @@ class ProfileFragment : Fragment() {
             openInputStream?.close()
 //            val readBytes = file.readBytes()
         }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -195,7 +223,6 @@ class ProfileFragment : Fragment() {
 
     }
 
-
     @Throws(IOException::class)
     fun createImageFile(): File {
         val m = System.currentTimeMillis()
@@ -212,8 +239,5 @@ class ProfileFragment : Fragment() {
                 binding.profileImg.setImageURI(uri)
             }
         }
-
-
-
 
 }
