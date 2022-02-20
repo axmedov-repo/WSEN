@@ -3,32 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_nav"
-    app:startDestination="@id/homeScreen">
-
+    app:startDestination="@id/basicScreen">
     <fragment
-        android:id="@+id/homeScreen"
-        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.HomeScreen"
-        android:label="screen_home"
-        tools:layout="@layout/screen_home" />
-    <fragment
-        android:id="@+id/videosItemFragment"
-        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.VideosItemFragment"
-        android:label="VideosItemFragment"
-        tools:layout="@layout/fragment_videos_item"/>
-    <fragment
-        android:id="@+id/languageFragment"
-        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.LanguageFragment"
-        android:label="fragment_language"
-        tools:layout="@layout/fragment_language" />
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/myVideosFragment"
-        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.MyVideosFragment"
-        android:label="fragment_myvideos"
-        tools:layout="@layout/fragment_my_videos" />
-
+        android:id="@+id/basicScreen"
+        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.BasicScreen"
+        android:label="screen_basic_nav"
+        tools:layout="@layout/screen_basic_nav" />
 </navigation>

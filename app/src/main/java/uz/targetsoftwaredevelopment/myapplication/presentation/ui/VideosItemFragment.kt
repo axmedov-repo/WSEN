@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import by.kirich1409.viewbindingdelegate.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
-import uz.targetsoftwaredevelopment.myapplication.adapters.SliderAdapter
+import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.SliderAdapter
 import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentVideosItemBinding
 
-
+@AndroidEntryPoint
 class VideosItemFragment : Fragment() {
 
     private lateinit var binding:FragmentVideosItemBinding
@@ -45,7 +45,7 @@ class VideosItemFragment : Fragment() {
 
     private fun onClickListener() {
        binding.toolbarVideos.setNavigationOnClickListener {
-           findNavController().popBackStack(R.id.homeScreen,false)
+           findNavController().popBackStack()
        }
     }
 
