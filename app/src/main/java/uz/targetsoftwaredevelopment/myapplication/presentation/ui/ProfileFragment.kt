@@ -3,12 +3,14 @@ package uz.targetsoftwaredevelopment.myapplication.presentation.ui
 // create by khumoyun 11.02.2022
 
 import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -90,6 +92,20 @@ class ProfileFragment : Fragment() {
 
     }
 
+    private var getGalleryImage =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            if(uri!=null){
+                binding.profileImg.setImageURI(uri)
+                val openInputStream = activity?.contentResolver?.openInputStream(uri)
+                val m = System.currentTimeMillis()
+                val file = File(activity?.filesDir, "$m.jpg")
+                val fileOutputStream = FileOutputStream(file)
+                openInputStream?.copyTo(fileOutputStream)
+                openInputStream?.close()
+//            val readBytes = file.readBytes()
+            }
+        }
+
     private fun getCameraPermission() {
         Dexter.withContext(requireContext())
             .withPermission(Manifest.permission.CAMERA)
@@ -137,7 +153,11 @@ class ProfileFragment : Fragment() {
                     builderCamera.show()
 
                 }
-            }).check()
+            }).withErrorListener {
+                Toast.makeText(requireContext(), "Some Error! ", Toast.LENGTH_SHORT).show()
+            }
+            .onSameThread()
+            .check()
 
 
     }
@@ -185,24 +205,20 @@ class ProfileFragment : Fragment() {
                     }
                     builderGallery.show()
                 }
-            }).check()
+            }).withErrorListener {
+                Toast.makeText(requireContext(), "Some Error! ", Toast.LENGTH_SHORT).show()
+            }
+            .onSameThread()
+            .check()
 
     }
 
-    private var getGalleryImage =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            binding.profileImg.setImageURI(uri)
-            val openInputStream = activity?.contentResolver?.openInputStream(uri)
-            val m = System.currentTimeMillis()
-            val file = File(activity?.filesDir, "$m.jpg")
-            val fileOutputStream = FileOutputStream(file)
-            openInputStream?.copyTo(fileOutputStream)
-            openInputStream?.close()
-//            val readBytes = file.readBytes()
-        }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_CANCELED) {
+            Log.d("what", "cancle")
+            return
+        }
         if (requestCode == OLD_REQUEST_CODE && resultCode == AppCompatActivity.RESULT_OK) {
             val uri = data?.data ?: return
             binding.profileImg.setImageURI(uri)

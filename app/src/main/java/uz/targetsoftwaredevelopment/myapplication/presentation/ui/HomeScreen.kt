@@ -94,6 +94,7 @@ class HomeScreen : Fragment(R.layout.screen_home), OnMapReadyCallback,
                 findNavController().navigate(R.id.profileFragment)
             }
             R.id.nav_add_video->{
+                findNavController().navigate(R.id.recordVideoFragment)
 
             }
             R.id.nav_language->{

@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import by.kirich1409.viewbindingdelegate.viewBinding
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.adapters.SliderAdapter
 import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentVideosItemBinding
@@ -17,11 +18,6 @@ class VideosItemFragment : Fragment() {
     private lateinit var binding:FragmentVideosItemBinding
     private lateinit var sliderAdapter: SliderAdapter
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,9 +26,28 @@ class VideosItemFragment : Fragment() {
     ): View? {
         binding = FragmentVideosItemBinding.inflate(inflater,container,false)
 
+        sliderAdapter = SliderAdapter(1,requireContext())
+//        val decoration = DividerItemDecoration(requireContext(),LinearLayoutManager.VERTICAL)
+//        binding.carouselRv.addItemDecoration(decoration)
+        binding.carouselRv.adapter = sliderAdapter
+
+//        binding.carouselRv.apply {
+//            set3DItem(true)
+//            setInfinite(false)
+//            setFlat(false)
+//            setAlpha(false)
+//            setIsScrollingEnabled(true)
+//            setIntervalRatio(0.65f)
+//            setScrollingTouchSlop(1)
+//        }
+
         setData()
         loadDataCarouseRv()
         onClickListener()
+
+
+
+
 
         return binding.root
     }
@@ -50,16 +65,6 @@ class VideosItemFragment : Fragment() {
     }
 
     private fun loadDataCarouseRv() {
-        sliderAdapter = SliderAdapter(1)
-        binding.carouselRv.apply {
-            adapter = sliderAdapter
-            set3DItem(false)
-            setAlpha(false)
-            setInfinite(true)
-            setFlat(false)
-            setIsScrollingEnabled(true)
-            setIntervalRatio(0.65f)
-        }
 
     }
 

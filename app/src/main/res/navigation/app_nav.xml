@@ -30,5 +30,16 @@
         android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.MyVideosFragment"
         android:label="fragment_myvideos"
         tools:layout="@layout/fragment_my_videos" />
+    <fragment
+        android:id="@+id/recordVideoFragment"
+        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.RecordVideoFragment"
+        android:label="fragment_record_video"
+        tools:layout="@layout/fragment_record_video" />
+    <fragment
+        android:id="@+id/watchVideoFragment"
+        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.WatchVideoFragment"
+        android:label="fragment_watch_video"
+        tools:layout="@layout/fragment_watch_video" />
+
 
 </navigation>
