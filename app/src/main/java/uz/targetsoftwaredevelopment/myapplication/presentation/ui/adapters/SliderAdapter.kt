@@ -1,4 +1,4 @@
-package uz.targetsoftwaredevelopment.myapplication.adapters
+package uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater

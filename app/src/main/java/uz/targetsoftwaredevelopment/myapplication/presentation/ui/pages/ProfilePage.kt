@@ -1,4 +1,4 @@
-package uz.targetsoftwaredevelopment.myapplication.presentation.ui
+package uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages
 
 // create by khumoyun 11.02.2022
 
@@ -20,14 +20,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
-import uz.targetsoftwaredevelopment.myapplication.R
+import dagger.hilt.android.AndroidEntryPoint
+import uz.targetsoftwaredevelopment.myapplication.BuildConfig
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogCameraBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogPermissionBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentProfileBinding
@@ -35,20 +35,21 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
-class ProfileFragment : Fragment() {
+@AndroidEntryPoint
+class ProfilePage : Fragment() {
 
-    private lateinit var binding:FragmentProfileBinding
+    private lateinit var binding: FragmentProfileBinding
     var OLD_REQUEST_CODE = 1
     var CAMERA_REQUEST_CODE = 1
     lateinit var currentImagePath: String
-    lateinit var uri:Uri
+    lateinit var uri: Uri
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentProfileBinding.inflate(inflater,container,false)
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         binding.apply {
 
@@ -57,14 +58,11 @@ class ProfileFragment : Fragment() {
             }
 
             toolbar.setNavigationOnClickListener {
-                findNavController().popBackStack(R.id.homeScreen,false)
+                findNavController().popBackStack()
             }
-
-
         }
         return binding.root
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -109,21 +107,24 @@ class ProfileFragment : Fragment() {
     private fun getCameraPermission() {
         Dexter.withContext(requireContext())
             .withPermission(Manifest.permission.CAMERA)
-            .withListener(object :PermissionListener{
+            .withListener(object : PermissionListener {
                 override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
                     Toast.makeText(requireContext(), "Allowed", Toast.LENGTH_SHORT).show()
 
                     //open camera
                     val imageFile = createImageFile()
-                    uri = FileProvider.getUriForFile(requireContext(),uz.targetsoftwaredevelopment.myapplication.BuildConfig.APPLICATION_ID,imageFile)
+                    uri = FileProvider.getUriForFile(
+                        requireContext(),
+                        BuildConfig.APPLICATION_ID, imageFile
+                    )
                     takePhoto.launch(uri)
                 }
 
                 override fun onPermissionDenied(response: PermissionDeniedResponse) {
                     Toast.makeText(requireContext(), "Deny", Toast.LENGTH_SHORT).show()
-                    if(response.isPermanentlyDenied){
+                    if (response.isPermanentlyDenied) {
                         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                        val uri:Uri = Uri.fromParts("package",activity?.packageName,null)
+                        val uri: Uri = Uri.fromParts("package", activity?.packageName, null)
                         intent.data = uri
                         startActivity(intent)
                     }
@@ -135,7 +136,7 @@ class ProfileFragment : Fragment() {
                     token: PermissionToken?
                 ) {
                     Toast.makeText(requireContext(), "Beshown", Toast.LENGTH_SHORT).show()
-                    val dialogCamera= AlertDialog.Builder(requireContext())
+                    val dialogCamera = AlertDialog.Builder(requireContext())
                     val dialogPermissionBinding = DialogPermissionBinding.inflate(layoutInflater)
                     dialogCamera.setView(dialogPermissionBinding.root)
                     val builderCamera = dialogCamera.create()
@@ -165,7 +166,7 @@ class ProfileFragment : Fragment() {
     private fun getGalleryPermission() {
         Dexter.withContext(requireContext())
             .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-            .withListener(object :PermissionListener{
+            .withListener(object : PermissionListener {
                 override fun onPermissionGranted(response: PermissionGrantedResponse?) {
                     Toast.makeText(requireContext(), "Allowed", Toast.LENGTH_SHORT).show()
 
@@ -176,9 +177,9 @@ class ProfileFragment : Fragment() {
 
                 override fun onPermissionDenied(response: PermissionDeniedResponse) {
                     Toast.makeText(requireContext(), "Deny", Toast.LENGTH_SHORT).show()
-                    if(response.isPermanentlyDenied){
+                    if (response.isPermanentlyDenied) {
                         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                        val uri: Uri = Uri.fromParts("package",activity?.packageName,null)
+                        val uri: Uri = Uri.fromParts("package", activity?.packageName, null)
                         intent.data = uri
                         startActivity(intent)
                     }

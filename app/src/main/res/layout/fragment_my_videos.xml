@@ -1,42 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.ui.MyVideosFragment">
+    android:orientation="vertical"
+    tools:context=".presentation.ui.MyVideosPage">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_videos_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="0dp">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/my_videos_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:title="My Videos"
-            app:contentInsetStart="0dp"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:titleTextColor="@color/white"
-            android:background="#0CEF15"
-            app:navigationIcon="@drawable/ic_arrow_back"
-            />
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <RelativeLayout
+        app:title="My Videos"
+        app:titleTextColor="@color/white"
+        android:background="#0CEF15"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/my_videos_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/my_videos_rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/my_vidoes_item"
-            tools:itemCount="50"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            />
-    </RelativeLayout>
+        android:layout_height="match_parent"
+        tools:listitem="@layout/my_vidoes_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

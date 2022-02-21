@@ -1,10 +1,11 @@
-package uz.targetsoftwaredevelopment.myapplication.presentation.ui
+package uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -14,10 +15,12 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [WishFragment.newInstance] factory method to
+ * Use the [WishPage.newInstance] factory method to
  * create an instance of this fragment.
  */
-class WishFragment : Fragment() {
+
+@AndroidEntryPoint
+class WishPage : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -50,7 +53,7 @@ class WishFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            WishFragment().apply {
+            WishPage().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
