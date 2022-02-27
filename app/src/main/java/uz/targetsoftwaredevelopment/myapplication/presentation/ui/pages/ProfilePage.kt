@@ -19,7 +19,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -57,9 +56,9 @@ class ProfilePage : Fragment() {
                 onClickAddImg()
             }
 
-            toolbar.setNavigationOnClickListener {
-                findNavController().popBackStack()
-            }
+//            toolbar.setNavigationOnClickListener {
+//                findNavController().popBackStack()
+//            }
         }
         return binding.root
     }

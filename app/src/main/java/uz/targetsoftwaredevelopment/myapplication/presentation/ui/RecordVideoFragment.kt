@@ -19,8 +19,9 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentRecordVideoBinding
-
+@AndroidEntryPoint
 class RecordVideoFragment : Fragment() {
 
     private lateinit var binding:FragmentRecordVideoBinding
@@ -37,7 +38,7 @@ class RecordVideoFragment : Fragment() {
 
         requestMultiplePermissions()
 
-        binding.videoBtn.setOnClickListener {
+        binding.fab.setOnClickListener {
             showPictureDialog()
         }
 
@@ -68,8 +69,7 @@ class RecordVideoFragment : Fragment() {
 
     private fun takeVideoFromCamera() {
         val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-            .putExtra(android.provider.MediaStore.EXTRA_DURATION_LIMIT,15)
-            .putExtra(MediaStore.EXTRA_SIZE_LIMIT,10)
+            .putExtra(MediaStore.EXTRA_DURATION_LIMIT,15)
         startActivityForResult(intent, CAMERA)
     }
 

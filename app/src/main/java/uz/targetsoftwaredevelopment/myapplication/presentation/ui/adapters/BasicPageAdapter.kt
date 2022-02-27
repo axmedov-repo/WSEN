@@ -4,6 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import uz.targetsoftwaredevelopment.myapplication.presentation.ui.RecordVideoFragment
+import uz.targetsoftwaredevelopment.myapplication.presentation.ui.VideosItemFragment
 import uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages.*
 
 class BasicPageAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
@@ -23,8 +25,8 @@ class BasicPageAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
 
         return when (position) {
             0 -> HomePage()
-            1 -> AllVideosPage()
-            2 -> AddVideoPage()
+            1 -> VideosItemFragment()
+            2 -> RecordVideoFragment()
             3 -> WishPage()
             else -> ProfilePage()
         }

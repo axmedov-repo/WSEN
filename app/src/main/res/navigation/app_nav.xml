@@ -9,4 +9,9 @@
         android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.BasicScreen"
         android:label="screen_basic_nav"
         tools:layout="@layout/screen_basic_nav" />
+    <fragment
+        android:id="@+id/watchVideoFragment"
+        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.WatchVideoFragment"
+        android:label="fragment_watch_video"
+        tools:layout="@layout/fragment_watch_video" />
 </navigation>
