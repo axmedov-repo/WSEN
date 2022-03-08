@@ -17,7 +17,7 @@ android {
         renderscriptSupportModeEnabled true
         versionCode 1
         versionName "1.0"
-        buildConfigField('String', 'BASE_URL', '"our url"')
+        buildConfigField('String', 'BASE_URL', '"http://147.182.250.241/"')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

@@ -5,7 +5,9 @@ import android.view.View
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -15,65 +17,99 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
+import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.CategoriesItem
+import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.Statistics
 import uz.targetsoftwaredevelopment.myapplication.databinding.PageHomeBinding
-import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.HomeScreenViewModel
-import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.impl.HomeScreenViewModelImpl
+import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.HomePageViewModel
+import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.impl.HomePageViewModelImpl
 
 @AndroidEntryPoint
-class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback{
+class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback {
     private val binding by viewBinding(PageHomeBinding::bind)
-    private val viewModel: HomeScreenViewModel by viewModels<HomeScreenViewModelImpl>()
+    private val viewModel: HomePageViewModel by viewModels<HomePageViewModelImpl>()
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var map: GoogleMap
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       /* drawerLayout = view.findViewById(R.id.drawer_layout)
-        navigationView = view.findViewById(R.id.navigation_view)*/
+        viewModel.getHomePageData()
 
-     /*   requireActivity().onBackPressedDispatcher
-            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (drawerLayout.isDrawerVisible(GravityCompat.END)) {
-                        drawerLayout.closeDrawer(GravityCompat.END)
-                    }
-                }
-            })*/
+        /* drawerLayout = view.findViewById(R.id.drawer_layout)
+         navigationView = view.findViewById(R.id.navigation_view)*/
+
+        /*   requireActivity().onBackPressedDispatcher
+               .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                   override fun handleOnBackPressed() {
+                       if (drawerLayout.isDrawerVisible(GravityCompat.END)) {
+                           drawerLayout.closeDrawer(GravityCompat.END)
+                       }
+                   }
+               })*/
 
 //        navigationView.setCheckedItem()
-     /*   navigationDrawer()
-        onClickListener()
-*/
+        /*   navigationDrawer()
+           onClickListener()
+   */
 
         val mapFragment =
             childFragmentManager.findFragmentById(R.id.mapVolunteers) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        viewModel.statisticsLiveData.observe(viewLifecycleOwner, statisticsObserver)
+        viewModel.categoriesLiveData.observe(viewLifecycleOwner, categoriesObserver)
     }
 
-   /* private fun onClickListener() {
-        binding.apply {
+    private val statisticsObserver = Observer<Statistics> {
+        binding.txtHeaderVolunteers.text = "${it.allVolunteers}"
+    }
 
-            allVideosCv.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putString("Title","All videos")
-                findNavController().navigate(R.id.videosItemFragment,bundle)
-            }
+    private val categoriesObserver = Observer<List<CategoriesItem?>?> {
+        Glide.with(binding.imgBgEcoVideos.context)
+            .load(it[0]!!.icon)
+            .placeholder(R.drawable.ic_place_holder)
+            .error(R.drawable.ic_error)
+            .into(binding.imgBgEcoVideos)
+        binding.ecoVideoTv.text = it[0]!!.name
 
-            ecoVideosCv.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putString("Title","Ecology videos")
-                findNavController().navigate(R.id.videosItemFragment,bundle)
-            }
+        Glide.with(binding.imgBgMyVideos.context)
+            .load(it[1]!!.icon)
+            .placeholder(R.drawable.ic_place_holder)
+            .error(R.drawable.ic_error)
+            .into(binding.imgBgMyVideos)
+        binding.myVideoTv.text = it[1]!!.name
 
-            myVideosCv.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putString("Title","My Videos")
-                findNavController().navigate(R.id.myVideosFragment,bundle)
-            }
+        Glide.with(binding.imgBgAllVideos.context)
+            .load(it[2]!!.icon)
+            .placeholder(R.drawable.ic_place_holder)
+            .error(R.drawable.ic_error)
+            .into(binding.imgBgAllVideos)
+        binding.allVideoTv.text = it[2]!!.name
+    }
 
-        }
-    }*/
+    /* private fun onClickListener() {
+         binding.apply {
+
+             allVideosCv.setOnClickListener {
+                 val bundle = Bundle()
+                 bundle.putString("Title","All videos")
+                 findNavController().navigate(R.id.videosItemFragment,bundle)
+             }
+
+             ecoVideosCv.setOnClickListener {
+                 val bundle = Bundle()
+                 bundle.putString("Title","Ecology videos")
+                 findNavController().navigate(R.id.videosItemFragment,bundle)
+             }
+
+             myVideosCv.setOnClickListener {
+                 val bundle = Bundle()
+                 bundle.putString("Title","My Videos")
+                 findNavController().navigate(R.id.myVideosFragment,bundle)
+             }
+
+         }
+     }*/
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
@@ -82,38 +118,38 @@ class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback{
         map.moveCamera(CameraUpdateFactory.newLatLng(uzbekistan))
     }
 
-   /* override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.nav_profile->{
-                findNavController().navigate(R.id.profileFragment)
-            }
-            R.id.nav_add_video->{
-                findNavController().navigate(R.id.recordVideoFragment)
+    /* override fun onNavigationItemSelected(item: MenuItem): Boolean {
+         when(item.itemId){
+             R.id.nav_profile->{
+                 findNavController().navigate(R.id.profileFragment)
+             }
+             R.id.nav_add_video->{
+                 findNavController().navigate(R.id.recordVideoFragment)
 
-            }
-            R.id.nav_language->{
-                findNavController().navigate(R.id.languageFragment)
-            }
-            R.id.nav_logout->{
-                Toast.makeText(requireContext(), "Logout", Toast.LENGTH_SHORT).show()
-            }
+             }
+             R.id.nav_language->{
+                 findNavController().navigate(R.id.languageFragment)
+             }
+             R.id.nav_logout->{
+                 Toast.makeText(requireContext(), "Logout", Toast.LENGTH_SHORT).show()
+             }
 
 
-        }
-        return true
-    }*/
+         }
+         return true
+     }*/
 
-   /* private fun navigationDrawer() {
-        navigationView.bringToFront()
-        navigationView.setNavigationItemSelectedListener(this)
+    /* private fun navigationDrawer() {
+         navigationView.bringToFront()
+         navigationView.setNavigationItemSelectedListener(this)
 
-        binding.btnMenu.setOnClickListener {
-            if (drawerLayout.isDrawerVisible(GravityCompat.END)) {
-                drawerLayout.closeDrawer(GravityCompat.END)
-            } else {
-                drawerLayout.openDrawer(GravityCompat.END)
-            }
-        }
-    }*/
+         binding.btnMenu.setOnClickListener {
+             if (drawerLayout.isDrawerVisible(GravityCompat.END)) {
+                 drawerLayout.closeDrawer(GravityCompat.END)
+             } else {
+                 drawerLayout.openDrawer(GravityCompat.END)
+             }
+         }
+     }*/
 
 }
