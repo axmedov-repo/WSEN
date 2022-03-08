@@ -68,7 +68,7 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:4.3.0'
     // If you want to use the GPU Filters
     implementation 'jp.co.cyberagent.android:gpuimage:2.1.0'
-    
+
     //Video View lib
     implementation 'bg.devlabs:fullscreen-video-view:1.2.0'
 //    implementation 'com.linsea:universalvideoview:1.1.0'
