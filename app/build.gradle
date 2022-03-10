@@ -71,7 +71,11 @@ dependencies {
     
     //Video View lib
     implementation 'bg.devlabs:fullscreen-video-view:1.2.0'
-//    implementation 'com.linsea:universalvideoview:1.1.0'
+
+    //Exoplayer
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.17.0'
+    implementation 'com.google.android.exoplayer:exoplayer-dash:2.17.0'
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.17.0'
 
 
     /**

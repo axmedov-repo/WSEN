@@ -11,7 +11,11 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
+    gradle.ext.exoplayerModulePrefix = 'exoplayer-'
+//    apply from: file("path/to/exoplayer/core_settings.gradle")
+
 }
+
 
 rootProject.name = "UzVolunteers"
 include ':app'
