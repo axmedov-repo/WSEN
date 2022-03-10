@@ -21,6 +21,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentRecordVideoBinding
+
 @AndroidEntryPoint
 class RecordVideoFragment : Fragment() {
 
@@ -41,8 +42,6 @@ class RecordVideoFragment : Fragment() {
         binding.fab.setOnClickListener {
             showPictureDialog()
         }
-
-
 
         return binding.root
     }
