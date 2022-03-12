@@ -4,18 +4,14 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentLoginBinding
+import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
+import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentLoginBinding
 import uz.targetsoftwaredevelopment.myapplication.ui.login.adapters.LoginAdapter
-import android.view.inputmethod.InputMethodManager
-
-import androidx.core.content.ContextCompat.getSystemService
-import com.google.android.material.tabs.TabLayoutMediator
-import android.content.Context.INPUT_METHOD_SERVICE as INPUT_METHOD_SERVICE1
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,6 +24,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [LoginFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null

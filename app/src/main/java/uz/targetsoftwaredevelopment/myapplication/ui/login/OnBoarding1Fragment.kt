@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentOnBoarding1Binding
 
@@ -20,6 +21,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [OnBoardingFragment1.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class OnBoardingFragment1 : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null

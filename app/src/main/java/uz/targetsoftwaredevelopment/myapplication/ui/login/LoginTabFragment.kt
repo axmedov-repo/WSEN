@@ -1,16 +1,17 @@
 package uz.targetsoftwaredevelopment.myapplication.ui.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import uz.targetsoftwaredevelopment.myapplication.R
+import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentLoginTabBinding
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+@AndroidEntryPoint
 class LoginTabFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null

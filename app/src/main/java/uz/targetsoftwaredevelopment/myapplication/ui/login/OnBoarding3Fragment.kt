@@ -1,22 +1,19 @@
 package uz.targetsoftwaredevelopment.myapplication.ui.login
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.squareup.picasso.Picasso
-import uz.targetsoftwaredevelopment.myapplication.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
-import uz.targetsoftwaredevelopment.myapplication.databinding.ActivityLoginBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentOnBoarding3Binding
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
+@AndroidEntryPoint
 class OnBoarding3Fragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null

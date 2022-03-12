@@ -1,12 +1,10 @@
 package uz.targetsoftwaredevelopment.myapplication.presentation.ui
 
-import android.media.MediaPlayer.create
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.MediaController
 import androidx.fragment.app.Fragment
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
