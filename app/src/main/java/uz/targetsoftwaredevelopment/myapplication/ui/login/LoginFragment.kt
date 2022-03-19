@@ -4,19 +4,13 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentLoginBinding
+import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
+import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentLoginBinding
 import uz.targetsoftwaredevelopment.myapplication.ui.login.adapters.LoginAdapter
-import android.view.inputmethod.InputMethodManager
-
-import androidx.core.content.ContextCompat.getSystemService
-import com.google.android.material.tabs.TabLayoutMediator
-import android.content.Context.INPUT_METHOD_SERVICE as INPUT_METHOD_SERVICE1
-
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,7 +46,6 @@ class LoginFragment : Fragment() {
 
         binding.apply {
 
-
             tabLayout.visibility
             tabLayout.addTab(tabLayout.newTab().setText("LOGIN"))
             tabLayout.addTab(tabLayout.newTab().setText("SIGN UP"))
@@ -83,11 +76,10 @@ class LoginFragment : Fragment() {
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     viewPager.currentItem = tab.position
                     val position = tab.position
-                    if (position==0){
+                    if (position == 0) {
                         tv1.setTextColor(Color.parseColor("#727272"))
                         tv2.setTextColor(Color.parseColor("#FF000000"))
-                    }
-                    else{
+                    } else {
                         tv2.setTextColor(Color.parseColor("#727272"))
                         tv1.setTextColor(Color.parseColor("#FF000000"))
                     }
