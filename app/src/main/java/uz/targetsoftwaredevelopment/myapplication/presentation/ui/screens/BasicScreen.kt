@@ -28,11 +28,11 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
 
             bottomNavigationView.setOnItemSelectedListener {
                 when (it.itemId) {
-                    R.id.home -> innerLayout.pager.currentItem = 0
-                    R.id.videos -> innerLayout.pager.currentItem = 1
-                    R.id.add_video -> innerLayout.pager.currentItem = 2
-                    R.id.favourite_videos -> innerLayout.pager.currentItem = 3
-                    else -> innerLayout.pager.currentItem = 4
+                    R.id.home -> innerLayout.pager.setCurrentItem(0, false)
+                    R.id.videos -> innerLayout.pager.setCurrentItem(1, false)
+                    R.id.add_video -> innerLayout.pager.setCurrentItem(2, false)
+                    R.id.favourite_videos -> innerLayout.pager.setCurrentItem(3, false)
+                    else -> innerLayout.pager.setCurrentItem(4, false)
                 }
                 return@setOnItemSelectedListener true
             }

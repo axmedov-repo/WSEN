@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <ImageView
         android:id="@+id/image2"
@@ -93,28 +91,28 @@
 
             <TextView
                 android:id="@+id/tv1"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:text="Log In"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_18sdp" />
+                android:textSize="@dimen/_18sdp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.3"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv2"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:text="Sign up"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_18sdp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.7"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -128,6 +126,10 @@
                 android:layout_height="?actionBarSize"
                 android:layout_margin="@dimen/_5sdp"
                 android:padding="@dimen/_5sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:tabGravity="fill"
                 app:tabIndicatorColor="#159671"
                 app:tabIndicatorHeight="@dimen/_2sdp"
@@ -135,12 +137,7 @@
                 app:tabRippleColor="@null"
                 app:tabSelectedTextColor="@color/black"
                 app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-                app:tabTextColor="#0D1012"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:tabTextColor="#0D1012" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -190,7 +187,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-           android:padding="@dimen/_8sdp"
+                android:padding="@dimen/_8sdp"
                 android:src="@drawable/ic__share" />
 
 
@@ -217,7 +214,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-           android:padding="@dimen/_8sdp"
+                android:padding="@dimen/_8sdp"
                 android:src="@drawable/ic_youtube" />
         </androidx.cardview.widget.CardView>
 
@@ -243,7 +240,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-           android:padding="@dimen/_8sdp"
+                android:padding="@dimen/_8sdp"
                 android:src="@drawable/ic_tg" />
         </androidx.cardview.widget.CardView>
 

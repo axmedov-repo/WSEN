@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/coordinator_layout"
     android:orientation="vertical"
     tools:context="presentation.ui.VideosItemFragment">
 
@@ -20,53 +19,47 @@
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
+                style="@style/MyCustomTabLayout"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:layout_marginTop="5dp"
                 android:layout_marginStart="10dp"
-                app:tabGravity="start"
+                android:layout_marginTop="5dp"
+                android:foregroundGravity="center"
                 app:tabBackground="@drawable/tablayout_shape"
+                app:tabGravity="start"
                 app:tabIndicator="@drawable/tablayout_indicator_shape"
                 app:tabIndicatorAnimationMode="elastic"
                 app:tabIndicatorColor="@color/main_green"
                 app:tabIndicatorGravity="stretch"
                 app:tabMode="scrollable"
-                android:foregroundGravity="center"
+                app:tabRippleColor="@android:color/transparent"
                 app:tabSelectedTextColor="@color/white"
-                app:tabTextColor="#8028282C"
-                style="@style/MyCustomTabLayout"
-
-                app:tabRippleColor="@android:color/transparent">
+                app:tabTextColor="#8028282C">
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="All"
-                    />
+                    android:text="All" />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ecology"
-                    />
+                    android:text="Ecology" />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Health"
-                    />
+                    android:text="Health" />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Animals"
-                    />
+                    android:text="Animals" />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Farms"
-                    />
+                    android:text="Farms" />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="wrap_content"
@@ -81,10 +74,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/fragment_item_view_pager"
-                />
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:listitem="@layout/fragment_item_view_pager" />
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

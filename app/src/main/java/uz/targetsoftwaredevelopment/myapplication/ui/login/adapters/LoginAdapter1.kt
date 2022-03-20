@@ -27,6 +27,4 @@ class LoginAdapter(fm: FragmentManager?, private val context: Context, var total
             }
         }
     }
-
-
 }

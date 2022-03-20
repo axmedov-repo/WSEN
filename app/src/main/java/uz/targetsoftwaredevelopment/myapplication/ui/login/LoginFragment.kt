@@ -9,10 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
-import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentLoginBinding
 import uz.targetsoftwaredevelopment.myapplication.ui.login.adapters.LoginAdapter
-
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +22,6 @@ private const val ARG_PARAM2 = "param2"
  * Use the [LoginFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-@AndroidEntryPoint
 class LoginFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -48,7 +45,6 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
 
         binding.apply {
-
 
             tabLayout.visibility
             tabLayout.addTab(tabLayout.newTab().setText("LOGIN"))
@@ -80,11 +76,10 @@ class LoginFragment : Fragment() {
                 override fun onTabSelected(tab: TabLayout.Tab) {
                     viewPager.currentItem = tab.position
                     val position = tab.position
-                    if (position==0){
+                    if (position == 0) {
                         tv1.setTextColor(Color.parseColor("#727272"))
                         tv2.setTextColor(Color.parseColor("#FF000000"))
-                    }
-                    else{
+                    } else {
                         tv2.setTextColor(Color.parseColor("#727272"))
                         tv1.setTextColor(Color.parseColor("#FF000000"))
                     }
