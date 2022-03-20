@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -17,6 +18,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [EditVideoScreen.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class EditVideoScreen:Fragment() {
     // TODO: Rename and change types of parameters
     private var param1 : String? = null
