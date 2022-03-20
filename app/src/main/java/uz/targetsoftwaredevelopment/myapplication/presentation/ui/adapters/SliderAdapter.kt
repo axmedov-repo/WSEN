@@ -59,6 +59,5 @@ class SliderAdapter(item:Int,val context: Context,var listener:OnItemClickListen
     interface OnItemClickListener{
         fun onItemClick(item: Int)
         fun onShareClick(item: Int)
-//        fun onLikeClick(item: Int)
     }
 }

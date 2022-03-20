@@ -7,7 +7,7 @@
     android:background="@color/white"
     android:layout_marginHorizontal="0dp"
     android:paddingBottom="20dp"
-    tools:context=".presentation.ui.fragments.ItemViewPagerFragment">
+    tools:context=".presentation.ui.ItemViewPagerFragment">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/account_img"
@@ -62,12 +62,10 @@
     <ImageView
         android:id="@+id/video_img"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="350dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/background_image_view_shape"
-        android:clipToOutline="true"
-        android:padding="0dp"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:src="@drawable/tabiat"
         app:layout_constraintTop_toBottomOf="@id/account_img" />
 
@@ -111,6 +109,7 @@
         android:text="123 views"
         android:textSize="14sp"
         android:textStyle="bold"
+        android:visibility="invisible"
         android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="@id/unlike_video_img"
         app:layout_constraintBottom_toBottomOf="@id/unlike_video_img"

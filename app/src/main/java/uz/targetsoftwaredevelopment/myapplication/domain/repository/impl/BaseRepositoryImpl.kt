@@ -15,6 +15,7 @@ class BaseRepositoryImpl @Inject constructor(
     private val mainPageApi: MainPageApi,
     private val localStorage: LocalStorage
 ) : BaseRepository {
+
     private val gson = Gson()
 
     override fun getMainPageData(): Flow<Result<MainPageDataResponse?>> = flow {

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottom_sheet"
+    android:background="@drawable/botom_sheet_shape"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="450dp"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <ImageView
+        android:id="@+id/line_im"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:src="@drawable/ic_horizontal_line"
+        />
+
+    <TextView
+        android:id="@+id/description_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:text="Description"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:layout_constraintTop_toBottomOf="@id/line_im"
+        app:layout_constraintLeft_toLeftOf="parent" />
+    <View
+        android:id="@+id/view_line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:background="#EAE0E0"
+        app:layout_constraintTop_toBottomOf="@id/description_tv"
+        />
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Title Title Title Title Title"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_line1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/account_img_view"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/my_foto"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_tv"
+        />
+
+    <TextView
+        android:id="@+id/account_name_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:text="@string/profile_name"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/account_img_view"
+        app:layout_constraintLeft_toRightOf="@id/account_img_view"
+        app:layout_constraintTop_toTopOf="@id/account_img_view" />
+
+    <TextView
+        android:id="@+id/likes_count_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="100"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/date_year_tv"
+        app:layout_constraintTop_toBottomOf="@id/account_img_view" />
+
+    <TextView
+        android:id="@+id/likes_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Likes"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/likes_count_tv"
+        app:layout_constraintRight_toRightOf="@id/likes_count_tv"
+        app:layout_constraintLeft_toLeftOf="@id/likes_count_tv"
+        />
+
+
+    <TextView
+        android:id="@+id/date_year_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="2022"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/likes_count_tv"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/account_img_view" />
+
+    <TextView
+        android:id="@+id/data_month_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Oct 15"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="@id/date_year_tv"
+        app:layout_constraintRight_toRightOf="@id/date_year_tv"
+        app:layout_constraintTop_toBottomOf="@id/date_year_tv" />
+    <View
+        android:id="@+id/view_line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="20dp"
+        android:background="#EAE0E0"
+        app:layout_constraintTop_toBottomOf="@id/likes_tv" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Minimalistik, nafis dizaynga ega PureBook Pro Windows 11'da ishlay oladi va u Off Global kompaniyasi tomonidan ishlab chiqarilib, 22 ta davlatda sotuvga chiqarilishi kutilmoqda.
+        — PureBook Pro noutbuki 12-avlod Intel® Core™ protsessori, 8 GB DDR4 operativ xotirasi, 512 GB SSD xotirasi va qo'shimcha xotira solish uchun Micro SD slotiga ega. Ekran o'lchami 15.6 -17.3 dyuymli bo'lib, 1920x1080 rezolyutsiyaga ega va Full HD, shu bilan birga 2 MP HD old kameraga ham ega. Ikkita USB-C, bitta USB-A portlari bor. Ko'p qismi plastik, yopiluvchi qopqog'i esa alyuminiy, og'irligi esa 1.7-2.5 kg. Batareyasi 57-63 vatt-soat — buni dehqonchasiga aytganda, noutbuk quvvati 10 soatga yetadi. Quvvatlanishi esa USB-C porti bilan 30 daqiqada 60 foizgacha to'ladi"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:justificationMode="inter_word"
+        app:layout_constraintTop_toBottomOf="@id/view_line2"
+        />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
