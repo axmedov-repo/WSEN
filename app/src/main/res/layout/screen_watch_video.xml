@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white2"
-    tools:context=".presentation.ui.WatchVideoFragment">
+    tools:context=".presentation.ui.WatchVideoScreen">
 
 
     <com.google.android.exoplayer2.ui.StyledPlayerView
