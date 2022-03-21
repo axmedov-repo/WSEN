@@ -103,6 +103,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/video_img" />
 
+
     <TextView
         android:id="@+id/watch_tv"
         android:layout_width="wrap_content"
@@ -112,6 +113,7 @@
         android:visibility="gone"
         android:textSize="14sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/unlike_video_img"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
