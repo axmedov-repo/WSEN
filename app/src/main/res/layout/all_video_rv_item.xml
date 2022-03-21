@@ -110,6 +110,7 @@
         android:layout_height="wrap_content"
         android:text="123 views"
         android:textColor="@color/black"
+        android:visibility="gone"
         android:textSize="14sp"
         android:textStyle="bold"
         android:visibility="gone"
@@ -117,6 +118,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/unlike_video_img" />
+
     <TextView
         android:id="@+id/tittle_tv"
         android:layout_width="match_parent"

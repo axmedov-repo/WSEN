@@ -26,28 +26,25 @@ import uz.targetsoftwaredevelopment.myapplication.utils.scope
 
 @AndroidEntryPoint
 class AddVideoPage : Fragment(R.layout.page_add_video) {
-
     private val binding by viewBinding(PageAddVideoBinding::bind)
-//    private var videoView: VideoView? = null
+
+    //    private var videoView: VideoView? = null
     private val VIDEO_DIRECTORY = "/demonutsVideoooo"
     private val GALLERY = 1
     private val CAMERA = 2
-    private lateinit var mediaController:MediaController
+    private lateinit var mediaController: MediaController
 
-    override fun onViewCreated(view : View, savedInstanceState : Bundle?)=binding.scope {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
         requestMultiplePermissions()
 
         mediaController = MediaController(requireActivity())
         mediaController.setAnchorView(binding.videoView)
-
         videoView.setMediaController(mediaController)
-            binding.fab.setOnClickListener {
-                showPictureDialog()
+        binding.fab.setOnClickListener {
+            showPictureDialog()
         }
-
     }
-
 
     private fun showPictureDialog() {
         val pictureDialog = AlertDialog.Builder(requireContext())
@@ -61,6 +58,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
         }
         pictureDialog.show()
     }
+
     private fun chooseVideoFromGallary() {
         val galleryIntent = Intent(
             Intent.ACTION_PICK,
@@ -71,7 +69,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
 
     private fun takeVideoFromCamera() {
         val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-            .putExtra(MediaStore.EXTRA_DURATION_LIMIT,15)
+            .putExtra(MediaStore.EXTRA_DURATION_LIMIT, 15)
         startActivityForResult(intent, CAMERA)
     }
 
@@ -81,7 +79,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
             Log.d("what", "cancel")
             return
         }
-        if(requestCode == GALLERY) {
+        if (requestCode == GALLERY) {
             Log.d("what", "gallery")
             if (data != null) {
                 val contentURI = data.data
@@ -157,7 +155,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
                         // show alert dialog navigating to Settings
                         //openSettingsDialog()
                         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                        val uri:Uri = Uri.fromParts("package",activity?.packageName,null)
+                        val uri: Uri = Uri.fromParts("package", activity?.packageName, null)
                         intent.data = uri
                         startActivity(intent)
                     }
@@ -175,8 +173,5 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
             }
             .onSameThread()
             .check()
-
     }
-
-
 }

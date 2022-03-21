@@ -1,5 +1,7 @@
 package uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages
 
+// create by khumoyun 11.02.2022
+
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
@@ -16,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.karumi.dexter.BuildConfig
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -23,7 +26,6 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import dagger.hilt.android.AndroidEntryPoint
-import uz.targetsoftwaredevelopment.myapplication.BuildConfig
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogCameraBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogPermissionBinding
@@ -42,7 +44,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
     lateinit var currentImagePath: String
     lateinit var uri: Uri
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?)=binding.scope{
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
         addImg.setOnClickListener {
             onClickAddImg()
@@ -72,7 +74,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
 
     private var getGalleryImage =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            if(uri!=null){
+            if (uri != null) {
                 binding.profileImg.setImageURI(uri)
                 val openInputStream = activity?.contentResolver?.openInputStream(uri)
                 val m = System.currentTimeMillis()
@@ -90,6 +92,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
             .withListener(object : PermissionListener {
                 override fun onPermissionGranted(permission: PermissionGrantedResponse?) {
                     Toast.makeText(requireContext(), "Allowed", Toast.LENGTH_SHORT).show()
+
                     //open camera
                     val imageFile = createImageFile()
                     uri = FileProvider.getUriForFile(

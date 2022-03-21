@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.AllVideoRvItemBinding
 
-class AllVideoRvAdapter(item:Int, val context: Context, var listener:OnItemClickListener) :
-    RecyclerView.Adapter<AllVideoRvAdapter.SliderViewHolder>() {
+class SliderAdapter(item:Int,val context: Context,var listener:OnItemClickListener) :
+    RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
 
     var selectHelp = false
 

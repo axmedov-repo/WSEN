@@ -6,22 +6,30 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.viewpager2.widget.MarginPageTransformer
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import uz.targetsoftwaredevelopment.myapplication.R
+import uz.targetsoftwaredevelopment.myapplication.data.entities.AdData
 import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.CategoriesItem
 import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.Statistics
 import uz.targetsoftwaredevelopment.myapplication.databinding.PageHomeBinding
-import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.HomePageViewModel
-import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.impl.HomePageViewModelImpl
+import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.AdsAdapter
+import uz.targetsoftwaredevelopment.myapplication.presentation.ui.viewmodels.HomePageViewModel
+import uz.targetsoftwaredevelopment.myapplication.presentation.ui.viewmodels.impl.HomePageViewModelImpl
+import uz.targetsoftwaredevelopment.myapplication.utils.dpToPx
+import uz.targetsoftwaredevelopment.myapplication.utils.scope
 
 @AndroidEntryPoint
 class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback {
@@ -30,8 +38,11 @@ class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navigationView: NavigationView
     private lateinit var map: GoogleMap
+    private var adsList = ArrayList<AdData>()
+    private lateinit var adsAdapter: AdsAdapter
+    private var isFirstTime: Boolean = true
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getHomePageData()
 
@@ -52,12 +63,45 @@ class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback {
            onClickListener()
    */
 
-        val mapFragment =
-            childFragmentManager.findFragmentById(R.id.mapVolunteers) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+        /*   val mapFragment =
+               childFragmentManager.findFragmentById(R.id.mapVolunteers) as SupportMapFragment
+           mapFragment.getMapAsync(this)*/
+
+
+        if (isFirstTime) {
+            fillAdsList()
+            isFirstTime = false
+        }
+
+        adsAdapter = AdsAdapter(requireActivity(), adsList)
+        pagerAds.apply {
+            adapter = adsAdapter
+            clipToPadding = false   // allow full width shown with padding
+            clipChildren = false    // allow left/right item is not clipped
+            offscreenPageLimit = 2  // make sure left/right item is rendered
+        }
+        // increase this offset to show more of left/right
+        val offsetPx = 16.dpToPx(resources.displayMetrics)
+        pagerAds.setPadding(offsetPx, 0, offsetPx, 0)
+
+        // increase this offset to increase distance between 2 items
+        val pageMarginPx = 2.dpToPx(resources.displayMetrics)
+        val marginTransformer = MarginPageTransformer(pageMarginPx)
+        pagerAds.setPageTransformer(marginTransformer)
+
+        lifecycleScope.launch(Dispatchers.Main) {
+            while (true) {
+                delay(4000L)
+                if (pagerAds.currentItem == adsList.size - 1) {
+                    pagerAds.currentItem = 0
+                } else {
+                    pagerAds.currentItem += 1
+                }
+            }
+        }
 
         viewModel.statisticsLiveData.observe(viewLifecycleOwner, statisticsObserver)
-        viewModel.categoriesLiveData.observe(viewLifecycleOwner, categoriesObserver)
+//        viewModel.categoriesLiveData.observe(viewLifecycleOwner, categoriesObserver)
     }
 
     private val statisticsObserver = Observer<Statistics> {
@@ -118,6 +162,10 @@ class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback {
         map.moveCamera(CameraUpdateFactory.newLatLng(uzbekistan))
     }
 
+    private fun fillAdsList() {
+
+    }
+
     /* override fun onNavigationItemSelected(item: MenuItem): Boolean {
          when(item.itemId){
              R.id.nav_profile->{
@@ -151,5 +199,4 @@ class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback {
              }
          }
      }*/
-
 }

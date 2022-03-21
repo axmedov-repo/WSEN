@@ -9,13 +9,13 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.PageAllVideoBinding
-import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.AllVideoRvAdapter
+import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.SliderAdapter
 
 @AndroidEntryPoint
 class AllVideoPage : Fragment(R.layout.page_all_video) {
 
     private val binding by viewBinding(PageAllVideoBinding::bind)
-    private lateinit var allVideoRvAdapter: AllVideoRvAdapter
+    private lateinit var sliderAdapter: SliderAdapter
 
     override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,7 +25,7 @@ class AllVideoPage : Fragment(R.layout.page_all_video) {
 
 
     private fun loadDataCarouseRv() {
-        allVideoRvAdapter = AllVideoRvAdapter(1,requireContext(),object :AllVideoRvAdapter.OnItemClickListener{
+        sliderAdapter = SliderAdapter(1,requireContext(),object :SliderAdapter.OnItemClickListener{
             override fun onItemClick(item: Int) {
                 findNavController().navigate(R.id.watchVideoFragment)
             }
@@ -40,7 +40,7 @@ class AllVideoPage : Fragment(R.layout.page_all_video) {
         })
 
         binding.carouselRv.apply {
-            adapter = allVideoRvAdapter
+            adapter = sliderAdapter
         }
 
     }

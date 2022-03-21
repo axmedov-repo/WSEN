@@ -2,7 +2,9 @@ package uz.targetsoftwaredevelopment.myapplication.presentation.ui
 
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding

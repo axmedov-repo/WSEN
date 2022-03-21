@@ -75,11 +75,5 @@
                 android:textSize="14sp"
                 android:textStyle="bold" />
         </androidx.cardview.widget.CardView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
-
 </androidx.cardview.widget.CardView>
