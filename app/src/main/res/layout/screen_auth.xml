@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.screens.AuthScreen">
 
     <ImageView
         android:id="@+id/image2"
@@ -42,7 +44,6 @@
         app:layout_constraintTop_toBottomOf="@id/image1"
         app:layout_constraintVertical_bias="0" />
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
@@ -54,29 +55,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text"
         app:layout_constraintVertical_bias="1">
-
-
-        <!--        <com.google.android.material.tabs.TabLayout-->
-        <!--            android:id="@+id/tab_layout"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_alignParentTop="true"-->
-        <!--            android:background="#020202"-->
-        <!--            android:minHeight="?attr/actionBarSize"-->
-        <!--            android:tag="NationFragmentTag"-->
-        <!--            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
-        <!--            app:layout_constraintBottom_toTopOf="@id/view_pager"-->
-        <!--            app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--            app:layout_constraintRight_toRightOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            app:tabGravity="fill"-->
-        <!--            app:tabIndicatorColor="#159671"-->
-        <!--            app:tabIndicatorHeight="@dimen/_2sdp"-->
-        <!--            app:tabMode="fixed"-->
-        <!--            app:tabRippleColor="@null"-->
-        <!--            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"-->
-        <!--            app:tabTextColor="#0D1012" />-->
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/tab_layout_liner"
@@ -119,7 +97,6 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
@@ -142,7 +119,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <androidx.viewpager.widget.ViewPager
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -152,19 +129,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tab_layout_liner"
             app:layout_constraintVertical_bias="0" />
-
-        <!--        <com.google.android.material.tabs.TabLayout-->
-        <!--            android:id="@+id/tab_layout"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="@dimen/_30sdp"-->
-        <!--            android:background="#4CAF50"-->
-        <!--            app:layout_constraintBottom_toTopOf="@id/view_pager"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            app:layout_constraintVertical_bias="0"-->
-        <!--            app:tabTextColor="@color/black" />-->
-
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_playmarket"
@@ -242,10 +206,9 @@
                 android:layout_height="match_parent"
                 android:padding="@dimen/_8sdp"
                 android:src="@drawable/ic_tg" />
+
         </androidx.cardview.widget.CardView>
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

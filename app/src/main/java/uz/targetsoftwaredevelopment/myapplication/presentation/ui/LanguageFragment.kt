@@ -37,7 +37,7 @@ class LanguageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_language, container, false)
+        return inflater.inflate(R.layout.screen_language, container, false)
     }
 
     companion object {

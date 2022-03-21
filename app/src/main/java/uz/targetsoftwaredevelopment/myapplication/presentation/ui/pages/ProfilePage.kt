@@ -19,6 +19,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import com.karumi.dexter.BuildConfig
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -26,7 +27,6 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import dagger.hilt.android.AndroidEntryPoint
-import uz.targetsoftwaredevelopment.myapplication.BuildConfig
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogCameraBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogPermissionBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentProfileBinding
@@ -118,6 +118,7 @@ class ProfilePage : Fragment() {
                     )
                     takePhoto.launch(uri)
                 }
+
 
                 override fun onPermissionDenied(response: PermissionDeniedResponse) {
                     Toast.makeText(requireContext(), "Deny", Toast.LENGTH_SHORT).show()

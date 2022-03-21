@@ -38,7 +38,7 @@ class MyVideosPage : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_videos, container, false)
+        return inflater.inflate(R.layout.screen_my_videos, container, false)
     }
 
     companion object {

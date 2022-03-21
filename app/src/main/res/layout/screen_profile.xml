@@ -10,6 +10,7 @@
     tools:context=".presentation.ui.pages.ProfilePage">
 
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -112,7 +113,6 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/phone_number_et"
                         android:layout_width="match_parent"
-                        android:enabled="false"
                         android:layout_height="match_parent"
                         android:background="@drawable/view_pager_shape"
                         android:hint="@string/phone_number"
@@ -136,7 +136,6 @@
                         android:background="@drawable/view_pager_shape"
                         android:hint="@string/email"
                         android:inputType="textEmailAddress"
-                        android:enabled="false"
                         android:padding="5dp"
                         android:textColorHint="#757575" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -146,7 +145,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     app:boxBackgroundMode="outline"
-                    android:visibility="gone"
                     app:passwordToggleEnabled="true"
                     android:layout_marginTop="10dp"
                     android:layout_marginHorizontal="25dp"
@@ -169,7 +167,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginHorizontal="25dp"
-                    android:visibility="gone"
                     app:boxBackgroundMode="outline"
                     app:passwordToggleEnabled="true"
                     android:layout_marginTop="10dp"

@@ -1,18 +1,29 @@
 package uz.targetsoftwaredevelopment.myapplication.presentation.ui
 
-import android.media.MediaPlayer.create
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.MediaController
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import com.google.android.exoplayer2.ExoPlayer
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentWatchVideoBinding
 
+@AndroidEntryPoint
 class WatchVideoFragment : Fragment() {
 
     private lateinit var binding:FragmentWatchVideoBinding
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetLayout.bottomSheet)
+    }
 
 
     override fun onCreateView(
@@ -21,24 +32,12 @@ class WatchVideoFragment : Fragment() {
     ): View? {
         binding = FragmentWatchVideoBinding.inflate(inflater,container,false)
 
-        val mediaController = MediaController(requireContext())
-        mediaController.setAnchorView(binding.videoView)
-
-
-
-        val onlineUri:Uri = Uri.parse("https://media.istockphoto.com/videos/preparing-mix-salad-with-vegetables-at-home-a-part-of-stirring-the-video-id1216828127")
-//      val uri: Uri = Uri.parse(Environment.getExternalStorageDirectory().path + "/video.mp4")
-
-
-        binding.videoView.setMediaController(mediaController)
-        binding.videoView.setVideoURI(onlineUri)
-        binding.videoView.requestFocus()
-        binding.videoView.start()
-
-
+        val player = ExoPlayer.Builder(requireContext()).build()
+        val onlineUri:Uri = Uri.parse("https://storage.googleapis.com/exoplayer-test-media-0/play.mp3")
+        val mediaItem:MediaItem = MediaItem.fromUri(onlineUri)
+        binding.videoView.player = player
+        player.setMediaItem(mediaItem)
+        player.prepare()
         return binding.root
     }
-
-
-
 }

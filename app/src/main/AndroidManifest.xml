@@ -13,7 +13,6 @@
     <uses-feature
         android:name="android.hardware.camera2"
         android:required="true" />
-
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -56,4 +55,6 @@
         </provider>
 
     </application>
+
+
 </manifest>

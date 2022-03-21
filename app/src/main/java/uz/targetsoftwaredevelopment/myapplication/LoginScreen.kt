@@ -3,11 +3,10 @@ package uz.targetsoftwaredevelopment.myapplication
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.ScreenLoginBinding
 
-class LoginScreen : Fragment(R.layout.screen_login) {
+class LoginScreen : Fragment(R.layout.screen_auth) {
     private val binding by viewBinding(ScreenLoginBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

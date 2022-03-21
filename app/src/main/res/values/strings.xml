@@ -17,5 +17,8 @@
     <string name="confirm_password">Confirm password</string>
     <string name="profile_name">profile name</string>
     <string name="my_image">my image</string>
+    <string name="location">Location</string>
+    <string name="description">Description</string>
+    <string name="create_title">Create title</string>
 
 </resources>

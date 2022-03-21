@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.MediaController
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -30,18 +31,25 @@ class RecordVideoFragment : Fragment() {
     private val VIDEO_DIRECTORY = "/demonutsVideoooo"
     private val GALLERY = 1
     private val CAMERA = 2
+    private lateinit var mediaController:MediaController
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRecordVideoBinding.inflate(inflater,container,false)
-
         requestMultiplePermissions()
+
+
+            mediaController = MediaController(requireActivity())
+            mediaController.setAnchorView(binding.videoView)
+
+        binding.videoView.setMediaController(mediaController)
 
         binding.fab.setOnClickListener {
             showPictureDialog()
         }
+
 
         return binding.root
     }

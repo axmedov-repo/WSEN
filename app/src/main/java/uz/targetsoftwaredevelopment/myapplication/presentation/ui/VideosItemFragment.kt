@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.children
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
-import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.SliderAdapter
 import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentVideosItemBinding
+import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.SliderAdapter
 
 @AndroidEntryPoint
 class VideosItemFragment : Fragment() {
@@ -27,14 +26,8 @@ class VideosItemFragment : Fragment() {
     ): View? {
         binding = FragmentVideosItemBinding.inflate(inflater,container,false)
 
-        setData()
         loadDataCarouseRv()
-        onClickListener()
-
         setTabs()
-
-
-
         return binding.root
     }
 
@@ -48,17 +41,6 @@ class VideosItemFragment : Fragment() {
         }
     }
 
-    private fun setData() {
-//        val bundle = Bundle(arguments)
-//        val title = bundle.getString("Title")
-//        binding.toolbarVideos.title = title
-    }
-
-    private fun onClickListener() {
-//       binding.toolbarVideos.setNavigationOnClickListener {
-//           findNavController().popBackStack()
-//       }
-    }
 
     private fun loadDataCarouseRv() {
         sliderAdapter = SliderAdapter(1,requireContext(),object :SliderAdapter.OnItemClickListener{
@@ -67,13 +49,10 @@ class VideosItemFragment : Fragment() {
             }
 
             override fun onShareClick(item: Int) {
-                TODO("Not yet implemented")
+                Toast.makeText(requireContext(), "send", Toast.LENGTH_SHORT).show()
             }
-
-//            override fun onLikeClick(item: Int) {
-//                TODO("Not yet implemented")
-//            }
         })
+
         binding.carouselRv.apply {
             adapter = sliderAdapter
         }

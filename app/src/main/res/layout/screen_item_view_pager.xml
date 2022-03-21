@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="0dp"
     android:background="@color/white"
     android:paddingBottom="20dp"
     tools:context=".presentation.ui.ItemViewPagerFragment">
@@ -117,7 +116,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/unlike_video_img" />
-
     <TextView
         android:id="@+id/tittle_tv"
         android:layout_width="match_parent"

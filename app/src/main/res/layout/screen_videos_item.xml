@@ -26,7 +26,7 @@
                 android:layout_marginTop="5dp"
                 android:foregroundGravity="center"
                 app:tabBackground="@drawable/tablayout_shape"
-                app:tabGravity="start"
+                app:tabGravity="fill"
                 app:tabIndicator="@drawable/tablayout_indicator_shape"
                 app:tabIndicatorAnimationMode="elastic"
                 app:tabIndicatorColor="@color/main_green"
@@ -76,7 +76,7 @@
                 android:layout_marginTop="5dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                tools:listitem="@layout/fragment_item_view_pager" />
+                tools:listitem="@layout/screen_item_view_pager" />
 
         </LinearLayout>
 
