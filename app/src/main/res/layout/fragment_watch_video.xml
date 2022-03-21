@@ -16,6 +16,7 @@
         app:resize_mode="fill"
         app:show_buffering="when_playing"
         app:show_shuffle_button="true" />
+
     <include
         android:id="@+id/bottom_sheet_layout"
         layout="@layout/layout_bottom_sheet" />
