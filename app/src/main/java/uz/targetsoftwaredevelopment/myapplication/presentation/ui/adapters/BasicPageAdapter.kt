@@ -25,7 +25,7 @@ class BasicPageAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
             0 -> HomePage()
             1 -> AllVideoPage()
             2 -> AddVideoPage()
-            3 -> WishPage()
+            3 -> MyPostsPage()
             else -> ProfilePage()
         }
     }

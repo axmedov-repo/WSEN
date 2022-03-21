@@ -14,4 +14,9 @@
         android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.WatchVideoFragment"
         android:label="fragment_watch_video"
         tools:layout="@layout/fragment_watch_video" />
+    <fragment
+        android:id="@+id/editVideoScreen"
+        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.EditVideoScreen"
+        android:label="fragment_edit_video_screen"
+        tools:layout="@layout/fragment_edit_video_screen" />
 </navigation>

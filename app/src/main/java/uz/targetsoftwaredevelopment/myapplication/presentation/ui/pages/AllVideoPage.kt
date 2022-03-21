@@ -1,12 +1,11 @@
 package uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.PageAllVideoBinding
@@ -15,30 +14,14 @@ import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.Slide
 @AndroidEntryPoint
 class AllVideoPage : Fragment(R.layout.page_all_video) {
 
-    private lateinit var binding: PageAllVideoBinding
+    private val binding by viewBinding(PageAllVideoBinding::bind)
     private lateinit var sliderAdapter: SliderAdapter
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = PageAllVideoBinding.inflate(inflater,container,false)
+    override fun onViewCreated(view : View, savedInstanceState : Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         loadDataCarouseRv()
-        return binding.root
     }
-
-
-//    private fun setTabs() {
-//        for (i in 0 until binding.tabLayout.tabCount) {
-//            val tab = (binding.tabLayout.getChildAt(0) as ViewGroup).getChildAt(i)
-//            val p = tab.layoutParams as ViewGroup.MarginLayoutParams
-//            p.setMargins(0, 0, 10, 0)
-//            tab.requestLayout()
-//        }
-//    }
 
 
     private fun loadDataCarouseRv() {

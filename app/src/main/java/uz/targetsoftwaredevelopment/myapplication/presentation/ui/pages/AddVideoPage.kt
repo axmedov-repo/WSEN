@@ -8,51 +8,46 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.MediaController
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import dagger.hilt.android.AndroidEntryPoint
+import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.PageAddVideoBinding
+import uz.targetsoftwaredevelopment.myapplication.utils.scope
 
 @AndroidEntryPoint
-class AddVideoPage : Fragment() {
+class AddVideoPage : Fragment(R.layout.page_add_video) {
 
-    private lateinit var binding:PageAddVideoBinding
+    private val binding by viewBinding(PageAddVideoBinding::bind)
 //    private var videoView: VideoView? = null
     private val VIDEO_DIRECTORY = "/demonutsVideoooo"
     private val GALLERY = 1
     private val CAMERA = 2
     private lateinit var mediaController:MediaController
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = PageAddVideoBinding.inflate(inflater,container,false)
+    override fun onViewCreated(view : View, savedInstanceState : Bundle?)=binding.scope {
+        super.onViewCreated(view, savedInstanceState)
         requestMultiplePermissions()
 
+        mediaController = MediaController(requireActivity())
+        mediaController.setAnchorView(binding.videoView)
 
-            mediaController = MediaController(requireActivity())
-            mediaController.setAnchorView(binding.videoView)
-
-        binding.videoView.setMediaController(mediaController)
-
-        binding.fab.setOnClickListener {
-            showPictureDialog()
+        videoView.setMediaController(mediaController)
+            binding.fab.setOnClickListener {
+                showPictureDialog()
         }
 
-
-        return binding.root
     }
+
 
     private fun showPictureDialog() {
         val pictureDialog = AlertDialog.Builder(requireContext())
