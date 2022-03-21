@@ -11,14 +11,13 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.karumi.dexter.BuildConfig
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -27,45 +26,29 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import dagger.hilt.android.AndroidEntryPoint
+import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogCameraBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogPermissionBinding
-import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentProfileBinding
+import uz.targetsoftwaredevelopment.myapplication.databinding.PageProfileBinding
+import uz.targetsoftwaredevelopment.myapplication.utils.scope
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 
 @AndroidEntryPoint
-class ProfilePage : Fragment() {
+class ProfilePage : Fragment(R.layout.page_profile) {
 
-    private lateinit var binding: FragmentProfileBinding
+    private val binding by viewBinding(PageProfileBinding::bind)
     var OLD_REQUEST_CODE = 1
     var CAMERA_REQUEST_CODE = 1
     lateinit var currentImagePath: String
     lateinit var uri: Uri
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
-
-        binding.apply {
-
-            addImg.setOnClickListener {
-                onClickAddImg()
-            }
-
-//            toolbar.setNavigationOnClickListener {
-//                findNavController().popBackStack()
-//            }
-        }
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
-
+        addImg.setOnClickListener {
+            onClickAddImg()
+        }
     }
 
     private fun onClickAddImg() {
@@ -91,7 +74,7 @@ class ProfilePage : Fragment() {
 
     private var getGalleryImage =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            if(uri!=null){
+            if (uri != null) {
                 binding.profileImg.setImageURI(uri)
                 val openInputStream = activity?.contentResolver?.openInputStream(uri)
                 val m = System.currentTimeMillis()
@@ -107,7 +90,7 @@ class ProfilePage : Fragment() {
         Dexter.withContext(requireContext())
             .withPermission(Manifest.permission.CAMERA)
             .withListener(object : PermissionListener {
-                override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
+                override fun onPermissionGranted(permission: PermissionGrantedResponse?) {
                     Toast.makeText(requireContext(), "Allowed", Toast.LENGTH_SHORT).show()
 
                     //open camera

@@ -26,8 +26,8 @@ import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.Categori
 import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.Statistics
 import uz.targetsoftwaredevelopment.myapplication.databinding.PageHomeBinding
 import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.AdsAdapter
-import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.HomePageViewModel
-import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.impl.HomePageViewModelImpl
+import uz.targetsoftwaredevelopment.myapplication.presentation.ui.viewmodels.HomePageViewModel
+import uz.targetsoftwaredevelopment.myapplication.presentation.ui.viewmodels.impl.HomePageViewModelImpl
 import uz.targetsoftwaredevelopment.myapplication.utils.dpToPx
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
 
@@ -101,7 +101,7 @@ class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback {
         }
 
         viewModel.statisticsLiveData.observe(viewLifecycleOwner, statisticsObserver)
-        viewModel.categoriesLiveData.observe(viewLifecycleOwner, categoriesObserver)
+//        viewModel.categoriesLiveData.observe(viewLifecycleOwner, categoriesObserver)
     }
 
     private val statisticsObserver = Observer<Statistics> {
@@ -199,5 +199,4 @@ class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback {
              }
          }
      }*/
-
 }

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="170dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/white"
+    app:cardUseCompatPadding="true"
     app:cardCornerRadius="15dp"
-    app:cardElevation="2dp"
-    app:cardUseCompatPadding="true">
+    app:cardElevation="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,38 +14,37 @@
         android:padding="20dp">
 
         <TextView
-            android:id="@+id/warning_tv"
+            android:id="@+id/delete_posts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/warning"
-            android:textColor="#0027FF"
+            android:text="@string/delete"
+            android:textColor="#2E2B2B"
             android:textSize="22sp"
+            android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <TextView
-            android:id="@+id/info_tv"
+            android:id="@+id/info_posts_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/you_can_t_change_your_picture_if_you_don_t_allow_it"
+            android:text="@string/are_you_sure_want_to_delete_this_post"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="italic"
+            android:textStyle="normal"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/warning_tv" />
+            app:layout_constraintTop_toBottomOf="@id/delete_posts" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cancel_cv"
+            android:id="@+id/cancel_posts_cv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#EC0D0D"
+            app:cardBackgroundColor="#3F51B5"
             app:cardCornerRadius="15dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/info_tv">
-
+            app:layout_constraintTop_toBottomOf="@id/info_posts_tv">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,21 +57,20 @@
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/allow_cv"
+            android:id="@+id/delete_post_cv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="#3F51B5"
+            app:cardBackgroundColor="#EC0D0D"
             app:cardCornerRadius="15dp"
             app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/cancel_cv"
-            app:layout_constraintTop_toBottomOf="@id/info_tv">
-
+            app:layout_constraintRight_toLeftOf="@id/cancel_posts_cv"
+            app:layout_constraintTop_toBottomOf="@id/info_posts_tv">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="@string/allow"
+                android:text="@string/delete"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold" />

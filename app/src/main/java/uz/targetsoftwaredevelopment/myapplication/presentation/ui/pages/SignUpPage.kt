@@ -1,17 +1,19 @@
-package uz.targetsoftwaredevelopment.myapplication.ui.login
+package uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
-import uz.targetsoftwaredevelopment.myapplication.databinding.PageLoginBinding
+import uz.targetsoftwaredevelopment.myapplication.databinding.PageSignUpBinding
+import uz.targetsoftwaredevelopment.myapplication.presentation.MainActivity
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
 
 @AndroidEntryPoint
-class LoginPage : Fragment(R.layout.page_login) {
-    private val binding by viewBinding(PageLoginBinding::bind)
+class SignUpPage : Fragment(R.layout.page_sign_up) {
+    private val binding by viewBinding(PageSignUpBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
@@ -20,8 +22,8 @@ class LoginPage : Fragment(R.layout.page_login) {
             translationX = 0F
             alpha = 0F
             animate().apply {
-                translationY(0F).alpha(1F).duration = 1000
                 setStartDelay(300).start()
+                translationY(0F).alpha(1F).duration = 1000
             }
         }
 
@@ -34,7 +36,7 @@ class LoginPage : Fragment(R.layout.page_login) {
             }
         }
 
-        text.apply {
+        confirmPassword.apply {
             translationX = 0F
             alpha = 0F
             animate().apply {
@@ -43,12 +45,23 @@ class LoginPage : Fragment(R.layout.page_login) {
             }
         }
 
-        btn.apply {
+        number.apply {
             translationX = 0F
             alpha = 0F
             animate().apply {
                 translationY(0F).alpha(1F).duration = 1000
                 setStartDelay(900).start()
+            }
+        }
+
+        btn.apply {
+            translationX = 0F
+            alpha = 0F
+            animate().translationY(0F).alpha(1F).duration = 1000
+            animate().setStartDelay(900).start()
+            setOnClickListener {
+                val intent = Intent(requireContext(), MainActivity::class.java)
+                startActivity(intent)
             }
         }
     }

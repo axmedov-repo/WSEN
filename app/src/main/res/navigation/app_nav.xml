@@ -21,7 +21,7 @@
         tools:layout="@layout/screen_watch_video" />
     <fragment
         android:id="@+id/splashScreen"
-        android:name="uz.targetsoftwaredevelopment.myapplication.ui.login.SplashScreen"
+        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.SplashScreen"
         android:label="screen_splash"
         tools:layout="@layout/screen_splash" >
         <action
@@ -40,4 +40,10 @@
             android:id="@+id/action_authScreen_to_basicScreen"
             app:destination="@id/basicScreen" />
     </fragment>
+
+    <fragment
+        android:id="@+id/editVideoScreen"
+        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.EditVideoScreen"
+        android:label="fragment_edit_video_screen"
+        tools:layout="@layout/fragment_edit_video_screen" />
 </navigation>

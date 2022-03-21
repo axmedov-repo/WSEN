@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="presentation.ui.VideosItemFragment">
+    tools:context=".presentation.ui.pages.AllVideoPage">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -24,16 +24,13 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
-                android:foregroundGravity="center"
-                app:tabBackground="@drawable/tablayout_shape"
+                android:visibility="gone"
                 app:tabGravity="fill"
-                app:tabIndicator="@drawable/tablayout_indicator_shape"
-                app:tabIndicatorAnimationMode="elastic"
+                app:tabIndicatorAnimationMode="linear"
                 app:tabIndicatorColor="@color/main_green"
-                app:tabIndicatorGravity="stretch"
-                app:tabMode="scrollable"
-                app:tabRippleColor="@android:color/transparent"
-                app:tabSelectedTextColor="@color/white"
+                app:tabMode="fixed"
+                app:tabRippleColor="@color/transparent"
+                app:tabSelectedTextColor="@color/main_green"
                 app:tabTextColor="#8028282C">
 
                 <com.google.android.material.tabs.TabItem
@@ -51,21 +48,6 @@
                     android:layout_height="wrap_content"
                     android:text="Health" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Animals" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Farms" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Wildlife" />
-
 
             </com.google.android.material.tabs.TabLayout>
 
@@ -76,7 +58,7 @@
                 android:layout_marginTop="5dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                tools:listitem="@layout/screen_item_view_pager" />
+                tools:listitem="@layout/all_video_rv_item" />
 
         </LinearLayout>
 
