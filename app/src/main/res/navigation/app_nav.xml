@@ -3,12 +3,66 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_nav"
-    app:startDestination="@id/basicScreen">
+    app:startDestination="@id/onBoardingFragment1">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="uz.targetsoftwaredevelopment.myapplication.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_signUpTabFragment"
+            app:destination="@id/signUpTabFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_basicScreen"
+            app:destination="@id/basicScreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment2"
+        android:name="uz.targetsoftwaredevelopment.myapplication.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/onBoardingFragment1"
+        android:name="uz.targetsoftwaredevelopment.myapplication.ui.login.OnBoardingFragment1"
+        android:label="fragment_on_boarding1"
+        tools:layout="@layout/fragment_on_boarding1" >
+        <action
+            android:id="@+id/action_onBoardingFragment1_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_onBoardingFragment1_to_basicScreen"
+            app:destination="@id/basicScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/onBoarding2Fragment"
+        android:name="uz.targetsoftwaredevelopment.myapplication.ui.login.OnBoarding2Fragment"
+        android:label="fragment_on_boarding2"
+        tools:layout="@layout/fragment_on_boarding2" />
+    <fragment
+        android:id="@+id/onBoarding3Fragment"
+        android:name="uz.targetsoftwaredevelopment.myapplication.ui.login.OnBoarding3Fragment"
+        android:label="fragment_on_boarding3"
+        tools:layout="@layout/fragment_on_boarding3" />
+    <fragment
+        android:id="@+id/signUpTabFragment"
+        android:name="uz.targetsoftwaredevelopment.myapplication.ui.login.SignUpTabFragment"
+        android:label="fragment_sign_up_tab"
+        tools:layout="@layout/fragment_sign_up_tab" >
+        <action
+            android:id="@+id/action_signUpTabFragment_to_basicScreen"
+            app:destination="@id/basicScreen" />
+    </fragment>
     <fragment
         android:id="@+id/basicScreen"
         android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.BasicScreen"
         android:label="screen_basic_nav"
-        tools:layout="@layout/screen_basic_nav" />
+        tools:layout="@layout/screen_basic_nav" >
+        <action
+            android:id="@+id/action_basicScreen_to_watchVideoFragment"
+            app:destination="@id/watchVideoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/watchVideoFragment"
         android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.WatchVideoFragment"

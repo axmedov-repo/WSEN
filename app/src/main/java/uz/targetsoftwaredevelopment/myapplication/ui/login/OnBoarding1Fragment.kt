@@ -2,12 +2,11 @@ package uz.targetsoftwaredevelopment.myapplication.ui.login
 
 import android.os.Bundle
 import android.os.Handler
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.FragmentOnBoarding1Binding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -44,8 +43,9 @@ class OnBoardingFragment1 : Fragment() {
         @Suppress("DEPRECATION")
         Handler().postDelayed(
             {
-                findNavController().popBackStack()
-                findNavController().navigate(R.id.onBoarding2Fragment)
+                /*findNavController().popBackStack()
+                findNavController().navigate(R.id.onBoarding2Fragment)*/
+                findNavController().navigate(OnBoardingFragment1Directions.actionOnBoardingFragment1ToBasicScreen())
             },
             1500
         )

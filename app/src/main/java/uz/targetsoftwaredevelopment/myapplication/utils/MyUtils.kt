@@ -2,7 +2,10 @@ package uz.targetsoftwaredevelopment.myapplication.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -12,6 +15,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import timber.log.Timber
+import uz.targetsoftwaredevelopment.myapplication.app.App
 import java.io.File
 
 fun Fragment.showToast(message: String) {
@@ -49,3 +53,19 @@ fun File.toRequestData(): MultipartBody.Part {
     val requestFile = this.asRequestBody("image/jpeg".toMediaTypeOrNull())
     return MultipartBody.Part.createFormData("avatar", name, requestFile)
 }
+
+
+fun Float.toPx(): Int {
+    val r: Resources = App.instance.resources
+    val px = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        this,
+        r.displayMetrics
+    ).toInt()
+
+    return px
+}
+
+fun Int.dpToPx(displayMetrics: DisplayMetrics): Int = (this * displayMetrics.density).toInt()
+
+fun Int.pxToDp(displayMetrics: DisplayMetrics): Int = (this / displayMetrics.density).toInt()

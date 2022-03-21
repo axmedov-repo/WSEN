@@ -163,4 +163,9 @@ dependencies {
      * SecureSharedPreference
      */
     implementation 'com.scottyab:secure-preferences-lib:0.1.7'
+
+    /**
+     * Lotti animations
+     */
+    implementation "com.airbnb.android:lottie:4.1.0"
 }
