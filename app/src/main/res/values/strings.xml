@@ -45,5 +45,8 @@
     <string name="year">Year</string>
     <string name="months_date">Months date</string>
     <string name="edit">Edit</string>
+    <string name="choose">Choose</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
 
 </resources>
