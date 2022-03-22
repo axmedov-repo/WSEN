@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.widget.MediaController
 import android.widget.Toast
@@ -41,6 +40,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
         mediaController = MediaController(requireActivity())
         mediaController.setAnchorView(binding.videoView)
         videoView.setMediaController(mediaController)
+
         binding.fab.setOnClickListener {
             showPictureDialog()
         }
@@ -49,7 +49,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
     private fun showPictureDialog() {
         val pictureDialog = AlertDialog.Builder(requireContext())
         pictureDialog.setTitle("Select Action")
-        val pictureDialogItems = arrayOf("Select video from gallery", "Record video from camera")
+        val pictureDialogItems = arrayOf(getString(R.string.select_vide_from_gallery), getString(R.string.record_video_from_camera))
         pictureDialog.setItems(pictureDialogItems) { dialog, which ->
             when (which) {
                 0 -> chooseVideoFromGallary()
@@ -69,23 +69,23 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
 
     private fun takeVideoFromCamera() {
         val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-            .putExtra(MediaStore.EXTRA_DURATION_LIMIT, 15)
+            .putExtra(MediaStore.EXTRA_DURATION_LIMIT, 30)
         startActivityForResult(intent, CAMERA)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_CANCELED) {
-            Log.d("what", "cancel")
+//            Log.d("what", "cancel")
             return
         }
         if (requestCode == GALLERY) {
-            Log.d("what", "gallery")
+//            Log.d("what", "gallery")
             if (data != null) {
                 val contentURI = data.data
 
                 val selectedVideoPath = getPath(contentURI)
-                Log.d("path", selectedVideoPath!!)
+//                Log.d("path", selectedVideoPath!!)
 
                 binding.apply {
                     videoView.setVideoURI(contentURI)
@@ -96,10 +96,10 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
             }
 
         } else if (requestCode == CAMERA) {
-            Log.d("what", "camera")
+//            Log.d("what", "camera")
             val contentURI = data!!.data
             val recordedVideoPath = getPath(contentURI)
-            Log.d("frrr", recordedVideoPath!!)
+//            Log.d("frrr", recordedVideoPath!!)
 
             binding.apply {
                 videoView.setVideoURI(contentURI)
@@ -141,14 +141,14 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                     // check if all permissions are granted
-                    if (report.areAllPermissionsGranted()) {
-                        Toast.makeText(
-                            requireContext(),
-                            "All permissions are granted by user!",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    }
+//                    if (report.areAllPermissionsGranted()) {
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "All permissions are granted by user!",
+//                            Toast.LENGTH_SHORT
+//                        )
+//                            .show()
+//                    }
 
                     // check for permanent denial of any permission
                     if (report.isAnyPermissionPermanentlyDenied) {
@@ -169,7 +169,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
                     token.continuePermissionRequest()
                 }
             }).withErrorListener {
-                Toast.makeText(requireContext(), "Some Error! ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.some_error), Toast.LENGTH_SHORT).show()
             }
             .onSameThread()
             .check()

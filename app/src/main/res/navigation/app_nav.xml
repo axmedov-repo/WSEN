@@ -10,14 +10,12 @@
         android:label="screen_basic_nav"
         tools:layout="@layout/screen_basic_nav" >
         <action
-            android:id="@+id/action_basicScreen_to_watchVideoFragment"
-            app:destination="@id/watchVideoFragment" />
+            android:id="@+id/action_basicScreen_to_watchVideoScreen"
+            app:destination="@id/watchVideoScreen" />
+        <action
+            android:id="@+id/action_basicScreen_to_editVideoScreen"
+            app:destination="@id/editVideoScreen" />
     </fragment>
-    <fragment
-        android:id="@+id/watchVideoFragment"
-        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.WatchVideoFragment"
-        android:label="fragment_watch_video"
-        tools:layout="@layout/screen_watch_video" />
     <fragment
         android:id="@+id/splashScreen"
         android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.SplashScreen"
@@ -39,10 +37,15 @@
             android:id="@+id/action_authScreen_to_basicScreen"
             app:destination="@id/basicScreen" />
     </fragment>
-
     <fragment
         android:id="@+id/editVideoScreen"
-        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.EditVideoScreen"
-        android:label="fragment_edit_video_screen"
-        tools:layout="@layout/fragment_edit_video_screen" />
+        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.EditVideoScreen"
+        android:label="screen_edit_video"
+        tools:layout="@layout/screen_edit_video" />
+    <fragment
+        android:id="@+id/watchVideoScreen"
+        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.WatchVideoScreen"
+        android:label="screen_watch_video"
+        tools:layout="@layout/screen_watch_video" />
+
 </navigation>

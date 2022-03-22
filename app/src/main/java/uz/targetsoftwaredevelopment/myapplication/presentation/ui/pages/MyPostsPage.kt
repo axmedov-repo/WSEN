@@ -29,7 +29,7 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
                 findNavController().navigate(R.id.editVideoScreen)
             }
             override fun onPostClick() {
-                findNavController().navigate(R.id.watchVideoFragment)
+                findNavController().navigate(R.id.watchVideoScreen)
             }
             override fun onMenuDelete() {
                 val deleteDialog = AlertDialog.Builder(requireContext())

@@ -28,7 +28,7 @@ class WishPage : Fragment(R.layout.page_wish) {
             }
 
             override fun onPostClick() {
-                findNavController().navigate(R.id.watchVideoFragment)
+                findNavController().navigate(R.id.watchVideoScreen)
 
             }
         })

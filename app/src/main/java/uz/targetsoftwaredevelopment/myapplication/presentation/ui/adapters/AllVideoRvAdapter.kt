@@ -9,15 +9,14 @@ import androidx.recyclerview.widget.RecyclerView
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.AllVideoRvItemBinding
 
-class SliderAdapter(item:Int,val context: Context,var listener:OnItemClickListener) :
-    RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
+class AllVideoRvAdapter(item:Int, val context: Context, var listener:OnItemClickListener) :
+    RecyclerView.Adapter<AllVideoRvAdapter.SliderViewHolder>() {
 
     var selectHelp = false
 
     inner class SliderViewHolder(private val allVideoRvItemBinding : AllVideoRvItemBinding) :
         RecyclerView.ViewHolder(allVideoRvItemBinding.root) {
         fun onBind(item: Int){
-
 
             allVideoRvItemBinding.unlikeVideoImg.startAnimation(AnimationUtils.loadAnimation(context,R.anim.com))
 

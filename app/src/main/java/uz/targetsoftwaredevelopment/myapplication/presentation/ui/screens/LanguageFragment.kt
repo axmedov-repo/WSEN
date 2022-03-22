@@ -1,4 +1,4 @@
-package uz.targetsoftwaredevelopment.myapplication.presentation.ui
+package uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
