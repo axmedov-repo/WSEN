@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinator_layout"
@@ -8,60 +9,44 @@
     android:orientation="vertical"
     tools:context=".presentation.ui.pages.AllVideoPage">
 
-    <androidx.core.widget.NestedScrollView
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        style="@style/MyCustomTabLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"
+        app:tabGravity="fill"
+        app:tabIndicatorAnimationMode="linear"
+        app:tabIndicatorColor="@color/main_green"
+        app:tabMode="fixed"
+        app:tabRippleColor="@color/transparent"
+        app:tabSelectedTextColor="@color/main_green"
+        app:tabTextColor="#8028282C">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:text="All" />
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
-                style="@style/MyCustomTabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="5dp"
-                android:visibility="gone"
-                app:tabGravity="fill"
-                app:tabIndicatorAnimationMode="linear"
-                app:tabIndicatorColor="@color/main_green"
-                app:tabMode="fixed"
-                app:tabRippleColor="@color/transparent"
-                app:tabSelectedTextColor="@color/main_green"
-                app:tabTextColor="#8028282C">
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ecology" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="All" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ecology" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Health" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Health" />
 
 
-            </com.google.android.material.tabs.TabLayout>
+    </com.google.android.material.tabs.TabLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/carousel_rv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                tools:listitem="@layout/all_video_rv_item" />
-
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/carousel_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/all_video_rv_item" />
 </LinearLayout>

@@ -25,47 +25,43 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
     private lateinit var myPostsAdapter: MyPostsAdapter
     private var list = arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
+    override fun onViewCreated(view : View, savedInstanceState:Bundle?)=binding.scope{
         super.onViewCreated(view, savedInstanceState)
 
-        myPostsAdapter =
-            MyPostsAdapter(requireContext(), object : MyPostsAdapter.OnPostItemTouchListener {
-                override fun onMenuEdit() {
-                    findNavController().navigate(R.id.editVideoScreen)
-                }
+        myPostsAdapter = MyPostsAdapter(requireContext(),object :MyPostsAdapter.OnPostItemTouchListener{
+            override fun onMenuEdit() {
+                findNavController().navigate(R.id.editVideoScreen)
+            }
+            override fun onPostClick() {
+                findNavController().navigate(R.id.watchVideoScreen)
+            }
+            override fun onMenuDelete() {
+                val deleteDialog = AlertDialog.Builder(requireContext())
+                val dialogDeleteBinding = DialogDeleteBinding.inflate(layoutInflater)
+                deleteDialog.setView(dialogDeleteBinding.root)
 
-                override fun onPostClick() {
-                    findNavController().navigate(R.id.watchVideoFragment)
-                }
+                val deleteBuilder = deleteDialog.create()
+                deleteBuilder.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-                override fun onMenuDelete() {
-                    val deleteDialog = AlertDialog.Builder(requireContext())
-                    val dialogDeleteBinding = DialogDeleteBinding.inflate(layoutInflater)
-                    deleteDialog.setView(dialogDeleteBinding.root)
+                dialogDeleteBinding.apply {
 
-                    val deleteBuilder = deleteDialog.create()
-                    deleteBuilder.window?.setBackgroundDrawableResource(android.R.color.transparent)
-
-                    dialogDeleteBinding.apply {
-
-                        cancelPostsCv.setOnClickListener {
-                            Toast.makeText(requireContext(), "cancel", Toast.LENGTH_SHORT).show()
-                            deleteBuilder.cancel()
-                        }
-
-                        deletePostCv.setOnClickListener {
-                            // bu yerga postni ochirish kodi yoziladi
-                            Toast.makeText(requireContext(), "delete post", Toast.LENGTH_SHORT)
-                                .show()
-                            deleteBuilder.cancel()
-                        }
+                    cancelPostsCv.setOnClickListener {
+                        Toast.makeText(requireContext(), "cancel", Toast.LENGTH_SHORT).show()
+                        deleteBuilder.cancel()
                     }
 
-                    deleteBuilder.show()
+                    deletePostCv.setOnClickListener {
+                        // bu yerga postni ochirish kodi yoziladi
+                        Toast.makeText(requireContext(), "delete post", Toast.LENGTH_SHORT).show()
+                        deleteBuilder.cancel()
+                    }
                 }
 
+                deleteBuilder.show()
+            }
 
-            })
+
+        })
         myPostsAdapter.submitList(list as List<Any>?)
         myVideosRv.adapter = myPostsAdapter
 

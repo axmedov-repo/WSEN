@@ -1,23 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white2"
-    tools:context=".presentation.ui.screens.WatchVideoFragment">
+    android:background="@color/white"
+    tools:context=".presentation.ui.screens.WatchVideoScreen">
 
-    <com.google.android.exoplayer2.ui.StyledPlayerView
-        android:id="@+id/videoView"
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        app:resize_mode="fill"
-        app:show_buffering="when_playing"
-        app:show_shuffle_button="true" />
+        app:layout_constraintBottom_toTopOf="@id/scroll_view"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <include
-        android:id="@+id/bottom_sheet_layout"
-        layout="@layout/layout_bottom_sheet" />
+        <com.google.android.exoplayer2.ui.StyledPlayerView
+            android:id="@+id/watchVideo_view"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            app:resize_mode="fill"
+            app:show_buffering="when_playing"
+            app:show_shuffle_button="true" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </FrameLayout>
+
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/frameLayout">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_ll"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/botom_sheet_shape">
+
+            <ImageView
+                android:id="@+id/like_video_img"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/healthcare_unselected"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="@string/tittle"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/like_video_img"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/account_img_view"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/default_profile_img"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_tv" />
+
+            <TextView
+                android:id="@+id/account_name_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/username"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/account_img_view"
+                app:layout_constraintLeft_toRightOf="@id/account_img_view"
+                app:layout_constraintTop_toTopOf="@id/account_img_view" />
+
+            <TextView
+                android:id="@+id/likes_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/nol"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/date_year_tv"
+                app:layout_constraintTop_toBottomOf="@id/account_img_view" />
+
+            <TextView
+                android:id="@+id/likes_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/likes"
+                android:textSize="16sp"
+                app:layout_constraintLeft_toLeftOf="@id/likes_count_tv"
+                app:layout_constraintRight_toRightOf="@id/likes_count_tv"
+                app:layout_constraintTop_toBottomOf="@id/likes_count_tv" />
+
+
+            <TextView
+                android:id="@+id/date_year_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="@string/year"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@id/likes_count_tv"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/account_img_view" />
+
+            <TextView
+                android:id="@+id/data_month_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/months_date"
+                android:textSize="16sp"
+                app:layout_constraintLeft_toLeftOf="@id/date_year_tv"
+                app:layout_constraintRight_toRightOf="@id/date_year_tv"
+                app:layout_constraintTop_toBottomOf="@id/date_year_tv" />
+
+            <View
+                android:id="@+id/view_line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="20dp"
+                android:background="#EAE0E0"
+                app:layout_constraintTop_toBottomOf="@id/likes_tv" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:justificationMode="inter_word"
+                android:padding="10dp"
+                android:text="@string/description"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/view_line2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

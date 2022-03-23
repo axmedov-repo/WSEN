@@ -10,19 +10,23 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="vertical">
 
         <LinearLayout
             android:id="@+id/main_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <VideoView
-                android:id="@+id/video_view"
+            
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:visibility="visible" />
+                android:layout_height="250dp">
+                <VideoView
+                    android:id="@+id/video_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </FrameLayout>
 
             <LinearLayout
                 android:id="@+id/ll1"
@@ -44,7 +48,7 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/my_foto"
+                        android:src="@drawable/default_profile_img"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"/>
@@ -61,14 +65,14 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Steve Johnson"
+                            android:text="@string/username"
                             android:textColor="@color/black"
                             android:textSize="16sp"
                             android:textStyle="bold"/>
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="12:00 pm"
+                            android:text="@string/create_video_time"
                             android:textColor="#322E2E"
                             android:textSize="14sp"
                             android:textStyle="normal" />
@@ -97,7 +101,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Add"
+                                android:text="@string/add"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
                                 android:textStyle="normal" />
@@ -111,19 +115,19 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="2dp"
                     android:background="#A8A2A2" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="5dp">
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Title"
-                        android:textSize="14sp"
-                        android:textColor="@color/purple_700"
-                        android:textStyle="normal"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
                         android:layout_marginStart="5dp"/>
 
                     <EditText
@@ -133,7 +137,6 @@
                         android:layout_marginStart="5dp"
                         android:background="@color/white"
                         android:hint="@string/create_title"
-                        android:maxLines="2"
                         android:minHeight="48dp"
                         android:textColor="@color/black"
                         android:textColorHint="#686363"
@@ -162,11 +165,11 @@
                     <EditText
                         android:id="@+id/description_et"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="48dp"
                         android:layout_marginStart="5dp"
                         android:background="@color/white"
                         android:hint="@string/description"
-                        android:ems="5000"
                         android:textColor="@color/black"
                         android:textColorHint="#686363"
                         android:textSize="16sp" />
@@ -184,7 +187,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginStart="5dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_location_on" />
                     <EditText
@@ -196,7 +199,6 @@
                         android:background="@color/white"
                         android:gravity="center_vertical"
                         android:hint="@string/location"
-                        android:ems="100"
                         android:textColor="@color/black"
                         android:textColorHint="#686363"
                         android:textSize="16sp" />

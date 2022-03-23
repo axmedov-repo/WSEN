@@ -1,28 +1,27 @@
 package uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.PopupMenu
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.AllVideoRvItemBinding
 
-class SliderAdapter(item: Int, val context: Context, var listener: OnItemClickListener) :
-    RecyclerView.Adapter<SliderAdapter.SliderViewHolder>() {
+class AllVideoRvAdapter(val context: Context, var listener:OnItemClickListener):
+    ListAdapter<Any,AllVideoRvAdapter.MyVideoHolder>(MyDiffUtil){
+
     var selectHelp = false
 
-    inner class SliderViewHolder(private val allVideoRvItemBinding: AllVideoRvItemBinding) :
+    inner class MyVideoHolder(private val allVideoRvItemBinding : AllVideoRvItemBinding) :
         RecyclerView.ViewHolder(allVideoRvItemBinding.root) {
+        fun onBind(item: Int){
 
-        fun onBind(item: Int) {
-            allVideoRvItemBinding.unlikeVideoImg.startAnimation(
-                AnimationUtils.loadAnimation(
-                    context,
-                    R.anim.com
-                )
-            )
+            allVideoRvItemBinding.unlikeVideoImg.startAnimation(AnimationUtils.loadAnimation(context,R.anim.com))
 
             allVideoRvItemBinding.playImg.setOnClickListener {
                 listener.onItemClick(item)
@@ -33,7 +32,7 @@ class SliderAdapter(item: Int, val context: Context, var listener: OnItemClickLi
             }
 
             allVideoRvItemBinding.threeDotsTv.setOnClickListener {
-                val popupMenu: PopupMenu = PopupMenu(context,allVideoRvItemBinding.threeDotsTv)
+                val popupMenu:PopupMenu = PopupMenu(context,allVideoRvItemBinding.threeDotsTv)
                 popupMenu.inflate(R.menu.rv_item_menu)
                 popupMenu.setOnMenuItemClickListener {
                     when(it.itemId){
@@ -46,38 +45,45 @@ class SliderAdapter(item: Int, val context: Context, var listener: OnItemClickLi
                 popupMenu.show()
             }
 
+
             allVideoRvItemBinding.unlikeVideoImg.setOnClickListener {
-                selectHelp = if (selectHelp) {
+                selectHelp = if(selectHelp){
                     allVideoRvItemBinding.unlikeVideoImg.setImageResource(R.drawable.healthcare_unselected)
                     false
-                } else {
+                }else{
                     allVideoRvItemBinding.unlikeVideoImg.setImageResource(R.drawable.healthcare_selected)
                     true
                 }
             }
 
         }
+
+
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder {
-        return SliderViewHolder(
-            AllVideoRvItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+    object MyDiffUtil:DiffUtil.ItemCallback<Any>() {
+        override fun areItemsTheSame(oldItem : Any, newItem : Any) : Boolean {
+            return oldItem==newItem
+        }
+
+        @SuppressLint("DiffUtilEquals")
+        override fun areContentsTheSame(oldItem : Any, newItem : Any) : Boolean {
+            return oldItem==newItem
+        }
     }
 
-    override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
-        holder.onBind(position)
+    override fun onCreateViewHolder(parent : ViewGroup , viewType : Int) : MyVideoHolder {
+        return MyVideoHolder(AllVideoRvItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
-    override fun getItemCount(): Int = 10
+    override fun onBindViewHolder(holder : MyVideoHolder , position : Int) {
+        holder.onBind(0)
+    }
 
-    interface OnItemClickListener {
+    interface OnItemClickListener{
         fun onItemClick(item: Int)
         fun onShareClick(item: Int)
         fun onMenuClick(item:Int)
     }
+
 }

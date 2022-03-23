@@ -1,7 +1,5 @@
 package uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages
 
-// create by khumoyun 11.02.2022
-
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
@@ -19,7 +17,6 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.karumi.dexter.BuildConfig
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -27,6 +24,7 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import dagger.hilt.android.AndroidEntryPoint
+import uz.targetsoftwaredevelopment.myapplication.BuildConfig
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogCameraBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogPermissionBinding

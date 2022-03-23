@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.widget.MediaController
 import android.widget.Toast
@@ -22,6 +21,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
+import uz.targetsoftwaredevelopment.myapplication.databinding.DialogCameraBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.PageAddVideoBinding
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.AddVideoPageViewModel
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.impl.AddVidePageViewModelImpl
@@ -29,6 +29,7 @@ import uz.targetsoftwaredevelopment.myapplication.utils.scope
 
 @AndroidEntryPoint
 class AddVideoPage : Fragment(R.layout.page_add_video) {
+
     private val binding by viewBinding(PageAddVideoBinding::bind)
     private val viewModel: AddVideoPageViewModel by viewModels<AddVidePageViewModelImpl>()
 
@@ -37,33 +38,44 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
     private val GALLERY = 1
     private val CAMERA = 2
     private lateinit var mediaController: MediaController
+    private var isGranted = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
-        requestMultiplePermissions()
+
 
         mediaController = MediaController(requireActivity())
-        mediaController.setAnchorView(binding.videoView)
+        mediaController.setAnchorView(videoView)
         videoView.setMediaController(mediaController)
-        binding.fab.setOnClickListener {
-            showPictureDialog()
+
+        fab.setOnClickListener {
+            requestMultiplePermissions()
+            if(isGranted){
+                showPictureDialog()
+            }
         }
     }
 
     private fun showPictureDialog() {
         val pictureDialog = AlertDialog.Builder(requireContext())
-        pictureDialog.setTitle("Select Action")
-        val pictureDialogItems = arrayOf("Select video from gallery", "Record video from camera")
-        pictureDialog.setItems(pictureDialogItems) { dialog, which ->
-            when (which) {
-                0 -> chooseVideoFromGallary()
-                1 -> takeVideoFromCamera()
-            }
+        val dialogCameraBinding = DialogCameraBinding.inflate(layoutInflater)
+        pictureDialog.setView(dialogCameraBinding.root)
+        val pictureBuilder = pictureDialog.create()
+        pictureBuilder.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialogCameraBinding.galleryView.setOnClickListener {
+            pictureBuilder.dismiss()
+            chooseVideoFromGallery()
         }
-        pictureDialog.show()
+
+        dialogCameraBinding.cameraView.setOnClickListener {
+            pictureBuilder.dismiss()
+            takeVideoFromCamera()
+        }
+        pictureBuilder.show()
     }
 
-    private fun chooseVideoFromGallary() {
+    private fun chooseVideoFromGallery() {
         val galleryIntent = Intent(
             Intent.ACTION_PICK,
             MediaStore.Video.Media.EXTERNAL_CONTENT_URI
@@ -73,41 +85,33 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
 
     private fun takeVideoFromCamera() {
         val intent = Intent(MediaStore.ACTION_VIDEO_CAPTURE)
-            .putExtra(MediaStore.EXTRA_DURATION_LIMIT, 15)
+            .putExtra(MediaStore.EXTRA_DURATION_LIMIT, 30)
         startActivityForResult(intent, CAMERA)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_CANCELED) {
-            Log.d("what", "cancel")
             return
         }
         if (requestCode == GALLERY) {
-            Log.d("what", "gallery")
             if (data != null) {
                 val contentURI = data.data
-
                 val selectedVideoPath = getPath(contentURI)
-                Log.d("path", selectedVideoPath!!)
-
                 binding.apply {
                     videoView.setVideoURI(contentURI)
-                    videoView.requestFocus()
+//                    videoView.requestFocus()
                     videoView.start()
                 }
 
             }
 
         } else if (requestCode == CAMERA) {
-            Log.d("what", "camera")
             val contentURI = data!!.data
             val recordedVideoPath = getPath(contentURI)
-            Log.d("frrr", recordedVideoPath!!)
-
             binding.apply {
                 videoView.setVideoURI(contentURI)
-                videoView.requestFocus()
+//                videoView.requestFocus()
                 videoView.start()
             }
         }
@@ -123,15 +127,12 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
             null
         )
         return if (cursor != null) {
-            // HERE YOU WILL GET A NULLPOINTER IF CURSOR IS NULL
-            // THIS CAN BE, IF YOU USED OI FILE MANAGER FOR PICKING THE MEDIA
             val column_index = cursor
                 .getColumnIndexOrThrow(MediaStore.Video.Media.DATA)
             cursor.moveToFirst()
             cursor.getString(column_index)
         } else
             null
-
     }
 
 
@@ -144,17 +145,10 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
             )
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-                    // check if all permissions are granted
                     if (report.areAllPermissionsGranted()) {
-                        Toast.makeText(
-                            requireContext(),
-                            "All permissions are granted by user!",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+                        isGranted=true
                     }
 
-                    // check for permanent denial of any permission
                     if (report.isAnyPermissionPermanentlyDenied) {
                         // show alert dialog navigating to Settings
                         //openSettingsDialog()
@@ -173,9 +167,10 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
                     token.continuePermissionRequest()
                 }
             }).withErrorListener {
-                Toast.makeText(requireContext(), "Some Error! ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.some_error), Toast.LENGTH_SHORT).show()
             }
             .onSameThread()
             .check()
     }
+
 }
