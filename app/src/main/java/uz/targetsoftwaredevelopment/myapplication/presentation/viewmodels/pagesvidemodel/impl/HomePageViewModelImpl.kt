@@ -1,4 +1,4 @@
-package uz.targetsoftwaredevelopment.myapplication.presentation.ui.viewmodels.impl
+package uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.impl
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.onEach
 import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.CategoriesItem
 import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.Statistics
 import uz.targetsoftwaredevelopment.myapplication.domain.repository.BaseRepository
-import uz.targetsoftwaredevelopment.myapplication.presentation.ui.viewmodels.HomePageViewModel
+import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.HomePageViewModel
 import javax.inject.Inject
 
 @HiltViewModel

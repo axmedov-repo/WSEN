@@ -26,8 +26,8 @@ import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.Categori
 import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.Statistics
 import uz.targetsoftwaredevelopment.myapplication.databinding.PageHomeBinding
 import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.AdsAdapter
-import uz.targetsoftwaredevelopment.myapplication.presentation.ui.viewmodels.HomePageViewModel
-import uz.targetsoftwaredevelopment.myapplication.presentation.ui.viewmodels.impl.HomePageViewModelImpl
+import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.HomePageViewModel
+import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.impl.HomePageViewModelImpl
 import uz.targetsoftwaredevelopment.myapplication.utils.dpToPx
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
 

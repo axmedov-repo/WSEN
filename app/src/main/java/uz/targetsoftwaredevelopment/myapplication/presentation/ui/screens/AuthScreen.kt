@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -12,11 +13,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.ScreenAuthBinding
 import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.LoginScreenAdapter
+import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.screensviewmodel.AuthScreenViewModel
+import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.screensviewmodel.impl.AuthScreenViewModelImpl
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
 
 @AndroidEntryPoint
 class AuthScreen : Fragment(R.layout.screen_auth) {
     private val binding by viewBinding(ScreenAuthBinding::bind)
+    private val viewModel: AuthScreenViewModel by viewModels<AuthScreenViewModelImpl>()
+
     private lateinit var loginAdapter: LoginScreenAdapter
     private var v: Float = 0F
 

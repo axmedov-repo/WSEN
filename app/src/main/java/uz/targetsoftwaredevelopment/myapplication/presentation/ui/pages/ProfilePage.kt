@@ -17,6 +17,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.karumi.dexter.BuildConfig
 import com.karumi.dexter.Dexter
@@ -30,6 +31,8 @@ import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogCameraBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogPermissionBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.PageProfileBinding
+import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.ProfilePageViewModel
+import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.impl.ProfilePageViewModelImpl
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
 import java.io.File
 import java.io.FileOutputStream
@@ -37,8 +40,9 @@ import java.io.IOException
 
 @AndroidEntryPoint
 class ProfilePage : Fragment(R.layout.page_profile) {
-
     private val binding by viewBinding(PageProfileBinding::bind)
+    private val viewModel: ProfilePageViewModel by viewModels<ProfilePageViewModelImpl>()
+
     var OLD_REQUEST_CODE = 1
     var CAMERA_REQUEST_CODE = 1
     lateinit var currentImagePath: String

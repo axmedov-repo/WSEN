@@ -5,7 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import uz.targetsoftwaredevelopment.myapplication.data.remote.ApiClient
-import uz.targetsoftwaredevelopment.myapplication.data.remote.api.MainPageApi
+import uz.targetsoftwaredevelopment.myapplication.data.remote.api.BaseApi
 import javax.inject.Singleton
 
 @Module
@@ -14,6 +14,6 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun getMainPageApi(): MainPageApi = ApiClient.retrofit.create(MainPageApi::class.java)
+    fun getBaseApi(): BaseApi = ApiClient.retrofit.create(BaseApi::class.java)
 
 }

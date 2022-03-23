@@ -31,15 +31,4 @@
     <string name="you_can_t_change_your_picture_if_you_don_t_allow_it">You can\'t change your picture if you don\'t allow it!</string>
     <string name="you_don_t_have_any_posts_yet">You don\'t have \nany posts yet</string>
 
-    <string name="_8942">⋮</string>
-    <string name="edit_posts">Edit posts</string>
-    <string name="delete_posts">Delete posts</string>
-    <string name="delete">Delete Post</string>
-    <string name="allow">Allow</string>
-    <string name="cancel">Cancel</string>
-    <string name="are_you_sure_want_to_delete_this_post">Are you sure want to delete this post?</string>
-    <string name="warning">Warning!</string>
-    <string name="you_can_t_change_your_picture_if_you_don_t_allow_it">You can\'t change your picture if you don\'t allow it!</string>
-    <string name="you_don_t_have_any_posts_yet">You don\'t have \nany posts yet</string>
-
 </resources>

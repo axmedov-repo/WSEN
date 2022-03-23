@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/watchVideoFragment"
-        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.WatchVideoFragment"
+        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.WatchVideoFragment"
         android:label="fragment_watch_video"
         tools:layout="@layout/screen_watch_video" />
     <fragment

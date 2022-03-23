@@ -13,6 +13,7 @@ import android.widget.MediaController
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -22,11 +23,14 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.PageAddVideoBinding
+import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.AddVideoPageViewModel
+import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.impl.AddVidePageViewModelImpl
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
 
 @AndroidEntryPoint
 class AddVideoPage : Fragment(R.layout.page_add_video) {
     private val binding by viewBinding(PageAddVideoBinding::bind)
+    private val viewModel: AddVideoPageViewModel by viewModels<AddVidePageViewModelImpl>()
 
     //    private var videoView: VideoView? = null
     private val VIDEO_DIRECTORY = "/demonutsVideoooo"

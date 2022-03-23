@@ -4,7 +4,8 @@ import retrofit2.Response
 import retrofit2.http.GET
 import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.MainPageDataResponse
 
-interface MainPageApi {
+interface BaseApi {
     @GET("en/api/")
     suspend fun getMainPageData() : Response<MainPageDataResponse>
+
 }

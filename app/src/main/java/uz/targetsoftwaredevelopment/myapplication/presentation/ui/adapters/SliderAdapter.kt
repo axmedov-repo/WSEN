@@ -15,8 +15,8 @@ class SliderAdapter(item: Int, val context: Context, var listener: OnItemClickLi
 
     inner class SliderViewHolder(private val allVideoRvItemBinding: AllVideoRvItemBinding) :
         RecyclerView.ViewHolder(allVideoRvItemBinding.root) {
-        fun onBind(item: Int) {
 
+        fun onBind(item: Int) {
             allVideoRvItemBinding.unlikeVideoImg.startAnimation(
                 AnimationUtils.loadAnimation(
                     context,

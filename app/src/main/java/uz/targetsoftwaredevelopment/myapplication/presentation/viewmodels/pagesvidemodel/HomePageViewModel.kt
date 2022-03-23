@@ -1,4 +1,4 @@
-package uz.targetsoftwaredevelopment.myapplication.presentation.ui.viewmodels
+package uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel
 
 import androidx.lifecycle.LiveData
 import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.CategoriesItem

@@ -5,18 +5,22 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.ScreenBasicNavBinding
 import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.BasicPageAdapter
+import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.screensviewmodel.BasicScreenViewModel
+import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.screensviewmodel.impl.BasicScreenViewModelImpl
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
 
 @AndroidEntryPoint
 class BasicScreen : Fragment(R.layout.screen_basic_nav),
     NavigationView.OnNavigationItemSelectedListener {
     private val binding by viewBinding(ScreenBasicNavBinding::bind)
+    private val viewModel: BasicScreenViewModel by viewModels<BasicScreenViewModelImpl>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
