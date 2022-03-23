@@ -1,20 +1,23 @@
 package uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.PopupMenu
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.AllVideoRvItemBinding
 
-class AllVideoRvAdapter(item:Int, val context: Context, var listener:OnItemClickListener) :
-    RecyclerView.Adapter<AllVideoRvAdapter.SliderViewHolder>() {
+class AllVideoRvAdapter(val context: Context, var listener:OnItemClickListener):
+    ListAdapter<Any,AllVideoRvAdapter.MyVideoHolder>(MyDiffUtil){
 
     var selectHelp = false
 
-    inner class SliderViewHolder(private val allVideoRvItemBinding : AllVideoRvItemBinding) :
+    inner class MyVideoHolder(private val allVideoRvItemBinding : AllVideoRvItemBinding) :
         RecyclerView.ViewHolder(allVideoRvItemBinding.root) {
         fun onBind(item: Int){
 
@@ -58,20 +61,29 @@ class AllVideoRvAdapter(item:Int, val context: Context, var listener:OnItemClick
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder {
-        return SliderViewHolder(AllVideoRvItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+    object MyDiffUtil:DiffUtil.ItemCallback<Any>() {
+        override fun areItemsTheSame(oldItem : Any, newItem : Any) : Boolean {
+            return oldItem==newItem
+        }
+
+        @SuppressLint("DiffUtilEquals")
+        override fun areContentsTheSame(oldItem : Any, newItem : Any) : Boolean {
+            return oldItem==newItem
+        }
     }
 
-    override fun onBindViewHolder(holder: SliderViewHolder, position: Int) {
-        holder.onBind(position)
-
+    override fun onCreateViewHolder(parent : ViewGroup , viewType : Int) : MyVideoHolder {
+        return MyVideoHolder(AllVideoRvItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
-    override fun getItemCount(): Int = 10
+    override fun onBindViewHolder(holder : MyVideoHolder , position : Int) {
+        holder.onBind(0)
+    }
 
     interface OnItemClickListener{
         fun onItemClick(item: Int)
         fun onShareClick(item: Int)
         fun onMenuClick(item:Int)
     }
+
 }

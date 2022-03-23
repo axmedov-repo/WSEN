@@ -3,12 +3,10 @@ package uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.databinding.ScreenWatchVideoBinding
@@ -25,11 +23,11 @@ class WatchVideoScreen : Fragment(R.layout.screen_watch_video) {
         super.onViewCreated(view, savedInstanceState)
 
         val player = ExoPlayer.Builder(requireContext()).build()
-        val onlineUri:Uri = Uri.parse("https://storage.googleapis.com/exoplayer-test-media-0/play.mp3")
+//        val onlineUri:Uri = Uri.parse("https://storage.googleapis.com/exoplayer-test-media-0/play.mp3")
+        val onlineUri:Uri = Uri.parse("https://s3.ca-central-1.amazonaws.com/codingwithmitch/media/VideoPlayerRecyclerView/Sending+Data+to+a+New+Activity+with+Intent+Extras.mp4")
         val mediaItem:MediaItem = MediaItem.fromUri(onlineUri)
-        binding.videoView.player = player
+        binding.watchVideoView.player = player
         player.setMediaItem(mediaItem)
         player.prepare()
-
     }
 }
