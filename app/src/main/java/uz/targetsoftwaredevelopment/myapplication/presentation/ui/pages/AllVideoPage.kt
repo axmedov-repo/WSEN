@@ -45,8 +45,5 @@ class AllVideoPage:Fragment(R.layout.page_all_video) {
 
         allVideoRvAdapter.submitList(list as List<Any>?)
         binding.carouselRv.adapter = allVideoRvAdapter
-
-
     }
-
 }
