@@ -1,6 +1,5 @@
 package uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -38,44 +37,34 @@ class AllVideoPage : Fragment(R.layout.page_all_video) {
     private fun loadAllVideoData() {
         allVideoRvAdapter =
             AllVideoRvAdapter(requireContext(), object : AllVideoRvAdapter.OnItemClickListener {
-                override fun onItemClick(item: Int) {
+                override fun onItemClick(videoData: VideoData) {
                     findNavController().navigate(R.id.watchVideoScreen)
                 }
 
-                override fun onShareClick(item: Int) {
-                    Toast.makeText(requireContext(), "send", Toast.LENGTH_SHORT).show()
-                }
-                override fun onShareClick(videoData : VideoData) {
+                override fun onShareClick(videoData: VideoData) {
 //                    val shareIntent: Intent = Intent().apply {
 //                        action = Intent.ACTION_SEND
 //                        putExtra(Intent.EXTRA_STREAM, videoData.title)
 //                        type = "video/mp4"
 //                    }
 //                    startActivity(Intent.createChooser(shareIntent, null))
-                    Toast.makeText(requireContext() , "send" , Toast.LENGTH_SHORT).show()
-
-                override fun onMenuClick(item: Int) {
-                    Toast.makeText(requireContext(), "spam", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "send", Toast.LENGTH_SHORT).show()
                 }
 
-                override fun onMenuClick(videoData : VideoData) {
+                override fun onMenuClick(videoData: VideoData) {
                     val bottomSheetDialog = BottomSheetDialog(requireContext())
-                    val screenBottomSheetDialogScreen = ScreenBottomSheetDialogBinding.inflate(layoutInflater)
+                    val screenBottomSheetDialogScreen =
+                        ScreenBottomSheetDialogBinding.inflate(layoutInflater)
                     bottomSheetDialog.setContentView(screenBottomSheetDialogScreen.root)
                     screenBottomSheetDialogScreen.sendReportCv.setOnClickListener {
-                        Toast.makeText(requireContext() , "send request" , Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "send request", Toast.LENGTH_SHORT)
+                            .show()
                     }
                     bottomSheetDialog.show()
                 }
             })
 
         binding.allVideRv.adapter = allVideoRvAdapter
-
-    }
-}
-
-//        allVideoRvAdapter.submitList(list as List<Any>?)
-        binding.carouselRv.adapter = allVideoRvAdapter
     }
 
     private val allVideosObserver = Observer<List<VideoData?>?> {
