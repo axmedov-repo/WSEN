@@ -46,6 +46,7 @@ class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getHomePageData()
 
+
         /* drawerLayout = view.findViewById(R.id.drawer_layout)
          navigationView = view.findViewById(R.id.navigation_view)*/
 

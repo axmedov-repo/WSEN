@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.provider.Settings
 import android.view.View
@@ -14,6 +15,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.abedelazizshe.lightcompressorlibrary.CompressionListener
+import com.abedelazizshe.lightcompressorlibrary.VideoCompressor
+import com.abedelazizshe.lightcompressorlibrary.VideoQuality
+import com.abedelazizshe.lightcompressorlibrary.config.Configuration
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -39,6 +44,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
     private val CAMERA = 2
     private lateinit var mediaController: MediaController
     private var isGranted = false
+    private lateinit var videUri:Uri
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
@@ -97,6 +103,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
         if (requestCode == GALLERY) {
             if (data != null) {
                 val contentURI = data.data
+                videUri = contentURI!!
                 val selectedVideoPath = getPath(contentURI)
                 binding.apply {
                     videoView.setVideoURI(contentURI)
@@ -108,12 +115,47 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
 
         } else if (requestCode == CAMERA) {
             val contentURI = data!!.data
+            videUri = contentURI!!
             val recordedVideoPath = getPath(contentURI)
             binding.apply {
                 videoView.setVideoURI(contentURI)
 //                videoView.requestFocus()
                 videoView.start()
             }
+//            val uriList:ArrayList<Uri> = ArrayList()
+//            uriList.add(contentURI!!)
+//            VideoCompressor.start(requireContext(), uriList,true,
+//                Environment.DIRECTORY_MOVIES,object :CompressionListener{
+//                override fun onCancelled(index : Int) {
+//                    Toast.makeText(requireContext() , "cancel" , Toast.LENGTH_SHORT).show()
+//                }
+//
+//                override fun onFailure(index : Int , failureMessage : String) {
+//                    Toast.makeText(requireContext() , "failure $failureMessage" , Toast.LENGTH_SHORT).show()
+//                }
+//
+//                override fun onProgress(index : Int , percent : Float) {
+//                    Toast.makeText(requireContext() , "progress" , Toast.LENGTH_SHORT).show()
+//
+//                }
+//
+//                override fun onStart(index : Int) {
+//                    Toast.makeText(requireContext() , "start" , Toast.LENGTH_SHORT).show()
+//                }
+//
+//                override fun onSuccess(index : Int , size : Long , path : String?) {
+//                    Toast.makeText(requireContext() , "success" , Toast.LENGTH_SHORT).show()
+//                }
+//            },
+//                Configuration(
+//                    VideoQuality.MEDIUM,24,true,3677198,
+//                    disableAudio = false ,
+//                    keepOriginalResolution = false ,
+//                    videoHeight = 360.0 ,
+//                    videoWidth = 480.0
+//                )
+//            )
+
         }
     }
 

@@ -44,7 +44,7 @@
                 android:layout_height="35dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="10dp"
-                android:src="@drawable/healthcare_unselected"
+                android:src="@drawable/ic_heart_unlike"
                 app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

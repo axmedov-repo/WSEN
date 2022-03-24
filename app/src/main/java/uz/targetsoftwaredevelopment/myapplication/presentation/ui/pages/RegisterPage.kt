@@ -8,15 +8,15 @@ import androidx.fragment.app.viewModels
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
-import uz.targetsoftwaredevelopment.myapplication.databinding.PageSignUpBinding
+import uz.targetsoftwaredevelopment.myapplication.databinding.PageRegisterBinding
 import uz.targetsoftwaredevelopment.myapplication.presentation.MainActivity
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.SignUpPageViewModel
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.impl.SignUpPageViewModelImpl
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
 
 @AndroidEntryPoint
-class SignUpPage : Fragment(R.layout.page_sign_up) {
-    private val binding by viewBinding(PageSignUpBinding::bind)
+class RegisterPage : Fragment(R.layout.page_register) {
+    private val binding by viewBinding(PageRegisterBinding::bind)
     private val viewModel: SignUpPageViewModel by viewModels<SignUpPageViewModelImpl>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {

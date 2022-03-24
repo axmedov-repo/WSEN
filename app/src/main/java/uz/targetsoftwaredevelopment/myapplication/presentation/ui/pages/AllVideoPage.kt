@@ -1,16 +1,23 @@
 package uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
+import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.myapplication.databinding.PageAllVideoBinding
+import uz.targetsoftwaredevelopment.myapplication.databinding.ScreenBottomSheetDialogBinding
 import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.AllVideoRvAdapter
+import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.AllVideoPageViewModel
+import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.impl.AllVideoPageViewModelImpl
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
 
 @AndroidEntryPoint
@@ -18,69 +25,55 @@ class AllVideoPage:Fragment(R.layout.page_all_video) {
 
     private val binding by viewBinding(PageAllVideoBinding::bind)
     private lateinit var allVideoRvAdapter : AllVideoRvAdapter
-    private var list = arrayListOf(1,2,3,4,5,6,7,8,9,0)
+    private val viewModel: AllVideoPageViewModel by viewModels<AllVideoPageViewModelImpl>()
+
+
+
 
     override fun onViewCreated(view : View , savedInstanceState : Bundle?) = binding.scope {
         super.onViewCreated(view , savedInstanceState)
-
+        viewModel.getAllVideosPageData()
         loadAllVideoData()
+
+        viewModel.getAllVideosLiveData.observe(viewLifecycleOwner,allVideoObserver)
+    }
+
+    private val allVideoObserver = Observer<List<VideoData?>?> {
+        allVideoRvAdapter.submitList(it)
     }
 
 
     private fun loadAllVideoData() {
         allVideoRvAdapter =
             AllVideoRvAdapter(requireContext() , object:AllVideoRvAdapter.OnItemClickListener {
-                override fun onItemClick(item : Int) {
+                override fun onItemClick(videoData : VideoData) {
                     findNavController().navigate(R.id.watchVideoScreen)
 
                 }
 
-                override fun onShareClick(item : Int) {
+                override fun onShareClick(videoData : VideoData) {
+//                    val shareIntent: Intent = Intent().apply {
+//                        action = Intent.ACTION_SEND
+//                        putExtra(Intent.EXTRA_STREAM, videoData.title)
+//                        type = "video/mp4"
+//                    }
+//                    startActivity(Intent.createChooser(shareIntent, null))
                     Toast.makeText(requireContext() , "send" , Toast.LENGTH_SHORT).show()
+
                 }
 
-                override fun onMenuClick(item : Int) {
-                    Toast.makeText(requireContext() , "spam" , Toast.LENGTH_SHORT).show()
-                }
-            })
-
-        allVideoRvAdapter.submitList(list as List<Any>?)
-        binding.carouselRv.adapter = allVideoRvAdapter
-    }
-}
-
-import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.SliderAdapter
-import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.AllVideoPageViewModel
-import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.impl.AllVideoPageViewModelImpl
-
-@AndroidEntryPoint
-class AllVideoPage : Fragment(R.layout.page_all_video) {
-    private val binding by viewBinding(PageAllVideoBinding::bind)
-    private val viewModel: AllVideoPageViewModel by viewModels<AllVideoPageViewModelImpl>()
-    private lateinit var sliderAdapter: SliderAdapter
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        loadDataCarouseRv()
-    }
-
-    private fun loadDataCarouseRv() {
-        sliderAdapter =
-            SliderAdapter(1, requireContext(), object : SliderAdapter.OnItemClickListener {
-                override fun onItemClick(item: Int) {
-                    findNavController().navigate(R.id.watchVideoFragment)
-                }
-
-                override fun onShareClick(item: Int) {
-                    Toast.makeText(requireContext(), "send", Toast.LENGTH_SHORT).show()
-                }
-
-                override fun onMenuClick(item: Int) {
-                    Toast.makeText(requireContext(), "spam", Toast.LENGTH_SHORT).show()
+                override fun onMenuClick(videoData : VideoData) {
+                    val bottomSheetDialog = BottomSheetDialog(requireContext())
+                    val screenBottomSheetDialogScreen = ScreenBottomSheetDialogBinding.inflate(layoutInflater)
+                    bottomSheetDialog.setContentView(screenBottomSheetDialogScreen.root)
+                    screenBottomSheetDialogScreen.sendReportCv.setOnClickListener {
+                        Toast.makeText(requireContext() , "send request" , Toast.LENGTH_SHORT).show()
+                    }
+                    bottomSheetDialog.show()
                 }
             })
-        binding.carouselRv.apply {
-            adapter = sliderAdapter
-        }
+
+        binding.allVideRv.adapter = allVideoRvAdapter
+
     }
 }

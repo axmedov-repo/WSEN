@@ -29,6 +29,7 @@ class WatchVideoScreen : Fragment(R.layout.screen_watch_video) {
         watchVideoView.player = player
         player.setMediaItem(mediaItem)
         player.prepare()
+
     }
 
     override fun onStop() {
