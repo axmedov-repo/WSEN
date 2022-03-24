@@ -21,7 +21,6 @@
         app:tabIndicatorAnimationMode="linear"
         app:tabIndicatorColor="@color/main_green"
         app:tabMode="fixed"
-        app:tabRippleColor="@color/transparent"
         app:tabSelectedTextColor="@color/main_green"
         app:tabTextColor="#8028282C">
 
@@ -44,7 +43,7 @@
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/carousel_rv"
+        android:id="@+id/all_vide_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

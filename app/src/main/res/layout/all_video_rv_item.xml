@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white2"
+    android:background="@color/white"
     android:paddingBottom="20dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -25,14 +25,14 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/data_tv"
+        app:layout_constraintBottom_toTopOf="@id/date_tv"
         app:layout_constraintLeft_toRightOf="@id/account_img"
         app:layout_constraintRight_toLeftOf="@id/three_dots_tv"
         app:layout_constraintTop_toTopOf="@id/account_img"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/data_tv"
+        android:id="@+id/date_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -56,6 +56,7 @@
         app:layout_constraintBottom_toBottomOf="@id/account_img"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/account_img" />
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/video_img"
@@ -102,7 +103,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/healthcare_unselected"
+        android:src="@drawable/ic_heart_unlike"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/video_img" />
 

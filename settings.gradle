@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
     gradle.ext.exoplayerModulePrefix = 'exoplayer-'
 //    apply from: file("path/to/exoplayer/core_settings.gradle")
