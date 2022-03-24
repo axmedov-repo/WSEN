@@ -2,7 +2,10 @@ package uz.targetsoftwaredevelopment.myapplication.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.ContextWrapper
 import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.TypedValue
@@ -17,6 +20,9 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import timber.log.Timber
 import uz.targetsoftwaredevelopment.myapplication.app.App
 import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
+import java.util.*
 
 fun Fragment.showToast(message: String) {
     Toast.makeText(this.requireContext(), message, Toast.LENGTH_SHORT).show()
@@ -69,3 +75,18 @@ fun Float.toPx(): Int {
 fun Int.dpToPx(displayMetrics: DisplayMetrics): Int = (this * displayMetrics.density).toInt()
 
 fun Int.pxToDp(displayMetrics: DisplayMetrics): Int = (this / displayMetrics.density).toInt()
+
+fun getImageFile(context: Context, imageDrawable: Int): File {
+    val imageBitmap = BitmapFactory.decodeResource(context.resources, imageDrawable)
+
+    val wrapper = ContextWrapper(context)
+    var file = wrapper.getDir("Images", Context.MODE_PRIVATE)
+    file = File(file, "${UUID.randomUUID()}.jpg")
+    val stream: OutputStream = FileOutputStream(file)
+    imageBitmap.compress(Bitmap.CompressFormat.JPEG, 25, stream)
+    stream.flush()
+    stream.close()
+    return file
+}
+
+

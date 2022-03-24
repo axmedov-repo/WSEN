@@ -8,7 +8,7 @@
         android:id="@+id/basicScreen"
         android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.BasicScreen"
         android:label="screen_basic_nav"
-        tools:layout="@layout/screen_basic_nav" >
+        tools:layout="@layout/screen_basic_nav">
         <action
             android:id="@+id/action_basicScreen_to_watchVideoScreen"
             app:destination="@id/watchVideoScreen" />
@@ -20,7 +20,7 @@
         android:id="@+id/splashScreen"
         android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.SplashScreen"
         android:label="screen_splash"
-        tools:layout="@layout/screen_splash" >
+        tools:layout="@layout/screen_splash">
         <action
             android:id="@+id/action_splashScreen_to_basicScreen"
             app:destination="@id/basicScreen" />
@@ -32,7 +32,7 @@
         android:id="@+id/authScreen"
         android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.AuthScreen"
         android:label="screen_auth"
-        tools:layout="@layout/screen_auth" >
+        tools:layout="@layout/screen_auth">
         <action
             android:id="@+id/action_authScreen_to_basicScreen"
             app:destination="@id/basicScreen" />

@@ -14,18 +14,17 @@ import uz.targetsoftwaredevelopment.myapplication.utils.scope
 
 @AndroidEntryPoint
 class WatchVideoScreen : Fragment(R.layout.screen_watch_video) {
-
     private val binding by viewBinding(ScreenWatchVideoBinding::bind)
-    private lateinit var player:ExoPlayer
+    private lateinit var player: ExoPlayer
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?)=binding.scope {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
 
         player = ExoPlayer.Builder(requireContext()).build()
 //        val onlineUri:Uri = Uri.parse("https://storage.googleapis.com/exoplayer-test-media-0/play.mp3")
-        val onlineUri:Uri = Uri.parse("https://s3.ca-central-1.amazonaws.com/codingwithmitch/media/VideoPlayerRecyclerView/Sending+Data+to+a+New+Activity+with+Intent+Extras.mp4")
-        val mediaItem:MediaItem = MediaItem.fromUri(onlineUri)
+        val onlineUri: Uri =
+            Uri.parse("https://s3.ca-central-1.amazonaws.com/codingwithmitch/media/VideoPlayerRecyclerView/Sending+Data+to+a+New+Activity+with+Intent+Extras.mp4")
+        val mediaItem: MediaItem = MediaItem.fromUri(onlineUri)
         watchVideoView.player = player
         player.setMediaItem(mediaItem)
         player.prepare()
