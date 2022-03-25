@@ -9,36 +9,52 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import uz.targetsoftwaredevelopment.myapplication.R
+import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.myapplication.databinding.MyPostsItemBinding
 
 class MyPostsAdapter(val context:Context,val listener:OnPostItemTouchListener)
-    :ListAdapter<Any,MyPostsAdapter.MyViewHolder>(MyDiffUtil) {
+    :ListAdapter<VideoData,MyPostsAdapter.MyViewHolder>(MyDiffUtil) {
 
     inner class MyViewHolder(private val myPostsItemBinding : MyPostsItemBinding)
         :RecyclerView.ViewHolder(myPostsItemBinding.root){
-        fun onBind(){
+        fun onBind(videoData : VideoData){
             myPostsItemBinding.apply {
+                Glide.with(context)
+                    .load(videoData.preloadImg)
+                    .error(R.drawable.planet_earth)
+                    .into(myPostItemImageView)
+
+                myPostTitleTv.text = videoData.title
+                myPostAddressTv.text = videoData.location
+
                 menuTv.setOnClickListener {
                     val popupMenu: PopupMenu = PopupMenu(context,myPostsItemBinding.menuTv)
                     popupMenu.inflate(R.menu.rv_posts_menu)
                     popupMenu.setOnMenuItemClickListener {
                         when(it.itemId){
                             R.id.menu_edit_posts->{
-                                listener.onMenuEdit()
+                                listener.onMenuEdit(videoData)
                             }
                             R.id.menu_delete_posts->{
-                                listener.onMenuDelete()
+                                listener.onMenuDelete(videoData)
+                            }
+                            R.id.menu_waiting->{
+                                listener.onMenuWaiting(videoData)
+                            }
+                            R.id.menu_finished->{
+                                listener.onMenuFinished(videoData)
                             }
                         }
                         true
                     }
                     popupMenu.show()
                 }
-
                 imageCv.setOnClickListener {
-                    listener.onPostClick()
+                    listener.onPostClick(videoData)
                 }
+
             }
 
 
@@ -47,14 +63,14 @@ class MyPostsAdapter(val context:Context,val listener:OnPostItemTouchListener)
 
     }
 
-    object MyDiffUtil:DiffUtil.ItemCallback<Any>() {
-        override fun areItemsTheSame(oldItem : Any, newItem : Any) : Boolean {
+    object MyDiffUtil:DiffUtil.ItemCallback<VideoData>() {
+        override fun areItemsTheSame(oldItem : VideoData, newItem : VideoData) : Boolean {
             return oldItem==newItem
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem : Any, newItem : Any) : Boolean {
-            return oldItem==newItem
+        override fun areContentsTheSame(oldItem : VideoData, newItem : VideoData) : Boolean {
+            return oldItem.id==newItem.id
         }
     }
 
@@ -63,12 +79,14 @@ class MyPostsAdapter(val context:Context,val listener:OnPostItemTouchListener)
     }
 
     override fun onBindViewHolder(holder : MyViewHolder, position : Int) {
-        holder.onBind()
+        holder.onBind(getItem(position))
     }
 
     interface OnPostItemTouchListener{
-        fun onMenuEdit()
-        fun onMenuDelete()
-        fun onPostClick()
+        fun onMenuEdit(videoData : VideoData)
+        fun onMenuDelete(videoData : VideoData)
+        fun onPostClick(videoData : VideoData)
+        fun onMenuWaiting(videoData : VideoData)
+        fun onMenuFinished(videoData : VideoData)
     }
 }

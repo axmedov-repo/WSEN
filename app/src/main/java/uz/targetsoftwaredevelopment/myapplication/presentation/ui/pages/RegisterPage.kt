@@ -22,7 +22,7 @@ class RegisterPage : Fragment(R.layout.page_register) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
 
-        email.apply {
+        etEmail.apply {
             translationX = 0F
             alpha = 0F
             animate().apply {
@@ -31,7 +31,7 @@ class RegisterPage : Fragment(R.layout.page_register) {
             }
         }
 
-        password.apply {
+        etPassword.apply {
             translationX = 0F
             alpha = 0F
             animate().apply {
@@ -40,7 +40,7 @@ class RegisterPage : Fragment(R.layout.page_register) {
             }
         }
 
-        confirmPassword.apply {
+        etConfirmPassword.apply {
             translationX = 0F
             alpha = 0F
             animate().apply {
@@ -49,7 +49,7 @@ class RegisterPage : Fragment(R.layout.page_register) {
             }
         }
 
-        number.apply {
+        etNumber.apply {
             translationX = 0F
             alpha = 0F
             animate().apply {
@@ -58,7 +58,7 @@ class RegisterPage : Fragment(R.layout.page_register) {
             }
         }
 
-        btn.apply {
+        btnRegister.apply {
             translationX = 0F
             alpha = 0F
             animate().translationY(0F).alpha(1F).duration = 1000

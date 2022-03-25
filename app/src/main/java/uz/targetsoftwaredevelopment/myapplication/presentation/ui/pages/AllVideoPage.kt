@@ -24,7 +24,6 @@ class AllVideoPage : Fragment(R.layout.page_all_video) {
     private val binding by viewBinding(PageAllVideoBinding::bind)
     private val viewModel: AllVideoPageViewModel by viewModels<AllVideoPageViewModelImpl>()
     private lateinit var allVideoRvAdapter: AllVideoRvAdapter
-//    private var list = arrayListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 0)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
@@ -55,12 +54,20 @@ class AllVideoPage : Fragment(R.layout.page_all_video) {
                     val bottomSheetDialog = BottomSheetDialog(requireContext())
                     val screenBottomSheetDialogScreen =
                         ScreenBottomSheetDialogBinding.inflate(layoutInflater)
-                    bottomSheetDialog.setContentView(screenBottomSheetDialogScreen.root)
-                    screenBottomSheetDialogScreen.sendReportCv.setOnClickListener {
+                        bottomSheetDialog.setContentView(screenBottomSheetDialogScreen.root)
+                        screenBottomSheetDialogScreen.sendReportCv.setOnClickListener {
                         Toast.makeText(requireContext(), "send request", Toast.LENGTH_SHORT)
                             .show()
                     }
                     bottomSheetDialog.show()
+                }
+
+                override fun onClickLike(videoData : VideoData) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onClickUnLike(videoData : VideoData) {
+                    TODO("Not yet implemented")
                 }
             })
 

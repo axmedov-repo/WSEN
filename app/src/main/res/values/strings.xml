@@ -49,7 +49,11 @@
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
     <string name="please_enter_any_additional_details_relevant_to_nyour_report">Please enter any additional details relevant to \nyour report</string>
-    <string name="additional_details">Additional details</string>
+    <string name="additional_details">Additional details…</string>
     <string name="send_report">Send Report</string>
+    <string name="status">Status</string>
+    <string name="waiting">Waiting</string>
+    <string name="finished">Finished</string>
+
 
 </resources>

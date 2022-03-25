@@ -8,12 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
+import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogDeleteBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.PageMyPostsBinding
-import uz.targetsoftwaredevelopment.myapplication.databinding.ScreenBottomSheetDialogBinding
 import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.MyPostsAdapter
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.MyPostsPageViewModel
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.impl.MyPostsPageViewModelImpl
@@ -31,13 +30,13 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
         super.onViewCreated(view, savedInstanceState)
 
         myPostsAdapter = MyPostsAdapter(requireContext(),object :MyPostsAdapter.OnPostItemTouchListener{
-            override fun onMenuEdit() {
+            override fun onMenuEdit(videoData : VideoData) {
                 findNavController().navigate(R.id.editVideoScreen)
             }
-            override fun onPostClick() {
+            override fun onPostClick(videoData : VideoData) {
                 findNavController().navigate(R.id.watchVideoScreen)
             }
-            override fun onMenuDelete() {
+            override fun onMenuDelete(videoData : VideoData) {
                 val deleteDialog = AlertDialog.Builder(requireContext())
                 val dialogDeleteBinding = DialogDeleteBinding.inflate(layoutInflater)
                 deleteDialog.setView(dialogDeleteBinding.root)
@@ -62,9 +61,15 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
                 deleteBuilder.show()
             }
 
+            override fun onMenuWaiting(videoData : VideoData) {
+                TODO("Not yet implemented")
+            }
 
+            override fun onMenuFinished(videoData : VideoData) {
+                TODO("Not yet implemented")
+            }
         })
-        myPostsAdapter.submitList(list as List<Any>?)
+//        myPostsAdapter.submitList(list)
         myVideosRv.adapter = myPostsAdapter
 
     }

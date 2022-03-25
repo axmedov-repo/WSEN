@@ -2,8 +2,9 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="128dp"
     android:layout_marginVertical="5dp"
     android:layout_marginHorizontal="10dp"
     app:cardUseCompatPadding="false"
@@ -17,7 +18,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/imageCv"
-            android:layout_width="110dp"
+            android:layout_width="128dp"
             app:cardCornerRadius="0sp"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -29,12 +30,16 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imageView"
+                    android:id="@+id/my_post_item_imageView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/tabiat" />
+                    android:src="@drawable/planet_earth"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:layout_width="50dp"
@@ -52,35 +57,37 @@
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/title_tv"
+            android:id="@+id/my_post_title_tv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:justificationMode="inter_word"
             android:paddingHorizontal="5dp"
             android:paddingTop="5dp"
             android:gravity="top"
-            android:text="Daraxtlari kesih va atrof muhitni tozalash"
+            android:maxLines="3"
+            android:text="@string/tittle"
             android:textColor="#FFFFFF"
             android:textSize="15sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/address_tv"
+            app:layout_constraintBottom_toTopOf="@id/my_post_address_tv"
             app:layout_constraintLeft_toRightOf="@id/imageCv"
             app:layout_constraintRight_toLeftOf="@id/menu_tv"
             app:layout_constraintTop_toTopOf="parent" />
         <TextView
-            android:id="@+id/address_tv"
+            android:id="@+id/my_post_address_tv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center_vertical"
             android:paddingHorizontal="5dp"
-            android:text="Toshent shahar Uchtapa tumani"
+            android:text="@string/address"
             android:textColor="#C9FFFFFF"
             android:textSize="14sp"
+            android:maxLines="3"
             android:paddingBottom="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@id/imageCv"
             app:layout_constraintRight_toLeftOf="@id/menu_tv"
-            app:layout_constraintTop_toBottomOf="@id/title_tv" />
+            app:layout_constraintTop_toBottomOf="@id/my_post_title_tv" />
 
         <TextView
             android:id="@+id/menu_tv"
@@ -88,7 +95,7 @@
             android:layout_height="wrap_content"
             android:text="@string/_8942"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="22sp"
             android:padding="10dp"
             android:layout_marginEnd="5dp"
