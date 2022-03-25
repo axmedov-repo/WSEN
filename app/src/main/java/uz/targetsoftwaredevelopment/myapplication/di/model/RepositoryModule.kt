@@ -6,8 +6,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import uz.targetsoftwaredevelopment.myapplication.domain.repository.BaseRepository
 import uz.targetsoftwaredevelopment.myapplication.domain.repository.impl.BaseRepositoryImpl
-import uz.targetsoftwaredevelopment.myapplication.domain.repository.pagesrepository.impl.ALlVideosBaseRepository
-import uz.targetsoftwaredevelopment.myapplication.domain.repository.pagesrepository.impl.AllVideosBaseRepositoryImpl
 import javax.inject.Singleton
 
 @Module
@@ -18,7 +16,8 @@ interface RepositoryModule {
     @Singleton
     fun getBaseRepository(baseRepository: BaseRepositoryImpl): BaseRepository
 
+/*
     @Binds
     @Singleton
-    fun getAllPostsRepository(allVideosRepository: AllVideosBaseRepositoryImpl): ALlVideosBaseRepository
+    fun getAllPostsRepository(allVideosRepository: AllVideosBaseRepositoryImpl): ALlVideosBaseRepository*/
 }

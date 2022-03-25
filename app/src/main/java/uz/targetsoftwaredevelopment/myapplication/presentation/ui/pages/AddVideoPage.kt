@@ -1,24 +1,25 @@
 package uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.widget.MediaController
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.abedelazizshe.lightcompressorlibrary.CompressionListener
-import com.abedelazizshe.lightcompressorlibrary.VideoCompressor
-import com.abedelazizshe.lightcompressorlibrary.VideoQuality
-import com.abedelazizshe.lightcompressorlibrary.config.Configuration
+import com.iceteck.silicompressorr.SiliCompressor
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -26,15 +27,22 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
+import uz.targetsoftwaredevelopment.myapplication.app.App
+import uz.targetsoftwaredevelopment.myapplication.data.remote.requests.AddVideoRequest
+import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.AddVideoResponse
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogCameraBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.PageAddVideoBinding
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.AddVideoPageViewModel
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.impl.AddVidePageViewModelImpl
+import uz.targetsoftwaredevelopment.myapplication.utils.gone
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
+import uz.targetsoftwaredevelopment.myapplication.utils.showToast
+import uz.targetsoftwaredevelopment.myapplication.utils.visible
+import java.io.File
+import java.net.URISyntaxException
 
 @AndroidEntryPoint
 class AddVideoPage : Fragment(R.layout.page_add_video) {
-
     private val binding by viewBinding(PageAddVideoBinding::bind)
     private val viewModel: AddVideoPageViewModel by viewModels<AddVidePageViewModelImpl>()
 
@@ -44,11 +52,10 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
     private val CAMERA = 2
     private lateinit var mediaController: MediaController
     private var isGranted = false
-    private lateinit var videUri:Uri
+    private var videoUri: Uri = Uri.EMPTY
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
-
 
         mediaController = MediaController(requireActivity())
         mediaController.setAnchorView(videoView)
@@ -56,10 +63,39 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
 
         fab.setOnClickListener {
             requestMultiplePermissions()
-            if(isGranted){
+            if (isGranted) {
                 showPictureDialog()
             }
         }
+
+        addVideoCv.setOnClickListener {
+            Log.d("ADDBTN", "add btn bosildi")
+            if (videoUri != Uri.EMPTY) {
+                getVideoFile(videoUri)
+            } else {
+                Log.d("ADDBTN", "VIDEO URI IS EMPTY")
+            }
+        }
+
+        viewModel.addVideoResponseLiveData.observe(viewLifecycleOwner, addVideoObserver)
+        viewModel.videoCompressedLiceData.observe(viewLifecycleOwner, videoCompressedObserver)
+    }
+
+    private val addVideoObserver = Observer<AddVideoResponse> {
+        binding.progressView.gone()
+        binding.progressView.clearAnimation()
+    }
+
+    private val videoCompressedObserver = Observer<File> { compressedVideoFile ->
+        viewModel.addVideo(
+            AddVideoRequest(
+                compressedVideoFile,
+                binding.createTitleEt.text.toString(),
+                binding.locationEt.text.toString(),
+                binding.descriptionEt.text.toString()
+            )
+        )
+        Log.d("ADDBTN", "Compressed video keldi: ${compressedVideoFile.name}")
     }
 
     private fun showPictureDialog() {
@@ -103,7 +139,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
         if (requestCode == GALLERY) {
             if (data != null) {
                 val contentURI = data.data
-                videUri = contentURI!!
+                videoUri = contentURI!!
                 val selectedVideoPath = getPath(contentURI)
                 binding.apply {
                     videoView.setVideoURI(contentURI)
@@ -115,7 +151,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
 
         } else if (requestCode == CAMERA) {
             val contentURI = data!!.data
-            videUri = contentURI!!
+            videoUri = contentURI!!
             val recordedVideoPath = getPath(contentURI)
             binding.apply {
                 videoView.setVideoURI(contentURI)
@@ -177,7 +213,6 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
             null
     }
 
-
     private fun requestMultiplePermissions() {
         Dexter.withActivity(requireActivity())
             .withPermissions(
@@ -188,7 +223,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                     if (report.areAllPermissionsGranted()) {
-                        isGranted=true
+                        isGranted = true
                     }
 
                     if (report.isAnyPermissionPermanentlyDenied) {
@@ -209,10 +244,97 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
                     token.continuePermissionRequest()
                 }
             }).withErrorListener {
-                Toast.makeText(requireContext(), getString(R.string.some_error), Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.some_error), Toast.LENGTH_SHORT)
+                    .show()
             }
             .onSameThread()
             .check()
     }
 
+    private fun getVideoFile(videoUri: Uri) {
+        /* val directory: String =
+             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                 .toString()
+
+         val filePath: String = SiliCompressor.with(App.instance).compressVideo(videoUri, directory)
+
+         return File(filePath, "myVolunteersAppVideo.mp4")*/
+
+        /*var file: File? = null
+        VideoCompressor.start(
+            App.instance,
+            listOf(videoUri),
+            true,
+            Environment.DIRECTORY_MOVIES,
+            object : CompressionListener {
+
+                override fun onProgress(index: Int, percent: Float) {
+                    binding.progressView.visible()
+                    binding.progressView.animate()
+                }
+
+                override fun onStart(index: Int) {
+                    // Compression start
+                    Log.d("ADDBTN", "Compression Start")
+                }
+
+                override fun onSuccess(index: Int, size: Long, path: String?) {
+                    // On Compression success
+                    file = File(path, "myVolunteersAppVideo.mp4")
+                }
+
+                override fun onFailure(index: Int, failureMessage: String) {
+                    Log.d("ADDBTN", "Compression failure")
+                }
+
+                override fun onCancelled(index: Int) {
+
+                }
+
+            },
+            configureWith = Configuration(
+                quality = VideoQuality.MEDIUM,
+                frameRate = 24, *//*Int, ignore, or null*//*
+                isMinBitrateCheckEnabled = true,
+                videoBitrate = 3677198, *//*Int, ignore, or null*//*
+                disableAudio = false, *//*Boolean, or ignore*//*
+                keepOriginalResolution = false, *//*Boolean, or ignore*//*
+                videoWidth = 360.0, *//*Double, ignore, or null*//*
+                videoHeight = 480.0 *//*Double, ignore, or null*//*
+            )
+        )*/
+
+        val file = File(Environment.getExternalStorageDirectory().absolutePath)
+        CompressVideo().execute("false", videoUri.toString(), file.path)
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    inner class CompressVideo : AsyncTask<String, String, String>() {
+
+        override fun onPreExecute() {
+            super.onPreExecute()
+            Log.d("ADDBTN", "onPreExecute ga kirdi")
+            binding.progressView.visible()
+            binding.progressView.animate()
+        }
+
+        override fun doInBackground(vararg strings: String?): String {
+            Log.d("ADDBTN", "doInBackground ga kirdi")
+            var videoPath: String? = null
+            try {
+                var uri: Uri = Uri.parse(strings[1])
+                videoPath = SiliCompressor.with(App.instance).compressVideo(uri, strings[2])
+            } catch (e: URISyntaxException) {
+                e.printStackTrace()
+            }
+            return videoPath!!
+        }
+
+        override fun onPostExecute(result: String) {
+            super.onPostExecute(result)
+            var file: File = File(result)
+            Log.d("ADDBTN", "onPostExecute ga kirdi")
+            viewModel.videoCompressed(file)
+        }
+    }
 }
