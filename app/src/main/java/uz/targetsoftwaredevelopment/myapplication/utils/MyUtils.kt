@@ -24,6 +24,7 @@ import java.io.FileOutputStream
 import java.io.OutputStream
 import java.util.*
 
+
 fun Fragment.showToast(message: String) {
     Toast.makeText(this.requireContext(), message, Toast.LENGTH_SHORT).show()
 }
@@ -88,5 +89,4 @@ fun getImageFile(context: Context, imageDrawable: Int): File {
     stream.close()
     return file
 }
-
 

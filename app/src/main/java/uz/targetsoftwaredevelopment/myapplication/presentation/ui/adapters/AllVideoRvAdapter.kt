@@ -81,6 +81,22 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
                 allVideosItemAddressVideoTv.text = videoData.location
             }
 
+            allVideoRvItemBinding.apply {
+                Glide.with(context).load(videoData.preloadImg)
+                    .centerCrop()
+                    .placeholder(R.drawable.default_profile_img)
+                    .into(accountImg)
+
+//                accountNameTv.text = videoData.owner
+                dateTv.text = videoData.createdAt
+            }
+
+            allVideoRvItemBinding.unlikeVideoImg.startAnimation(
+                AnimationUtils.loadAnimation(
+                    context,
+                    R.anim.com
+                )
+            )
         }
     }
 
@@ -117,84 +133,3 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
         fun onClickUnLike(videoData : VideoData)
     }
 }
-
-// class AllVideoRvAdapter(val context: Context, var listener:OnItemClickListener):
-// ListAdapter<VideoData,AllVideoRvAdapter.MyVideoHolder>(MyDiffUtil){
-// var selectHelp = false
-//
-// inner class MyVideoHolder(private val allVideoRvItemBinding: AllVideoRvItemBinding) :
-// RecyclerView.ViewHolder(allVideoRvItemBinding.root) {
-// fun onBind(videoData : VideoData){
-// allVideoRvItemBinding.apply {
-// Glide.with(context).
-// load(videoData.preloadImg)
-// .centerCrop()
-// .placeholder(R.drawable.default_profile_img)
-// .into(accountImg)
-//
-// //                accountNameTv.text = videoData.owner
-// dateTv.text = videoData.createdAt
-// }
-//
-// allVideoRvItemBinding.unlikeVideoImg.startAnimation(AnimationUtils.loadAnimation(context,R.anim.com))
-//
-// allVideoRvItemBinding.playImg.setOnClickListener {
-// listener.onItemClick(videoData)
-// }
-//
-// allVideoRvItemBinding.shareVideoImg.setOnClickListener {
-// listener.onShareClick(videoData)
-// }
-//
-// allVideoRvItemBinding.threeDotsTv.setOnClickListener {
-// val popupMenu: PopupMenu = PopupMenu(context, allVideoRvItemBinding.threeDotsTv)
-// popupMenu.inflate(R.menu.rv_item_menu)
-// popupMenu.setOnMenuItemClickListener {
-// when(it.itemId){
-// R.id.menu_spam->{
-// listener.onMenuClick(videoData)
-// }
-// }
-// true
-// }
-// popupMenu.show()
-// }
-//
-// allVideoRvItemBinding.unlikeVideoImg.setOnClickListener {
-// selectHelp = if(selectHelp){
-// allVideoRvItemBinding.unlikeVideoImg.setImageResource(R.drawable.ic_heart_unlike)
-// false
-// }else{
-// allVideoRvItemBinding.unlikeVideoImg.setImageResource(R.drawable.ic_heart)
-// true
-// }
-// }
-//
-// }
-// }
-//
-// object MyDiffUtil:DiffUtil.ItemCallback<VideoData>() {
-// override fun areItemsTheSame(oldItem : VideoData, newItem : VideoData) : Boolean {
-// return oldItem==newItem
-// }
-//
-// @SuppressLint("DiffUtilEquals")
-// override fun areContentsTheSame(oldItem : VideoData, newItem : VideoData) : Boolean {
-// return oldItem.id==newItem.id
-// }
-// }
-//
-// override fun onCreateViewHolder(parent : ViewGroup , viewType : Int) : MyVideoHolder {
-// return MyVideoHolder(AllVideoRvItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
-// }
-//
-// override fun onBindViewHolder(holder : MyVideoHolder , position : Int) {
-// holder.onBind(getItem(position))
-// }
-//
-// interface OnItemClickListener{
-// fun onItemClick(videoData : VideoData)
-// fun onShareClick(videoData : VideoData)
-// fun onMenuClick(videoData : VideoData)
-// }
-// }

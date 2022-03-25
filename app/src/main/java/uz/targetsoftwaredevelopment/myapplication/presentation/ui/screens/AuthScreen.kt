@@ -19,8 +19,10 @@ import uz.targetsoftwaredevelopment.myapplication.databinding.ScreenAuthBinding
 import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.AuthScreenAdapter
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.screensviewmodel.AuthScreenViewModel
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.screensviewmodel.impl.AuthScreenViewModelImpl
+import uz.targetsoftwaredevelopment.myapplication.utils.gone
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
 import uz.targetsoftwaredevelopment.myapplication.utils.showToast
+import uz.targetsoftwaredevelopment.myapplication.utils.visible
 
 @AndroidEntryPoint
 class AuthScreen : Fragment(R.layout.screen_auth) {
@@ -35,9 +37,13 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
         authAdapter = AuthScreenAdapter(childFragmentManager, lifecycle, tabLayout.tabCount)
         viewPager.adapter = authAdapter
         authAdapter.setRegisterBtnClickListener { registerData ->
+            progressBar.animate()
+            progressBar.visible()
             viewModel.registerUser(registerData)
         }
         authAdapter.setLoginBtnClickListener { loginData ->
+            progressBar.animate()
+            progressBar.visible()
             viewModel.loginUser(loginData)
         }
 
@@ -111,10 +117,14 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
     }
 
     private val registerUserResponseObserver = Observer<RegisterUserResponse> {
+        binding.progressBar.gone()
+        binding.progressBar.clearAnimation()
         showToast("Login")
         binding.viewPager.currentItem = 1
     }
     private val loginUserResponseObserver = Observer<LoginUserResponse> {
+        binding.progressBar.gone()
+        binding.progressBar.clearAnimation()
         findNavController().navigate(AuthScreenDirections.actionAuthScreenToBasicScreen())
     }
 }

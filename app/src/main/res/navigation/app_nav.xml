@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_nav"
-    app:startDestination="@id/basicScreen">
+    app:startDestination="@id/splashScreen">
     <fragment
         android:id="@+id/basicScreen"
         android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.BasicScreen"

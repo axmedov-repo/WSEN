@@ -17,5 +17,5 @@ data class CategoriesItem(
 )
 
 data class Statistics(
-    val allVolunteers: Int? = null
+    val allVolunteers: Int? = 0
 )

@@ -70,7 +70,6 @@ class AllVideoPage : Fragment(R.layout.page_all_video) {
                     TODO("Not yet implemented")
                 }
             })
-
         binding.allVideRv.adapter = allVideoRvAdapter
     }
 

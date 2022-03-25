@@ -22,7 +22,7 @@ class AuthScreenAdapter(fm: FragmentManager, lifecycle: Lifecycle, private val t
         loginBtnClickListener = f
     }
 
-    override fun getItemCount(): Int = tabsCount
+    override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment =
         when (position) {

@@ -15,4 +15,9 @@ interface RepositoryModule {
     @Binds
     @Singleton
     fun getBaseRepository(baseRepository: BaseRepositoryImpl): BaseRepository
+
+/*
+    @Binds
+    @Singleton
+    fun getAllPostsRepository(allVideosRepository: AllVideosBaseRepositoryImpl): ALlVideosBaseRepository*/
 }
