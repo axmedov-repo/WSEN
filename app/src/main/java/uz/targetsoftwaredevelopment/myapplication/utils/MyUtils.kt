@@ -38,7 +38,7 @@ fun <T : ViewBinding> T.scope(block: T.() -> Unit) {
     block(this)
 }
 
-fun timber(message: String, tag: String = "TTT") {
+fun timber(tag: String = "TTT", message: String) {
     Timber.tag(tag).d(message)
 }
 

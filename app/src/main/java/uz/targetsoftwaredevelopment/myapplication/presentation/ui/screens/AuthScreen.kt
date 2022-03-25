@@ -120,7 +120,7 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
         binding.progressBar.gone()
         binding.progressBar.clearAnimation()
         showToast("Login")
-        binding.viewPager.currentItem = 1
+        binding.viewPager.currentItem = 0
     }
     private val loginUserResponseObserver = Observer<LoginUserResponse> {
         binding.progressBar.gone()
