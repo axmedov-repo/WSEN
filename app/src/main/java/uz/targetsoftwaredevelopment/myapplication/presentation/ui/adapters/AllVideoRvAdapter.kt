@@ -20,30 +20,14 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
 
     inner class MyVideoHolder(private val allVideoRvItemBinding: AllVideoRvItemBinding) :
         RecyclerView.ViewHolder(allVideoRvItemBinding.root) {
-        fun onBind(videoData: VideoData) {
-            allVideoRvItemBinding.apply {
-                Glide.with(context).load(videoData.preloadImg)
-                    .centerCrop()
-                    .placeholder(R.drawable.default_profile_img)
-                    .into(accountImg)
 
-//                accountNameTv.text = videoData.owner
-                dateTv.text = videoData.createdAt
-            }
-
-            allVideoRvItemBinding.unlikeVideoImg.startAnimation(
-                AnimationUtils.loadAnimation(
-                    context,
-                    R.anim.com
-                )
-            )
-
+        init {
             allVideoRvItemBinding.playImg.setOnClickListener {
-                listener.onItemClick(videoData)
+                listener.onItemClick(getItem(absoluteAdapterPosition))
             }
 
             allVideoRvItemBinding.shareVideoImg.setOnClickListener {
-                listener.onShareClick(videoData)
+                listener.onShareClick(getItem(absoluteAdapterPosition))
             }
 
             allVideoRvItemBinding.threeDotsTv.setOnClickListener {
@@ -52,7 +36,7 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
                 popupMenu.setOnMenuItemClickListener {
                     when (it.itemId) {
                         R.id.menu_spam -> {
-                            listener.onMenuClick(videoData)
+                            listener.onMenuClick(getItem(absoluteAdapterPosition))
                         }
                     }
                     true
@@ -69,7 +53,26 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
                     true
                 }
             }
+        }
 
+        fun onBind(videoData: VideoData) {
+
+            allVideoRvItemBinding.apply {
+                Glide.with(context).load(videoData.preloadImg)
+                    .centerCrop()
+                    .placeholder(R.drawable.default_profile_img)
+                    .into(accountImg)
+
+//                accountNameTv.text = videoData.owner
+                dateTv.text = videoData.createdAt
+            }
+
+            allVideoRvItemBinding.unlikeVideoImg.startAnimation(
+                AnimationUtils.loadAnimation(
+                    context,
+                    R.anim.com
+                )
+            )
         }
     }
 
