@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_basicScreen_to_editVideoScreen"
             app:destination="@id/editVideoScreen" />
+        <action
+            android:id="@+id/action_basicScreen_to_languageScreen"
+            app:destination="@id/languageScreen" />
     </fragment>
     <fragment
         android:id="@+id/splashScreen"
@@ -47,5 +50,10 @@
         android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.WatchVideoScreen"
         android:label="screen_watch_video"
         tools:layout="@layout/screen_watch_video" />
+    <fragment
+        android:id="@+id/languageScreen"
+        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.LanguageScreen"
+        android:label="LanguageScreen"
+        tools:layout="@layout/screen_language" />
 
 </navigation>

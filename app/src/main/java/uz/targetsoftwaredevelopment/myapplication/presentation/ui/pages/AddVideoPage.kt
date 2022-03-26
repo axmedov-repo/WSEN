@@ -1,13 +1,16 @@
 package uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.Settings
+import android.util.Log
 import android.view.View
 import android.widget.MediaController
 import android.widget.Toast
@@ -33,7 +36,6 @@ import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesv
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.impl.AddVidePageViewModelImpl
 import uz.targetsoftwaredevelopment.myapplication.utils.gone
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
-import uz.targetsoftwaredevelopment.myapplication.utils.showToast
 import uz.targetsoftwaredevelopment.myapplication.utils.visible
 import java.io.File
 import java.net.URISyntaxException
@@ -42,8 +44,6 @@ import java.net.URISyntaxException
 class AddVideoPage : Fragment(R.layout.page_add_video) {
     private val binding by viewBinding(PageAddVideoBinding::bind)
     private val viewModel: AddVideoPageViewModel by viewModels<AddVidePageViewModelImpl>()
-
-    //    private var videoView: VideoView? = null
     private val VIDEO_DIRECTORY = "/demonutsVideoooo"
     private val GALLERY = 1
     private val CAMERA = 2
@@ -66,11 +66,11 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
         }
 
         addVideoCv.setOnClickListener {
-            Log.d("ADDBTN", "add btn bosildi")
+//            Log.d("ADDBTN", "add btn bosildi")
             if (videoUri != Uri.EMPTY) {
                 getVideoFile(videoUri)
             } else {
-                Log.d("ADDBTN", "VIDEO URI IS EMPTY")
+//                Log.d("ADDBTN", "VIDEO URI IS EMPTY")
             }
         }
 
@@ -152,42 +152,8 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
             val recordedVideoPath = getPath(contentURI)
             binding.apply {
                 videoView.setVideoURI(contentURI)
-//                videoView.requestFocus()
                 videoView.start()
             }
-//            val uriList:ArrayList<Uri> = ArrayList()
-//            uriList.add(contentURI!!)
-//            VideoCompressor.start(requireContext(), uriList,true,
-//                Environment.DIRECTORY_MOVIES,object :CompressionListener{
-//                override fun onCancelled(index : Int) {
-//                    Toast.makeText(requireContext() , "cancel" , Toast.LENGTH_SHORT).show()
-//                }
-//
-//                override fun onFailure(index : Int , failureMessage : String) {
-//                    Toast.makeText(requireContext() , "failure $failureMessage" , Toast.LENGTH_SHORT).show()
-//                }
-//
-//                override fun onProgress(index : Int , percent : Float) {
-//                    Toast.makeText(requireContext() , "progress" , Toast.LENGTH_SHORT).show()
-//
-//                }
-//
-//                override fun onStart(index : Int) {
-//                    Toast.makeText(requireContext() , "start" , Toast.LENGTH_SHORT).show()
-//                }
-//
-//                override fun onSuccess(index : Int , size : Long , path : String?) {
-//                    Toast.makeText(requireContext() , "success" , Toast.LENGTH_SHORT).show()
-//                }
-//            },
-//                Configuration(
-//                    VideoQuality.MEDIUM,24,true,3677198,
-//                    disableAudio = false ,
-//                    keepOriginalResolution = false ,
-//                    videoHeight = 360.0 ,
-//                    videoWidth = 480.0
-//                )
-//            )
 
         }
     }
@@ -306,7 +272,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
     }
 
     @SuppressLint("StaticFieldLeak")
-    inner class CompressVideo : AsyncTask<String, String, String>() {
+    inner class CompressVideo : AsyncTask<String , String , String>() {
 
         override fun onPreExecute() {
             super.onPreExecute()
@@ -329,9 +295,11 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
 
         override fun onPostExecute(result: String) {
             super.onPostExecute(result)
-            var file: File = File(result)
+            val file: File = File(result)
             Log.d("ADDBTN", "onPostExecute ga kirdi")
             viewModel.videoCompressed(file)
+            Toast.makeText(requireContext() , "Compress finished" , Toast.LENGTH_SHORT).show()
         }
+
     }
 }

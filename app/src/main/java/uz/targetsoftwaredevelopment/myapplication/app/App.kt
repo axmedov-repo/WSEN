@@ -1,6 +1,7 @@
 package uz.targetsoftwaredevelopment.myapplication.app
 
 import android.app.Application
+import com.yariksoffice.lingver.Lingver
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
@@ -13,5 +14,9 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
+
+        Lingver.init(this,"en")
     }
+
+
 }
