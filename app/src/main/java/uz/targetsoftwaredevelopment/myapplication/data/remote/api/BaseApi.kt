@@ -25,7 +25,7 @@ interface BaseApi {
 
     @POST("en/api/my-post/")
     suspend fun addVideo(@Body data: AddVideoRequest): Response<AddVideoResponse>
-/*
-    @POST
-    suspend fun editVideo(@Url url: String): Response<EditVideoResponse>*/
+
+//    @POST
+//    suspend fun editVideo(@Url url: String): Response<EditVideoResponse>
 }

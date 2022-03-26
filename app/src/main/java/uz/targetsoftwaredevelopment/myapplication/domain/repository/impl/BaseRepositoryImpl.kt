@@ -14,6 +14,7 @@ import uz.targetsoftwaredevelopment.myapplication.data.remote.requests.LoginUser
 import uz.targetsoftwaredevelopment.myapplication.data.remote.requests.RegisterUserRequest
 import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.*
 import uz.targetsoftwaredevelopment.myapplication.domain.repository.BaseRepository
+import uz.targetsoftwaredevelopment.myapplication.utils.timber
 import javax.inject.Inject
 
 class BaseRepositoryImpl @Inject constructor(
@@ -36,8 +37,11 @@ class BaseRepositoryImpl @Inject constructor(
 
     override fun registerUser(data: RegisterUserRequest): Flow<Result<RegisterUserResponse?>> =
         flow {
+            Log.d("REGISTERPAGE", "repository ichida data = ${data}")
             val response = baseApi.registerUser(data)
+            Log.d("REGISTERPAGE", "repository ichida response =  ${response.body().toString()}")
             if (response.isSuccessful) {
+                Log.d("REGISTERPAGE", "repository success")
                 emit(Result.success(response.body()))
             }
         }.flowOn(Dispatchers.IO)
@@ -47,7 +51,9 @@ class BaseRepositoryImpl @Inject constructor(
             val response = baseApi.loginUser(data)
             if (response.isSuccessful) {
                 emit(Result.success(response.body()))
-                localStorage.token = response.body()!!.token!!
+                response.body()!!.token.let {
+                    localStorage.token = it!!
+                }
                 setSplashOpenScreen(SplashOpenScreenTypes.BASE_SCREEN)
             }
         }.flowOn(Dispatchers.IO)
@@ -70,10 +76,10 @@ class BaseRepositoryImpl @Inject constructor(
 
     override fun addVideo(data: AddVideoRequest): Flow<Result<AddVideoResponse?>> =
         flow {
-                Log.d("ADDBTN", "repository da add videoga kirdi")
+            timber("ADDBTN", "repository da add videoga kirdi")
             val response = baseApi.addVideo(data)
             if (response.isSuccessful) {
-                Log.d("ADDBTN", "repository da success")
+                timber("ADDBTN", "repository da success")
                 emit(Result.success(response.body()))
             }
         }.flowOn(Dispatchers.IO)
