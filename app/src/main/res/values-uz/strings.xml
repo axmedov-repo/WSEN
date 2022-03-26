@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">UzVolunteers</string>
+    <string name="profile">Profil</string>
+    <string name="language">Til</string>
+    <string name="add_video">Video qo\'shish</string>
+    <string name="logout">Chiqish</string>
+    <string name="save">Saqlash</string>
+    <string name="surname">Familya</string>
+    <string name="name">Ism</string>
+    <string name="phone_number">Telfon nomer</string>
+    <string name="email">Email</string>
+    <string name="password">Parol</string>
+    <string name="confirm_password">Parolni tasdiqlang</string>
+    <string name="profile_name">Profile nomi</string>
+    <string name="my_image">Menig rasmlarim</string>
+    <string name="location">Joylashuv</string>
+    <string name="description">Tavsif</string>
+    <string name="create_title" translatable="false">Saralavha yaratish</string>
+    <string name="edit_posts">Postni tahrirlash</string>
+    <string name="delete_posts">Postni o\'chirish</string>
+    <string name="delete">Postni o\'chirish</string>
+    <string name="allow">Ruxsat berish</string>
+    <string name="cancel">Bekor qilish</string>
+    <string name="are_you_sure_want_to_delete_this_post">Bu postni o‘chirib tashlamoqchimisiz?</string>
+    <string name="warning">Ogohlantirish</string>
+    <string name="you_can_t_change_your_picture_if_you_don_t_allow_it">Agar ruxsat bermasangiz, rasmingizni o\'zgartira olmaysiz!</string>
+    <string name="you_don_t_have_any_posts_yet">Sizda hali birorta ham postlar yoʻq</string>
+    <string name="some_error">Qandaydir xato bor!</string>
+    <string name="select_vide_from_gallery">Galereyadan videoni tanlang</string>
+    <string name="record_video_from_camera">Kameradan video yozib oling</string>
+    <string name="spam">Spam</string>
+    <string name="report">Xabar</string>
+    <string name="username">Foydalanuvchi ismi</string>
+    <string name="tittle">Sarlavha</string>
+    <string name="address">Manzil:</string>
+    <string name="add">Qo\'shish</string>
+    <string name="year">Yil</string>
+    <string name="months_date">Oy kun</string>
+    <string name="edit">O\'zgartirish</string>
+    <string name="choose">Tanlang</string>
+    <string name="gallery">Galereya</string>
+    <string name="camera">Kamera</string>
+    <string name="please_enter_any_additional_details_relevant_to_nyour_report">Iltimos, hisobotingizga tegishli qoʻshimcha maʼlumotlarni kiriting</string>
+    <string name="additional_details">Qoʻshimcha maʼlumotlar…</string>
+    <string name="send_report">Hisobot Yuborish</string>
+    <string name="status">Holati</string>
+    <string name="waiting">Kutmoqda</string>
+    <string name="finished">Tugallangan</string>
+    <string name="english">Inglizcha</string>
+    <string name="lang">Til</string>
+    <string name="uzbek">O\'zbekcha</string>
+    <string name="likes">Likes</string>
+</resources>

@@ -3,6 +3,7 @@ package uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -16,7 +17,6 @@ import uz.targetsoftwaredevelopment.myapplication.presentation.ui.adapters.Basic
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.screensviewmodel.BasicScreenViewModel
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.screensviewmodel.impl.BasicScreenViewModelImpl
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
-
 
 @AndroidEntryPoint
 class BasicScreen : Fragment(R.layout.screen_basic_nav),
@@ -54,9 +54,19 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
                 drawerLayout.openDrawer(GravityCompat.START)
             }
         }
+
+        if(navigationView!=null){
+            navigationView.setNavigationItemSelectedListener(this@BasicScreen)
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.nav_language->{
+                Toast.makeText(requireContext() , "Language" , Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.languageScreen)
+            }
+        }
         return true
     }
 }

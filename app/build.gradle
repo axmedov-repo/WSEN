@@ -10,6 +10,7 @@ android {
     compileSdk 32
 
     defaultConfig {
+        resConfigs("en","uz")
         applicationId "uz.targetsoftwaredevelopment.myapplication"
         minSdk 25
         targetSdk 32
@@ -41,6 +42,12 @@ android {
     buildFeatures {
         dataBinding true
         viewBinding true
+    }
+
+    bundle{
+        language{
+            enableSplit = false
+        }
     }
 }
 
@@ -131,8 +138,11 @@ dependencies {
     //auto text size
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
 
-    //Compressor
-//    implementation 'com.github.AbedElazizShe:LightCompressor:1.1.1'
+    /**
+     * locale
+     */
+    implementation "com.github.YarikSOffice:lingver:1.3.0"
+    implementation 'com.zeugmasolutions.localehelper:locale-helper-android:1.5.1'
 
     /**
      * Paging
@@ -165,4 +175,10 @@ dependencies {
      * ProgressView
      */
     implementation 'com.github.zjywill:OverwatchProgress:1.6'
+
+    /**
+     * Lottie Animation
+     */
+    def lottieVersion = "3.4.0"
+    implementation "com.airbnb.android:lottie:$lottieVersion"
 }

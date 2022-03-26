@@ -47,9 +47,11 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
             allVideoRvItemBinding.unlikeVideoImg.setOnClickListener {
                 selectHelp = if (selectHelp) {
                     allVideoRvItemBinding.unlikeVideoImg.setImageResource(R.drawable.ic_heart_unlike)
+                    listener.onClickUnLike(getItem(absoluteAdapterPosition))
                     false
                 } else {
                     allVideoRvItemBinding.unlikeVideoImg.setImageResource(R.drawable.ic_heart)
+                    listener.onClickLike(getItem(absoluteAdapterPosition))
                     true
                 }
             }
@@ -63,7 +65,7 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
                     .placeholder(R.drawable.default_profile_img)
                     .into(accountImg)
 
-//                accountNameTv.text = videoData.owner
+                accountNameTv.text = videoData.owner?.username
                 dateTv.text = videoData.created_at
             }
 
@@ -105,5 +107,7 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
         fun onItemClick(videoData: VideoData)
         fun onShareClick(videoData: VideoData)
         fun onMenuClick(videoData: VideoData)
+        fun onClickLike(videoData : VideoData)
+        fun onClickUnLike(videoData : VideoData)
     }
 }

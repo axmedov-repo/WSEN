@@ -38,17 +38,52 @@
             android:layout_height="0dp"
             android:background="@drawable/botom_sheet_shape">
 
+            <TextView
+                android:id="@+id/status_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/status"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <View
+                android:id="@+id/status_color"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_status_finished"
+                app:layout_constraintLeft_toLeftOf="@id/status_tv"
+                app:layout_constraintTop_toBottomOf="@id/status_tv"/>
+
+            <TextView
+                android:id="@+id/status_text_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:text="@string/finished"
+                android:textColor="@color/black"
+                android:textStyle="normal"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@id/status_color"
+                app:layout_constraintLeft_toRightOf="@id/status_color"
+                app:layout_constraintTop_toTopOf="@id/status_color" />
+
             <ImageView
                 android:id="@+id/like_video_img"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="0dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/ic_heart_unlike"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_heart"
                 app:layout_constraintHorizontal_bias="1"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/status_text_tv"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/status_tv" />
 
             <TextView
                 android:id="@+id/title_tv"
@@ -63,7 +98,7 @@
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/like_video_img"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/like_video_img" />
 
 
             <de.hdodenhof.circleimageview.CircleImageView

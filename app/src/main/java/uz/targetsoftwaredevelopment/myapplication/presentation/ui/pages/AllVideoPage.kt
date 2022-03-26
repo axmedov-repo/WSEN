@@ -58,12 +58,20 @@ class AllVideoPage : Fragment(R.layout.page_all_video) {
                     val bottomSheetDialog = BottomSheetDialog(requireContext())
                     val screenBottomSheetDialogScreen =
                         ScreenBottomSheetDialogBinding.inflate(layoutInflater)
-                    bottomSheetDialog.setContentView(screenBottomSheetDialogScreen.root)
-                    screenBottomSheetDialogScreen.sendReportCv.setOnClickListener {
+                        bottomSheetDialog.setContentView(screenBottomSheetDialogScreen.root)
+                        screenBottomSheetDialogScreen.sendReportCv.setOnClickListener {
                         Toast.makeText(requireContext(), "send request", Toast.LENGTH_SHORT)
                             .show()
                     }
                     bottomSheetDialog.show()
+                }
+
+                override fun onClickLike(videoData : VideoData) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onClickUnLike(videoData : VideoData) {
+                    TODO("Not yet implemented")
                 }
             })
         binding.allVideRv.adapter = allVideoRvAdapter

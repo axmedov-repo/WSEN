@@ -34,21 +34,17 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
 
-        myPostsAdapter =
-            MyPostsAdapter(requireContext(), object : MyPostsAdapter.OnPostItemTouchListener {
-                override fun onMenuEdit() {
-//                findNavController().navigate(R.id.editVideoScreen)
-//                    videoClickedListener?.invoke()
-                }
-
-                override fun onPostClick() {
-                    findNavController().navigate(R.id.watchVideoScreen)
-                }
-
-                override fun onMenuDelete() {
-                    val deleteDialog = AlertDialog.Builder(requireContext())
-                    val dialogDeleteBinding = DialogDeleteBinding.inflate(layoutInflater)
-                    deleteDialog.setView(dialogDeleteBinding.root)
+        myPostsAdapter = MyPostsAdapter(requireContext(),object :MyPostsAdapter.OnPostItemTouchListener{
+            override fun onMenuEdit(videoData : VideoData) {
+                findNavController().navigate(R.id.editVideoScreen)
+            }
+            override fun onPostClick(videoData : VideoData) {
+                findNavController().navigate(R.id.watchVideoScreen)
+            }
+            override fun onMenuDelete(videoData : VideoData) {
+                val deleteDialog = AlertDialog.Builder(requireContext())
+                val dialogDeleteBinding = DialogDeleteBinding.inflate(layoutInflater)
+                deleteDialog.setView(dialogDeleteBinding.root)
 
                     val deleteBuilder = deleteDialog.create()
                     deleteBuilder.window?.setBackgroundDrawableResource(android.R.color.transparent)
@@ -71,9 +67,15 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
                     deleteBuilder.show()
                 }
 
+            override fun onMenuWaiting(videoData : VideoData) {
+                TODO("Not yet implemented")
+            }
 
-            })
-        myPostsAdapter.submitList(list as List<Any>?)
+            override fun onMenuFinished(videoData : VideoData) {
+                TODO("Not yet implemented")
+            }
+        })
+//        myPostsAdapter.submitList(list)
         myVideosRv.adapter = myPostsAdapter
 
     }

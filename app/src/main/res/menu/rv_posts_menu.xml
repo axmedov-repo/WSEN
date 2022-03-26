@@ -15,7 +15,28 @@
             android:icon="@drawable/delete_btn"
             android:title="@string/delete_posts"
             app:showAsAction="never" />
+        <item
+            android:id="@+id/menu_status"
+            android:title="@string/status"
+            app:showAsAction="never">
+            <menu>
+                <item
+                    android:id="@+id/menu_waiting"
+                    android:icon="@drawable/shape_status_waiting"
+                    android:title="@string/waiting"
+                    app:showAsAction="never"
+                    />
+                <item
+                    android:id="@+id/menu_finished"
+                    android:icon="@drawable/shape_status_finished"
+                    android:title="@string/finished"
+                    app:showAsAction="never"
+                    />
 
+
+
+            </menu>
+
+        </item>
     </group>
-
 </menu>
