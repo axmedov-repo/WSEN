@@ -2,9 +2,7 @@ package uz.targetsoftwaredevelopment.myapplication.domain.repository
 
 import kotlinx.coroutines.flow.Flow
 import uz.targetsoftwaredevelopment.myapplication.data.enums.SplashOpenScreenTypes
-import uz.targetsoftwaredevelopment.myapplication.data.remote.requests.AddVideoRequest
-import uz.targetsoftwaredevelopment.myapplication.data.remote.requests.LoginUserRequest
-import uz.targetsoftwaredevelopment.myapplication.data.remote.requests.RegisterUserRequest
+import uz.targetsoftwaredevelopment.myapplication.data.remote.requests.*
 import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.*
 
 interface BaseRepository {
@@ -22,4 +20,18 @@ interface BaseRepository {
     fun getAllVideos(): Flow<Result<List<VideoData?>?>>
 
     fun addVideo(data: AddVideoRequest): Flow<Result<AddVideoResponse?>>
+
+    fun setRegisterErrorListener(f: (String) -> Unit)
+
+    fun setLoginErrorListener(f: (String) -> Unit)
+
+    fun getUserData(): Flow<Result<UserData>>
+
+    fun getUserPhoneNumber(): String
+
+    fun setUserPhoneNumber(phoneNumber: String)
+
+    fun editUserData(userData: UserData): Flow<Result<UserData>>
+
+    fun editMyVideo(videoData : EditVideoRequest) : Flow<Result<EditVideoResponse>>
 }

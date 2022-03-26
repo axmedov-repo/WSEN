@@ -48,7 +48,7 @@ fun tokenInterceptor() = Interceptor { chain ->
 
     val chainRequest = chain.request()
     val newRequest =
-        chainRequest.newBuilder().removeHeader("Authorization").addHeader("Authorization", pref.token).build()
+        chainRequest.newBuilder().removeHeader("Authorization").addHeader("Authorization",pref.token).build()
 
     val response = chain.proceed(newRequest)
     response

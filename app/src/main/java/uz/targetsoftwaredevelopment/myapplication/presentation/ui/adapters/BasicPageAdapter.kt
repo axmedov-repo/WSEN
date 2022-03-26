@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages.*
 
 class BasicPageAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
@@ -11,6 +12,11 @@ class BasicPageAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
     private var clickHomeButtonListener: (() -> Unit)? = null
     fun setOnClickHomeButtonListener(block: () -> Unit) {
         clickHomeButtonListener = block
+    }
+
+    private var videoClickListener: ((VideoData) -> Unit)? = null
+    fun setVideoClickListener(block: (VideoData) -> Unit) {
+        videoClickListener = block
     }
 
     override fun getItemCount(): Int = 5
@@ -23,7 +29,11 @@ class BasicPageAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
 
         return when (position) {
             0 -> HomePage()
-            1 -> AllVideoPage()
+            1 -> AllVideoPage().apply {
+                setVideoClickedListener {
+                    videoClickListener?.invoke(it)
+                }
+            }
             2 -> AddVideoPage()
             3 -> MyPostsPage()
             else -> ProfilePage()

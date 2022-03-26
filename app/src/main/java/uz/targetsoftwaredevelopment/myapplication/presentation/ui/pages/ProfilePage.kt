@@ -14,9 +14,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.bumptech.glide.Glide
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -26,6 +29,7 @@ import com.karumi.dexter.listener.single.PermissionListener
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.BuildConfig
 import uz.targetsoftwaredevelopment.myapplication.R
+import uz.targetsoftwaredevelopment.myapplication.data.remote.requests.UserData
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogCameraBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.DialogPermissionBinding
 import uz.targetsoftwaredevelopment.myapplication.databinding.PageProfileBinding
@@ -40,17 +44,102 @@ import java.io.IOException
 class ProfilePage : Fragment(R.layout.page_profile) {
     private val binding by viewBinding(PageProfileBinding::bind)
     private val viewModel: ProfilePageViewModel by viewModels<ProfilePageViewModelImpl>()
+    private var isReadyEmail = false
+    private var isReadyPhone = true
 
     var OLD_REQUEST_CODE = 1
     var CAMERA_REQUEST_CODE = 1
     lateinit var currentImagePath: String
-    lateinit var uri: Uri
+    var imageUri: Uri? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getUserData()
+        viewModel.getUserPhoneNumber()
+
         addImg.setOnClickListener {
             onClickAddImg()
         }
+
+        emailEt.apply {
+            addTextChangedListener {
+                emailEtLayout.isErrorEnabled = false
+                it?.let {
+                    isReadyEmail = it.isNotEmpty() && it.contains("@")
+                    check()
+                }
+            }
+        }
+
+        phoneNumberEt.apply {
+            setOnFocusChangeListener { view, focused ->
+                if (!focused && this.text != null && this.text.toString()
+                        .isNotEmpty() && !this.text.toString().contains("+998")
+                ) {
+                    isReadyPhone = false
+                    phoneEtLayout.isErrorEnabled = true
+                    phoneEtLayout.error = getString(R.string.error_phone_not_contains_998)
+                }
+            }
+            addTextChangedListener {
+                isReadyPhone = true
+                phoneEtLayout.isErrorEnabled = false
+            }
+        }
+
+        btnSaveProfile.setOnClickListener {
+            viewModel.editUserData(
+                UserData(
+                    lastnameEt.text.toString(),
+                    if (imageUri != null) {
+                        imageUri.toString()
+                    } else {
+                        null
+                    },
+                    firstnameEt.text.toString(),
+                    emailEt.text.toString(),
+                    usernameTv.text.toString()
+                )
+            )
+        }
+
+        viewModel.getUserDataLiveData.observe(viewLifecycleOwner, getUserDataObserver)
+        viewModel.getUserPhoneNumberLiveData.observe(viewLifecycleOwner, getUserPhoneNumberObserver)
+        viewModel.errorLiveData.observe(viewLifecycleOwner, errorObserver)
+        viewModel.editUserDataLiveData.observe(viewLifecycleOwner, editUserDataObserver)
+    }
+
+    private val getUserDataObserver = Observer<UserData> { userData ->
+        binding.apply {
+
+            Glide.with(profileImg.context)
+                .load(userData.photo)
+                .placeholder(R.drawable.ic_place_holder)
+                .error(R.drawable.ic_error)
+                .into(profileImg)
+
+            usernameTv.text = userData.username
+            firstnameEt.setText(userData.first_name)
+            lastnameEt.setText(userData.last_name)
+            emailEt.setText(userData.email)
+        }
+    }
+
+    private val getUserPhoneNumberObserver = Observer<String> { userPhoneNumber ->
+        binding.phoneNumberEt.setText(userPhoneNumber)
+    }
+
+    private val errorObserver = Observer<String> { errorMessage ->
+        if (errorMessage.equals(getString(R.string.errorTextEmailExist))) {
+            binding.emailEtLayout.isErrorEnabled = true
+            binding.emailEtLayout.error = "Email is already exist"
+        } else {
+            // TODO: HUMOYUN AKA, errorni toast orqali chiqarish kerak
+        }
+    }
+
+    private val editUserDataObserver = Observer<UserData> {
+        viewModel.getUserData()
     }
 
     private fun onClickAddImg() {
@@ -97,11 +186,11 @@ class ProfilePage : Fragment(R.layout.page_profile) {
 
                     //open camera
                     val imageFile = createImageFile()
-                    uri = FileProvider.getUriForFile(
+                    imageUri = FileProvider.getUriForFile(
                         requireContext(),
                         BuildConfig.APPLICATION_ID, imageFile
                     )
-                    takePhoto.launch(uri)
+                    takePhoto.launch(imageUri)
                 }
 
 
@@ -238,8 +327,11 @@ class ProfilePage : Fragment(R.layout.page_profile) {
         registerForActivityResult(ActivityResultContracts.TakePicture()) {
             if (it) {
 //                Log.d(TAG, "File: $uri")
-                binding.profileImg.setImageURI(uri)
+                binding.profileImg.setImageURI(imageUri)
             }
         }
 
+    private fun check() {
+        binding.btnSaveProfile.isEnabled = isReadyEmail && isReadyPhone
+    }
 }

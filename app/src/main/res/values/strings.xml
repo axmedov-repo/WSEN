@@ -9,13 +9,13 @@
     <string name="logout">Log out</string>
 
     <string name="save">Save</string>
-    <string name="surname">Surname</string>
-    <string name="name">Name</string>
-    <string name="phone_number">Phone number</string>
+    <string name="surname">Lastname</string>
+    <string name="name">Firstname</string>
+    <string name="phone_number">Phone</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
-    <string name="profile_name">profile name</string>
+    <string name="profile_name">username</string>
     <string name="my_image">my image</string>
     <string name="location">Location</string>
     <string name="description">Description</string>
@@ -39,7 +39,7 @@
     <string name="create_video_time">/~/~/</string>
     <string name="tittle">Tittle</string>
     <string name="address">Address:</string>
-    <string name="add">Add</string>
+    <string name="add">Submit</string>
     <string name="nol">0</string>
     <string name="likes">Likes</string>
     <string name="year">Year</string>
@@ -52,4 +52,9 @@
     <string name="additional_details">Additional details</string>
     <string name="send_report">Send Report</string>
 
+    <string name="errorTextEmailExist">user with this Email address already exists.</string>
+    <string name="errorTextLoginOrPassword">Login yoki parol notogri!</string>
+    <string name="errorTextLoginOrPassword2">Xatolik yuzaga keldi</string>
+    <string name="internet_disconnected">Tarmoqqa ulanmagan</string>
+    <string name="error_phone_not_contains_998">+998 kiritilishi zarur</string>
 </resources>

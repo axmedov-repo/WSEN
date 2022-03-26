@@ -9,7 +9,7 @@ import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.Register
 interface AuthScreenViewModel {
     val registerUserResponseLiveData: LiveData<RegisterUserResponse>
     val loginUserResponseLiveData: LiveData<LoginUserResponse>
-    val errorLiveData: LiveData<Unit>
+    val errorLiveData: LiveData<String>
 
     fun registerUser(data: RegisterUserRequest)
     fun loginUser(data: LoginUserRequest)

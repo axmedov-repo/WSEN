@@ -6,6 +6,7 @@ import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,6 +17,7 @@ import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.screen
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.screensviewmodel.impl.BasicScreenViewModelImpl
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
 
+
 @AndroidEntryPoint
 class BasicScreen : Fragment(R.layout.screen_basic_nav),
     NavigationView.OnNavigationItemSelectedListener {
@@ -25,6 +27,13 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
         val adapter = BasicPageAdapter(childFragmentManager, lifecycle)
+        adapter.setVideoClickListener {
+            findNavController().navigate(
+                BasicScreenDirections.actionBasicScreenToWatchVideoScreen(
+                    it
+                )
+            )
+        }
 
         innerLayout.apply {
             pager.adapter = adapter
@@ -47,5 +56,7 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
         }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean = true
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        return true
+    }
 }

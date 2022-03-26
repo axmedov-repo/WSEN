@@ -77,10 +77,10 @@ fun Int.dpToPx(displayMetrics: DisplayMetrics): Int = (this * displayMetrics.den
 
 fun Int.pxToDp(displayMetrics: DisplayMetrics): Int = (this / displayMetrics.density).toInt()
 
-fun getImageFile(context: Context, imageDrawable: Int): File {
-    val imageBitmap = BitmapFactory.decodeResource(context.resources, imageDrawable)
+fun getImageFile(imageDrawable: Int): File {
+    val imageBitmap = BitmapFactory.decodeResource(App.instance.resources, imageDrawable)
 
-    val wrapper = ContextWrapper(context)
+    val wrapper = ContextWrapper(App.instance)
     var file = wrapper.getDir("Images", Context.MODE_PRIVATE)
     file = File(file, "${UUID.randomUUID()}.jpg")
     val stream: OutputStream = FileOutputStream(file)
@@ -89,4 +89,5 @@ fun getImageFile(context: Context, imageDrawable: Int): File {
     stream.close()
     return file
 }
+
 

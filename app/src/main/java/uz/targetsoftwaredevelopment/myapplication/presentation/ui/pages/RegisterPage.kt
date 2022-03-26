@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
@@ -12,7 +13,9 @@ import uz.targetsoftwaredevelopment.myapplication.data.remote.requests.RegisterU
 import uz.targetsoftwaredevelopment.myapplication.databinding.PageRegisterBinding
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.RegisterPageViewModel
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.pagesvidemodel.impl.RegisterPageViewModelImpl
+import uz.targetsoftwaredevelopment.myapplication.utils.gone
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
+import uz.targetsoftwaredevelopment.myapplication.utils.visible
 
 @AndroidEntryPoint
 class RegisterPage : Fragment(R.layout.page_register) {
@@ -54,6 +57,7 @@ class RegisterPage : Fragment(R.layout.page_register) {
                 setStartDelay(500).start()
             }
             addTextChangedListener {
+                emailEditTextLayout.isErrorEnabled = false
                 it?.let {
                     isReadyEmail = it.isNotEmpty() && it.contains("@")
                     check()
@@ -89,6 +93,14 @@ class RegisterPage : Fragment(R.layout.page_register) {
                     check()
                 }
             }
+            setOnFocusChangeListener { view, b ->
+                if (!b && !isReadyConfirmPassword) {
+                    confirmPasswordEditTextLayout.isErrorEnabled = true
+                    confirmPasswordEditTextLayout.error= "Enter same passwords"
+                } else {
+                    confirmPasswordEditTextLayout.isErrorEnabled = false
+                }
+            }
         }
 
         btnRegister.apply {
@@ -106,6 +118,15 @@ class RegisterPage : Fragment(R.layout.page_register) {
                     )
                 )
             }
+        }
+
+        viewModel.errorLiveData.observe(viewLifecycleOwner, errorObserver)
+    }
+
+    private val errorObserver = Observer<String> { errorMessage ->
+        if (errorMessage.equals(getString(R.string.errorTextEmailExist))) {
+            binding.emailEditTextLayout.isErrorEnabled = true
+            binding.emailEditTextLayout.error = "Email is already exist"
         }
     }
 

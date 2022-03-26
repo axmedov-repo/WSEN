@@ -4,12 +4,12 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
@@ -34,28 +34,66 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
 
-        authAdapter = AuthScreenAdapter(childFragmentManager, lifecycle, tabLayout.tabCount)
+        authAdapter = AuthScreenAdapter(childFragmentManager, lifecycle)
         viewPager.adapter = authAdapter
-        authAdapter.setRegisterBtnClickListener { registerData ->
-            progressBar.animate()
-            progressBar.visible()
-            viewModel.registerUser(registerData)
-        }
-        authAdapter.setLoginBtnClickListener { loginData ->
-            progressBar.animate()
-            progressBar.visible()
-            viewModel.loginUser(loginData)
+
+        authAdapter.apply {
+            setRegisterBtnClickListener { registerData ->
+                progressBar.animate()
+                progressBar.visible()
+                viewModel.registerUser(registerData)
+            }
+
+            setLoginBtnClickListener { loginData ->
+                progressBar.animate()
+                progressBar.visible()
+                viewModel.loginUser(loginData)
+            }
         }
 
-        tabLayout.apply {
-            addTab(tabLayout.newTab().setText("LOGIN"))
-            addTab(tabLayout.newTab().setText("SIGN UP"))
+        /*tabLayout.apply {
+            addTab(tabLayout.newTab().setText("Login"))
+            addTab(tabLayout.newTab().setText("Register"))
             tabGravity = TabLayout.GRAVITY_FILL
             alpha = 0F
-        }
-        TabLayoutMediator(tabLayout, viewPager) { tab, pos ->
+        }*/
 
+        TabLayoutMediator(tabLayout, viewPager) { tab, pos ->
+           /* if (pos == 0) {
+                titleLogin.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.main_green
+                    )
+                )
+                titleRegister.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.black
+                    )
+                )
+            } else {
+                titleLogin.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.black
+                    )
+                )
+                titleRegister.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.main_green
+                    )
+                )
+            }*/
         }.attach()
+
+        titleLogin.setOnClickListener {
+            viewPager.currentItem = 0
+        }
+        titleRegister.setOnClickListener {
+            viewPager.currentItem = 1
+        }
 
         cardPlaymarket.apply {
             setOnClickListener {
@@ -114,6 +152,10 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
             viewLifecycleOwner,
             loginUserResponseObserver
         )
+        viewModel.errorLiveData.observe(
+            viewLifecycleOwner,
+            errorObserver
+        )
     }
 
     private val registerUserResponseObserver = Observer<RegisterUserResponse> {
@@ -126,5 +168,9 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
         binding.progressBar.gone()
         binding.progressBar.clearAnimation()
         findNavController().navigate(AuthScreenDirections.actionAuthScreenToBasicScreen())
+    }
+    private val errorObserver = Observer<String> {
+        binding.progressBar.gone()
+        binding.progressBar.clearAnimation()
     }
 }

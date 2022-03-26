@@ -95,7 +95,9 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
                 binding.descriptionEt.text.toString()
             )
         )
-        Log.d("ADDBTN", "Compressed video keldi: ${compressedVideoFile.name}")
+        Log.d("ADDBTN", "Compressed video keldi: name = ${compressedVideoFile.name}")
+        Log.d("ADDBTN", "Compressed video keldi: path = ${compressedVideoFile.path}")
+        Log.d("ADDBTN", "Compressed video keldi: size = ${compressedVideoFile.length()/1024}")
     }
 
     private fun showPictureDialog() {
@@ -146,9 +148,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
 //                    videoView.requestFocus()
                     videoView.start()
                 }
-
             }
-
         } else if (requestCode == CAMERA) {
             val contentURI = data!!.data
             videoUri = contentURI!!
@@ -252,58 +252,6 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
     }
 
     private fun getVideoFile(videoUri: Uri) {
-        /* val directory: String =
-             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                 .toString()
-
-         val filePath: String = SiliCompressor.with(App.instance).compressVideo(videoUri, directory)
-
-         return File(filePath, "myVolunteersAppVideo.mp4")*/
-
-        /*var file: File? = null
-        VideoCompressor.start(
-            App.instance,
-            listOf(videoUri),
-            true,
-            Environment.DIRECTORY_MOVIES,
-            object : CompressionListener {
-
-                override fun onProgress(index: Int, percent: Float) {
-                    binding.progressView.visible()
-                    binding.progressView.animate()
-                }
-
-                override fun onStart(index: Int) {
-                    // Compression start
-                    Log.d("ADDBTN", "Compression Start")
-                }
-
-                override fun onSuccess(index: Int, size: Long, path: String?) {
-                    // On Compression success
-                    file = File(path, "myVolunteersAppVideo.mp4")
-                }
-
-                override fun onFailure(index: Int, failureMessage: String) {
-                    Log.d("ADDBTN", "Compression failure")
-                }
-
-                override fun onCancelled(index: Int) {
-
-                }
-
-            },
-            configureWith = Configuration(
-                quality = VideoQuality.MEDIUM,
-                frameRate = 24, *//*Int, ignore, or null*//*
-                isMinBitrateCheckEnabled = true,
-                videoBitrate = 3677198, *//*Int, ignore, or null*//*
-                disableAudio = false, *//*Boolean, or ignore*//*
-                keepOriginalResolution = false, *//*Boolean, or ignore*//*
-                videoWidth = 360.0, *//*Double, ignore, or null*//*
-                videoHeight = 480.0 *//*Double, ignore, or null*//*
-            )
-        )*/
-
         val file = File(Environment.getExternalStorageDirectory().absolutePath)
         CompressVideo().execute("false", videoUri.toString(), file.path)
     }
