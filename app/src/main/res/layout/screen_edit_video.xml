@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".presentation.ui.screens.EditVideoScreen">
 
@@ -12,9 +11,9 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/main_ll"
@@ -25,6 +24,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="250dp">
+
                 <com.google.android.exoplayer2.ui.StyledPlayerView
                     android:id="@+id/editVideo_view"
                     android:layout_width="match_parent"
@@ -38,8 +38,8 @@
                 android:id="@+id/ll1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
                 android:layout_marginTop="5dp"
+                android:background="@color/white"
                 android:orientation="vertical">
 
 
@@ -55,9 +55,9 @@
                         android:layout_height="35dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/default_profile_img"
-                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"/>
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -68,6 +68,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toRightOf="@id/my_profile_img"
                         app:layout_constraintTop_toTopOf="parent">
+
                         <TextView
                             android:id="@+id/edit_username_tv"
                             android:layout_width="match_parent"
@@ -75,7 +76,8 @@
                             android:text="@string/username"
                             android:textColor="@color/black"
                             android:textSize="16sp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/edit_time_tv"
                             android:layout_width="match_parent"
@@ -87,11 +89,13 @@
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="2dp"
                     android:background="#A8A2A2" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -101,11 +105,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:text="@string/tittle"
-                        android:textSize="16sp"
                         android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:layout_marginStart="5dp"/>
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/edit_title_et"
@@ -118,9 +122,9 @@
                         android:minHeight="48dp"
                         android:textColor="@color/black"
                         android:textColorHint="#686363"
-                        android:textSize="16sp">
-                    </EditText>
+                        android:textSize="16sp"></EditText>
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -139,6 +143,7 @@
                         android:layout_marginStart="5dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_pencil" />
+
                     <EditText
                         android:id="@+id/edit_description_et"
                         android:layout_width="match_parent"
@@ -152,22 +157,26 @@
                         android:textColorHint="#686363"
                         android:textSize="16sp" />
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginTop="2dp"
                     android:background="#A8A2A2" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_location_on" />
+
                     <EditText
                         android:id="@+id/edit_location_et"
                         android:layout_width="match_parent"
@@ -181,6 +190,7 @@
                         android:textColorHint="#686363"
                         android:textSize="16sp" />
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -189,42 +199,56 @@
             </LinearLayout>
 
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/edit_video_cv"
+            <!--  <androidx.cardview.widget.CardView
+                  android:id="@+id/edit_video_cv"
+                  android:layout_width="match_parent"
+                  android:layout_height="50dp"
+                  android:layout_marginHorizontal="15dp"
+                  android:layout_marginBottom="15dp"
+                  android:clickable="true"
+                  android:focusable="true"
+                  android:layout_marginTop="15dp"
+                  android:layout_gravity="bottom"
+                  android:foreground="?android:selectableItemBackground"
+                  app:cardBackgroundColor="@color/main_green"
+                  app:cardCornerRadius="15dp"
+                  app:cardElevation="1dp">
+
+                  <LinearLayout
+                      android:layout_width="match_parent"
+                      android:layout_height="match_parent"
+                      android:gravity="center"
+                      android:orientation="vertical">
+
+                      <TextView
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:text="@string/edit"
+                          android:textColor="@color/white"
+                          android:textSize="18sp"
+                          android:textStyle="normal" />
+                  </LinearLayout>
+
+              </androidx.cardview.widget.CardView>-->
+
+            <Button
+                android:id="@+id/btnEditVideo"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginBottom="15dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:foreground="?android:selectableItemBackground"
-                app:cardBackgroundColor="@color/main_green"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit"
-                        android:textColor="@color/white"
-                        android:textSize="18sp"
-                        android:textStyle="normal" />
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/btn_bg"
+                android:enabled="false"
+                android:text="@string/save"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

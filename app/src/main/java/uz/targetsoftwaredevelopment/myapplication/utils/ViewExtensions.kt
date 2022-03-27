@@ -2,6 +2,7 @@ package uz.targetsoftwaredevelopment.myapplication.utils
 
 import android.app.Activity
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 
@@ -28,4 +29,12 @@ fun View.invisible() {
 
 fun View.gone() {
     this.visibility = View.GONE
+}
+
+fun View.setMarginsInDp(left: Float, top: Float, right: Float, bottom: Float) {
+    if (this.layoutParams is ViewGroup.MarginLayoutParams) {
+        val p = this.layoutParams as ViewGroup.MarginLayoutParams
+        p.setMargins(left.toPx(), top.toPx(), right.toPx(), bottom.toPx())
+        this.requestLayout()
+    }
 }

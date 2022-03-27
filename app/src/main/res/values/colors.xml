@@ -15,4 +15,5 @@
     <color name="color_grey">#818181</color>
     <color name="select_lang_bg_color">#1FE627</color>
     <color name="unselect_lang_bg_color">#E6E6E6</color>
+    <color name="color_red">#B60A0A</color>
 </resources>

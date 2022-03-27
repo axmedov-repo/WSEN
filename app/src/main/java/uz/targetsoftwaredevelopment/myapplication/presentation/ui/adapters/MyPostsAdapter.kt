@@ -22,7 +22,7 @@ class MyPostsAdapter(val context:Context,val listener:OnPostItemTouchListener)
         fun onBind(videoData : VideoData){
             myPostsItemBinding.apply {
                 Glide.with(context)
-                    .load(videoData.preloadImg)
+                    .load(videoData.preload_img)
                     .error(R.drawable.planet_earth)
                     .into(myPostItemImageView)
 

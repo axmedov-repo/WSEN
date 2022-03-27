@@ -7,15 +7,16 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import uz.targetsoftwaredevelopment.myapplication.BuildConfig.BASE_URL
 import uz.targetsoftwaredevelopment.myapplication.BuildConfig.LOGGING
 import uz.targetsoftwaredevelopment.myapplication.app.App
 import uz.targetsoftwaredevelopment.myapplication.data.local.LocalStorage
+import uz.targetsoftwaredevelopment.myapplication.data.local.SafeStorage
 import uz.targetsoftwaredevelopment.myapplication.utils.timber
 
 object ApiClient {
+    private val safeStorage = SafeStorage()
     val retrofit: Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(safeStorage.base_url)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .client(getHttpClient())
@@ -48,7 +49,8 @@ fun tokenInterceptor() = Interceptor { chain ->
 
     val chainRequest = chain.request()
     val newRequest =
-        chainRequest.newBuilder().removeHeader("Authorization").addHeader("Authorization", pref.token).build()
+        chainRequest.newBuilder().removeHeader("Authorization")
+            .addHeader("Authorization", pref.token).build()
 
     val response = chain.proceed(newRequest)
     response

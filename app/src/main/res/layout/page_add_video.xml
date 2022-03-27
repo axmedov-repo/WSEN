@@ -84,14 +84,14 @@
                             android:textColor="@color/black"
                             android:textSize="16sp"
                             android:textStyle="bold" />
-
+<!--
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/create_video_time"
                             android:textColor="#322E2E"
                             android:textSize="14sp"
-                            android:textStyle="normal" />
+                            android:textStyle="normal" />-->
                     </LinearLayout>
 
                     <androidx.cardview.widget.CardView
@@ -119,7 +119,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/add"
                                 android:textColor="@color/white"
-                                android:textSize="18sp"
+                                android:textSize="16sp"
                                 android:textStyle="normal" />
                         </LinearLayout>
 

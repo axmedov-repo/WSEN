@@ -1,5 +1,6 @@
 package uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.screensviewmodel.impl
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,7 +21,7 @@ class AuthScreenViewModelImpl @Inject constructor(private val baseRepository: Ba
     ViewModel(), AuthScreenViewModel {
     override val registerUserResponseLiveData = MutableLiveData<RegisterUserResponse>()
     override val loginUserResponseLiveData = MutableLiveData<LoginUserResponse>()
-    override val errorLiveData = MutableLiveData<Unit>()
+    override val errorLiveData = MutableLiveData<String>()
 
     override fun registerUser(data: RegisterUserRequest) {
         if (isConnected()) {
@@ -29,11 +30,11 @@ class AuthScreenViewModelImpl @Inject constructor(private val baseRepository: Ba
                     registerUserResponseLiveData.value = it
                 }
                 it.onFailure {
-                    errorLiveData.value = Unit
+                    errorLiveData.value = it.message
                 }
             }.launchIn(viewModelScope)
         } else {
-            errorLiveData.value = Unit
+            errorLiveData.value = "Internet ga ulanmagan!"
         }
     }
 
@@ -41,14 +42,15 @@ class AuthScreenViewModelImpl @Inject constructor(private val baseRepository: Ba
         if (isConnected()) {
             baseRepository.loginUser(data).onEach {
                 it.onSuccess {
+                    Log.d("LOGINCHECK", "Login viewmodel success")
                     loginUserResponseLiveData.value = it
                 }
                 it.onFailure {
-                    errorLiveData.value = Unit
+                    errorLiveData.value = it.message
                 }
             }.launchIn(viewModelScope)
         } else {
-            errorLiveData.value = Unit
+            errorLiveData.value = "Internet ga ulanmagan!"
         }
     }
 }

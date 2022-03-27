@@ -60,43 +60,22 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
         fun onBind(videoData: VideoData) {
 
             allVideoRvItemBinding.apply {
-
-                Glide.with(context).load(videoData.owner?.photo)
+                Glide.with(context)
+                    .load(videoData.preload_img)
                     .centerCrop()
                     .placeholder(R.drawable.default_profile_img)
                     .into(accountImg)
 
                 accountNameTv.text = videoData.owner?.username
-                dateTv.text = videoData.createdAt
-
-                Glide.with(context).load(videoData.preloadImg)
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_default_bg)
-                    .into(itemAllVideosImg)
+                dateTv.text = videoData.created_at
 
                 unlikeVideoImg.startAnimation(
-                    AnimationUtils.loadAnimation(context , R.anim.com))
-
-                allVideosItemTitleTv.text = videoData.title
-                allVideosItemAddressVideoTv.text = videoData.location
-            }
-
-            allVideoRvItemBinding.apply {
-                Glide.with(context).load(videoData.preloadImg)
-                    .centerCrop()
-                    .placeholder(R.drawable.default_profile_img)
-                    .into(accountImg)
-
-//                accountNameTv.text = videoData.owner
-                dateTv.text = videoData.createdAt
-            }
-
-            allVideoRvItemBinding.unlikeVideoImg.startAnimation(
-                AnimationUtils.loadAnimation(
-                    context,
-                    R.anim.com
+                    AnimationUtils.loadAnimation(
+                        context,
+                        R.anim.com
+                    )
                 )
-            )
+            }
         }
     }
 

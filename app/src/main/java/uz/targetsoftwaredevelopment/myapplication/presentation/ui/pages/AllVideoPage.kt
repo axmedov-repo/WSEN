@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +24,11 @@ class AllVideoPage : Fragment(R.layout.page_all_video) {
     private val viewModel: AllVideoPageViewModel by viewModels<AllVideoPageViewModelImpl>()
     private lateinit var allVideoRvAdapter: AllVideoRvAdapter
 
+    private var videoClickedListener: ((VideoData) -> Unit)? = null
+    fun setVideoClickedListener(f: (VideoData) -> Unit) {
+        videoClickedListener = f
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,7 +41,7 @@ class AllVideoPage : Fragment(R.layout.page_all_video) {
         allVideoRvAdapter =
             AllVideoRvAdapter(requireContext(), object : AllVideoRvAdapter.OnItemClickListener {
                 override fun onItemClick(videoData: VideoData) {
-                    findNavController().navigate(R.id.watchVideoScreen)
+                    videoClickedListener?.invoke(videoData)
                 }
 
                 override fun onShareClick(videoData: VideoData) {

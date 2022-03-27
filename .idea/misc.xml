@@ -124,23 +124,35 @@
         <entry key="..\:/MyApps/UzVolunteers/app/src/main/res/layout/screen_splash.xml" value="0.18" />
         <entry key="..\:/MyApps/UzVolunteers/app/src/main/res/layout/screen_watch_video.xml" value="0.16" />
         <entry key="..\:/MyApps/UzVolunteers/app/src/main/res/menu/main_menu.xml" value="0.178125" />
+        <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/drawable/btn_bg.xml" value="0.1295" />
+        <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/drawable/edit_text_bg.xml" value="0.1225" />
+        <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/drawable/ic_place_holder.xml" value="0.1345" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/activity_main.xml" value="0.17222222222222222" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/all_video_rv_item.xml" value="0.21" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/dialog_delete.xml" value="0.17314814814814813" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/dialog_permission.xml" value="0.17314814814814813" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/my_posts_item.xml" value="0.17314814814814813" />
+        <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/page_add_video.xml" value="0.22" />
+        <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/page_all_video.xml" value="0.22" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/page_all_video.xml" value="0.17314814814814813" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/page_home.xml" value="0.1921875" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/page_login.xml" value="0.18888888888888888" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/page_my_posts.xml" value="0.17314814814814813" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/page_profile.xml" value="0.17314814814814813" />
+        <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/page_profile.xml" value="0.22" />
+        <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/page_register.xml" value="0.22" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/page_sign_up.xml" value="0.1921875" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/page_wish.xml" value="0.17314814814814813" />
+        <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/screen_auth.xml" value="0.2" />
+        <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/screen_basic_nav.xml" value="0.1787037037037037" />
+        <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/screen_edit_video.xml" value="0.22" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/screen_edit_video_screen.xml" value="0.17314814814814813" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/screen_item_view_pager.xml" value="0.1921875" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/screen_record_video.xml" value="0.1921875" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/screen_splash.xml" value="0.1921875" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/screen_videos_item.xml" value="0.17314814814814813" />
+        <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/layout/screen_watch_video.xml" value="0.22" />
+        <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/menu/main_menu.xml" value="0.178125" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/menu/rv_item_menu.xml" value="0.17314814814814813" />
         <entry key="..\:/MyApps/UzVolunteers2/app/src/main/res/menu/rv_posts_menu.xml" value="0.178125" />
       </map>

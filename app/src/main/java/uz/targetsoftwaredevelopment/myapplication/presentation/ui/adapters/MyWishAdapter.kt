@@ -8,54 +8,78 @@ import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import uz.targetsoftwaredevelopment.myapplication.R
+import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.myapplication.databinding.WishPostsItemBinding
 
-class MyWishAdapter(val context:Context, val listener:OnWishItemTouchListener)
-    :ListAdapter<Any,MyWishAdapter.MyViewHolder>(MyDiffUtil) {
+class MyWishAdapter(val context: Context, val listener: OnWishItemTouchListener) :
+    ListAdapter<VideoData, MyWishAdapter.MyViewHolder>(MyDiffUtil) {
 
-    inner class MyViewHolder(private val wishPostsItemBinding : WishPostsItemBinding)
-        :RecyclerView.ViewHolder(wishPostsItemBinding.root){
-        fun onBind(){
+    inner class MyViewHolder(private val wishPostsItemBinding: WishPostsItemBinding) :
+        RecyclerView.ViewHolder(wishPostsItemBinding.root) {
+
+        init {
             wishPostsItemBinding.apply {
-
                 wishImageCv.setOnClickListener {
-                    listener.onPostClick()
+                    listener.onPostClick(getItem(absoluteAdapterPosition))
                 }
 
                 wishVideoImg.setOnClickListener {
-                    listener.onWishClick()
+                    listener.onWishClick(getItem(absoluteAdapterPosition))
                 }
-
             }
-
-
-            itemView.animation = AnimationUtils.loadAnimation(itemView.context,R.anim.animation_one)
         }
 
+        fun onBind(videoData: VideoData) {
+            itemView.animation =
+                AnimationUtils.loadAnimation(itemView.context, R.anim.animation_one)
+
+            wishPostsItemBinding.apply {
+                Glide.with(context)
+                    .load(videoData.preload_img)
+                    .centerCrop()
+                    .placeholder(R.drawable.default_profile_img)
+                    .into(wishImageView)
+
+                wishTitleTv.text = videoData.title
+                wishAddressTv.text = videoData.location
+                if (videoData.isLikedByCurrentUser) {
+                    wishVideoImg.setImageResource(R.drawable.healthcare_selected)
+                } else {
+                    wishVideoImg.setImageResource(R.drawable.healthcare_unselected)
+                }
+            }
+        }
     }
 
-    object MyDiffUtil:DiffUtil.ItemCallback<Any>() {
-        override fun areItemsTheSame(oldItem : Any, newItem : Any) : Boolean {
-            return oldItem==newItem
+    object MyDiffUtil : DiffUtil.ItemCallback<VideoData>() {
+        override fun areItemsTheSame(oldItem: VideoData, newItem: VideoData): Boolean {
+            return oldItem == newItem
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem : Any, newItem : Any) : Boolean {
-            return oldItem==newItem
+        override fun areContentsTheSame(oldItem: VideoData, newItem: VideoData): Boolean {
+            return oldItem == newItem
         }
     }
 
-    override fun onCreateViewHolder(parent : ViewGroup, viewType : Int) : MyViewHolder {
-        return MyViewHolder(WishPostsItemBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        return MyViewHolder(
+            WishPostsItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
-    override fun onBindViewHolder(holder : MyViewHolder, position : Int) {
-        holder.onBind()
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        holder.onBind(getItem(position))
     }
 
-    interface OnWishItemTouchListener{
-        fun onWishClick()
-        fun onPostClick()
+    interface OnWishItemTouchListener {
+        fun onWishClick(videoData: VideoData)
+        fun onPostClick(videoData: VideoData)
     }
 }

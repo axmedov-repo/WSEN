@@ -10,12 +10,12 @@ data class MainPageDataResponse(
 data class CategoriesItem(
     val id: Int? = null,
     val name: String? = null,
-    val createdAt: String? = null,
+    val created_at: String? = null,
     @field:SerializedName("updated_at")
-    val updayedAt: String? = null,
+    val updayed_at: String? = null,
     val icon: String? = null
 )
 
 data class Statistics(
-    val allVolunteers: Int? = 0
+    val all_volunteers: Int? = 0
 )

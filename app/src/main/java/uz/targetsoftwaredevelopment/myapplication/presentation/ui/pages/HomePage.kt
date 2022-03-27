@@ -106,7 +106,7 @@ class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback {
     }
 
     private val statisticsObserver = Observer<Statistics> {
-        binding.txtHeaderVolunteers.text = "${it.allVolunteers}"
+        binding.txtHeaderVolunteers.text = "${it.all_volunteers}"
     }
 
     private val categoriesObserver = Observer<List<CategoriesItem?>?> {
