@@ -7,8 +7,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages.*
 
-class BasicPageAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
+class BasicScreenAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fm, lifecycle) {
+
     private var clickHomeButtonListener: (() -> Unit)? = null
     fun setOnClickHomeButtonListener(block: () -> Unit) {
         clickHomeButtonListener = block
@@ -17,6 +18,16 @@ class BasicPageAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
     private var videoClickListener: ((VideoData) -> Unit)? = null
     fun setVideoClickListener(block: (VideoData) -> Unit) {
         videoClickListener = block
+    }
+
+    private var editVideoClickedListener: ((VideoData) -> Unit)? = null
+    fun setEditMyVideoClickedListener(f: (VideoData) -> Unit) {
+        editVideoClickedListener = f
+    }
+
+    private var watchVideoClickedListener: ((VideoData) -> Unit)? = null
+    fun setWatchMyVideoClickedListener(f: (VideoData) -> Unit) {
+        watchVideoClickedListener = f
     }
 
     override fun getItemCount(): Int = 5
@@ -35,7 +46,14 @@ class BasicPageAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
                 }
             }
             2 -> AddVideoPage()
-            3 -> MyPostsPage()
+            3 -> MyPostsPage().apply {
+                setEditMyVideoClickedListener {
+                    editVideoClickedListener?.invoke(it)
+                }
+                setWatchMyVideoClickedListener {
+                    watchVideoClickedListener?.invoke(it)
+                }
+            }
             else -> ProfilePage()
         }
     }

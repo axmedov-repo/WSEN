@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_basicScreen_to_languageScreen"
             app:destination="@id/languageScreen" />
+        <action
+            android:id="@+id/action_basicScreen_to_favouriteVideosScreen"
+            app:destination="@id/favouriteVideosScreen" />
     </fragment>
     <fragment
         android:id="@+id/splashScreen"
@@ -64,5 +67,14 @@
         android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.LanguageScreen"
         android:label="LanguageScreen"
         tools:layout="@layout/screen_language" />
+    <fragment
+        android:id="@+id/favouriteVideosScreen"
+        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages.FavouriteVideosScreen"
+        android:label="screen_favourite_videos"
+        tools:layout="@layout/screen_favourite_videos" >
+        <action
+            android:id="@+id/action_favouriteVideosScreen_to_watchVideoScreen"
+            app:destination="@id/watchVideoScreen" />
+    </fragment>
 
 </navigation>

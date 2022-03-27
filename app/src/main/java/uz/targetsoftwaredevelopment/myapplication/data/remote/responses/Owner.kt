@@ -1,9 +1,10 @@
 package uz.targetsoftwaredevelopment.myapplication.data.remote.responses
 
 data class Owner(
-    val last_name: String? = null,
+    val lastLogin: String? = null,
+    val lastName: String? = null,
     val photo: Any? = null,
-    val first_name: String? = null,
+    val firstName: String? = null,
     val email: String? = null,
     val username: String? = null
 )

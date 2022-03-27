@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import uz.targetsoftwaredevelopment.myapplication.data.enums.SplashOpenScreenTypes
 import uz.targetsoftwaredevelopment.myapplication.data.local.LocalStorage
+import uz.targetsoftwaredevelopment.myapplication.data.local.SafeStorage
 import uz.targetsoftwaredevelopment.myapplication.data.remote.api.BaseApi
 import uz.targetsoftwaredevelopment.myapplication.data.remote.requests.*
 import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.*
@@ -16,7 +17,8 @@ import javax.inject.Inject
 
 class BaseRepositoryImpl @Inject constructor(
     private val baseApi: BaseApi,
-    private val localStorage: LocalStorage
+    private val localStorage: LocalStorage,
+    private val safeStorage: SafeStorage
 ) : BaseRepository {
     private val gson = Gson()
 
@@ -85,6 +87,7 @@ class BaseRepositoryImpl @Inject constructor(
 
     override fun getMainPageData(): Flow<Result<MainPageDataResponse?>> =
         flow {
+            Log.d("BASEURL", "${safeStorage.base_url}")
             val response = baseApi.getMainPageData()
             if (response.isSuccessful) {
                 emit(Result.success(response.body()))
@@ -111,7 +114,7 @@ class BaseRepositoryImpl @Inject constructor(
 
     override fun getUserData(): Flow<Result<UserData>> = flow {
         val response =
-            baseApi.getUserData("http://147.182.250.241/uz/client/me/${localStorage.userId}/")
+            baseApi.getUserData("${safeStorage.base_url}client/me/${localStorage.userId}/")
         if (response.isSuccessful) {
             emit(Result.success(response.body()!!))
         }
@@ -126,16 +129,41 @@ class BaseRepositoryImpl @Inject constructor(
     }
 
     override fun editUserData(userData: UserData): Flow<Result<UserData>> = flow {
-        val response = baseApi.editUserData("uz/client/me/${localStorage.userId}/", userData)
+        val response = baseApi.editUserData(
+            "${safeStorage.base_url}client/me/${localStorage.userId}/",
+            userData
+        )
         if (response.isSuccessful) {
             emit(Result.success(response.body()!!))
         }
     }.flowOn(Dispatchers.IO)
 
+    override fun getAllMyVideos(): Flow<Result<List<VideoData?>>> = flow {
+        val response = baseApi.getAllMyVideos()
+        if (response.isSuccessful) {
+            emit(Result.success(response.body()!!.results!!))
+        }
+    }
+
     override fun editMyVideo(videoData: EditVideoRequest): Flow<Result<EditVideoResponse>> = flow {
-        val response = baseApi.editMyVideo("uz/api/my-post/${videoData.id}/", videoData)
+        val response =
+            baseApi.editMyVideo("${safeStorage.base_url}api/my-post/${videoData.id}/", videoData)
         if (response.isSuccessful) {
             emit(Result.success(response.body()!!))
         }
     }.flowOn(Dispatchers.IO)
+
+    override fun getAllFavouriteVideos(): Flow<Result<AllFavouriteVideosResponse>> = flow {
+        val response = baseApi.getAllFavouriteVideos()
+        if (response.isSuccessful) {
+            emit(Result.success(response.body()!!))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    override fun changeLike(videoData: VideoData): Flow<Result<LikeVideoResponse>> = flow {
+        val response = baseApi.likeVideo("${safeStorage.base_url}api/wish-event/${videoData.id}/")
+        if (response.isSuccessful) {
+            emit(Result.success(response.body()!!))
+        }
+    }
 }

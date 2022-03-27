@@ -3,10 +3,10 @@ package uz.targetsoftwaredevelopment.myapplication.data.remote.responses
 import com.google.gson.annotations.SerializedName
 
 data class LikeVideoResponse(
-	val data: Data? = null
+	val data: LikeVideResponseData? = null
 )
 
-data class Data(
+data class LikeVideResponseData(
 	val owner: Int? = null,
 	val preload_img: String? = null,
 	val like: Int? = null,

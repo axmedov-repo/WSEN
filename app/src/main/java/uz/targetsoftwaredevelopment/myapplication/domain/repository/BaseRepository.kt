@@ -33,5 +33,11 @@ interface BaseRepository {
 
     fun editUserData(userData: UserData): Flow<Result<UserData>>
 
-    fun editMyVideo(videoData : EditVideoRequest) : Flow<Result<EditVideoResponse>>
+    fun getAllMyVideos(): Flow<Result<List<VideoData?>>>
+
+    fun editMyVideo(videoData: EditVideoRequest): Flow<Result<EditVideoResponse>>
+
+    fun getAllFavouriteVideos(): Flow<Result<AllFavouriteVideosResponse>>
+
+    fun changeLike(videoData: VideoData): Flow<Result<LikeVideoResponse>>
 }

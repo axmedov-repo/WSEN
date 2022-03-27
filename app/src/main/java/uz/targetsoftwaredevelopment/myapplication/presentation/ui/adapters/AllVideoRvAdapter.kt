@@ -58,6 +58,7 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
         }
 
         fun onBind(videoData: VideoData) {
+
             allVideoRvItemBinding.apply {
                 Glide.with(context)
                     .load(videoData.preload_img)
@@ -67,14 +68,14 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
 
                 accountNameTv.text = videoData.owner?.username
                 dateTv.text = videoData.created_at
-            }
 
-            allVideoRvItemBinding.unlikeVideoImg.startAnimation(
-                AnimationUtils.loadAnimation(
-                    context,
-                    R.anim.com
+                unlikeVideoImg.startAnimation(
+                    AnimationUtils.loadAnimation(
+                        context,
+                        R.anim.com
+                    )
                 )
-            )
+            }
         }
     }
 

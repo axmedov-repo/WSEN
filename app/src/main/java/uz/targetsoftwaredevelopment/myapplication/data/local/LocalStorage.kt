@@ -16,5 +16,6 @@ class LocalStorage @Inject constructor() {
     var splashOpenScreen: String by StringPreference(pref, SplashOpenScreenTypes.AUTH_SCREEN.name)
 
     var userId: String by StringPreference(pref)
+
     var userPhoneNumber: String by StringPreference(pref)
 }

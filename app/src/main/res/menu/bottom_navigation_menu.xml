@@ -16,9 +16,9 @@
         android:title="Add" />
 
     <item
-        android:id="@+id/favourite_videos"
+        android:id="@+id/my_videos"
         android:icon="@drawable/ic_favourite_videos"
-        android:title="Favourite" />
+        android:title="My Videos" />
 
     <item
         android:id="@+id/profile"
