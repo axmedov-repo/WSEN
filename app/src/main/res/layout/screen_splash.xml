@@ -7,22 +7,16 @@
     tools:context=".presentation.ui.screens.SplashScreen">
 
     <ImageView
-        android:id="@+id/bg_splash"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/wsen_logo"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/blur_background" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Eco Help"
-        android:textColor="@color/white"
-        android:textSize="36sp"
+        android:scaleType="fitXY"
+        android:src="@drawable/wsen_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

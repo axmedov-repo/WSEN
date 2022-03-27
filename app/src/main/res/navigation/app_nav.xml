@@ -29,7 +29,8 @@
         tools:layout="@layout/screen_splash">
         <action
             android:id="@+id/action_splashScreen_to_basicScreen"
-            app:destination="@id/basicScreen" />
+            app:destination="@id/basicScreen"
+            />
         <action
             android:id="@+id/action_splashScreen_to_authScreen"
             app:destination="@id/authScreen" />

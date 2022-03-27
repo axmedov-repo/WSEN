@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -35,6 +36,17 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
         val adapter = BasicPageAdapter(childFragmentManager, lifecycle)
+
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if(drawerLayout.isOpen){
+                        drawerLayout.closeDrawer(GravityCompat.START)
+                    }else{
+                        requireActivity().finish()
+                    }
+                }
+            })
 
         innerLayout.apply {
             pager.adapter = adapter
