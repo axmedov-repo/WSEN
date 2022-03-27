@@ -58,7 +58,6 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
         }
 
         fun onBind(videoData: VideoData) {
-
             allVideoRvItemBinding.apply {
                 Glide.with(context)
                     .load(videoData.preload_img)
@@ -69,12 +68,19 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
                 accountNameTv.text = videoData.owner?.username
                 dateTv.text = videoData.created_at
 
+                Glide.with(context).load(videoData.preload_img)
+                    .centerCrop()
+                    .placeholder(R.drawable.ic_default_bg)
+                    .into(itemAllVideosImg)
+
                 unlikeVideoImg.startAnimation(
                     AnimationUtils.loadAnimation(
                         context,
                         R.anim.com
                     )
                 )
+                allVideosItemTitleTv.text = videoData.title
+                allVideosItemAddressVideoTv.text = videoData.location
             }
         }
     }
@@ -108,7 +114,7 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
         fun onItemClick(videoData: VideoData)
         fun onShareClick(videoData: VideoData)
         fun onMenuClick(videoData: VideoData)
-        fun onClickLike(videoData : VideoData)
-        fun onClickUnLike(videoData : VideoData)
+        fun onClickLike(videoData: VideoData)
+        fun onClickUnLike(videoData: VideoData)
     }
 }
