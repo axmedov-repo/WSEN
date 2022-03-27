@@ -179,6 +179,12 @@ dependencies {
     /**
      * Lottie Animation
      */
-    def lottieVersion = "3.4.0"
+    def lottieVersion = "5.0.1"
     implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    /**
+     * Toast Library
+     */
+    implementation 'io.github.shashank02051997:FancyToast:2.0.1'
+
 }

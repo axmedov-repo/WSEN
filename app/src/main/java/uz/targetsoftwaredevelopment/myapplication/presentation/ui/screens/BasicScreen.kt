@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -24,16 +25,17 @@ import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.screen
 import uz.targetsoftwaredevelopment.myapplication.utils.CheckInternetReceiver
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
 
+
 @AndroidEntryPoint
-class BasicScreen : Fragment(R.layout.screen_basic_nav),
+class BasicScreen:Fragment(R.layout.screen_basic_nav) ,
     NavigationView.OnNavigationItemSelectedListener {
     private val binding by viewBinding(ScreenBasicNavBinding::bind)
-    private val viewModel: BasicScreenViewModel by viewModels<BasicScreenViewModelImpl>()
+    private val viewModel : BasicScreenViewModel by viewModels<BasicScreenViewModelImpl>()
     private val checkInternetReceiver = CheckInternetReceiver()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
-        super.onViewCreated(view, savedInstanceState)
-        val adapter = BasicScreenAdapter(childFragmentManager, lifecycle)
+    override fun onViewCreated(view : View , savedInstanceState : Bundle?) = binding.scope {
+        super.onViewCreated(view , savedInstanceState)
+        val adapter = BasicScreenAdapter(childFragmentManager , lifecycle)
         adapter.apply {
             setVideoClickListener {
                 findNavController().navigate(
@@ -49,7 +51,6 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
                     )
                 )
             }
-
             setWatchMyVideoClickedListener {
                 findNavController().navigate(
                     BasicScreenDirections.actionBasicScreenToWatchVideoScreen(
@@ -57,47 +58,60 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
                     )
                 )
             }
-        }
-        innerLayout.apply {
-            pager.adapter = adapter
-            pager.isUserInputEnabled = false
 
-            bottomNavigationView.setOnItemSelectedListener {
-                when (it.itemId) {
-                    R.id.home -> innerLayout.pager.setCurrentItem(0, false)
-                    R.id.videos -> innerLayout.pager.setCurrentItem(1, false)
-                    R.id.add_video -> innerLayout.pager.setCurrentItem(2, false)
-                    R.id.my_videos -> innerLayout.pager.setCurrentItem(3, false)
-                    else -> innerLayout.pager.setCurrentItem(4, false)
+            requireActivity().onBackPressedDispatcher
+                .addCallback(viewLifecycleOwner , object:OnBackPressedCallback(true) {
+                    override fun handleOnBackPressed() {
+                        if (drawerLayout.isOpen) {
+                            drawerLayout.closeDrawer(GravityCompat.START)
+                        } else {
+                            requireActivity().finish()
+                        }
+                    }
+                })
+
+            innerLayout.apply {
+                pager.adapter = adapter
+                pager.isUserInputEnabled = false
+
+                bottomNavigationView.setOnItemSelectedListener {
+                    when (it.itemId) {
+                        R.id.home -> innerLayout.pager.setCurrentItem(0 , false)
+                        R.id.videos -> innerLayout.pager.setCurrentItem(1 , false)
+                        R.id.add_video -> innerLayout.pager.setCurrentItem(2 , false)
+                        R.id.my_videos -> innerLayout.pager.setCurrentItem(3 , false)
+                        else -> innerLayout.pager.setCurrentItem(4 , false)
+                    }
+                    return@setOnItemSelectedListener true
                 }
-                return@setOnItemSelectedListener true
+
+                btnMenu.setOnClickListener {
+                    drawerLayout.openDrawer(GravityCompat.START)
+                }
             }
 
-            btnMenu.setOnClickListener {
-                drawerLayout.openDrawer(GravityCompat.START)
+            if (navigationView != null) {
+                navigationView.setNavigationItemSelectedListener(this@BasicScreen)
             }
-        }
-
-        if (navigationView != null) {
-            navigationView.setNavigationItemSelectedListener(this@BasicScreen)
         }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    override fun onNavigationItemSelected(item : MenuItem) : Boolean {
         when (item.itemId) {
             R.id.nav_wish_list -> {
-                findNavController().navigate(BasicScreenDirections.actionBasicScreenToFavouriteVideosScreen())
+//                findNavController().navigate(R.id.wishPage)
+                Toast.makeText(requireContext() , "wish page" , Toast.LENGTH_SHORT).show()
             }
             R.id.nav_language -> {
-                findNavController().navigate(BasicScreenDirections.actionBasicScreenToLanguageScreen())
+                findNavController().navigate(R.id.languageScreen)
             }
             R.id.nav_invite_friends -> {
 //                Toast.makeText(requireContext() , "invite friends" , Toast.LENGTH_SHORT).show()
                 val intent = Intent()
                 intent.action = Intent.ACTION_SEND
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Android app")
+                intent.putExtra(Intent.EXTRA_SUBJECT , "Android app")
                 intent.putExtra(
-                    Intent.EXTRA_TEXT,
+                    Intent.EXTRA_TEXT ,
                     "https://play.google.com/store/apps/details?id=${activity?.packageName}"
                 )
                 intent.type = "text/plain"
@@ -106,8 +120,8 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
             }
             R.id.nav_rate_our_app -> {
 //                Toast.makeText(requireContext() , "rate our app" , Toast.LENGTH_SHORT).show()
-                val uri: Uri = Uri.parse("market://details?id=${activity?.packageName}")
-                val goToMarket = Intent(Intent.ACTION_VIEW, uri)
+                val uri : Uri = Uri.parse("market://details?id=${activity?.packageName}")
+                val goToMarket = Intent(Intent.ACTION_VIEW , uri)
                 goToMarket.addFlags(
                     Intent.FLAG_ACTIVITY_NO_HISTORY or
                             Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
@@ -115,25 +129,25 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
                 )
                 try {
                     startActivity(goToMarket)
-                } catch (e: ActivityNotFoundException) {
+                } catch (e : ActivityNotFoundException) {
                     startActivity(
                         Intent(
-                            Intent.ACTION_VIEW,
+                            Intent.ACTION_VIEW ,
                             Uri.parse("http://play.google.com/store/apps/details?id=${activity?.packageName}")
                         )
                     )
                 }
             }
             R.id.nav_logout -> {
-                Toast.makeText(requireContext(), "log out", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext() , "log out" , Toast.LENGTH_SHORT).show()
             }
         }
         return true
     }
 
     override fun onStart() {
-        val filter: IntentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        requireContext().registerReceiver(checkInternetReceiver, filter)
+        val filter : IntentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+        requireContext().registerReceiver(checkInternetReceiver , filter)
         super.onStart()
     }
 

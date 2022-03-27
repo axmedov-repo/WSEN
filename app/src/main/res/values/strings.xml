@@ -65,10 +65,13 @@
     <string name="check_your_internet_connection" translatable="false">Check your internet connection</string>
     <string name="available_services_in_offline_mode" translatable="false">Available services in offline mode</string>
     <string name="repeat" translatable="false">Repeat</string>
+    <string name="wsen" translatable="false">WSEN</string>
 
     <string name="errorTextEmailExist" translatable="false">user with this Email address already exists.</string>
     <string name="errorTextLoginOrPassword" translatable="false">Login yoki parol notogri!</string>
     <string name="errorTextLoginOrPassword2" translatable="false">Xatolik yuzaga keldi</string>
     <string name="internet_disconnected" translatable="false">Tarmoqqa ulanmagan</string>
     <string name="error_phone_not_contains_998" translatable="false">+998 kiritilishi zarur</string>
+    <string name="all_videos" translatable="false">All Videos</string>
+    <string name="my_videos" translatable="false">My Videos</string>
 </resources>
