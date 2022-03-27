@@ -33,6 +33,11 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="myFullscreenAlertDialogStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+    </style>
+
 
 
 

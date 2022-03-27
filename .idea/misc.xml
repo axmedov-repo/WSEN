@@ -18,6 +18,8 @@
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/drawable/ic_horizontal_line.xml" value="0.147" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/drawable/ic_launcher_background.xml" value="0.15" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/drawable/ic_location_on.xml" value="0.1535" />
+        <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/drawable/ic_nav_home.xml" value="0.153" />
+        <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/drawable/ic_nav_language.xml" value="0.153" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/drawable/ic_pencil.xml" value="0.1535" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/drawable/ic_save.xml" value="0.159" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/drawable/ic_send.xml" value="0.2075" />
@@ -25,6 +27,7 @@
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/drawable/ic_videocam.xml" value="0.1225" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/drawable/ic_view_headline.xml" value="0.1435" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/drawable/profile_back_shape.xml" value="0.145" />
+        <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/drawable/shape_btn_repeat.xml" value="0.2005" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/drawable/shape_circle.xml" value="0.145" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/drawable/shape_status_finished.xml" value="0.152" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/drawable/shape_status_waiting.xml" value="0.1475" />
@@ -56,13 +59,14 @@
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/fragment_videos_item.xml" value="0.14455231930960086" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/fragment_watch_video.xml" value="0.209375" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/fragment_wish.xml" value="0.1388888888888889" />
+        <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/innerview_offlinemode_paymego.xml" value="0.209375" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/item_ads.xml" value="0.209375" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/layout_bottom_sheet.xml" value="0.22" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/menu_header.xml" value="0.209375" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/my_posts_item.xml" value="0.209375" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/my_vidoes_item.xml" value="0.25" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/page_add_video.xml" value="0.20615384615384616" />
-        <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/page_all_video.xml" value="0.15" />
+        <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/page_all_video.xml" value="0.4185185185185185" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/page_home.xml" value="0.209375" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/page_login.xml" value="0.209375" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/page_my_posts.xml" value="0.2" />
@@ -72,11 +76,12 @@
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/page_wish.xml" value="0.209375" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/screen_auth.xml" value="0.20615384615384616" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/screen_basic.xml" value="0.15069444444444444" />
-        <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/screen_basic_nav.xml" value="0.20615384615384616" />
+        <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/screen_basic_nav.xml" value="0.18611111111111112" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/screen_bottom_sheet_dialog.xml" value="0.209375" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/screen_edit_video.xml" value="0.209375" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/screen_home.xml" value="0.15925925925925927" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/screen_language.xml" value="0.20555555555555555" />
+        <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/screen_offline_mode.xml" value="0.20615384615384616" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/screen_spam_bottm_sheet.xml" value="0.18518518518518517" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/screen_watch_video.xml" value="0.209375" />
         <entry key="..\:/Humoyun/Android/Stajirovka/UzVolunteers/app/src/main/res/layout/wish_posts_item.xml" value="0.209375" />

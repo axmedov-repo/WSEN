@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_basicScreen_to_languageScreen"
             app:destination="@id/languageScreen" />
+        <action
+            android:id="@+id/action_basicScreen_to_wishPage"
+            app:destination="@id/wishPage" />
     </fragment>
     <fragment
         android:id="@+id/splashScreen"
@@ -55,5 +58,10 @@
         android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.LanguageScreen"
         android:label="LanguageScreen"
         tools:layout="@layout/screen_language" />
+    <fragment
+        android:id="@+id/wishPage"
+        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages.WishPage"
+        android:label="page_wish"
+        tools:layout="@layout/page_wish" />
 
 </navigation>

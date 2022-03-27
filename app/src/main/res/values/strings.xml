@@ -60,7 +60,11 @@
     <string name="home" translatable="false">Home</string>
     <string name="wish_list" translatable="false">Wish list</string>
     <string name="invite_fiends" translatable="false">Invite fiends</string>
-    <string name="rate_our_app" translatable="false">Rate our app</string>
+    <string name="rate_app" translatable="false">Rate App</string>
+    <string name="offline_mode" translatable="false">Offline mode</string>
+    <string name="check_your_internet_connection" translatable="false">Check your internet connection</string>
+    <string name="available_services_in_offline_mode" translatable="false">Available services in offline mode</string>
+    <string name="repeat" translatable="false">Repeat</string>
 
 
 </resources>
