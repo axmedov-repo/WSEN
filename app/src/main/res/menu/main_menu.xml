@@ -5,12 +5,6 @@
         android:id="@+id/nav_group1"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_home"
-            android:title="@string/home"
-            app:showAsAction="never" />
-
-        <item
             android:id="@+id/nav_wish_list"
             android:title="@string/wish_list"
             android:icon="@drawable/ic_heart"
@@ -18,19 +12,19 @@
 
         <item
             android:id="@+id/nav_language"
-            android:icon="@drawable/ic_heart"
+            android:icon="@drawable/ic_nav_language"
             android:title="@string/language"
             app:showAsAction="never" />
 
         <item
             android:id="@+id/nav_invite_friends"
-            android:icon="@drawable/ic_heart"
+            android:icon="@drawable/ic_nav_invite"
             android:title="@string/invite_fiends"
             app:showAsAction="never" />
         <item
             android:id="@+id/nav_rate_our_app"
-            android:icon="@drawable/ic_heart"
-            android:title="@string/rate_our_app"
+            android:icon="@drawable/ic_nav_rate_us"
+            android:title="@string/rate_app"
             app:showAsAction="never" />
     </group>
 
@@ -39,7 +33,7 @@
         android:checkableBehavior="single">
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_heart"
+            android:icon="@drawable/ic_nav_log_out"
             android:title="@string/logout"
             app:showAsAction="never" />
     </group>

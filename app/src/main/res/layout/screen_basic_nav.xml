@@ -20,10 +20,12 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="#FFFFFF"
-        app:itemTextColor="@color/black"
-        app:itemIconTint="@null"
+        app:dividerInsetEnd="22dp"
+        app:dividerInsetStart="22dp"
         app:headerLayout="@layout/menu_header"
-        app:menu="@menu/main_menu" >
+        app:itemIconTint="@null"
+        app:itemTextColor="@color/black"
+        app:menu="@menu/main_menu">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
