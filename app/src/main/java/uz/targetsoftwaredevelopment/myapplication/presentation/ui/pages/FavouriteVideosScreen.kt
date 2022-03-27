@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.VideoData
@@ -50,11 +51,9 @@ class FavouriteVideosScreen : Fragment(R.layout.screen_favourite_videos) {
     }
 
     private val errorObserver = Observer<String> { errorMessage ->
-        // TODO : HUMOYUN AKA, errorni toast qilish kerak
-        if (errorMessage.equals(getString(R.string.internet_disconnected))) {
-            // error internet yo'q bo'ladi bu yerda, screen ochiladi
-        } else {
-            // errorMessage ni chiqarib qo'ya qoling
+        if (errorMessage.equals(getString(R.string.internet_disconnected))) {}
+        else {
+            FancyToast.makeText(requireContext(),errorMessage,FancyToast.LENGTH_LONG,FancyToast.ERROR,true)
         }
     }
 }

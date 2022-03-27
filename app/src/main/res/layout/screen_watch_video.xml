@@ -55,7 +55,7 @@
                 android:layout_width="8dp"
                 android:layout_height="8dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/shape_status_finished"
+                android:background="@drawable/shape_status_waiting"
                 app:layout_constraintLeft_toLeftOf="@id/status_tv"
                 app:layout_constraintTop_toBottomOf="@id/status_tv"/>
 
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@string/finished"
+                android:text="@string/waiting"
                 android:textColor="@color/black"
                 android:textStyle="normal"
                 android:textSize="16sp"
@@ -79,7 +79,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="10dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_heart"
+                android:src="@drawable/ic_heart_unlike"
                 app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintLeft_toRightOf="@id/status_text_tv"
                 app:layout_constraintRight_toRightOf="parent"

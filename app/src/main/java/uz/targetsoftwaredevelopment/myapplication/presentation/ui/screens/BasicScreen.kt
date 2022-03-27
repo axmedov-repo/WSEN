@@ -99,14 +99,13 @@ class BasicScreen:Fragment(R.layout.screen_basic_nav) ,
     override fun onNavigationItemSelected(item : MenuItem) : Boolean {
         when (item.itemId) {
             R.id.nav_wish_list -> {
-//                findNavController().navigate(R.id.wishPage)
-                Toast.makeText(requireContext() , "wish page" , Toast.LENGTH_SHORT).show()
+                findNavController().navigate(BasicScreenDirections.actionBasicScreenToFavouriteVideosScreen())
+
             }
             R.id.nav_language -> {
-                findNavController().navigate(R.id.languageScreen)
+                findNavController().navigate(BasicScreenDirections.actionBasicScreenToLanguageScreen())
             }
             R.id.nav_invite_friends -> {
-//                Toast.makeText(requireContext() , "invite friends" , Toast.LENGTH_SHORT).show()
                 val intent = Intent()
                 intent.action = Intent.ACTION_SEND
                 intent.putExtra(Intent.EXTRA_SUBJECT , "Android app")
@@ -119,7 +118,6 @@ class BasicScreen:Fragment(R.layout.screen_basic_nav) ,
 
             }
             R.id.nav_rate_our_app -> {
-//                Toast.makeText(requireContext() , "rate our app" , Toast.LENGTH_SHORT).show()
                 val uri : Uri = Uri.parse("market://details?id=${activity?.packageName}")
                 val goToMarket = Intent(Intent.ACTION_VIEW , uri)
                 goToMarket.addFlags(

@@ -1,16 +1,16 @@
 package uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.google.android.material.tabs.TabLayoutMediator
+import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.LoginUserResponse
@@ -21,20 +21,19 @@ import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.screen
 import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.screensviewmodel.impl.AuthScreenViewModelImpl
 import uz.targetsoftwaredevelopment.myapplication.utils.gone
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
-import uz.targetsoftwaredevelopment.myapplication.utils.showToast
 import uz.targetsoftwaredevelopment.myapplication.utils.visible
 
 @AndroidEntryPoint
-class AuthScreen : Fragment(R.layout.screen_auth) {
+class AuthScreen:Fragment(R.layout.screen_auth) {
     private val binding by viewBinding(ScreenAuthBinding::bind)
-    private val viewModel: AuthScreenViewModel by viewModels<AuthScreenViewModelImpl>()
-    private lateinit var authAdapter: AuthScreenAdapter
-    private var v: Float = 0F
+    private val viewModel : AuthScreenViewModel by viewModels<AuthScreenViewModelImpl>()
+    private lateinit var authAdapter : AuthScreenAdapter
+    private var v : Float = 0F
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view : View , savedInstanceState : Bundle?) = binding.scope {
+        super.onViewCreated(view , savedInstanceState)
 
-        authAdapter = AuthScreenAdapter(childFragmentManager, lifecycle)
+        authAdapter = AuthScreenAdapter(childFragmentManager , lifecycle)
         viewPager.adapter = authAdapter
 
         authAdapter.apply {
@@ -58,35 +57,36 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
             alpha = 0F
         }*/
 
-        TabLayoutMediator(tabLayout, viewPager) { tab, pos ->
-           /* if (pos == 0) {
-                titleLogin.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.main_green
-                    )
-                )
-                titleRegister.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.black
-                    )
-                )
-            } else {
-                titleLogin.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.black
-                    )
-                )
-                titleRegister.setTextColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.main_green
-                    )
-                )
-            }*/
-        }.attach()
+//        TabLayoutMediator(tabLayout , viewPager) { tab , pos ->
+//            tab.text = "Login"
+//            /* if (pos == 0) {
+//                 titleLogin.setTextColor(
+//                     ContextCompat.getColor(
+//                         requireContext(),
+//                         R.color.main_green
+//                     )
+//                 )
+//                 titleRegister.setTextColor(
+//                     ContextCompat.getColor(
+//                         requireContext(),
+//                         R.color.black
+//                     )
+//                 )
+//             } else {
+//                 titleLogin.setTextColor(
+//                     ContextCompat.getColor(
+//                         requireContext(),
+//                         R.color.black
+//                     )
+//                 )
+//                 titleRegister.setTextColor(
+//                     ContextCompat.getColor(
+//                         requireContext(),
+//                         R.color.main_green
+//                     )
+//                 )
+//             }*/
+//        }.attach()
 
         titleLogin.setOnClickListener {
             viewPager.currentItem = 0
@@ -97,14 +97,23 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
 
         cardPlaymarket.apply {
             setOnClickListener {
-                val sendIntent = Intent()
-                sendIntent.action = Intent.ACTION_SEND
-                sendIntent.putExtra(
-                    Intent.EXTRA_TEXT,
-                    "https://play.google.com/store/apps/details?id=com.gamefirst.free.strategy.save.the.earth"
+                val uri : Uri = Uri.parse("market://details?id=${activity?.packageName}")
+                val goToMarket = Intent(Intent.ACTION_VIEW , uri)
+                goToMarket.addFlags(
+                    Intent.FLAG_ACTIVITY_NO_HISTORY or
+                            Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                            Intent.FLAG_ACTIVITY_MULTIPLE_TASK
                 )
-                sendIntent.type = "text/plain"
-                startActivity(sendIntent)
+                try {
+                    startActivity(goToMarket)
+                } catch (e : ActivityNotFoundException) {
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW ,
+                            Uri.parse("http://play.google.com/store/apps/details?id=${activity?.packageName}")
+                        )
+                    )
+                }
             }
             translationY = 300.0F
             alpha = 0F
@@ -115,11 +124,11 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
         cardYouTube.apply {
             setOnClickListener {
                 val uri =
-                    Uri.parse("https://www.youtube.com/watch?v=aTrWtFR_FrQ")
-                val intent = Intent(Intent.ACTION_VIEW, uri)
+                    Uri.parse(getString(R.string.you_tube_video_link))
+                val intent = Intent(Intent.ACTION_VIEW , uri)
                 try {
                     startActivity(intent)
-                } catch (e: Exception) {
+                } catch (e : Exception) {
                 }
             }
             translationY = 300.0F
@@ -131,11 +140,11 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
         cardTelegram.apply {
             setOnClickListener {
                 val uri =
-                    Uri.parse("https://t.me/ecology_problems")
-                val intent = Intent(Intent.ACTION_VIEW, uri)
+                    Uri.parse(getString(R.string.telegram_kanal_link))
+                val intent = Intent(Intent.ACTION_VIEW , uri)
                 try {
                     startActivity(intent)
-                } catch (e: Exception) {
+                } catch (e : Exception) {
                 }
             }
             translationY = 300.0F
@@ -145,15 +154,15 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
         }
 
         viewModel.registerUserResponseLiveData.observe(
-            viewLifecycleOwner,
+            viewLifecycleOwner ,
             registerUserResponseObserver
         )
         viewModel.loginUserResponseLiveData.observe(
-            viewLifecycleOwner,
+            viewLifecycleOwner ,
             loginUserResponseObserver
         )
         viewModel.errorLiveData.observe(
-            viewLifecycleOwner,
+            viewLifecycleOwner ,
             errorObserver
         )
     }
@@ -161,16 +170,19 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
     private val registerUserResponseObserver = Observer<RegisterUserResponse> {
         binding.progressBar.gone()
         binding.progressBar.clearAnimation()
-        showToast("Login")
+//        showToast("Login")
+        FancyToast.makeText(requireContext(),getString(R.string.successfully_registered),FancyToast.LENGTH_LONG,FancyToast.SUCCESS,true).show()
         binding.viewPager.currentItem = 0
     }
     private val loginUserResponseObserver = Observer<LoginUserResponse> {
         binding.progressBar.gone()
         binding.progressBar.clearAnimation()
+        FancyToast.makeText(requireContext(),getString(R.string.successfully_logged_in),FancyToast.LENGTH_LONG,FancyToast.SUCCESS,true).show()
         findNavController().navigate(AuthScreenDirections.actionAuthScreenToBasicScreen())
     }
     private val errorObserver = Observer<String> {
         binding.progressBar.gone()
         binding.progressBar.clearAnimation()
+        FancyToast.makeText(requireContext(),getString(R.string.error_reg_login),FancyToast.LENGTH_LONG,FancyToast.ERROR,true).show()
     }
 }

@@ -7,40 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white2"
     tools:context=".presentation.ui.pages.AllVideoPage">
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        style="@style/MyCustomTabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="5dp"
-        android:visibility="gone"
-        app:tabGravity="fill"
-        app:tabIndicatorAnimationMode="linear"
-        app:tabIndicatorColor="@color/main_green"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/main_green"
-        app:tabTextColor="#8028282C">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="All" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ecology" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Health" />
-
-
-    </com.google.android.material.tabs.TabLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/all_vide_rv"
