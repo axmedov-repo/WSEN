@@ -24,7 +24,6 @@ import uz.targetsoftwaredevelopment.myapplication.presentation.viewmodels.screen
 import uz.targetsoftwaredevelopment.myapplication.utils.CheckInternetReceiver
 import uz.targetsoftwaredevelopment.myapplication.utils.scope
 
-
 @AndroidEntryPoint
 class BasicScreen : Fragment(R.layout.screen_basic_nav),
     NavigationView.OnNavigationItemSelectedListener {
@@ -85,43 +84,48 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-         when(item.itemId){
-            R.id.nav_wish_list->{
-//                findNavController().navigate(R.id.wishPage)
-                Toast.makeText(requireContext() , "wish page" , Toast.LENGTH_SHORT).show()
+        when (item.itemId) {
+            R.id.nav_wish_list -> {
+                findNavController().navigate(BasicScreenDirections.actionBasicScreenToFavouriteVideosScreen())
             }
-            R.id.nav_language->{
-                findNavController().navigate(R.id.languageScreen)
+            R.id.nav_language -> {
+                findNavController().navigate(BasicScreenDirections.actionBasicScreenToLanguageScreen())
             }
-            R.id.nav_invite_friends->{
+            R.id.nav_invite_friends -> {
 //                Toast.makeText(requireContext() , "invite friends" , Toast.LENGTH_SHORT).show()
                 val intent = Intent()
                 intent.action = Intent.ACTION_SEND
-                intent.putExtra(Intent.EXTRA_SUBJECT , "Android app")
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Android app")
                 intent.putExtra(
-                    Intent.EXTRA_TEXT ,
+                    Intent.EXTRA_TEXT,
                     "https://play.google.com/store/apps/details?id=${activity?.packageName}"
                 )
                 intent.type = "text/plain"
                 startActivity(intent)
 
             }
-            R.id.nav_rate_our_app->{
+            R.id.nav_rate_our_app -> {
 //                Toast.makeText(requireContext() , "rate our app" , Toast.LENGTH_SHORT).show()
                 val uri: Uri = Uri.parse("market://details?id=${activity?.packageName}")
                 val goToMarket = Intent(Intent.ACTION_VIEW, uri)
-                goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or
-                        Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
-                        Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                goToMarket.addFlags(
+                    Intent.FLAG_ACTIVITY_NO_HISTORY or
+                            Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                            Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+                )
                 try {
                     startActivity(goToMarket)
                 } catch (e: ActivityNotFoundException) {
-                    startActivity(Intent(Intent.ACTION_VIEW,
-                        Uri.parse("http://play.google.com/store/apps/details?id=${activity?.packageName}")))
+                    startActivity(
+                        Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("http://play.google.com/store/apps/details?id=${activity?.packageName}")
+                        )
+                    )
                 }
             }
-            R.id.nav_logout->{
-                Toast.makeText(requireContext() , "log out" , Toast.LENGTH_SHORT).show()
+            R.id.nav_logout -> {
+                Toast.makeText(requireContext(), "log out", Toast.LENGTH_SHORT).show()
             }
         }
         return true
