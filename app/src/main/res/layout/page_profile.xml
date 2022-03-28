@@ -69,7 +69,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/view_pager_shape"
                 android:hint="@string/name"
-                android:inputType="text"
+                android:inputType="textNoSuggestions"
                 android:padding="5dp"
                 android:textColorHint="#757575" />
 
@@ -90,7 +90,7 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/view_pager_shape"
                 android:hint="@string/surname"
-                android:inputType="text"
+                android:inputType="textNoSuggestions"
                 android:padding="5dp"
                 android:textColorHint="#757575" />
         </com.google.android.material.textfield.TextInputLayout>

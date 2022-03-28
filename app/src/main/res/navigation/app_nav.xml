@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_nav"
     app:startDestination="@id/splashScreen">
+
     <fragment
         android:id="@+id/basicScreen"
         android:name="uz.targetsoftwaredevelopment.wsen.presentation.ui.screens.BasicScreen"
@@ -21,6 +22,9 @@
         <action
             android:id="@+id/action_basicScreen_to_favouriteVideosScreen"
             app:destination="@id/favouriteVideosScreen" />
+        <action
+            android:id="@+id/action_basicScreen_to_authScreen"
+            app:destination="@id/authScreen" />
     </fragment>
     <fragment
         android:id="@+id/splashScreen"

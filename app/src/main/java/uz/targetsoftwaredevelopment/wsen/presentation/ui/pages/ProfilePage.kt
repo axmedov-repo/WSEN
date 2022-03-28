@@ -91,7 +91,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
                 UserData(
                     lastnameEt.text.toString(),
                     if (imageUri != null) {
-                        imageUri.toString()
+                        File(imageUri!!.path!!)
                     } else {
                         null
                     },
@@ -113,8 +113,8 @@ class ProfilePage : Fragment(R.layout.page_profile) {
 
             Glide.with(requireContext())
                 .load(userData.photo)
-                .placeholder(R.drawable.ic_place_holder)
-                .error(R.drawable.ic_error)
+                .placeholder(R.drawable.default_profile_img2)
+                .error(R.drawable.default_profile_img2)
                 .into(profileImg)
 
             usernameTv.text = userData.username
@@ -133,7 +133,13 @@ class ProfilePage : Fragment(R.layout.page_profile) {
             binding.emailEtLayout.isErrorEnabled = true
             binding.emailEtLayout.error = "Email is already exist"
         } else {
-            FancyToast.makeText(requireContext(),errorMessage,FancyToast.LENGTH_LONG, FancyToast.ERROR,true)
+            FancyToast.makeText(
+                requireContext(),
+                errorMessage,
+                FancyToast.LENGTH_LONG,
+                FancyToast.ERROR,
+                true
+            )
                 .show()
         }
     }
@@ -160,7 +166,6 @@ class ProfilePage : Fragment(R.layout.page_profile) {
         }
 
         builder.show()
-
     }
 
     private var getGalleryImage =
@@ -225,7 +230,13 @@ class ProfilePage : Fragment(R.layout.page_profile) {
 
                 }
             }).withErrorListener {
-                FancyToast.makeText(requireContext(),getString(R.string.some_error),FancyToast.LENGTH_LONG,FancyToast.ERROR,true)
+                FancyToast.makeText(
+                    requireContext(),
+                    getString(R.string.some_error),
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.ERROR,
+                    true
+                )
                     .show()
             }
             .onSameThread()
@@ -275,7 +286,13 @@ class ProfilePage : Fragment(R.layout.page_profile) {
                     builderGallery.show()
                 }
             }).withErrorListener {
-                FancyToast.makeText(requireContext(),getString(R.string.some_error),FancyToast.LENGTH_LONG,FancyToast.ERROR,true)
+                FancyToast.makeText(
+                    requireContext(),
+                    getString(R.string.some_error),
+                    FancyToast.LENGTH_LONG,
+                    FancyToast.ERROR,
+                    true
+                )
                     .show()
             }
             .onSameThread()

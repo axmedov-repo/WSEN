@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -33,6 +34,13 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
 
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            })
+
         authAdapter = AuthScreenAdapter(childFragmentManager, lifecycle)
         viewPager.adapter = authAdapter
 
@@ -49,44 +57,6 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
                 viewModel.loginUser(loginData)
             }
         }
-
-        /*tabLayout.apply {
-            addTab(tabLayout.newTab().setText("Login"))
-            addTab(tabLayout.newTab().setText("Register"))
-            tabGravity = TabLayout.GRAVITY_FILL
-            alpha = 0F
-        }*/
-
-//        TabLayoutMediator(tabLayout , viewPager) { tab , pos ->
-//            tab.text = "Login"
-//            /* if (pos == 0) {
-//                 titleLogin.setTextColor(
-//                     ContextCompat.getColor(
-//                         requireContext(),
-//                         R.color.main_green
-//                     )
-//                 )
-//                 titleRegister.setTextColor(
-//                     ContextCompat.getColor(
-//                         requireContext(),
-//                         R.color.black
-//                     )
-//                 )
-//             } else {
-//                 titleLogin.setTextColor(
-//                     ContextCompat.getColor(
-//                         requireContext(),
-//                         R.color.black
-//                     )
-//                 )
-//                 titleRegister.setTextColor(
-//                     ContextCompat.getColor(
-//                         requireContext(),
-//                         R.color.main_green
-//                     )
-//                 )
-//             }*/
-//        }.attach()
 
         titleLogin.setOnClickListener {
             viewPager.currentItem = 0
@@ -192,15 +162,25 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
         ).show()
         findNavController().navigate(AuthScreenDirections.actionAuthScreenToBasicScreen())
     }
-    private val errorObserver = Observer<String> {
+    private val errorObserver = Observer<String> { errorMessage ->
         binding.progressBar.gone()
         binding.progressBar.clearAnimation()
-        FancyToast.makeText(
-            requireContext(),
-            getString(R.string.error_reg_login),
-            FancyToast.LENGTH_LONG,
-            FancyToast.ERROR,
-            true
-        ).show()
+        if (errorMessage.equals(getString(R.string.internet_disconnected))) {
+            FancyToast.makeText(
+                requireContext(),
+                getString(R.string.internet_disconnected),
+                FancyToast.LENGTH_LONG,
+                FancyToast.ERROR,
+                true
+            ).show()
+        } else {
+            FancyToast.makeText(
+                requireContext(),
+                getString(R.string.error_reg_login),
+                FancyToast.LENGTH_LONG,
+                FancyToast.ERROR,
+                true
+            ).show()
+        }
     }
 }

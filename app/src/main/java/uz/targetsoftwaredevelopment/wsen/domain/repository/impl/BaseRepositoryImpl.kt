@@ -1,5 +1,6 @@
 package uz.targetsoftwaredevelopment.wsen.domain.repository.impl
 
+import android.util.Log
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -84,10 +85,13 @@ class BaseRepositoryImpl @Inject constructor(
             }
         }.flowOn(Dispatchers.IO)
 
-    override fun logoutUser(): Flow<Result<String>> = flow<Result<String>> {
+    override fun logoutUser(): Flow<Result<String>> = flow {
         val response = baseApi.logoutUser()
+        Log.d("LOGOUTDDD", "logout repository")
         if (response.isSuccessful) {
             emit(Result.success(response.body()!!))
+            setSplashOpenScreen(SplashOpenScreenTypes.AUTH_SCREEN)
+            Log.d("LOGOUTDDD", "logout repository success ")
         }
     }.flowOn(Dispatchers.IO)
 
