@@ -1,8 +1,8 @@
 package uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -45,13 +45,12 @@ class AllVideoPage : Fragment(R.layout.page_all_video) {
                 }
 
                 override fun onShareClick(videoData: VideoData) {
-//                    val shareIntent: Intent = Intent().apply {
-//                        action = Intent.ACTION_SEND
-//                        putExtra(Intent.EXTRA_STREAM, videoData.title)
-//                        type = "video/mp4"
-//                    }
-//                    startActivity(Intent.createChooser(shareIntent, null))
-                    Toast.makeText(requireContext(), "send", Toast.LENGTH_SHORT).show()
+                    val shareIntent: Intent = Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, videoData.video)
+                        type = "text/plain"
+                    }
+                    startActivity(Intent.createChooser(shareIntent, null))
                 }
 
                 override fun onMenuClick(videoData: VideoData) {
@@ -59,11 +58,11 @@ class AllVideoPage : Fragment(R.layout.page_all_video) {
                     val screenBottomSheetDialogScreen =
                         ScreenBottomSheetDialogBinding.inflate(layoutInflater)
                         bottomSheetDialog.setContentView(screenBottomSheetDialogScreen.root)
+
                         screenBottomSheetDialogScreen.sendReportCv.setOnClickListener {
-                        Toast.makeText(requireContext(), "send request", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                    bottomSheetDialog.show()
+
+                        }
+                        bottomSheetDialog.show()
                 }
 
                 override fun onClickLike(videoData : VideoData) {

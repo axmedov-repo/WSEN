@@ -37,7 +37,7 @@
                     android:id="@+id/etUsername"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Username"
+                    android:hint="@string/username"
                     android:inputType="text"
                     android:textColor="@color/black"
                     android:textColorHint="@color/color_grey" />
@@ -67,7 +67,7 @@
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/black"
                     android:textColorHint="@color/color_grey" />
@@ -97,7 +97,7 @@
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
+                    android:hint="@string/password"
                     android:inputType="numberPassword"
                     android:textColor="@color/black"
                     android:textColorHint="@color/color_grey" />
@@ -127,7 +127,7 @@
                     android:id="@+id/etConfirmPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Confirm password"
+                    android:hint="@string/confirm_password"
                     android:inputType="numberPassword"
                     android:textColor="@color/black"
                     android:textColorHint="@color/color_grey" />
@@ -142,7 +142,7 @@
                 android:layout_marginTop="36dp"
                 android:background="@drawable/btn_bg"
                 android:enabled="false"
-                android:text="Register"
+                android:text="@string/register"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp"

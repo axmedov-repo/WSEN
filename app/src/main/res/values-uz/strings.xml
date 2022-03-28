@@ -16,7 +16,7 @@
     <string name="my_image">Menig rasmlarim</string>
     <string name="location">Joylashuv</string>
     <string name="description">Tavsif</string>
-    <string name="create_title" translatable="false">Saralavha yaratish</string>
+    <string name="create_title">Saralavha yaratish</string>
     <string name="edit_posts">Postni tahrirlash</string>
     <string name="delete_posts">Postni o\'chirish</string>
     <string name="delete">Postni o\'chirish</string>
@@ -51,4 +51,28 @@
     <string name="lang">Til</string>
     <string name="uzbek">O\'zbekcha</string>
     <string name="likes">Likes</string>
+    <string name="home">Asosiy</string>
+    <string name="invite_fiends">Do\'stlaringizni taklif qiling</string>
+    <string name="rate_app">Baho bering</string>
+    <string name="check_your_internet_connection">Internet aloqangizni tekshiring</string>
+    <string name="offline_mode">Oflayn rejim</string>
+    <string name="available_services_in_offline_mode">Oflayn rejimda mavjud xizmatlar</string>
+    <string name="repeat">Takrorlamoq</string>
+    <string name="errorTextEmailExist">ushbu elektron pochta manziliga ega foydalanuvchi allaqachon mavjud.</string>
+    <string name="errorTextLoginOrPassword">Login yoki parol notogri!</string>
+    <string name="errorTextLoginOrPassword2">Xatolik yuzaga keldi</string>
+    <string name="internet_disconnected">Tarmoqqa ulanmagan</string>
+    <string name="error_phone_not_contains_998">+998 must be entered</string>
+    <string name="all_videos">Videolar</string>
+    <string name="login">Tizimga kiish</string>
+    <string name="register">Ro\'yhatdan o\'tish</string>
+    <string name="successfully_registered">Muvaffaqiyatli roʻyxatdan oʻtkazildi</string>
+    <string name="successfully_logged_in">Muvaffaqiyatli tizimga kirildi</string>
+    <string name="error_reg_login">Ro\'yxatdan o\'tish yoki kirishda xato</string>
+    <string name="title">Saralavha</string>
+    <string name="begin">Boshlamoq</string>
+    <string name="password_is_incorrect">Parol noto\'g\'ri</string>
+    <string name="forget_password">Parolni unutdingizmi</string>
+    <string name="favorite">Sevimlilar</string>
+    <string name="my_videos">Videolarim</string>
 </resources>

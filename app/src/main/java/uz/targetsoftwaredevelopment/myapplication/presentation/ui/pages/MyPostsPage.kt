@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.R
 import uz.targetsoftwaredevelopment.myapplication.data.remote.responses.VideoData
@@ -58,13 +59,13 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
 
                     dialogDeleteBinding.apply {
                         cancelPostsCv.setOnClickListener {
-                            Toast.makeText(requireContext(), "cancel", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), getString(R.string.cancel), Toast.LENGTH_SHORT).show()
                             deleteBuilder.cancel()
                         }
 
                         deletePostCv.setOnClickListener {
                             // bu yerga postni ochirish kodi yoziladi
-                            Toast.makeText(requireContext(), "delete post", Toast.LENGTH_SHORT)
+                            Toast.makeText(requireContext(), getString(R.string.delete_posts), Toast.LENGTH_SHORT)
                                 .show()
                             deleteBuilder.cancel()
                         }
@@ -91,11 +92,9 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
     }
 
     private val errorObserver = Observer<String> { errorMessage ->
-        // TODO : HUMOYUN AKA, errorni toast qilish kerak
-        if (errorMessage.equals(getString(R.string.internet_disconnected))) {
-            // error internet yo'q bo'ladi bu yerda, screen ochiladi
-        } else {
-            // errorMessage ni chiqarib qo'ya qoling
+        if (errorMessage.equals(getString(R.string.internet_disconnected))) {}
+        else {
+            FancyToast.makeText(requireContext(),errorMessage,FancyToast.LENGTH_LONG, FancyToast.WARNING,true).show()
         }
     }
 }

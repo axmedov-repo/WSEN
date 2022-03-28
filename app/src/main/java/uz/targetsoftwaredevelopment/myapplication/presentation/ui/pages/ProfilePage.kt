@@ -8,7 +8,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -26,6 +25,7 @@ import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
+import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.myapplication.BuildConfig
 import uz.targetsoftwaredevelopment.myapplication.R
@@ -112,7 +112,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
     private val getUserDataObserver = Observer<UserData> { userData ->
         binding.apply {
 
-            Glide.with(profileImg.context)
+            Glide.with(requireContext())
                 .load(userData.photo)
                 .placeholder(R.drawable.ic_place_holder)
                 .error(R.drawable.ic_error)
@@ -134,7 +134,8 @@ class ProfilePage : Fragment(R.layout.page_profile) {
             binding.emailEtLayout.isErrorEnabled = true
             binding.emailEtLayout.error = "Email is already exist"
         } else {
-            // TODO: HUMOYUN AKA, errorni toast orqali chiqarish kerak
+            FancyToast.makeText(requireContext(),errorMessage,FancyToast.LENGTH_LONG, FancyToast.ERROR,true)
+                .show()
         }
     }
 
@@ -182,8 +183,6 @@ class ProfilePage : Fragment(R.layout.page_profile) {
             .withPermission(Manifest.permission.CAMERA)
             .withListener(object : PermissionListener {
                 override fun onPermissionGranted(permission: PermissionGrantedResponse?) {
-                    Toast.makeText(requireContext(), "Allowed", Toast.LENGTH_SHORT).show()
-
                     //open camera
                     val imageFile = createImageFile()
                     imageUri = FileProvider.getUriForFile(
@@ -195,7 +194,6 @@ class ProfilePage : Fragment(R.layout.page_profile) {
 
 
                 override fun onPermissionDenied(response: PermissionDeniedResponse) {
-                    Toast.makeText(requireContext(), "Deny", Toast.LENGTH_SHORT).show()
                     if (response.isPermanentlyDenied) {
                         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                         val uri: Uri = Uri.fromParts("package", activity?.packageName, null)
@@ -209,7 +207,6 @@ class ProfilePage : Fragment(R.layout.page_profile) {
                     request: PermissionRequest?,
                     token: PermissionToken?
                 ) {
-                    Toast.makeText(requireContext(), "Beshown", Toast.LENGTH_SHORT).show()
                     val dialogCamera = AlertDialog.Builder(requireContext())
                     val dialogPermissionBinding = DialogPermissionBinding.inflate(layoutInflater)
                     dialogCamera.setView(dialogPermissionBinding.root)
@@ -229,7 +226,8 @@ class ProfilePage : Fragment(R.layout.page_profile) {
 
                 }
             }).withErrorListener {
-                Toast.makeText(requireContext(), "Some Error! ", Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(requireContext(),getString(R.string.some_error),FancyToast.LENGTH_LONG,FancyToast.ERROR,true)
+                    .show()
             }
             .onSameThread()
             .check()
@@ -242,15 +240,12 @@ class ProfilePage : Fragment(R.layout.page_profile) {
             .withPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
             .withListener(object : PermissionListener {
                 override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                    Toast.makeText(requireContext(), "Allowed", Toast.LENGTH_SHORT).show()
-
                     // open gallery
                     getGalleryImage.launch("image/*")
 
                 }
 
                 override fun onPermissionDenied(response: PermissionDeniedResponse) {
-                    Toast.makeText(requireContext(), "Deny", Toast.LENGTH_SHORT).show()
                     if (response.isPermanentlyDenied) {
                         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                         val uri: Uri = Uri.fromParts("package", activity?.packageName, null)
@@ -281,7 +276,8 @@ class ProfilePage : Fragment(R.layout.page_profile) {
                     builderGallery.show()
                 }
             }).withErrorListener {
-                Toast.makeText(requireContext(), "Some Error! ", Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(requireContext(),getString(R.string.some_error),FancyToast.LENGTH_LONG,FancyToast.ERROR,true)
+                    .show()
             }
             .onSameThread()
             .check()
@@ -291,7 +287,6 @@ class ProfilePage : Fragment(R.layout.page_profile) {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_CANCELED) {
-            Log.d("what", "cancle")
             return
         }
         if (requestCode == OLD_REQUEST_CODE && resultCode == AppCompatActivity.RESULT_OK) {
@@ -307,7 +302,6 @@ class ProfilePage : Fragment(R.layout.page_profile) {
 
         if (requestCode == CAMERA_REQUEST_CODE && resultCode == AppCompatActivity.RESULT_OK) {
             if (::currentImagePath.isInitialized) {
-//                Log.d(TAG, "onActivityResult: $currentImagePath")
                 binding.profileImg.setImageURI(Uri.fromFile(File(currentImagePath)))
             }
         }
@@ -326,7 +320,6 @@ class ProfilePage : Fragment(R.layout.page_profile) {
     private var takePhoto =
         registerForActivityResult(ActivityResultContracts.TakePicture()) {
             if (it) {
-//                Log.d(TAG, "File: $uri")
                 binding.profileImg.setImageURI(imageUri)
             }
         }
