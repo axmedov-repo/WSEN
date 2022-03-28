@@ -59,17 +59,7 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
                     )
                 )
             }
-
-            requireActivity().onBackPressedDispatcher
-                .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-                    override fun handleOnBackPressed() {
-                        if (drawerLayout.isOpen) {
-                            drawerLayout.closeDrawer(GravityCompat.START)
-                        } else {
-                            findNavController().popBackStack()
-                        }
-                    }
-                })
+        }
 
             innerLayout.apply {
                 pager.adapter = adapter
@@ -91,10 +81,20 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
                 }
             }
 
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (drawerLayout.isOpen) {
+                        drawerLayout.closeDrawer(GravityCompat.START)
+                    } else {
+                        findNavController().popBackStack()
+                    }
+                }
+            })
+
             if (navigationView != null) {
                 navigationView.setNavigationItemSelectedListener(this@BasicScreen)
             }
-        }
 
         viewModel.logoutUserResponseLiveData.observe(viewLifecycleOwner, logoutUserObserver)
         viewModel.errorLiveData.observe(viewLifecycleOwner, errorObserver)

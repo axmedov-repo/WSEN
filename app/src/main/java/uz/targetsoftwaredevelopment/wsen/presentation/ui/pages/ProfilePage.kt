@@ -49,7 +49,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
     var OLD_REQUEST_CODE = 1
     var CAMERA_REQUEST_CODE = 1
     lateinit var currentImagePath: String
-    var imageUri: Uri? = null
+    lateinit var imageUri: Uri
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
@@ -166,6 +166,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
         }
 
         builder.show()
+
     }
 
     private var getGalleryImage =
