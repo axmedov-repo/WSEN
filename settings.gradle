@@ -19,6 +19,5 @@ dependencyResolutionManagement {
 
 }
 
-
-rootProject.name = "UzVolunteers"
+rootProject.name = "wsen"
 include ':app'
