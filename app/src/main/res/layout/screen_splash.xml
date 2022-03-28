@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.screens.SplashScreen">
+    tools:context="uz.targetsoftwaredevelopment.wsen.presentation.ui.screens.SplashScreen">
 
     <ImageView
         android:id="@+id/wsen_logo"

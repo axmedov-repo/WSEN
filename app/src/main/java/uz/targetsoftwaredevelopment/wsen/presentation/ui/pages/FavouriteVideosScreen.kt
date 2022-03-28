@@ -10,8 +10,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.wsen.R
-import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.wsen.databinding.ScreenFavouriteVideosBinding
+import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.wsen.presentation.ui.adapters.MyWishAdapter
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.WishPageViewModel
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.impl.WishPageViewModelImpl
