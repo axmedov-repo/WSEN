@@ -73,7 +73,7 @@
         tools:layout="@layout/screen_language" />
     <fragment
         android:id="@+id/favouriteVideosScreen"
-        android:name="uz.targetsoftwaredevelopment.wsen.presentation.ui.pages.ContributeVideosScreen"
+        android:name="uz.targetsoftwaredevelopment.wsen.presentation.ui.screens.ContributeVideosScreen"
         android:label="screen_favourite_videos"
         tools:layout="@layout/screen_contribute_videos">
         <action

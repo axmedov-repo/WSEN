@@ -1,4 +1,4 @@
-package uz.targetsoftwaredevelopment.wsen.presentation.ui.pages
+package uz.targetsoftwaredevelopment.wsen.presentation.ui.screens
 
 import android.os.Bundle
 import android.view.View
