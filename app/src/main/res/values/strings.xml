@@ -65,6 +65,7 @@
     <string name="wsen" translatable="false">WSEN</string>
 
     <string name="errorTextEmailExist">user with this Email address already exists.</string>
+    <string name="errorTextUsernameExist" translatable="false">user with this Email address already exists.</string>
     <string name="errorTextLoginOrPassword">Login yoki parol notogri!</string>
     <string name="errorTextLoginOrPassword2">Xatolik yuzaga keldi</string>
     <string name="internet_disconnected">Tarmoqqa ulanmagan</string>

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import uz.targetsoftwaredevelopment.wsen.R
 import uz.targetsoftwaredevelopment.wsen.data.remote.requests.LoginUserRequest
 import uz.targetsoftwaredevelopment.wsen.data.remote.requests.RegisterUserRequest
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.LoginUserResponse
@@ -34,7 +35,7 @@ class AuthScreenViewModelImpl @Inject constructor(private val baseRepository: Ba
                 }
             }.launchIn(viewModelScope)
         } else {
-            errorLiveData.value = "Internet ga ulanmagan!"
+            errorLiveData.value = "${R.string.internet_disconnected}"
         }
     }
 
@@ -50,7 +51,7 @@ class AuthScreenViewModelImpl @Inject constructor(private val baseRepository: Ba
                 }
             }.launchIn(viewModelScope)
         } else {
-            errorLiveData.value = "Internet ga ulanmagan!"
+            errorLiveData.value = "${R.string.internet_disconnected}"
         }
     }
 }

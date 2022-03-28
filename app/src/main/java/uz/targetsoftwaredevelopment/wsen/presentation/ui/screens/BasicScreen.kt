@@ -12,9 +12,11 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.navigation.NavigationView
+import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.wsen.R
 import uz.targetsoftwaredevelopment.wsen.databinding.ScreenBasicNavBinding
@@ -64,7 +66,7 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
                         if (drawerLayout.isOpen) {
                             drawerLayout.closeDrawer(GravityCompat.START)
                         } else {
-                            requireActivity().finish()
+                            findNavController().popBackStack()
                         }
                     }
                 })
@@ -92,6 +94,22 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
             if (navigationView != null) {
                 navigationView.setNavigationItemSelectedListener(this@BasicScreen)
             }
+        }
+
+        viewModel.logoutUserResponseLiveData.observe(viewLifecycleOwner, logoutUserObserver)
+        viewModel.errorLiveData.observe(viewLifecycleOwner, errorObserver)
+    }
+
+    private val logoutUserObserver = Observer<String> {
+        findNavController().navigate(BasicScreenDirections.actionBasicScreenToAuthScreen())
+    }
+    private val errorObserver = Observer<String> { errorMessage ->
+        if (errorMessage.equals(getString(R.string.internet_disconnected))) {
+        } else {
+            FancyToast.makeText(
+                requireContext(), errorMessage,
+                FancyToast.LENGTH_LONG, FancyToast.WARNING, true
+            ).show()
         }
     }
 

@@ -40,6 +40,7 @@ class RegisterPage : Fragment(R.layout.page_register) {
                 setStartDelay(500).start()
             }
             addTextChangedListener {
+                usernameEditTextLayout.isErrorEnabled = false
                 it?.let {
                     isReadyUsername = it.isNotEmpty()
                     check()
@@ -125,6 +126,9 @@ class RegisterPage : Fragment(R.layout.page_register) {
         if (errorMessage.equals(getString(R.string.errorTextEmailExist))) {
             binding.emailEditTextLayout.isErrorEnabled = true
             binding.emailEditTextLayout.error = "Email is already exist"
+        }else  if (errorMessage.equals(getString(R.string.errorTextUsernameExist))) {
+            binding.usernameEditTextLayout.isErrorEnabled = true
+            binding.usernameEditTextLayout.error = "Username is already exist"
         }
     }
 
