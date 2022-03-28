@@ -41,7 +41,7 @@ interface BaseApi {
     suspend fun getMyVideo(@Url url: String): Response<VideoData>
 
     @GET("api/my-post/")
-    suspend fun getAllMyVideos() : Response<AllMyVideosResponse>
+    suspend fun getAllMyVideos(): Response<AllMyVideosResponse>
 
     // api/my-post/<int:post_id>/
     @DELETE
