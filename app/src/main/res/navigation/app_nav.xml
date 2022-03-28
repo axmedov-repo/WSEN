@@ -6,7 +6,7 @@
     app:startDestination="@id/splashScreen">
     <fragment
         android:id="@+id/basicScreen"
-        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.BasicScreen"
+        android:name="uz.targetsoftwaredevelopment.wsen.presentation.ui.screens.BasicScreen"
         android:label="screen_basic_nav"
         tools:layout="@layout/screen_basic_nav">
         <action
@@ -24,55 +24,54 @@
     </fragment>
     <fragment
         android:id="@+id/splashScreen"
-        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.SplashScreen"
+        android:name="uz.targetsoftwaredevelopment.wsen.presentation.ui.screens.SplashScreen"
         android:label="screen_splash"
-        tools:layout="@layout/screen_splash" >
+        tools:layout="@layout/screen_splash">
         <action
             android:id="@+id/action_splashScreen_to_basicScreen"
-            app:destination="@id/basicScreen"
-            />
+            app:destination="@id/basicScreen" />
         <action
             android:id="@+id/action_splashScreen_to_authScreen"
             app:destination="@id/authScreen" />
     </fragment>
     <fragment
         android:id="@+id/authScreen"
-        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.AuthScreen"
+        android:name="uz.targetsoftwaredevelopment.wsen.presentation.ui.screens.AuthScreen"
         android:label="screen_auth"
-        tools:layout="@layout/screen_auth" >
+        tools:layout="@layout/screen_auth">
         <action
             android:id="@+id/action_authScreen_to_basicScreen"
             app:destination="@id/basicScreen" />
     </fragment>
     <fragment
         android:id="@+id/editVideoScreen"
-        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.EditVideoScreen"
+        android:name="uz.targetsoftwaredevelopment.wsen.presentation.ui.screens.EditVideoScreen"
         android:label="screen_edit_video"
-        tools:layout="@layout/screen_edit_video" >
+        tools:layout="@layout/screen_edit_video">
         <argument
             android:name="VideoData"
-            app:argType="uz.targetsoftwaredevelopment.myapplication.data.remote.responses.VideoData" />
+            app:argType="uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData" />
     </fragment>
     <fragment
         android:id="@+id/watchVideoScreen"
-        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.WatchVideoScreen"
+        android:name="uz.targetsoftwaredevelopment.wsen.presentation.ui.screens.WatchVideoScreen"
         android:label="screen_watch_video"
-        tools:layout="@layout/screen_watch_video" >
+        tools:layout="@layout/screen_watch_video">
         <argument
             android:name="VideoData"
-            app:argType="uz.targetsoftwaredevelopment.myapplication.data.remote.responses.VideoData" />
+            app:argType="uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData" />
     </fragment>
 
     <fragment
         android:id="@+id/languageScreen"
-        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.screens.LanguageScreen"
+        android:name="uz.targetsoftwaredevelopment.wsen.presentation.ui.screens.LanguageScreen"
         android:label="LanguageScreen"
         tools:layout="@layout/screen_language" />
     <fragment
         android:id="@+id/favouriteVideosScreen"
-        android:name="uz.targetsoftwaredevelopment.myapplication.presentation.ui.pages.FavouriteVideosScreen"
+        android:name="uz.targetsoftwaredevelopment.wsen.presentation.ui.pages.FavouriteVideosScreen"
         android:label="screen_favourite_videos"
-        tools:layout="@layout/screen_favourite_videos" >
+        tools:layout="@layout/screen_favourite_videos">
         <action
             android:id="@+id/action_favouriteVideosScreen_to_watchVideoScreen"
             app:destination="@id/watchVideoScreen" />

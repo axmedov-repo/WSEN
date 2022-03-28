@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         resConfigs("en","uz")
-        applicationId "uz.targetsoftwaredevelopment.myapplication"
+        applicationId "uz.targetsoftwaredevelopment.wsen"
         minSdk 25
         targetSdk 32
         renderscriptTargetApi 19

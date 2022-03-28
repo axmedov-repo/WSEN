@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="uz.targetsoftwaredevelopment.myapplication">
+    package="uz.targetsoftwaredevelopment.wsen">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,7 +14,7 @@
         android:name="android.hardware.camera2"
         android:required="true" />
     <application
-        android:name=".app.App"
+        android:name="uz.targetsoftwaredevelopment.wsen.app.App"
         android:allowBackup="true"
         android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
@@ -34,7 +34,7 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name=".presentation.MainActivity"
+            android:name="uz.targetsoftwaredevelopment.wsen.presentation.MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"
