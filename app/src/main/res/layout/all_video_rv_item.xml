@@ -17,7 +17,6 @@
         android:src="@drawable/default_profile_img"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/account_name_tv"
         android:layout_width="0dp"
@@ -32,8 +31,6 @@
         app:layout_constraintRight_toLeftOf="@id/three_dots_tv"
         app:layout_constraintTop_toTopOf="@id/account_img"
         app:layout_constraintVertical_chainStyle="packed" />
-
-
     <TextView
         android:id="@+id/date_tv"
         android:layout_width="0dp"
@@ -46,7 +43,6 @@
         app:layout_constraintLeft_toRightOf="@id/account_img"
         app:layout_constraintRight_toLeftOf="@id/three_dots_tv"
         app:layout_constraintTop_toBottomOf="@id/account_name_tv" />
-
     <View
         android:id="@+id/item_status_color"
         android:layout_width="8dp"
@@ -55,8 +51,6 @@
         app:layout_constraintBottom_toBottomOf="@id/account_img"
         app:layout_constraintRight_toLeftOf="@id/three_dots_tv"
         app:layout_constraintTop_toTopOf="@id/account_img" />
-
-
     <TextView
         android:id="@+id/three_dots_tv"
         android:layout_width="wrap_content"
@@ -69,8 +63,6 @@
         app:layout_constraintBottom_toBottomOf="@id/account_img"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/account_img" />
-
-
     <androidx.cardview.widget.CardView
         android:id="@+id/video_img"
         android:layout_width="match_parent"
@@ -98,7 +90,6 @@
             android:scaleType="centerCrop"
             android:src="@drawable/ic_play_circle" />
     </androidx.cardview.widget.CardView>
-
     <ImageView
         android:id="@+id/share_video_img"
         android:layout_width="32dp"
@@ -109,7 +100,6 @@
         android:src="@drawable/ic_send"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/video_img" />
-
     <ImageView
         android:id="@+id/unlike_video_img"
         android:layout_width="32dp"
@@ -120,8 +110,6 @@
         android:src="@drawable/ic_heart_unlike"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/video_img" />
-
-
     <TextView
         android:id="@+id/watch_tv"
         android:layout_width="wrap_content"
@@ -135,7 +123,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/unlike_video_img" />
-
     <TextView
         android:id="@+id/all_videos_item_title_tv"
         android:layout_width="match_parent"
@@ -150,7 +137,6 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/unlike_video_img" />
-
     <TextView
         android:id="@+id/all_videos_item_address_video_tv"
         android:layout_width="match_parent"

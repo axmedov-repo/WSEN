@@ -76,4 +76,8 @@
     <string name="favorite">Sevimlilar</string>
     <string name="my_videos">Videolarim</string>
     <string name="per_error">Ruxsat berishda xatolik</string>
+    <string name="fav_videos">Sevimli videolar</string>
+    <string name="contribute_videos">Hissa qo\'shadigan videolar</string>
+    <string name="contribute">Hissa qo\'shilganlarim</string>
+    <string name="not_contributed">Siz hali birorta ham\nhissa qo\'shmadingiz</string>
 </resources>
