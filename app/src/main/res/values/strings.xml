@@ -88,4 +88,5 @@
     <string name="password_is_incorrect">Password is incorrect</string>
     <string name="forget_password">Forget password</string>
     <string name="favorite">Favorite</string>
+    <string name="per_error">Permission Error</string>
 </resources>

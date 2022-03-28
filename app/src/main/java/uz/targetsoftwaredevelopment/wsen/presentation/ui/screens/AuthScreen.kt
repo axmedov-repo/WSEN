@@ -24,16 +24,16 @@ import uz.targetsoftwaredevelopment.wsen.utils.scope
 import uz.targetsoftwaredevelopment.wsen.utils.visible
 
 @AndroidEntryPoint
-class AuthScreen : Fragment(R.layout.screen_auth) {
+class AuthScreen:Fragment(R.layout.screen_auth) {
     private val binding by viewBinding(ScreenAuthBinding::bind)
-    private val viewModel: AuthScreenViewModel by viewModels<AuthScreenViewModelImpl>()
-    private lateinit var authAdapter: AuthScreenAdapter
-    private var v: Float = 0F
+    private val viewModel : AuthScreenViewModel by viewModels<AuthScreenViewModelImpl>()
+    private lateinit var authAdapter : AuthScreenAdapter
+    private var v : Float = 0F
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view : View , savedInstanceState : Bundle?) = binding.scope {
+        super.onViewCreated(view , savedInstanceState)
 
-        authAdapter = AuthScreenAdapter(childFragmentManager, lifecycle)
+        authAdapter = AuthScreenAdapter(childFragmentManager , lifecycle)
         viewPager.adapter = authAdapter
 
         authAdapter.apply {
@@ -97,8 +97,8 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
 
         cardPlaymarket.apply {
             setOnClickListener {
-                val uri: Uri = Uri.parse("market://details?id=${activity?.packageName}")
-                val goToMarket = Intent(Intent.ACTION_VIEW, uri)
+                val uri : Uri = Uri.parse("market://details?id=${activity?.packageName}")
+                val goToMarket = Intent(Intent.ACTION_VIEW , uri)
                 goToMarket.addFlags(
                     Intent.FLAG_ACTIVITY_NO_HISTORY or
                             Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
@@ -106,10 +106,10 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
                 )
                 try {
                     startActivity(goToMarket)
-                } catch (e: ActivityNotFoundException) {
+                } catch (e : ActivityNotFoundException) {
                     startActivity(
                         Intent(
-                            Intent.ACTION_VIEW,
+                            Intent.ACTION_VIEW ,
                             Uri.parse("http://play.google.com/store/apps/details?id=${activity?.packageName}")
                         )
                     )
@@ -125,10 +125,10 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
             setOnClickListener {
                 val uri =
                     Uri.parse(getString(R.string.you_tube_video_link))
-                val intent = Intent(Intent.ACTION_VIEW, uri)
+                val intent = Intent(Intent.ACTION_VIEW , uri)
                 try {
                     startActivity(intent)
-                } catch (e: Exception) {
+                } catch (e : Exception) {
                 }
             }
             translationY = 300.0F
@@ -141,10 +141,10 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
             setOnClickListener {
                 val uri =
                     Uri.parse(getString(R.string.telegram_kanal_link))
-                val intent = Intent(Intent.ACTION_VIEW, uri)
+                val intent = Intent(Intent.ACTION_VIEW , uri)
                 try {
                     startActivity(intent)
-                } catch (e: Exception) {
+                } catch (e : Exception) {
                 }
             }
             translationY = 300.0F
@@ -154,15 +154,15 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
         }
 
         viewModel.registerUserResponseLiveData.observe(
-            viewLifecycleOwner,
+            viewLifecycleOwner ,
             registerUserResponseObserver
         )
         viewModel.loginUserResponseLiveData.observe(
-            viewLifecycleOwner,
+            viewLifecycleOwner ,
             loginUserResponseObserver
         )
         viewModel.errorLiveData.observe(
-            viewLifecycleOwner,
+            viewLifecycleOwner ,
             errorObserver
         )
     }
@@ -172,10 +172,10 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
         binding.progressBar.clearAnimation()
 //        showToast("Login")
         FancyToast.makeText(
-            requireContext(),
-            getString(R.string.successfully_registered),
-            FancyToast.LENGTH_LONG,
-            FancyToast.SUCCESS,
+            requireContext() ,
+            getString(R.string.successfully_registered) ,
+            FancyToast.LENGTH_LONG ,
+            FancyToast.SUCCESS ,
             true
         ).show()
         binding.viewPager.currentItem = 0
@@ -184,10 +184,10 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
         binding.progressBar.gone()
         binding.progressBar.clearAnimation()
         FancyToast.makeText(
-            requireContext(),
-            getString(R.string.successfully_logged_in),
-            FancyToast.LENGTH_LONG,
-            FancyToast.SUCCESS,
+            requireContext() ,
+            getString(R.string.successfully_logged_in) ,
+            FancyToast.LENGTH_LONG ,
+            FancyToast.SUCCESS ,
             true
         ).show()
         findNavController().navigate(AuthScreenDirections.actionAuthScreenToBasicScreen())
@@ -196,10 +196,10 @@ class AuthScreen : Fragment(R.layout.screen_auth) {
         binding.progressBar.gone()
         binding.progressBar.clearAnimation()
         FancyToast.makeText(
-            requireContext(),
-            getString(R.string.error_reg_login),
-            FancyToast.LENGTH_LONG,
-            FancyToast.ERROR,
+            requireContext() ,
+            getString(R.string.error_reg_login) ,
+            FancyToast.LENGTH_LONG ,
+            FancyToast.ERROR ,
             true
         ).show()
     }

@@ -13,29 +13,32 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import uz.targetsoftwaredevelopment.wsen.R
-import uz.targetsoftwaredevelopment.wsen.data.enums.SplashOpenScreenTypes
 import uz.targetsoftwaredevelopment.wsen.databinding.ScreenSplashBinding
+import uz.targetsoftwaredevelopment.wsen.data.enums.SplashOpenScreenTypes
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.screensviewmodel.SplashScreenViewModel
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.screensviewmodel.impl.SplashScreenViewModelImpl
 import uz.targetsoftwaredevelopment.wsen.utils.scope
 
 @SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
-class SplashScreen : Fragment(R.layout.screen_splash) {
+class SplashScreen:Fragment(R.layout.screen_splash) {
     private val binding by viewBinding(ScreenSplashBinding::bind)
-    private val viewModel: SplashScreenViewModel by viewModels<SplashScreenViewModelImpl>()
+    private val viewModel : SplashScreenViewModel by viewModels<SplashScreenViewModelImpl>()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view : View , savedInstanceState : Bundle?) = binding.scope {
+        super.onViewCreated(view , savedInstanceState)
         lifecycleScope.launchWhenResumed {
             delay(2000L)
-            viewModel.splashOpenScreenLiveData.observe(viewLifecycleOwner, splashOpenScreenObserver)
+            viewModel.splashOpenScreenLiveData.observe(
+                viewLifecycleOwner ,
+                splashOpenScreenObserver
+            )
             viewModel.getSplashOpenScreen()
         }
 
         wsenLogo.startAnimation(
             AnimationUtils.loadAnimation(
-                requireContext(),
+                requireContext() ,
                 R.anim.slide_in_bottom
             )
         )
