@@ -22,8 +22,8 @@ class BaseRepositoryImpl @Inject constructor(
 ) : BaseRepository {
     private val gson = Gson()
 
-    private var registerErrorListener: ((String) -> Unit)? = null
-    override fun setRegisterErrorListener(f: (String) -> Unit) {
+    private var registerErrorListener: ((List<String>) -> Unit)? = null
+    override fun setRegisterErrorListener(f: (List<String>) -> Unit) {
         registerErrorListener = f
     }
 
@@ -50,15 +50,17 @@ class BaseRepositoryImpl @Inject constructor(
             if (response.isSuccessful) {
                 emit(Result.success(response.body()))
             } else {
-                var message = "Xatolik yuzaga keldi"
-                response.errorBody()?.let {
-                    message = gson.fromJson(
+                var errorKeysList: List<String> = ArrayList()
+                /*response.errorBody()?.let {
+                    errorKeysList = gson.fromJson(
                         it.string(),
-                        ErrorEmailResponse::class.java
-                    ).email?.get(0).toString()
-                }
-                registerErrorListener?.invoke(message)
-                emit(Result.failure(Throwable(message)))
+                        ErrorRegisterResponse::class.java
+                    ).errorsDictionary.keys().toList()
+
+                    registerErrorListener?.invoke(errorKeysList)
+
+                }*/
+                emit(Result.failure(Throwable("bad")))
             }
         }.flowOn(Dispatchers.IO)
 
@@ -85,7 +87,7 @@ class BaseRepositoryImpl @Inject constructor(
             }
         }.flowOn(Dispatchers.IO)
 
-    override fun logoutUser(): Flow<Result<String>> = flow {
+    override fun logoutUser(): Flow<Result<LogoutResponse>> = flow {
         val response = baseApi.logoutUser()
         Log.d("LOGOUTDDD", "logout repository")
         if (response.isSuccessful) {
@@ -97,7 +99,7 @@ class BaseRepositoryImpl @Inject constructor(
 
     override fun getMainPageData(): Flow<Result<MainPageDataResponse?>> =
         flow {
-            val response = baseApi.getMainPageData()
+            val response = baseApi.getMainPageData(localStorage.token)
             if (response.isSuccessful) {
                 emit(Result.success(response.body()))
             }
@@ -105,7 +107,7 @@ class BaseRepositoryImpl @Inject constructor(
 
     override fun getAllVideos(): Flow<Result<List<VideoData?>?>> =
         flow {
-            val response = baseApi.getAllVideos()
+            val response = baseApi.getAllVideos(localStorage.token)
             if (response.isSuccessful) {
                 emit(Result.success(response.body()?.results))
             }
@@ -113,7 +115,7 @@ class BaseRepositoryImpl @Inject constructor(
 
     override fun addVideo(data: AddVideoRequest): Flow<Result<AddVideoResponse?>> =
         flow {
-            val response = baseApi.addVideo(data)
+            val response = baseApi.addVideo(localStorage.token, data)
             if (response.isSuccessful) {
                 emit(Result.success(response.body()))
             }
@@ -121,7 +123,10 @@ class BaseRepositoryImpl @Inject constructor(
 
     override fun getUserData(): Flow<Result<UserData>> = flow {
         val response =
-            baseApi.getUserData("${safeStorage.base_url}client/me/${localStorage.userId}/")
+            baseApi.getUserData(
+                localStorage.token,
+                "${safeStorage.base_url}client/me/${localStorage.userId}/"
+            )
         if (response.isSuccessful) {
             emit(Result.success(response.body()!!))
         }
@@ -137,6 +142,7 @@ class BaseRepositoryImpl @Inject constructor(
 
     override fun editUserData(userData: UserData): Flow<Result<UserData>> = flow {
         val response = baseApi.editUserData(
+            localStorage.token,
             "${safeStorage.base_url}client/me/${localStorage.userId}/",
             userData
         )
@@ -146,7 +152,7 @@ class BaseRepositoryImpl @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     override fun getAllMyVideos(): Flow<Result<List<VideoData?>>> = flow {
-        val response = baseApi.getAllMyVideos()
+        val response = baseApi.getAllMyVideos(localStorage.token)
         if (response.isSuccessful) {
             emit(Result.success(response.body()!!.results!!))
         }
@@ -154,21 +160,28 @@ class BaseRepositoryImpl @Inject constructor(
 
     override fun editMyVideo(videoData: EditVideoRequest): Flow<Result<EditVideoResponse>> = flow {
         val response =
-            baseApi.editMyVideo("${safeStorage.base_url}api/my-post/${videoData.id}/", videoData)
+            baseApi.editMyVideo(
+                localStorage.token,
+                "${safeStorage.base_url}api/my-post/${videoData.id}/",
+                videoData
+            )
         if (response.isSuccessful) {
             emit(Result.success(response.body()!!))
         }
     }.flowOn(Dispatchers.IO)
 
     override fun getAllFavouriteVideos(): Flow<Result<AllFavouriteVideosResponse>> = flow {
-        val response = baseApi.getAllFavouriteVideos()
+        val response = baseApi.getAllFavouriteVideos(localStorage.token)
         if (response.isSuccessful) {
             emit(Result.success(response.body()!!))
         }
     }.flowOn(Dispatchers.IO)
 
     override fun changeLike(videoData: VideoData): Flow<Result<LikeVideoResponse>> = flow {
-        val response = baseApi.likeVideo("${safeStorage.base_url}api/wish-event/${videoData.id}/")
+        val response = baseApi.likeVideo(
+            localStorage.token,
+            "${safeStorage.base_url}api/wish-event/${videoData.id}/"
+        )
         if (response.isSuccessful) {
             emit(Result.success(response.body()!!))
         }

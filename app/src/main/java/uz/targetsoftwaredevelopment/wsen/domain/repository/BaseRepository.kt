@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import uz.targetsoftwaredevelopment.wsen.data.enums.SplashOpenScreenTypes
 import uz.targetsoftwaredevelopment.wsen.data.remote.requests.*
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.*
+import java.util.*
 
 interface BaseRepository {
 
@@ -15,7 +16,7 @@ interface BaseRepository {
 
     fun loginUser(data: LoginUserRequest): Flow<Result<LoginUserResponse?>>
 
-    fun logoutUser(): Flow<Result<String>>
+    fun logoutUser(): Flow<Result<LogoutResponse>>
 
     fun getMainPageData(): Flow<Result<MainPageDataResponse?>>
 
@@ -23,7 +24,7 @@ interface BaseRepository {
 
     fun addVideo(data: AddVideoRequest): Flow<Result<AddVideoResponse?>>
 
-    fun setRegisterErrorListener(f: (String) -> Unit)
+    fun setRegisterErrorListener(f: (List<String>) -> Unit)
 
     fun setLoginErrorListener(f: (String) -> Unit)
 

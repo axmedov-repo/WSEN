@@ -11,7 +11,7 @@ import javax.inject.Inject
 class RegisterPageViewModelImpl @Inject constructor(private val baseRepository: BaseRepository) :
     ViewModel(), RegisterPageViewModel {
 
-    override val errorLiveData = MutableLiveData<String>()
+    override val errorLiveData = MutableLiveData<List<String>>()
 
     init {
         baseRepository.setRegisterErrorListener { errorMessage ->

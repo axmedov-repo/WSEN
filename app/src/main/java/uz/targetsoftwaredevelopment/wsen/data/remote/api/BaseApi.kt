@@ -12,55 +12,81 @@ interface BaseApi {
     @POST("client/login/")
     suspend fun loginUser(@Body data: LoginUserRequest): Response<LoginUserResponse>
 
-    @POST("client/logout/")
-    suspend fun logoutUser(): Response<String>
+    @DELETE("client/logout/")
+    suspend fun logoutUser(): Response<LogoutResponse>
 
     @GET("api/")
-    suspend fun getMainPageData(): Response<MainPageDataResponse>
+    suspend fun getMainPageData(@Header("Authorization") token: String): Response<MainPageDataResponse>
 
     @GET("api/all-posts/")
-    suspend fun getAllVideos(): Response<AllVideosResponse>
+    suspend fun getAllVideos(@Header("Authorization") token: String): Response<AllVideosResponse>
 
     @POST("api/my-post/")
-    suspend fun addVideo(@Body data: AddVideoRequest): Response<AddVideoResponse>
+    suspend fun addVideo(
+        @Header("Authorization") token: String,
+        @Body data: AddVideoRequest
+    ): Response<AddVideoResponse>
 
     // client/me/userni id si/
     @GET
-    suspend fun getUserData(@Url url: String): Response<UserData>
+    suspend fun getUserData(
+        @Header("Authorization") token: String,
+        @Url url: String
+    ): Response<UserData>
 
     // client/me/userni id si/
     @PUT
-    suspend fun editUserData(@Url url: String, @Body data: UserData): Response<UserData>
+    suspend fun editUserData(
+        @Header("Authorization") token: String,
+        @Url url: String,
+        @Body data: UserData
+    ): Response<UserData>
 
     // api/my-post/<int:post_id>/
     @PUT
     suspend fun editMyVideo(
+        @Header("Authorization") token: String,
         @Url url: String,
         @Body data: EditVideoRequest
     ): Response<EditVideoResponse>
 
     // api/my-post/<int:post_id>/
     @GET
-    suspend fun getMyVideo(@Url url: String): Response<VideoData>
+    suspend fun getMyVideo(
+        @Header("Authorization") token: String,
+        @Url url: String
+    ): Response<VideoData>
 
     @GET("api/my-post/")
-    suspend fun getAllMyVideos(): Response<AllMyVideosResponse>
+    suspend fun getAllMyVideos(@Header("Authorization") token: String): Response<AllMyVideosResponse>
 
     // api/my-post/<int:post_id>/
     @DELETE
-    suspend fun deleteMyVideo(@Url url: String): Response<String>
+    suspend fun deleteMyVideo(
+        @Header("Authorization") token: String,
+        @Url url: String
+    ): Response<String>
 
     // api/post-read-only/<int:post_id>/
     @GET
-    suspend fun getWatchVideoData(@Url url: String): Response<GetWatchVideoResponse>
+    suspend fun getWatchVideoData(
+        @Header("Authorization") token: String,
+        @Url url: String
+    ): Response<GetWatchVideoResponse>
 
     @GET("api/wished-posts/")
-    suspend fun getAllFavouriteVideos(): Response<AllFavouriteVideosResponse>
+    suspend fun getAllFavouriteVideos(@Header("Authorization") token: String): Response<AllFavouriteVideosResponse>
 
     // api/wish-event/post ni id si/
     @POST  // xuddi shu idi ga yana murojaat qilsa like yo'qoladi
-    suspend fun likeVideo(@Url url: String): Response<LikeVideoResponse>
+    suspend fun likeVideo(
+        @Header("Authorization") token: String,
+        @Url url: String
+    ): Response<LikeVideoResponse>
 
     @POST("api/spam/")
-    suspend fun spamVideo(@Body data: SpamVideoRequest): Response<SpamVideoResponse>
+    suspend fun spamVideo(
+        @Header("Authorization") token: String,
+        @Body data: SpamVideoRequest
+    ): Response<SpamVideoResponse>
 }

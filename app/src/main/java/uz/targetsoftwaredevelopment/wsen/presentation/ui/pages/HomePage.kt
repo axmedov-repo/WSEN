@@ -43,13 +43,6 @@ class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getHomePageData()
 
-        requireActivity().onBackPressedDispatcher
-            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    requireActivity().finish()
-                }
-            })
-
         if (isFirstTime) {
             fillAdsList()
             isFirstTime = false

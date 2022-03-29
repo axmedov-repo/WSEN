@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import uz.targetsoftwaredevelopment.wsen.R
 
 @AndroidEntryPoint
 class ClarifyLogoutDialog : DialogFragment() {
@@ -19,12 +20,12 @@ class ClarifyLogoutDialog : DialogFragment() {
         return activity?.let {
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
-            builder.setTitle("Chindan ham ilovadan\nchiqishni hohlaysizmi?")
-                .setPositiveButton("Ha",
+            builder.setTitle(getString(R.string.clarify_logout_dialog_title))
+                .setPositiveButton(getString(R.string.clarify_logout_dialog_accept),
                     DialogInterface.OnClickListener { dialog, id ->
                         positiveBtnListener?.invoke()
                     })
-                .setNegativeButton("Bekor qilish",
+                .setNegativeButton(getString(R.string.clarify_logout_dialog_cancel),
                     DialogInterface.OnClickListener { dialog, id ->
                         dismiss()
                     })
