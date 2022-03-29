@@ -21,17 +21,17 @@ class AddVidePageViewModelImpl @Inject constructor(private val baseRepository: B
 
     override val addVideoResponseLiveData = MutableLiveData<AddVideoResponse>()
     override val errorLiveData = MutableLiveData<Unit>()
-    override val videoCompressedLiceData = MutableLiveData<File>()
+    override val videoCompressedLiveData = MutableLiveData<File>()
 
 
     override fun videoCompressed(file: File) {
-        videoCompressedLiceData.value = file
+        videoCompressedLiveData.value = file
     }
 
     override fun addVideo(data: AddVideoRequest) {
         Log.d("ADDBTN", "viewmodelda addvideoga kirdi")
-        baseRepository.addVideo(data).onEach {
-            if (isConnected()) {
+        if (isConnected()) {
+            baseRepository.addVideo(data).onEach {
                 Log.d("ADDBTN", "viewmodelda internet connected")
                 it.onSuccess {
                     addVideoResponseLiveData.value = it
@@ -41,10 +41,10 @@ class AddVidePageViewModelImpl @Inject constructor(private val baseRepository: B
                     Log.d("ADDBTN", "viewmodelda failure")
                     errorLiveData.value = Unit
                 }
-            } else {
-                errorLiveData.value = Unit
-                Log.d("ADDBTN", "viewmodelda error")
-            }
-        }.launchIn(viewModelScope)
+            }.launchIn(viewModelScope)
+        } else {
+            errorLiveData.value = Unit
+            Log.d("ADDBTN", "viewmodelda error")
+        }
     }
 }

@@ -44,7 +44,7 @@ class ContributeVideosAdapter(val context : Context , val listener : OnWishItemT
 
                 wishTitleTv.text = videoData.title
                 wishAddressTv.text = videoData.location
-                if (videoData.isLikedByCurrentUser) {
+                if (videoData.is_liked_by_currentUser) {
                     wishVideoImg.setImageResource(R.drawable.healthcare_selected)
                 } else {
                     wishVideoImg.setImageResource(R.drawable.healthcare_unselected)

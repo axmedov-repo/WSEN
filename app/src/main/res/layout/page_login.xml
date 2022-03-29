@@ -15,28 +15,6 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/_5sdp">
 
-            <!--<EditText
-                android:id="@+id/etUsername"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_10sdp"
-                android:background="@drawable/edit_text_bg"
-                android:hint="Username"
-                android:paddingLeft="@dimen/_20sdp"
-                android:paddingTop="@dimen/_10sdp"
-                android:paddingRight="@dimen/_10sdp"
-                android:paddingBottom="@dimen/_10sdp"
-                android:textSize="@dimen/_15sdp"
-                app:layout_constraintBottom_toTopOf="@id/passwordEditTextLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias=".5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias=".3"
-                app:layout_constraintVertical_chainStyle="packed"
-                app:layout_constraintWidth_percent=".8" />
-        -->
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/usernameEditTextLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -65,37 +43,6 @@
                     android:textColorHint="@color/color_grey" />
 
             </com.google.android.material.textfield.TextInputLayout>
-<!--
-            <TextView
-                android:id="@+id/txtErrorUsername"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:text="Username or password is incorrect"
-                android:textColor="@color/color_red"
-                android:textSize="12sp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/usernameEditTextLayout" />-->
-
-            <!-- <EditText
-                 android:id="@+id/etPassword"
-                 android:layout_width="0dp"
-                 android:layout_height="wrap_content"
-                 android:background="@drawable/edit_text_bg"
-                 android:hint="Password"
-                 android:paddingLeft="@dimen/_20sdp"
-                 android:paddingTop="@dimen/_10sdp"
-                 android:paddingRight="@dimen/_10sdp"
-                 android:paddingBottom="@dimen/_10sdp"
-                 android:textSize="@dimen/_15sdp"
-                 app:flow_firstVerticalBias="0"
-                 app:layout_constraintBottom_toTopOf="@id/txtForgetPassword"
-                 app:layout_constraintEnd_toEndOf="parent"
-                 app:layout_constraintHorizontal_bias=".5"
-                 app:layout_constraintStart_toStartOf="parent"
-                 app:layout_constraintTop_toBottomOf="@id/etUsername"
-                 app:layout_constraintVertical_bias="0"
-                 app:layout_constraintWidth_percent=".8" />-->
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordEditTextLayout"

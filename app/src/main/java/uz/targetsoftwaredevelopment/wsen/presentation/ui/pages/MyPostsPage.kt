@@ -18,6 +18,7 @@ import uz.targetsoftwaredevelopment.wsen.presentation.ui.adapters.MyPostsAdapter
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.MyPostsPageViewModel
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.impl.MyPostsPageViewModelImpl
 import uz.targetsoftwaredevelopment.wsen.utils.scope
+import uz.targetsoftwaredevelopment.wsen.utils.visible
 
 @AndroidEntryPoint
 class MyPostsPage : Fragment(R.layout.page_my_posts) {
@@ -59,13 +60,22 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
 
                     dialogDeleteBinding.apply {
                         cancelPostsCv.setOnClickListener {
-                            Toast.makeText(requireContext(), getString(R.string.cancel), Toast.LENGTH_SHORT).show()
+
+                            Toast.makeText(
+                                requireContext(),
+                                getString(R.string.cancel),
+                                Toast.LENGTH_SHORT
+                            ).show()
                             deleteBuilder.cancel()
                         }
 
                         deletePostCv.setOnClickListener {
                             // bu yerga postni ochirish kodi yoziladi
-                            Toast.makeText(requireContext(), getString(R.string.delete_posts), Toast.LENGTH_SHORT)
+                            Toast.makeText(
+                                requireContext(),
+                                getString(R.string.delete_posts),
+                                Toast.LENGTH_SHORT
+                            )
                                 .show()
                             deleteBuilder.cancel()
                         }
@@ -88,13 +98,23 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
     }
 
     private val allMyVideosObserver = Observer<List<VideoData?>> {
-        myPostsAdapter.submitList(it)
+        if (it.isEmpty()) {
+            binding.havePostTv.visible()
+        } else {
+            myPostsAdapter.submitList(it)
+        }
     }
 
     private val errorObserver = Observer<String> { errorMessage ->
-        if (errorMessage.equals(getString(R.string.internet_disconnected))) {}
-        else {
-            FancyToast.makeText(requireContext(),errorMessage,FancyToast.LENGTH_LONG, FancyToast.WARNING,true).show()
+        if (errorMessage.equals(getString(R.string.internet_disconnected))) {
+        } else {
+            FancyToast.makeText(
+                requireContext(),
+                errorMessage,
+                FancyToast.LENGTH_LONG,
+                FancyToast.WARNING,
+                true
+            ).show()
         }
     }
 }

@@ -115,8 +115,10 @@ class BaseRepositoryImpl @Inject constructor(
 
     override fun addVideo(data: AddVideoRequest): Flow<Result<AddVideoResponse?>> =
         flow {
+            Log.d("ADDBTN", "repositoryda addvideoga kirdi")
             val response = baseApi.addVideo(localStorage.token, data)
             if (response.isSuccessful) {
+                Log.d("ADDBTN", "repositoryda success")
                 emit(Result.success(response.body()))
             }
         }.flowOn(Dispatchers.IO)
@@ -186,4 +188,8 @@ class BaseRepositoryImpl @Inject constructor(
             emit(Result.success(response.body()!!))
         }
     }
+
+   /* override fun deleteMyVideo(videoData: EditVideoRequest) {
+
+    }*/
 }

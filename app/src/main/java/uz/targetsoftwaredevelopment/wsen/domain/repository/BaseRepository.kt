@@ -40,6 +40,8 @@ interface BaseRepository {
 
     fun editMyVideo(videoData: EditVideoRequest): Flow<Result<EditVideoResponse>>
 
+//    fun deleteMyVideo(videoData: EditVideoRequest)
+
     fun getAllFavouriteVideos(): Flow<Result<AllFavouriteVideosResponse>>
 
     fun changeLike(videoData: VideoData): Flow<Result<LikeVideoResponse>>

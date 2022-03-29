@@ -8,4 +8,5 @@ interface MyPostsPageViewModel {
     val errorLiveData: LiveData<String>
 
     fun getAllMyVideos()
+//    fun deleteMyVideo()
 }
