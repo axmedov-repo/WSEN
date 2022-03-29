@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.targetsoftwaredevelopment.wsen.R
+import uz.targetsoftwaredevelopment.wsen.data.remote.responses.LogoutResponse
 import uz.targetsoftwaredevelopment.wsen.domain.repository.BaseRepository
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.screensviewmodel.BasicScreenViewModel
 import uz.targetsoftwaredevelopment.wsen.utils.isConnected
@@ -15,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BasicScreenViewModelImpl @Inject constructor(private val baseRepository: BaseRepository) :
     ViewModel(), BasicScreenViewModel {
-    override val logoutUserResponseLiveData = MutableLiveData<String>()
+    override val logoutUserResponseLiveData = MutableLiveData<LogoutResponse>()
     override val errorLiveData = MutableLiveData<String>()
 
     override fun logoutUser() {

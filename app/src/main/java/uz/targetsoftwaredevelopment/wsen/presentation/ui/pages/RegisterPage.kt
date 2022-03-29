@@ -95,7 +95,7 @@ class RegisterPage : Fragment(R.layout.page_register) {
             setOnFocusChangeListener { view, b ->
                 if (!b && !isReadyConfirmPassword) {
                     confirmPasswordEditTextLayout.isErrorEnabled = true
-                    confirmPasswordEditTextLayout.error= "Enter same passwords"
+                    confirmPasswordEditTextLayout.error = "Enter same passwords"
                 } else {
                     confirmPasswordEditTextLayout.isErrorEnabled = false
                 }
@@ -118,17 +118,18 @@ class RegisterPage : Fragment(R.layout.page_register) {
                 )
             }
         }
-
         viewModel.errorLiveData.observe(viewLifecycleOwner, errorObserver)
     }
 
-    private val errorObserver = Observer<String> { errorMessage ->
-        if (errorMessage.equals(getString(R.string.errorTextEmailExist))) {
-            binding.emailEditTextLayout.isErrorEnabled = true
-            binding.emailEditTextLayout.error = "Email is already exist"
-        }else  if (errorMessage.equals(getString(R.string.errorTextUsernameExist))) {
-            binding.usernameEditTextLayout.isErrorEnabled = true
-            binding.usernameEditTextLayout.error = "Username is already exist"
+    private val errorObserver = Observer<List<String>> { errorKeysList ->
+        if (errorKeysList != null && errorKeysList.isNotEmpty()) {
+            if (errorKeysList.contains("email")) {
+                binding.emailEditTextLayout.isErrorEnabled = true
+                binding.emailEditTextLayout.error = "Email is already exist"
+            } else if (errorKeysList.contains("username")) {
+                binding.usernameEditTextLayout.isErrorEnabled = true
+                binding.usernameEditTextLayout.error = "Username is already exist"
+            }
         }
     }
 

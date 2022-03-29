@@ -12,6 +12,7 @@ import uz.targetsoftwaredevelopment.wsen.app.App
 import uz.targetsoftwaredevelopment.wsen.data.local.LocalStorage
 import uz.targetsoftwaredevelopment.wsen.data.local.SafeStorage
 import uz.targetsoftwaredevelopment.wsen.utils.timber
+import java.net.URL
 
 object ApiClient {
     private val safeStorage = SafeStorage()
@@ -25,7 +26,6 @@ object ApiClient {
     private fun getHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .addLogging()
-            .addInterceptor(tokenInterceptor())
             .build()
     }
 }
@@ -44,14 +44,20 @@ fun OkHttpClient.Builder.addLogging(): OkHttpClient.Builder {
     return this
 }
 
+/*
 fun tokenInterceptor() = Interceptor { chain ->
     val pref = LocalStorage()
+    val safeStorage = SafeStorage()
 
     val chainRequest = chain.request()
     val newRequest =
-        chainRequest.newBuilder().removeHeader("Authorization")
-            .addHeader("Authorization", pref.token).build()
-
+        if (chainRequest.url.toUrl() == URL("${safeStorage.base_url}client/logout/")) {
+            chainRequest.newBuilder().removeHeader("Authorization").build()
+        } else {
+            chainRequest.newBuilder().removeHeader("Authorization")
+                .addHeader("Authorization", pref.token).build()
+        }
     val response = chain.proceed(newRequest)
     response
 }
+*/

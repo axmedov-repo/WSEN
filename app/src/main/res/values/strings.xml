@@ -13,7 +13,7 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
-    <string name="profile_name">Profile name</string>
+    <string name="profile_name">username</string>
     <string name="my_image">my image</string>
     <string name="location">Location</string>
     <string name="description">Description</string>
@@ -65,7 +65,7 @@
     <string name="wsen" translatable="false">WSEN</string>
 
     <string name="errorTextEmailExist">user with this Email address already exists.</string>
-    <string name="errorTextUsernameExist" translatable="false">user with this Email address already exists.</string>
+    <string name="errorTextUsernameExist" translatable="false">A user with that username already exists.</string>
     <string name="errorTextLoginOrPassword">Login yoki parol notogri!</string>
     <string name="errorTextLoginOrPassword2">Xatolik yuzaga keldi</string>
     <string name="internet_disconnected">Tarmoqqa ulanmagan</string>

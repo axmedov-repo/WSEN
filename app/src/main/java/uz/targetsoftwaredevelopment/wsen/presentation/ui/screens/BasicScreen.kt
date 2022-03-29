@@ -19,6 +19,7 @@ import com.google.android.material.navigation.NavigationView
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.wsen.R
+import uz.targetsoftwaredevelopment.wsen.data.remote.responses.LogoutResponse
 import uz.targetsoftwaredevelopment.wsen.databinding.ScreenBasicNavBinding
 import uz.targetsoftwaredevelopment.wsen.presentation.ui.adapters.BasicScreenAdapter
 import uz.targetsoftwaredevelopment.wsen.presentation.ui.dialog.ClarifyLogoutDialog
@@ -61,46 +62,45 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
             }
         }
 
-            innerLayout.apply {
-                pager.adapter = adapter
-                pager.isUserInputEnabled = false
-
-                bottomNavigationView.setOnItemSelectedListener {
-                    when (it.itemId) {
-                        R.id.home -> innerLayout.pager.setCurrentItem(0, false)
-                        R.id.videos -> innerLayout.pager.setCurrentItem(1, false)
-                        R.id.add_video -> innerLayout.pager.setCurrentItem(2, false)
-                        R.id.my_videos -> innerLayout.pager.setCurrentItem(3, false)
-                        else -> innerLayout.pager.setCurrentItem(4, false)
-                    }
-                    return@setOnItemSelectedListener true
-                }
-
-                btnMenu.setOnClickListener {
-                    drawerLayout.openDrawer(GravityCompat.START)
-                }
-            }
-
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     if (drawerLayout.isOpen) {
                         drawerLayout.closeDrawer(GravityCompat.START)
                     } else {
-                        findNavController().popBackStack()
+                        requireActivity().finish()
                     }
                 }
             })
 
+        innerLayout.apply {
+            pager.adapter = adapter
+            pager.isUserInputEnabled = false
+
+            bottomNavigationView.setOnItemSelectedListener {
+                when (it.itemId) {
+                    R.id.home -> innerLayout.pager.setCurrentItem(0, false)
+                    R.id.videos -> innerLayout.pager.setCurrentItem(1, false)
+                    R.id.add_video -> innerLayout.pager.setCurrentItem(2, false)
+                    R.id.my_videos -> innerLayout.pager.setCurrentItem(3, false)
+                    else -> innerLayout.pager.setCurrentItem(4, false)
+                }
+                return@setOnItemSelectedListener true
+            }
+
+            btnMenu.setOnClickListener {
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
             if (navigationView != null) {
                 navigationView.setNavigationItemSelectedListener(this@BasicScreen)
             }
+        }
 
         viewModel.logoutUserResponseLiveData.observe(viewLifecycleOwner, logoutUserObserver)
         viewModel.errorLiveData.observe(viewLifecycleOwner, errorObserver)
     }
 
-    private val logoutUserObserver = Observer<String> {
+    private val logoutUserObserver = Observer<LogoutResponse> {
         findNavController().navigate(BasicScreenDirections.actionBasicScreenToAuthScreen())
     }
     private val errorObserver = Observer<String> { errorMessage ->
