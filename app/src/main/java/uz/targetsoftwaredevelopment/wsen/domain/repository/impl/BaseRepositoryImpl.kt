@@ -88,7 +88,7 @@ class BaseRepositoryImpl @Inject constructor(
         }.flowOn(Dispatchers.IO)
 
     override fun logoutUser(): Flow<Result<LogoutResponse>> = flow {
-        val response = baseApi.logoutUser()
+        val response = baseApi.logoutUser(localStorage.token)
         Log.d("LOGOUTDDD", "logout repository")
         if (response.isSuccessful) {
             emit(Result.success(response.body()!!))

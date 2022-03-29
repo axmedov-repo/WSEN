@@ -13,7 +13,7 @@ interface BaseApi {
     suspend fun loginUser(@Body data: LoginUserRequest): Response<LoginUserResponse>
 
     @DELETE("client/logout/")
-    suspend fun logoutUser(): Response<LogoutResponse>
+    suspend fun logoutUser(@Header("Authorization") token: String): Response<LogoutResponse>
 
     @GET("api/")
     suspend fun getMainPageData(@Header("Authorization") token: String): Response<MainPageDataResponse>

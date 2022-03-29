@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import uz.targetsoftwaredevelopment.wsen.R
+import uz.targetsoftwaredevelopment.wsen.app.App
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.wsen.databinding.AllVideoRvItemBinding
 
@@ -31,7 +32,7 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
             }
 
             allVideoRvItemBinding.threeDotsTv.setOnClickListener {
-                val popupMenu: PopupMenu = PopupMenu(context, allVideoRvItemBinding.threeDotsTv)
+                val popupMenu: PopupMenu = PopupMenu(App.instance, allVideoRvItemBinding.threeDotsTv)
                 popupMenu.inflate(R.menu.rv_item_menu)
                 popupMenu.setOnMenuItemClickListener {
                     when (it.itemId) {
@@ -70,7 +71,7 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
 
                 Glide.with(context).load(videoData.preload_img)
                     .centerCrop()
-                    .placeholder(R.drawable.ic_default_bg)
+                    .placeholder(R.drawable.ic_place_holder)
                     .into(itemAllVideosImg)
 
                 unlikeVideoImg.startAnimation(

@@ -19,7 +19,7 @@
     <string name="create_title">Saralavha yaratish</string>
     <string name="edit_posts">Postni tahrirlash</string>
     <string name="delete_posts">Postni o\'chirish</string>
-    <string name="delete">Postni o\'chirish</string>
+    <string name="delete">O\'chirish</string>
     <string name="allow">Ruxsat berish</string>
     <string name="cancel">Bekor qilish</string>
     <string name="are_you_sure_want_to_delete_this_post">Bu postni o‘chirib tashlamoqchimisiz?</string>
@@ -82,4 +82,5 @@
     <string name="not_contributed">Siz hali birorta ham\nhissa qo\'shmadingiz</string>
     <string name="yes">Ha</string>
     <string name="exit_app">Chindan ham ilovadan chiqishni hohlaysizmi?</string>
+    <string name="firstname">Ism</string>
 </resources>

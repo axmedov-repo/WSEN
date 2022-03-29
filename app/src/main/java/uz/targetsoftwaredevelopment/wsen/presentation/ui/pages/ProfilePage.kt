@@ -43,13 +43,12 @@ import java.io.IOException
 class ProfilePage : Fragment(R.layout.page_profile) {
     private val binding by viewBinding(PageProfileBinding::bind)
     private val viewModel: ProfilePageViewModel by viewModels<ProfilePageViewModelImpl>()
-    private var isReadyEmail = false
     private var isReadyPhone = true
 
     var OLD_REQUEST_CODE = 1
     var CAMERA_REQUEST_CODE = 1
     lateinit var currentImagePath: String
-    lateinit var imageUri: Uri
+    var imageUri: Uri?=null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
@@ -58,16 +57,6 @@ class ProfilePage : Fragment(R.layout.page_profile) {
 
         addImg.setOnClickListener {
             onClickAddImg()
-        }
-
-        emailEt.apply {
-            addTextChangedListener {
-                emailEtLayout.isErrorEnabled = false
-                it?.let {
-                    isReadyEmail = it.isNotEmpty() && it.contains("@")
-                    check()
-                }
-            }
         }
 
         phoneNumberEt.apply {
@@ -81,8 +70,11 @@ class ProfilePage : Fragment(R.layout.page_profile) {
                 }
             }
             addTextChangedListener {
-                isReadyPhone = true
-                phoneEtLayout.isErrorEnabled = false
+                it?.let {
+                    phoneEtLayout.isErrorEnabled = false
+                    isReadyPhone = it.isEmpty() || (it.isNotEmpty() && it.contains("+998"))
+                    check()
+                }
             }
         }
 
@@ -96,7 +88,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
                         null
                     },
                     firstnameEt.text.toString(),
-                    emailEt.text.toString(),
+                    emailTv.text.toString(),
                     usernameTv.text.toString()
                 )
             )
@@ -120,7 +112,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
             usernameTv.text = userData.username
             firstnameEt.setText(userData.first_name)
             lastnameEt.setText(userData.last_name)
-            emailEt.setText(userData.email)
+            emailTv.text = userData.email
         }
     }
 
@@ -129,10 +121,6 @@ class ProfilePage : Fragment(R.layout.page_profile) {
     }
 
     private val errorObserver = Observer<String> { errorMessage ->
-        if (errorMessage.equals(getString(R.string.errorTextEmailExist))) {
-            binding.emailEtLayout.isErrorEnabled = true
-            binding.emailEtLayout.error = "Email is already exist"
-        } else {
             FancyToast.makeText(
                 requireContext(),
                 errorMessage,
@@ -141,7 +129,6 @@ class ProfilePage : Fragment(R.layout.page_profile) {
                 true
             )
                 .show()
-        }
     }
 
     private val editUserDataObserver = Observer<UserData> {
@@ -342,6 +329,6 @@ class ProfilePage : Fragment(R.layout.page_profile) {
         }
 
     private fun check() {
-        binding.btnSaveProfile.isEnabled = isReadyEmail && isReadyPhone
+        binding.btnSaveProfile.isEnabled = isReadyPhone
     }
 }
