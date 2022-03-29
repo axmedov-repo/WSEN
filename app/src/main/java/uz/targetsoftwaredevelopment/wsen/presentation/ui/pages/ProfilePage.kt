@@ -81,8 +81,11 @@ class ProfilePage : Fragment(R.layout.page_profile) {
                 }
             }
             addTextChangedListener {
-                isReadyPhone = true
-                phoneEtLayout.isErrorEnabled = false
+                it?.let {
+                    phoneEtLayout.isErrorEnabled = false
+                    isReadyPhone = it.isEmpty() || (it.isNotEmpty() && it.contains("+998"))
+                    check()
+                }
             }
         }
 
@@ -139,8 +142,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
                 FancyToast.LENGTH_LONG,
                 FancyToast.ERROR,
                 true
-            )
-                .show()
+            ).show()
         }
     }
 

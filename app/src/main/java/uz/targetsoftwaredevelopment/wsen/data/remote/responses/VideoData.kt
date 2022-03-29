@@ -21,5 +21,5 @@ data class VideoData(
     val status: String? = null,
     val video: String? = null,
     val desc: String? = null,
-    val isLikedByCurrentUser: Boolean = false
+    val is_liked_by_currentUser: Boolean = false
 ) : Serializable

@@ -8,7 +8,7 @@ import java.io.File
 interface AddVideoPageViewModel {
     val addVideoResponseLiveData: LiveData<AddVideoResponse>
     val errorLiveData: LiveData<Unit>
-    val videoCompressedLiceData: LiveData<File>
+    val videoCompressedLiveData: LiveData<File>
 
     fun addVideo(data: AddVideoRequest)
     fun videoCompressed(file : File)
