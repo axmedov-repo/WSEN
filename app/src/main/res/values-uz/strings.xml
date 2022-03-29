@@ -80,4 +80,6 @@
     <string name="contribute_videos">Hissa qo\'shadigan videolar</string>
     <string name="contribute">Hissa qo\'shilganlarim</string>
     <string name="not_contributed">Siz hali birorta ham\nhissa qo\'shmadingiz</string>
+    <string name="yes">Ha</string>
+    <string name="exit_app">Chindan ham ilovadan chiqishni hohlaysizmi?</string>
 </resources>

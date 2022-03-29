@@ -268,6 +268,7 @@
                     android:text="@string/water"
                     android:textColor="#22A5DD"
                     android:textSize="20sp"
+                    android:fontFamily="@font/carter_one"
                     android:layout_marginEnd="5dp"
                     android:textStyle="bold" />
 
@@ -277,6 +278,7 @@
                     android:layout_gravity="center"
                     android:layout_marginEnd="5dp"
                     android:text="@string/sun"
+                    android:fontFamily="@font/carter_one"
                     android:textColor="#F3BC17"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -287,6 +289,7 @@
                     android:layout_gravity="center"
                     android:layout_marginEnd="5dp"
                     android:text="@string/earth"
+                    android:fontFamily="@font/carter_one"
                     android:textColor="#80F308"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -296,6 +299,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/nature"
+                    android:fontFamily="@font/carter_one"
                     android:textColor="#80F308"
                     android:textSize="20sp"
                     android:textStyle="bold"

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,6 +43,7 @@ class AllVideoPage:Fragment(R.layout.page_all_video) {
             AllVideoRvAdapter(requireContext() , object:AllVideoRvAdapter.OnItemClickListener {
                 override fun onItemClick(videoData : VideoData) {
                     videoClickedListener?.invoke(videoData)
+                    findNavController().navigate(R.id.watchVideoScreen)
                 }
 
                 override fun onShareClick(videoData : VideoData) {

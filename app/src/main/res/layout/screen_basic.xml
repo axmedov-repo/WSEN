@@ -21,7 +21,7 @@
             android:adjustViewBounds="true"
             android:src="@drawable/ic__menu" />
 
-        <Space
+        <androidx.legacy.widget.Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
@@ -31,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
             android:fontFamily="@font/carter_one"
+            app:fontFamily="@font/carter_one"
             android:text="W"
             android:textAlignment="center"
             android:textColor="#22A5DD"
@@ -42,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
             android:fontFamily="@font/carter_one"
+            app:fontFamily="@font/carter_one"
             android:text="S"
             android:textAlignment="center"
             android:textColor="#F3BC17"
@@ -53,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
             android:fontFamily="@font/carter_one"
+            app:fontFamily="@font/carter_one"
             android:text="E"
             android:textAlignment="center"
             android:textColor="#80F308"
@@ -64,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
             android:fontFamily="@font/carter_one"
+            app:fontFamily="@font/carter_one"
             android:text="N"
             android:textAlignment="center"
             android:textColor="#80F308"
