@@ -78,4 +78,8 @@
     <string name="forget_password">Forget password</string>
     <string name="favorite">Favorite</string>
     <string name="per_error">Permission Error</string>
+    <string name="fav_videos">Favourite videos</string>
+    <string name="contribute_videos">Contributed videos</string>
+    <string name="contribute">My contributors</string>
+    <string name="not_contributed">You have not contributed\nanything yet</string>
 </resources>

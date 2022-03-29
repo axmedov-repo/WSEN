@@ -17,4 +17,5 @@
     <color name="unselect_lang_bg_color">#E6E6E6</color>
     <color name="color_red">#B60A0A</color>
     <color name="white_darker">#F4F4F4</color>
+    <color name="no_videos_color">#B5B8B1</color>
 </resources>

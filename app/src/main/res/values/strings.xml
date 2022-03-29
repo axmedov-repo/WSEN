@@ -90,6 +90,10 @@
     <string name="forget_password">Forget password</string>
     <string name="favorite">Favorite</string>
     <string name="per_error">Permission Error</string>
+    <string name="fav_videos" translatable="false">Favourite videos</string>
+    <string name="contribute_videos" translatable="false">Contribute videos</string>
+    <string name="contribute" translatable="false">My contributors</string>
+    <string name="not_contributed" translatable="false">You have not contributed\nanything yet</string>
 
     <string name="clarify_logout_dialog_title" translatable="false">Chindan ham ilovadan\nchiqishni hohlaysizmi?</string>
     <string name="clarify_logout_dialog_accept" translatable="false">Ha</string>

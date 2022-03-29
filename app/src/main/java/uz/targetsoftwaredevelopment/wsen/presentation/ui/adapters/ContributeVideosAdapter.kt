@@ -11,16 +11,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import uz.targetsoftwaredevelopment.wsen.R
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
-import uz.targetsoftwaredevelopment.wsen.databinding.WishPostsItemBinding
+import uz.targetsoftwaredevelopment.wsen.databinding.ContributeVideosItemBinding
 
-class MyWishAdapter(val context: Context, val listener: OnWishItemTouchListener) :
-    ListAdapter<VideoData, MyWishAdapter.MyViewHolder>(MyDiffUtil) {
+class ContributeVideosAdapter(val context : Context , val listener : OnWishItemTouchListener):
+    ListAdapter<VideoData , ContributeVideosAdapter.MyViewHolder>(MyDiffUtil) {
 
-    inner class MyViewHolder(private val wishPostsItemBinding: WishPostsItemBinding) :
-        RecyclerView.ViewHolder(wishPostsItemBinding.root) {
+    inner class MyViewHolder(private val contributeVideosItemBinding : ContributeVideosItemBinding):
+        RecyclerView.ViewHolder(contributeVideosItemBinding.root) {
 
         init {
-            wishPostsItemBinding.apply {
+            contributeVideosItemBinding.apply {
                 wishImageCv.setOnClickListener {
                     listener.onPostClick(getItem(absoluteAdapterPosition))
                 }
@@ -31,11 +31,11 @@ class MyWishAdapter(val context: Context, val listener: OnWishItemTouchListener)
             }
         }
 
-        fun onBind(videoData: VideoData) {
+        fun onBind(videoData : VideoData) {
             itemView.animation =
-                AnimationUtils.loadAnimation(itemView.context, R.anim.animation_one)
+                AnimationUtils.loadAnimation(itemView.context , R.anim.animation_one)
 
-            wishPostsItemBinding.apply {
+            contributeVideosItemBinding.apply {
                 Glide.with(context)
                     .load(videoData.preload_img)
                     .centerCrop()
@@ -53,33 +53,33 @@ class MyWishAdapter(val context: Context, val listener: OnWishItemTouchListener)
         }
     }
 
-    object MyDiffUtil : DiffUtil.ItemCallback<VideoData>() {
-        override fun areItemsTheSame(oldItem: VideoData, newItem: VideoData): Boolean {
+    object MyDiffUtil:DiffUtil.ItemCallback<VideoData>() {
+        override fun areItemsTheSame(oldItem : VideoData , newItem : VideoData) : Boolean {
             return oldItem == newItem
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: VideoData, newItem: VideoData): Boolean {
+        override fun areContentsTheSame(oldItem : VideoData , newItem : VideoData) : Boolean {
             return oldItem == newItem
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+    override fun onCreateViewHolder(parent : ViewGroup , viewType : Int) : MyViewHolder {
         return MyViewHolder(
-            WishPostsItemBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
+            ContributeVideosItemBinding.inflate(
+                LayoutInflater.from(parent.context) ,
+                parent ,
                 false
             )
         )
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder : MyViewHolder , position : Int) {
         holder.onBind(getItem(position))
     }
 
     interface OnWishItemTouchListener {
-        fun onWishClick(videoData: VideoData)
-        fun onPostClick(videoData: VideoData)
+        fun onWishClick(videoData : VideoData)
+        fun onPostClick(videoData : VideoData)
     }
 }
