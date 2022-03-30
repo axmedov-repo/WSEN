@@ -24,6 +24,7 @@ import uz.targetsoftwaredevelopment.wsen.databinding.PageHomeBinding
 import uz.targetsoftwaredevelopment.wsen.presentation.ui.adapters.AdsAdapter
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.HomePageViewModel
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.impl.HomePageViewModelImpl
+import uz.targetsoftwaredevelopment.wsen.utils.getImageFile
 import uz.targetsoftwaredevelopment.wsen.utils.scope
 
 @AndroidEntryPoint
@@ -42,6 +43,8 @@ class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback {
             fillAdsList()
             isFirstTime = false
         }
+
+//        nestedScrollView.scrollTo(0,0)
 
         adsAdapter = AdsAdapter(requireActivity(), adsList)
         pagerAds.apply {

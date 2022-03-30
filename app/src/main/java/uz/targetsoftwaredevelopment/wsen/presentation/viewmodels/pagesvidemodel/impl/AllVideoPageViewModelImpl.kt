@@ -1,11 +1,13 @@
 package uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.impl
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import uz.targetsoftwaredevelopment.wsen.data.remote.responses.LikeVideResponseData
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.wsen.domain.repository.BaseRepository
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.AllVideoPageViewModel
@@ -18,6 +20,8 @@ class AllVideoPageViewModelImpl @Inject constructor(private val baseRepository: 
     override val allVideosLiveData = MutableLiveData<List<VideoData?>?>()
     override val errorLiveData = MutableLiveData<Unit>()
 
+    override val changeLikeLiveData = MutableLiveData<LikeVideResponseData>()
+
     override fun getAllVideos() {
         if (isConnected()) {
             baseRepository.getAllVideos().onEach {
@@ -29,6 +33,21 @@ class AllVideoPageViewModelImpl @Inject constructor(private val baseRepository: 
                 }
             }.launchIn(viewModelScope)
         } else {
+            errorLiveData.value = Unit
+        }
+    }
+
+    override fun changeLikeVideo(videoData : VideoData) {
+        if(isConnected()){
+            baseRepository.changeLike(videoData).onEach {
+                it.onSuccess {
+                    changeLikeLiveData.value = it.data!!
+                }
+                it.onFailure {
+                    errorLiveData.value = Unit
+                }
+            }.launchIn(viewModelScope)
+        }else{
             errorLiveData.value = Unit
         }
     }

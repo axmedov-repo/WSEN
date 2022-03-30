@@ -1,227 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nestedScroll_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
     tools:context=".presentation.ui.pages.HomePage">
 
-    <ScrollView
-        android:id="@+id/scroll_view"
+    <!--    <androidx.core.widget.NestedScrollView-->
+    <!--        android:id="@+id/scroll_view"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent">-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/image_sample"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/the_earth"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@id/pager_ads"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/pager_ads"
-                android:layout_width="match_parent"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager_ads"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/view1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_sample" />
+
+        <!--            <androidx.cardview.widget.CardView-->
+        <!--                android:id="@+id/eco_videos_cv"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="100dp"-->
+        <!--                android:layout_marginStart="4dp"-->
+        <!--                android:visibility="gone"-->
+        <!--                app:cardBackgroundColor="@color/main_green"-->
+        <!--                app:cardCornerRadius="15dp"-->
+        <!--                app:cardElevation="2dp"-->
+        <!--                app:cardUseCompatPadding="true"-->
+        <!--                app:layout_constraintHorizontal_weight="1"-->
+        <!--                app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--                app:layout_constraintTop_toBottomOf="@id/pager_ads">-->
+
+        <!--                <FrameLayout-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent">-->
+
+        <!--                    <ImageView-->
+        <!--                        android:id="@+id/img_bg_eco_videos"-->
+        <!--                        android:layout_width="match_parent"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_gravity="center"-->
+        <!--                        android:adjustViewBounds="true"-->
+        <!--                        android:scaleType="centerCrop" />-->
+
+        <!--                    <TextView-->
+        <!--                        android:id="@+id/eco_video_tv"-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_gravity="center"-->
+        <!--                        android:gravity="center"-->
+        <!--                        android:text="@string/begin"-->
+        <!--                        android:textColor="@color/white"-->
+        <!--                        android:textSize="22sp"-->
+        <!--                        android:textStyle="normal" />-->
+
+        <!--                </FrameLayout>-->
+
+        <!--            </androidx.cardview.widget.CardView>-->
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#29BF29"
+            app:layout_constraintBottom_toTopOf="@id/vv_about"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/pager_ads" />
+
+        <VideoView
+            android:id="@+id/vv_about"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@id/footer"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view1" />
+
+        <ImageView
+            android:id="@+id/imgVolunteersNumber"
+            style="@style/footer_images_style"
+            android:src="@drawable/ic_volunteers"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/imgLocation"
+            app:layout_constraintTop_toTopOf="@id/view1" />
+
+        <TextView
+            android:id="@+id/txtHeaderVolunteers"
+            style="@style/footer_headers_style"
+            android:text="8,281 UN\nVolunteers"
+            app:layout_constraintLeft_toLeftOf="@id/imgVolunteersNumber"
+            app:layout_constraintRight_toRightOf="@id/imgVolunteersNumber"
+            app:layout_constraintTop_toBottomOf="@id/imgVolunteersNumber" />
+
+        <TextView
+            android:id="@+id/txtDescriptionVolunteers"
+            style="@style/footer_descriptions_style"
+            android:text="were deployed worldwide\nin 2019"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/txtDescriptionLocation"
+            app:layout_constraintTop_toBottomOf="@id/txtHeaderVolunteers" />
+
+        <ImageView
+            android:id="@+id/imgLocation"
+            style="@style/footer_images_style"
+            android:src="@drawable/ic_location"
+            app:layout_constraintLeft_toRightOf="@id/imgVolunteersNumber"
+            app:layout_constraintRight_toLeftOf="@id/imgStatistics"
+            app:layout_constraintTop_toTopOf="@id/view1" />
+
+        <TextView
+            android:id="@+id/txtHeaderLocation"
+            style="@style/footer_headers_style"
+            android:text="81 %"
+            app:layout_constraintLeft_toLeftOf="@id/imgLocation"
+            app:layout_constraintRight_toRightOf="@id/imgLocation"
+            app:layout_constraintTop_toBottomOf="@id/imgLocation" />
+
+        <TextView
+            android:id="@+id/txtDescriptionLocation"
+            style="@style/footer_descriptions_style"
+            android:text="UN Volunteers were from countries of the\nGlobal South"
+            app:layout_constraintLeft_toRightOf="@id/txtDescriptionVolunteers"
+            app:layout_constraintRight_toLeftOf="@id/txtDescriptionStatistics"
+            app:layout_constraintTop_toBottomOf="@id/txtHeaderLocation" />
+
+        <ImageView
+            android:id="@+id/imgStatistics"
+            style="@style/footer_images_style"
+            android:src="@drawable/ic_document"
+            app:layout_constraintLeft_toRightOf="@id/imgLocation"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/view1" />
+
+        <TextView
+            android:id="@+id/txtHeaderStatistics"
+            style="@style/footer_headers_style"
+            android:text="2,570 UN\nVolunteers"
+            app:layout_constraintLeft_toLeftOf="@id/imgStatistics"
+            app:layout_constraintRight_toRightOf="@id/imgStatistics"
+            app:layout_constraintTop_toBottomOf="@id/imgStatistics" />
+
+        <TextView
+            android:id="@+id/txtDescriptionStatistics"
+            style="@style/footer_descriptions_style"
+            android:text="served with the\nUnited Nations Development Programme"
+            app:layout_constraintLeft_toRightOf="@id/txtDescriptionLocation"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtHeaderStatistics" />
+
+        <LinearLayout
+            android:id="@+id/footer"
+            android:layout_width="match_parent"
+            android:layout_height="84dp"
+            android:background="@color/custom_blue"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/vv_about">
+
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/image_sample" />
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/carter_one"
+                android:text="@string/water"
+                android:textColor="#22A5DD"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/eco_videos_cv"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:visibility="gone"
-                android:layout_marginStart="4dp"
-                app:cardBackgroundColor="@color/main_green"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="2dp"
-                app:cardUseCompatPadding="true"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pager_ads">
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/img_bg_eco_videos"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerCrop" />
-
-                    <TextView
-                        android:id="@+id/eco_video_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="@string/begin"
-                        android:textColor="@color/white"
-                        android:textSize="22sp"
-                        android:textStyle="normal" />
-
-                </FrameLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <ImageView
-                android:id="@+id/image_sample"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/the_earth"
-                android:adjustViewBounds="true"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <VideoView
-                android:id="@+id/vv_about"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view1" />
-
-            <View
-                android:id="@+id/view1"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="#29BF29"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/pager_ads" />
-
-            <ImageView
-                android:id="@+id/imgVolunteersNumber"
-                style="@style/footer_images_style"
-                android:src="@drawable/ic_volunteers"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/imgLocation"
-                app:layout_constraintTop_toTopOf="@id/view1" />
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/carter_one"
+                android:text="@string/sun"
+                android:textColor="#F3BC17"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txtHeaderVolunteers"
-                style="@style/footer_headers_style"
-                android:text="8,281 UN\nVolunteers"
-                app:layout_constraintLeft_toLeftOf="@id/imgVolunteersNumber"
-                app:layout_constraintRight_toRightOf="@id/imgVolunteersNumber"
-                app:layout_constraintTop_toBottomOf="@id/imgVolunteersNumber" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:fontFamily="@font/carter_one"
+                android:text="@string/earth"
+                android:textColor="#80F308"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/txtDescriptionVolunteers"
-                style="@style/footer_descriptions_style"
-                android:text="were deployed worldwide\nin 2019"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/txtDescriptionLocation"
-                app:layout_constraintTop_toBottomOf="@id/txtHeaderVolunteers" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/carter_one"
+                android:text="@string/nature"
+                android:textColor="#80F308"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:ignore="HardcodedText" />
 
-            <ImageView
-                android:id="@+id/imgLocation"
-                style="@style/footer_images_style"
-                android:src="@drawable/ic_location"
-                app:layout_constraintLeft_toRightOf="@id/imgVolunteersNumber"
-                app:layout_constraintRight_toLeftOf="@id/imgStatistics"
-                app:layout_constraintTop_toTopOf="@id/view1" />
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/txtHeaderLocation"
-                style="@style/footer_headers_style"
-                android:text="81 %"
-                app:layout_constraintLeft_toLeftOf="@id/imgLocation"
-                app:layout_constraintRight_toRightOf="@id/imgLocation"
-                app:layout_constraintTop_toBottomOf="@id/imgLocation" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/txtDescriptionLocation"
-                style="@style/footer_descriptions_style"
-                android:text="UN Volunteers were from countries of the\nGlobal South"
-                app:layout_constraintLeft_toRightOf="@id/txtDescriptionVolunteers"
-                app:layout_constraintRight_toLeftOf="@id/txtDescriptionStatistics"
-                app:layout_constraintTop_toBottomOf="@id/txtHeaderLocation" />
+    <!--    </androidx.core.widget.NestedScrollView>-->
 
-            <ImageView
-                android:id="@+id/imgStatistics"
-                style="@style/footer_images_style"
-                android:src="@drawable/ic_document"
-                app:layout_constraintLeft_toRightOf="@id/imgLocation"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/view1" />
-
-            <TextView
-                android:id="@+id/txtHeaderStatistics"
-                style="@style/footer_headers_style"
-                android:text="2,570 UN\nVolunteers"
-                app:layout_constraintLeft_toLeftOf="@id/imgStatistics"
-                app:layout_constraintRight_toRightOf="@id/imgStatistics"
-                app:layout_constraintTop_toBottomOf="@id/imgStatistics" />
-
-            <TextView
-                android:id="@+id/txtDescriptionStatistics"
-                style="@style/footer_descriptions_style"
-                android:text="served with the\nUnited Nations Development Programme"
-                app:layout_constraintLeft_toRightOf="@id/txtDescriptionLocation"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtHeaderStatistics" />
-
-            <LinearLayout
-                android:id="@+id/footer"
-                android:layout_width="match_parent"
-                android:layout_height="84dp"
-                android:background="@color/custom_blue"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/vv_about">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="5dp"
-                    android:text="@string/water"
-                    android:textColor="#22A5DD"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/carter_one"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="5dp"
-                    android:text="@string/sun"
-                    android:fontFamily="@font/carter_one"
-                    android:textColor="#F3BC17"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="5dp"
-                    android:text="@string/earth"
-                    android:fontFamily="@font/carter_one"
-                    android:textColor="#80F308"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/nature"
-                    android:fontFamily="@font/carter_one"
-                    android:textColor="#80F308"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:ignore="HardcodedText" />
-
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
-</LinearLayout>
+</ScrollView>
