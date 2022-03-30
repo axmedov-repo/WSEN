@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.google.android.material.tabs.TabLayoutMediator
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.wsen.R
@@ -30,6 +31,7 @@ class AuthScreen:Fragment(R.layout.screen_auth) {
     private val viewModel : AuthScreenViewModel by viewModels<AuthScreenViewModelImpl>()
     private lateinit var authAdapter : AuthScreenAdapter
     private var v : Float = 0F
+    val tabItemList = arrayListOf("Login","Register")
 
     override fun onViewCreated(view : View , savedInstanceState : Bundle?) = binding.scope {
         super.onViewCreated(view , savedInstanceState)
@@ -40,10 +42,14 @@ class AuthScreen:Fragment(R.layout.screen_auth) {
                     requireActivity().finish()
                 }
             })
-
         authAdapter = AuthScreenAdapter(childFragmentManager, lifecycle)
         viewPager.adapter = authAdapter
 
+        TabLayoutMediator(tabLayout,viewPager) { tab, position ->
+            tab.text = tabItemList[position]
+        }.attach()
+
+        viewPager.isUserInputEnabled = false
         authAdapter.apply {
             setRegisterBtnClickListener { registerData ->
                 progressBar.animate()
@@ -56,13 +62,6 @@ class AuthScreen:Fragment(R.layout.screen_auth) {
                 progressBar.visible()
                 viewModel.loginUser(loginData)
             }
-        }
-
-        titleLogin.setOnClickListener {
-            viewPager.currentItem = 0
-        }
-        titleRegister.setOnClickListener {
-            viewPager.currentItem = 1
         }
 
         cardPlaymarket.apply {

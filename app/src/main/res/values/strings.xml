@@ -21,7 +21,7 @@
     <string name="_8942" translatable="false">⋮</string>
     <string name="edit_posts">Edit posts</string>
     <string name="delete_posts">Delete posts</string>
-    <string name="delete">Delete Post</string>
+    <string name="delete">Delete</string>
     <string name="allow">Allow</string>
     <string name="cancel">Cancel</string>
     <string name="are_you_sure_want_to_delete_this_post">Are you sure want to delete this post?</string>
@@ -90,12 +90,11 @@
     <string name="forget_password">Forget password</string>
     <string name="favorite">Favorite</string>
     <string name="per_error">Permission Error</string>
-    <string name="fav_videos" translatable="false">Favourite videos</string>
-    <string name="contribute_videos" translatable="false">Contribute videos</string>
-    <string name="contribute" translatable="false">My contributors</string>
-    <string name="not_contributed" translatable="false">You have not contributed\nanything yet</string>
-
-    <string name="clarify_logout_dialog_title" translatable="false">Chindan ham ilovadan\nchiqishni hohlaysizmi?</string>
-    <string name="clarify_logout_dialog_accept" translatable="false">Ha</string>
-    <string name="clarify_logout_dialog_cancel" translatable="false">Bekor qilish</string>
+    <string name="fav_videos">Favourite videos</string>
+    <string name="contribute_videos">Contribute videos</string>
+    <string name="contribute">My contributors</string>
+    <string name="not_contributed">You have not contributed\nanything yet</string>
+    <string name="yes">Ha</string>
+    <string name="exit_app">Do you really want to exit the app?</string>
+    <string name="firstname">Firstname</string>
 </resources>

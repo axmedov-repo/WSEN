@@ -43,13 +43,12 @@ import java.io.IOException
 class ProfilePage : Fragment(R.layout.page_profile) {
     private val binding by viewBinding(PageProfileBinding::bind)
     private val viewModel: ProfilePageViewModel by viewModels<ProfilePageViewModelImpl>()
-    private var isReadyEmail = false
     private var isReadyPhone = true
 
     var OLD_REQUEST_CODE = 1
     var CAMERA_REQUEST_CODE = 1
     lateinit var currentImagePath: String
-    var imageUri: Uri? = null
+    var imageUri: Uri?=null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
@@ -58,16 +57,6 @@ class ProfilePage : Fragment(R.layout.page_profile) {
 
         addImg.setOnClickListener {
             onClickAddImg()
-        }
-
-        emailEt.apply {
-            addTextChangedListener {
-                emailEtLayout.isErrorEnabled = false
-                it?.let {
-                    isReadyEmail = it.isNotEmpty() && it.contains("@")
-                    check()
-                }
-            }
         }
 
         phoneNumberEt.apply {
@@ -99,7 +88,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
                         null
                     },
                     firstnameEt.text.toString(),
-                    emailEt.text.toString(),
+                    emailTv.text.toString(),
                     usernameTv.text.toString()
                 )
             )
@@ -114,16 +103,16 @@ class ProfilePage : Fragment(R.layout.page_profile) {
     private val getUserDataObserver = Observer<UserData> { userData ->
         binding.apply {
 
-           /* Glide.with(requireContext())
-                .load(userData.photo)
-                .placeholder(R.drawable.default_profile_img2)
-                .error(R.drawable.default_profile_img2)
-                .into(profileImg)*/
+//            Glide.with(requireContext())
+//                .load(userData.photo)
+//                .placeholder(R.drawable.default_profile_img2)
+//                .error(R.drawable.default_profile_img2)
+//                .into(profileImg)
 
             usernameTv.text = userData.username
             firstnameEt.setText(userData.first_name)
             lastnameEt.setText(userData.last_name)
-            emailEt.setText(userData.email)
+            emailTv.text = userData.email
         }
     }
 
@@ -132,18 +121,14 @@ class ProfilePage : Fragment(R.layout.page_profile) {
     }
 
     private val errorObserver = Observer<String> { errorMessage ->
-        if (errorMessage.equals(getString(R.string.errorTextEmailExist))) {
-            binding.emailEtLayout.isErrorEnabled = true
-            binding.emailEtLayout.error = "Email is already exist"
-        } else {
             FancyToast.makeText(
                 requireContext(),
                 errorMessage,
                 FancyToast.LENGTH_LONG,
                 FancyToast.ERROR,
                 true
-            ).show()
-        }
+            )
+                .show()
     }
 
     private val editUserDataObserver = Observer<UserData> {
@@ -168,6 +153,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
         }
 
         builder.show()
+
     }
 
     private var getGalleryImage =
@@ -343,6 +329,6 @@ class ProfilePage : Fragment(R.layout.page_profile) {
         }
 
     private fun check() {
-        binding.btnSaveProfile.isEnabled = isReadyEmail && isReadyPhone
+        binding.btnSaveProfile.isEnabled = isReadyPhone
     }
 }

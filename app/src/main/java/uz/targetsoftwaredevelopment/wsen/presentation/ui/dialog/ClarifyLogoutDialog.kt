@@ -20,12 +20,13 @@ class ClarifyLogoutDialog : DialogFragment() {
         return activity?.let {
             // Use the Builder class for convenient dialog construction
             val builder = AlertDialog.Builder(it)
-            builder.setTitle(getString(R.string.clarify_logout_dialog_title))
-                .setPositiveButton(getString(R.string.clarify_logout_dialog_accept),
+            builder.setTitle(getString(R.string.logout))
+                .setMessage(getString(R.string.exit_app))
+                .setPositiveButton(getString(R.string.yes),
                     DialogInterface.OnClickListener { dialog, id ->
                         positiveBtnListener?.invoke()
                     })
-                .setNegativeButton(getString(R.string.clarify_logout_dialog_cancel),
+                .setNegativeButton(getString(R.string.cancel),
                     DialogInterface.OnClickListener { dialog, id ->
                         dismiss()
                     })
@@ -33,4 +34,5 @@ class ClarifyLogoutDialog : DialogFragment() {
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
+
 }

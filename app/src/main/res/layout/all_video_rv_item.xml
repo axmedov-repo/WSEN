@@ -79,7 +79,7 @@
             android:layout_marginHorizontal="0dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_default_bg"/>
+            android:src="@drawable/ic_place_holder"/>
         <ImageView
             android:id="@+id/play_img"
             android:layout_width="70dp"

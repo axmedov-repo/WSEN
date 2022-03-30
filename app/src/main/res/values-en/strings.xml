@@ -14,14 +14,13 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
-    <string name="profile_name">profile name</string>
     <string name="my_image">my image</string>
     <string name="location">Location</string>
     <string name="description">Description</string>
     <string name="create_title">Create title</string>
     <string name="edit_posts">Edit posts</string>
     <string name="delete_posts">Delete posts</string>
-    <string name="delete">Delete Post</string>
+    <string name="delete">Delete</string>
     <string name="allow">Allow</string>
     <string name="cancel">Cancel</string>
     <string name="are_you_sure_want_to_delete_this_post">Are you sure want to delete this post?</string>
@@ -82,4 +81,8 @@
     <string name="contribute_videos">Contributed videos</string>
     <string name="contribute">My contributors</string>
     <string name="not_contributed">You have not contributed\nanything yet</string>
+    <string name="yes">Yes</string>
+    <string name="profile_name">Profile name</string>
+    <string name="exit_app">Do you really want to exit the app?</string>
+    <string name="firstname">Firstname</string>
 </resources>
