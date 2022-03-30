@@ -97,4 +97,7 @@
     <string name="yes">Ha</string>
     <string name="exit_app">Do you really want to exit the app?</string>
     <string name="firstname">Firstname</string>
+    <string name="video_success_add">The video was successfully added</string>
+    <string name="fill_our_this_fields">Fill out this fields</string>
+    <string name="succed_delete_post">This post was successfully deleted</string>
 </resources>

@@ -28,9 +28,11 @@ class ContributeVideosScreen : Fragment(R.layout.screen_contribute_videos) {
         viewModel.getFavouriteVideos()
 
         contributeVideosAdapter =
-            ContributeVideosAdapter(requireContext(), object : ContributeVideosAdapter.OnWishItemTouchListener {
+            ContributeVideosAdapter(object : ContributeVideosAdapter.OnWishItemTouchListener {
                 override fun onWishClick(videoData: VideoData) {
                     viewModel.changeLike(videoData)
+                    //dialog keladi
+                    //ha bo'lsa unlike bo'ladi va MyContribute dan o'chirb ketadi
                 }
 
                 override fun onPostClick(videoData: VideoData) {

@@ -6,13 +6,13 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.wsen.R
-import uz.targetsoftwaredevelopment.wsen.databinding.PageAllVideoBinding
+import uz.targetsoftwaredevelopment.wsen.data.remote.responses.LikeVideResponseData
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
+import uz.targetsoftwaredevelopment.wsen.databinding.PageAllVideoBinding
 import uz.targetsoftwaredevelopment.wsen.databinding.ScreenBottomSheetDialogBinding
 import uz.targetsoftwaredevelopment.wsen.presentation.ui.adapters.AllVideoRvAdapter
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.AllVideoPageViewModel
@@ -36,14 +36,14 @@ class AllVideoPage:Fragment(R.layout.page_all_video) {
         loadAllVideoData()
         viewModel.getAllVideos()
         viewModel.allVideosLiveData.observe(viewLifecycleOwner , allVideosObserver)
+        viewModel.changeLikeLiveData.observe(viewLifecycleOwner,changeVideoObserver)
     }
 
     private fun loadAllVideoData() {
         allVideoRvAdapter =
-            AllVideoRvAdapter(requireContext() , object:AllVideoRvAdapter.OnItemClickListener {
+            AllVideoRvAdapter(object:AllVideoRvAdapter.OnItemClickListener {
                 override fun onItemClick(videoData : VideoData) {
                     videoClickedListener?.invoke(videoData)
-                    findNavController().navigate(R.id.watchVideoScreen)
                 }
 
                 override fun onShareClick(videoData : VideoData) {
@@ -62,17 +62,13 @@ class AllVideoPage:Fragment(R.layout.page_all_video) {
                     bottomSheetDialog.setContentView(screenBottomSheetDialogScreen.root)
 
                     screenBottomSheetDialogScreen.sendReportCv.setOnClickListener {
-
+                        bottomSheetDialog.dismiss()
                     }
                     bottomSheetDialog.show()
                 }
 
                 override fun onClickLike(videoData : VideoData) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onClickUnLike(videoData : VideoData) {
-                    TODO("Not yet implemented")
+                    viewModel.changeLikeVideo(videoData)
                 }
             })
         binding.allVideRv.adapter = allVideoRvAdapter
@@ -81,4 +77,9 @@ class AllVideoPage:Fragment(R.layout.page_all_video) {
     private val allVideosObserver = Observer<List<VideoData?>?> {
         allVideoRvAdapter.submitList(it)
     }
+    private val changeVideoObserver = Observer<LikeVideResponseData?> {
+
+    }
+
+
 }

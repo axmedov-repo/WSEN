@@ -38,63 +38,63 @@
                 android:id="@+id/ll1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:padding="8dp"
                 android:background="@color/white"
                 android:orientation="vertical">
 
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:padding="10dp">-->
 
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/my_profile_img"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/default_profile_img"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+<!--                    <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                        android:id="@+id/my_profile_img"-->
+<!--                        android:layout_width="35dp"-->
+<!--                        android:layout_height="35dp"-->
+<!--                        android:scaleType="centerCrop"-->
+<!--                        android:src="@drawable/default_profile_img"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@id/my_profile_img"
-                        app:layout_constraintTop_toTopOf="parent">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="10dp"-->
+<!--                        android:gravity="center_horizontal"-->
+<!--                        android:orientation="vertical"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintLeft_toRightOf="@id/my_profile_img"-->
+<!--                        app:layout_constraintTop_toTopOf="parent">-->
 
-                        <TextView
-                            android:id="@+id/edit_username_tv"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/username"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/edit_username_tv"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="@string/username"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textSize="16sp"-->
+<!--                            android:textStyle="bold" />-->
 
-                        <TextView
-                            android:id="@+id/edit_time_tv"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/create_video_time"
-                            android:textColor="#322E2E"
-                            android:textSize="14sp"
-                            android:textStyle="normal" />
-                    </LinearLayout>
+<!--                        <TextView-->
+<!--                            android:id="@+id/edit_time_tv"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="@string/create_video_time"-->
+<!--                            android:textColor="#322E2E"-->
+<!--                            android:textSize="14sp"-->
+<!--                            android:textStyle="normal" />-->
+<!--                    </LinearLayout>-->
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="2dp"
-                    android:background="#A8A2A2" />
+<!--                <View-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_marginTop="2dp"-->
+<!--                    android:background="#A8A2A2" />-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -241,7 +241,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/btn_bg"
-                android:enabled="false"
+                android:enabled="true"
                 android:text="@string/save"
                 android:textAllCaps="false"
                 android:textColor="@color/white"

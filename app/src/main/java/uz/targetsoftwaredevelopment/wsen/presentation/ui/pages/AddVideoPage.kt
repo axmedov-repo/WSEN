@@ -25,6 +25,7 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.wsen.R
 import uz.targetsoftwaredevelopment.wsen.app.App
@@ -59,6 +60,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
         mediaController = MediaController(requireActivity())
         mediaController.setAnchorView(videoView)
         videoView.setMediaController(mediaController)
+        requestMultiplePermissions()
 
         fab.setOnClickListener {
             requestMultiplePermissions()
@@ -69,10 +71,11 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
 
         addVideoCv.setOnClickListener {
             Log.d("ADDBTN", "add btn bosildi")
-            if (videoUri != Uri.EMPTY) {
+            if (videoUri != Uri.EMPTY && createTitleEt.text.isNotEmpty() && descriptionEt.text.isNotEmpty() ) {
                 getVideoFile(videoUri)
             } else {
-                Log.d("ADDBTN", "VIDEO URI IS EMPTY")
+                FancyToast.makeText(requireContext(),getString(R.string.fill_our_this_fields),FancyToast.LENGTH_LONG,FancyToast.INFO,true)
+                    .show()
             }
         }
 
@@ -83,6 +86,12 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
     private val addVideoObserver = Observer<AddVideoResponse> {
         binding.progressView.gone()
         binding.progressView.clearAnimation()
+        binding.createTitleEt.setText("")
+        binding.descriptionEt.setText("")
+        binding.locationEt.setText("")
+
+        FancyToast.makeText(requireContext(),getString(R.string.video_success_add),FancyToast.LENGTH_LONG,FancyToast.SUCCESS,true)
+            .show()
     }
 
     private val videoCompressedObserver = Observer<File> { compressedVideoFile ->
@@ -189,7 +198,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                     if (report.areAllPermissionsGranted()) {
                         isGranted = true
-                        showPictureDialog()
+//                        showPictureDialog()
                     }
 
                     if (report.isAnyPermissionPermanentlyDenied) {

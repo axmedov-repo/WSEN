@@ -11,26 +11,28 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import uz.targetsoftwaredevelopment.wsen.R
+import uz.targetsoftwaredevelopment.wsen.app.App
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.wsen.databinding.MyPostsItemBinding
 
-class MyPostsAdapter(val context:Context,val listener:OnPostItemTouchListener)
+class MyPostsAdapter(val listener:OnPostItemTouchListener)
     :ListAdapter<VideoData,MyPostsAdapter.MyViewHolder>(MyDiffUtil) {
 
     inner class MyViewHolder(private val myPostsItemBinding : MyPostsItemBinding)
         :RecyclerView.ViewHolder(myPostsItemBinding.root){
         fun onBind(videoData : VideoData){
             myPostsItemBinding.apply {
-                Glide.with(context)
+
+                Glide.with(myPostItemImageView.context)
                     .load(videoData.preload_img)
-                    .error(R.drawable.planet_earth)
+                    .error(R.drawable.ic_place_holder)
                     .into(myPostItemImageView)
 
                 myPostTitleTv.text = videoData.title
                 myPostAddressTv.text = videoData.location
 
                 menuTv.setOnClickListener {
-                    val popupMenu: PopupMenu = PopupMenu(context,myPostsItemBinding.menuTv)
+                    val popupMenu: PopupMenu = PopupMenu(App.instance,myPostsItemBinding.menuTv)
                     popupMenu.inflate(R.menu.rv_posts_menu)
                     popupMenu.setOnMenuItemClickListener {
                         when(it.itemId){
@@ -40,12 +42,12 @@ class MyPostsAdapter(val context:Context,val listener:OnPostItemTouchListener)
                             R.id.menu_delete_posts->{
                                 listener.onMenuDelete(videoData)
                             }
-                            R.id.menu_waiting->{
-                                listener.onMenuWaiting(videoData)
-                            }
-                            R.id.menu_finished->{
-                                listener.onMenuFinished(videoData)
-                            }
+//                            R.id.menu_waiting->{
+//                                listener.onMenuWaiting(videoData)
+//                            }
+//                            R.id.menu_finished->{
+//                                listener.onMenuFinished(videoData)
+//                            }
                         }
                         true
                     }
@@ -86,7 +88,7 @@ class MyPostsAdapter(val context:Context,val listener:OnPostItemTouchListener)
         fun onMenuEdit(videoData : VideoData)
         fun onMenuDelete(videoData : VideoData)
         fun onPostClick(videoData : VideoData)
-        fun onMenuWaiting(videoData : VideoData)
-        fun onMenuFinished(videoData : VideoData)
+//        fun onMenuWaiting(videoData : VideoData)
+//        fun onMenuFinished(videoData : VideoData)
     }
 }

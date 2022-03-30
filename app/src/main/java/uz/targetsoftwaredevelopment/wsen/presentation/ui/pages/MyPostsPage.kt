@@ -41,7 +41,7 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
         viewModel.getAllMyVideos()
 
         myPostsAdapter =
-            MyPostsAdapter(requireContext(), object : MyPostsAdapter.OnPostItemTouchListener {
+            MyPostsAdapter(object : MyPostsAdapter.OnPostItemTouchListener {
                 override fun onMenuEdit(videoData: VideoData) {
                     editMyVideoClickedListener?.invoke(videoData)
                 }
@@ -60,36 +60,27 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
 
                     dialogDeleteBinding.apply {
                         cancelPostsCv.setOnClickListener {
-
-                            Toast.makeText(
-                                requireContext(),
-                                getString(R.string.cancel),
-                                Toast.LENGTH_SHORT
-                            ).show()
                             deleteBuilder.cancel()
                         }
 
                         deletePostCv.setOnClickListener {
                             // bu yerga postni ochirish kodi yoziladi
-                            Toast.makeText(
-                                requireContext(),
-                                getString(R.string.delete_posts),
-                                Toast.LENGTH_SHORT
-                            )
-                                .show()
+
+                            FancyToast.makeText(requireContext(), getString(R.string.succed_delete_post), FancyToast.LENGTH_LONG, FancyToast.CONFUSING,
+                                R.drawable.delete_btn , false)
                             deleteBuilder.cancel()
                         }
                     }
+
                     deleteBuilder.show()
                 }
 
-                override fun onMenuWaiting(videoData: VideoData) {
-                    TODO("Not yet implemented")
-                }
-
-                override fun onMenuFinished(videoData: VideoData) {
-                    TODO("Not yet implemented")
-                }
+//                override fun onMenuWaiting(videoData: VideoData) {
+//
+//                }
+//
+//                override fun onMenuFinished(videoData: VideoData) {
+//                }
             })
         myVideosRv.adapter = myPostsAdapter
 
@@ -113,7 +104,7 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
                 errorMessage,
                 FancyToast.LENGTH_LONG,
                 FancyToast.WARNING,
-                true
+                false
             ).show()
         }
     }

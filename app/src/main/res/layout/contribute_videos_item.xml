@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#13C81A">
+        android:background="#21CF28">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/wishImage_cv"
@@ -33,7 +33,7 @@
                     android:layout_height="match_parent"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/planet_earth" />
+                    android:src="@drawable/ic_place_holder" />
 
                 <ImageView
                     android:id="@+id/playImg"
@@ -60,7 +60,6 @@
             android:maxLines="2"
             android:paddingHorizontal="5dp"
             android:paddingTop="5dp"
-            android:text=""
             android:textColor="#FFFFFF"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -73,11 +72,10 @@
             android:id="@+id/wishAddress_tv"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:gravity="center_vertical"
+            android:gravity="start"
             android:maxLines="2"
             android:paddingHorizontal="5dp"
             android:paddingBottom="5dp"
-            android:text=""
             android:textColor="#C9FFFFFF"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"

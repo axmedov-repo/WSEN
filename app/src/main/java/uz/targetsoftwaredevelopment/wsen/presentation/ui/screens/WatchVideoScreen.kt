@@ -18,9 +18,12 @@ class WatchVideoScreen : Fragment(R.layout.screen_watch_video) {
     private val binding by viewBinding(ScreenWatchVideoBinding::bind)
     private lateinit var player: ExoPlayer
     private val args: WatchVideoScreenArgs by navArgs()
+    var isLike = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
+
+        loadData()
 
         player = ExoPlayer.Builder(requireContext()).build()
         val onlineUri: Uri = Uri.parse(args.videoData.video)
@@ -28,6 +31,25 @@ class WatchVideoScreen : Fragment(R.layout.screen_watch_video) {
         watchVideoView.player = player
         player.setMediaItem(mediaItem)
         player.prepare()
+
+
+        likeVideoImg.setOnClickListener {
+            isLike = if(isLike){
+                likeVideoImg.setImageResource(R.drawable.ic_heart_unlike)
+                false
+            }else{
+                likeVideoImg.setImageResource(R.drawable.ic_heart)
+                true
+            }
+        }
+
+
+    }
+
+    private fun loadData() {
+//        binding.apply {
+//            if(args.videoData.)
+//        }
     }
 
     override fun onStop() {
