@@ -36,7 +36,7 @@
                     app:hive_color="@color/main_green"
                     android:visibility="gone"
                     app:hive_cornerRadius="20"
-                    app:hive_image="@drawable/biodegradable"
+                    app:hive_image="@drawable/hive_image"
                     app:hive_maxAlpha="255"
                     app:hive_rainbow="true"
                     app:hive_shrink="true" />

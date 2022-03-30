@@ -157,40 +157,6 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
 //                videoView.requestFocus()
                 videoView.start()
             }
-//            val uriList:ArrayList<Uri> = ArrayList()
-//            uriList.add(contentURI!!)
-//            VideoCompressor.start(requireContext(), uriList,true,
-//                Environment.DIRECTORY_MOVIES,object :CompressionListener{
-//                override fun onCancelled(index : Int) {
-//                    Toast.makeText(requireContext() , "cancel" , Toast.LENGTH_SHORT).show()
-//                }
-//
-//                override fun onFailure(index : Int , failureMessage : String) {
-//                    Toast.makeText(requireContext() , "failure $failureMessage" , Toast.LENGTH_SHORT).show()
-//                }
-//
-//                override fun onProgress(index : Int , percent : Float) {
-//                    Toast.makeText(requireContext() , "progress" , Toast.LENGTH_SHORT).show()
-//
-//                }
-//
-//                override fun onStart(index : Int) {
-//                    Toast.makeText(requireContext() , "start" , Toast.LENGTH_SHORT).show()
-//                }
-//
-//                override fun onSuccess(index : Int , size : Long , path : String?) {
-//                    Toast.makeText(requireContext() , "success" , Toast.LENGTH_SHORT).show()
-//                }
-//            },
-//                Configuration(
-//                    VideoQuality.MEDIUM,24,true,3677198,
-//                    disableAudio = false ,
-//                    keepOriginalResolution = false ,
-//                    videoHeight = 360.0 ,
-//                    videoWidth = 480.0
-//                )
-//            )
-
         }
     }
 
@@ -223,6 +189,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                     if (report.areAllPermissionsGranted()) {
                         isGranted = true
+                        showPictureDialog()
                     }
 
                     if (report.isAnyPermissionPermanentlyDenied) {
