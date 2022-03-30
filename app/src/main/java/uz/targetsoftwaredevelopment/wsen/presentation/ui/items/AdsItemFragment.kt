@@ -19,6 +19,6 @@ class AdsItemFragment : Fragment(R.layout.item_ads) {
         val bundle = requireArguments()
         val data = bundle.getSerializable("AD_DATA") as AdData
 
-        vvAd.setVideoURI(data.videoUrl)
+        vvAd.setImageResource(data.Image)
     }
 }

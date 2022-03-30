@@ -114,11 +114,11 @@ class ProfilePage : Fragment(R.layout.page_profile) {
     private val getUserDataObserver = Observer<UserData> { userData ->
         binding.apply {
 
-            Glide.with(requireContext())
+           /* Glide.with(requireContext())
                 .load(userData.photo)
                 .placeholder(R.drawable.default_profile_img2)
                 .error(R.drawable.default_profile_img2)
-                .into(profileImg)
+                .into(profileImg)*/
 
             usernameTv.text = userData.username
             firstnameEt.setText(userData.first_name)
