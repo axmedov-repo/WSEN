@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -15,11 +16,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.bumptech.glide.Glide
 import com.google.android.material.navigation.NavigationView
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.wsen.R
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.LogoutResponse
+import uz.targetsoftwaredevelopment.wsen.data.remote.responses.UserDataResponse
 import uz.targetsoftwaredevelopment.wsen.databinding.ScreenBasicNavBinding
 import uz.targetsoftwaredevelopment.wsen.presentation.ui.adapters.BasicScreenAdapter
 import uz.targetsoftwaredevelopment.wsen.presentation.ui.dialog.ClarifyLogoutDialog
@@ -28,16 +31,22 @@ import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.screensviewmode
 import uz.targetsoftwaredevelopment.wsen.utils.CheckInternetReceiver
 import uz.targetsoftwaredevelopment.wsen.utils.scope
 
+
 @AndroidEntryPoint
 class BasicScreen : Fragment(R.layout.screen_basic_nav),
     NavigationView.OnNavigationItemSelectedListener {
     private val binding by viewBinding(ScreenBasicNavBinding::bind)
     private val viewModel: BasicScreenViewModel by viewModels<BasicScreenViewModelImpl>()
     private val checkInternetReceiver = CheckInternetReceiver()
+    private lateinit var drawerImage: ImageView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
         val adapter = BasicScreenAdapter(childFragmentManager, lifecycle)
+        viewModel.getUserData()
+        val headerView: View = navigationView.getHeaderView(0)
+        drawerImage = headerView.findViewById<View>(R.id.header_user_img) as ImageView
+
         adapter.apply {
             setVideoClickListener {
                 findNavController().navigate(
@@ -98,8 +107,16 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
 
         viewModel.logoutUserResponseLiveData.observe(viewLifecycleOwner, logoutUserObserver)
         viewModel.errorLiveData.observe(viewLifecycleOwner, errorObserver)
+        viewModel.userDataLiveDataRequest.observe(viewLifecycleOwner, userDataObserver)
     }
 
+    private val userDataObserver = Observer<UserDataResponse> { userDataResponse ->
+        Glide.with(drawerImage.context)
+            .load(userDataResponse.photo)
+            .placeholder(R.drawable.default_profile_img2)
+            .error(R.drawable.default_profile_img2)
+            .into(drawerImage)
+    }
     private val logoutUserObserver = Observer<LogoutResponse> {
         findNavController().navigate(BasicScreenDirections.actionBasicScreenToAuthScreen())
     }

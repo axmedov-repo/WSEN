@@ -4,7 +4,6 @@ import kotlinx.coroutines.flow.Flow
 import uz.targetsoftwaredevelopment.wsen.data.enums.SplashOpenScreenTypes
 import uz.targetsoftwaredevelopment.wsen.data.remote.requests.*
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.*
-import java.util.*
 
 interface BaseRepository {
 
@@ -28,13 +27,13 @@ interface BaseRepository {
 
     fun setLoginErrorListener(f: (String) -> Unit)
 
-    fun getUserData(): Flow<Result<UserData>>
+    fun getUserData(): Flow<Result<UserDataResponse>>
 
     fun getUserPhoneNumber(): String
 
     fun setUserPhoneNumber(phoneNumber: String)
 
-    fun editUserData(userData: UserData): Flow<Result<UserData>>
+    fun editUserData(userDataRequest: UserDataRequest): Flow<Result<UserDataResponse>>
 
     fun getAllMyVideos(): Flow<Result<List<VideoData?>>>
 

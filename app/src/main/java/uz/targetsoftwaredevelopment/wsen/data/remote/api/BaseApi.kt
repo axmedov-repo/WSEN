@@ -32,15 +32,15 @@ interface BaseApi {
     suspend fun getUserData(
         @Header("Authorization") token: String,
         @Url url: String
-    ): Response<UserData>
+    ): Response<UserDataResponse>
 
     // client/me/userni id si/
     @PUT
     suspend fun editUserData(
         @Header("Authorization") token: String,
         @Url url: String,
-        @Body data: UserData
-    ): Response<UserData>
+        @Body dataRequest: UserDataRequest
+    ): Response<UserDataResponse>
 
     // api/my-post/<int:post_id>/
     @PUT

@@ -43,7 +43,6 @@ class AllVideoPage:Fragment(R.layout.page_all_video) {
             AllVideoRvAdapter(requireContext() , object:AllVideoRvAdapter.OnItemClickListener {
                 override fun onItemClick(videoData : VideoData) {
                     videoClickedListener?.invoke(videoData)
-                    findNavController().navigate(R.id.watchVideoScreen)
                 }
 
                 override fun onShareClick(videoData : VideoData) {

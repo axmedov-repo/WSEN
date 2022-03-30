@@ -15,6 +15,7 @@ import uz.targetsoftwaredevelopment.wsen.data.remote.responses.*
 import uz.targetsoftwaredevelopment.wsen.domain.repository.BaseRepository
 import javax.inject.Inject
 
+
 class BaseRepositoryImpl @Inject constructor(
     private val baseApi: BaseApi,
     private val localStorage: LocalStorage,
@@ -123,7 +124,7 @@ class BaseRepositoryImpl @Inject constructor(
             }
         }.flowOn(Dispatchers.IO)
 
-    override fun getUserData(): Flow<Result<UserData>> = flow {
+    override fun getUserData(): Flow<Result<UserDataResponse>> = flow {
         val response =
             baseApi.getUserData(
                 localStorage.token,
@@ -142,16 +143,16 @@ class BaseRepositoryImpl @Inject constructor(
         localStorage.userPhoneNumber = phoneNumber
     }
 
-    override fun editUserData(userData: UserData): Flow<Result<UserData>> = flow {
-        val response = baseApi.editUserData(
-            localStorage.token,
-            "${safeStorage.base_url}client/me/${localStorage.userId}/",
-            userData
-        )
-        if (response.isSuccessful) {
-            emit(Result.success(response.body()!!))
-        }
-    }.flowOn(Dispatchers.IO)
+    override fun editUserData(userDataRequest: UserDataRequest): Flow<Result<UserDataResponse>> =
+        flow {
+            val response = baseApi.editUserData(
+                localStorage.token,
+                "${safeStorage.base_url}client/me/${localStorage.userId}/", userDataRequest
+            )
+            if (response.isSuccessful) {
+                emit(Result.success(response.body()!!))
+            }
+        }.flowOn(Dispatchers.IO)
 
     override fun getAllMyVideos(): Flow<Result<List<VideoData?>>> = flow {
         val response = baseApi.getAllMyVideos(localStorage.token)
@@ -189,7 +190,7 @@ class BaseRepositoryImpl @Inject constructor(
         }
     }
 
-   /* override fun deleteMyVideo(videoData: EditVideoRequest) {
+    /* override fun deleteMyVideo(videoData: EditVideoRequest) {
 
-    }*/
+     }*/
 }

@@ -7,7 +7,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.targetsoftwaredevelopment.wsen.R
-import uz.targetsoftwaredevelopment.wsen.data.remote.requests.UserData
+import uz.targetsoftwaredevelopment.wsen.data.remote.requests.UserDataRequest
+import uz.targetsoftwaredevelopment.wsen.data.remote.responses.UserDataResponse
 import uz.targetsoftwaredevelopment.wsen.domain.repository.BaseRepository
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.ProfilePageViewModel
 import uz.targetsoftwaredevelopment.wsen.utils.isConnected
@@ -17,16 +18,16 @@ import javax.inject.Inject
 class ProfilePageViewModelImpl @Inject constructor(private val baseRepository: BaseRepository) :
     ViewModel(), ProfilePageViewModel {
 
-    override val getUserDataLiveData = MutableLiveData<UserData>()
+    override val getUserDataLiveDataRequest = MutableLiveData<UserDataResponse>()
     override val getUserPhoneNumberLiveData = MutableLiveData<String>()
     override val errorLiveData = MutableLiveData<String>()
-    override val editUserDataLiveData = MutableLiveData<UserData>()
+    override val editUserDataLiveDataRequest = MutableLiveData<UserDataResponse>()
 
     override fun getUserData() {
         if (isConnected()) {
             baseRepository.getUserData().onEach {
                 it.onSuccess {
-                    getUserDataLiveData.value = it
+                    getUserDataLiveDataRequest.value = it
                 }
                 it.onFailure {
                     errorLiveData.value = it.message
@@ -45,11 +46,11 @@ class ProfilePageViewModelImpl @Inject constructor(private val baseRepository: B
         baseRepository.setUserPhoneNumber(phoneNumber)
     }
 
-    override fun editUserData(userData: UserData) {
+    override fun editUserData(userDataRequest: UserDataRequest) {
         if (isConnected()) {
-            baseRepository.editUserData(userData).onEach {
+            baseRepository.editUserData(userDataRequest).onEach {
                 it.onSuccess {
-                    editUserDataLiveData.value = it
+                    editUserDataLiveDataRequest.value = it
                 }
                 it.onFailure {
                     errorLiveData.value = it.message

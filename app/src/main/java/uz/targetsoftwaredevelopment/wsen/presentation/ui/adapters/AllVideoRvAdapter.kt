@@ -60,16 +60,17 @@ class AllVideoRvAdapter(val context: Context, var listener: OnItemClickListener)
 
         fun onBind(videoData: VideoData) {
             allVideoRvItemBinding.apply {
-                Glide.with(context)
-                    .load(videoData.preload_img)
+                Glide.with(accountImg.context)
+                    .load(videoData.owner!!.photo)
                     .centerCrop()
                     .placeholder(R.drawable.default_profile_img)
                     .into(accountImg)
 
-                accountNameTv.text = videoData.owner?.username
+                accountNameTv.text = videoData.owner.username
                 dateTv.text = videoData.created_at
 
-                Glide.with(context).load(videoData.preload_img)
+                Glide.with(itemAllVideosImg.context)
+                    .load(videoData.preload_img)
                     .centerCrop()
                     .placeholder(R.drawable.ic_place_holder)
                     .into(itemAllVideosImg)

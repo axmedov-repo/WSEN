@@ -28,7 +28,8 @@ import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.wsen.BuildConfig
 import uz.targetsoftwaredevelopment.wsen.R
-import uz.targetsoftwaredevelopment.wsen.data.remote.requests.UserData
+import uz.targetsoftwaredevelopment.wsen.data.remote.requests.UserDataRequest
+import uz.targetsoftwaredevelopment.wsen.data.remote.responses.UserDataResponse
 import uz.targetsoftwaredevelopment.wsen.databinding.DialogCameraBinding
 import uz.targetsoftwaredevelopment.wsen.databinding.DialogPermissionBinding
 import uz.targetsoftwaredevelopment.wsen.databinding.PageProfileBinding
@@ -48,7 +49,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
     var OLD_REQUEST_CODE = 1
     var CAMERA_REQUEST_CODE = 1
     lateinit var currentImagePath: String
-    var imageUri: Uri?=null
+    var imageUri: Uri? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
@@ -79,8 +80,11 @@ class ProfilePage : Fragment(R.layout.page_profile) {
         }
 
         btnSaveProfile.setOnClickListener {
+            if (isReadyPhone) {
+                viewModel.setUserPhoneNumber(phoneNumberEt.text.toString())
+            }
             viewModel.editUserData(
-                UserData(
+                UserDataRequest(
                     lastnameEt.text.toString(),
                     if (imageUri != null) {
                         File(imageUri!!.path!!)
@@ -94,20 +98,20 @@ class ProfilePage : Fragment(R.layout.page_profile) {
             )
         }
 
-        viewModel.getUserDataLiveData.observe(viewLifecycleOwner, getUserDataObserver)
+        viewModel.getUserDataLiveDataRequest.observe(viewLifecycleOwner, getUserDataObserver)
         viewModel.getUserPhoneNumberLiveData.observe(viewLifecycleOwner, getUserPhoneNumberObserver)
         viewModel.errorLiveData.observe(viewLifecycleOwner, errorObserver)
-        viewModel.editUserDataLiveData.observe(viewLifecycleOwner, editUserDataObserver)
+        viewModel.editUserDataLiveDataRequest.observe(viewLifecycleOwner, editUserDataObserver)
     }
 
-    private val getUserDataObserver = Observer<UserData> { userData ->
+    private val getUserDataObserver = Observer<UserDataResponse> { userData ->
         binding.apply {
 
-//            Glide.with(requireContext())
-//                .load(userData.photo)
-//                .placeholder(R.drawable.default_profile_img2)
-//                .error(R.drawable.default_profile_img2)
-//                .into(profileImg)
+            Glide.with(profileImg.context)
+                .load(userData.photo)
+                .placeholder(R.drawable.default_profile_img2)
+                .error(R.drawable.default_profile_img2)
+                .into(profileImg)
 
             usernameTv.text = userData.username
             firstnameEt.setText(userData.first_name)
@@ -121,17 +125,16 @@ class ProfilePage : Fragment(R.layout.page_profile) {
     }
 
     private val errorObserver = Observer<String> { errorMessage ->
-            FancyToast.makeText(
-                requireContext(),
-                errorMessage,
-                FancyToast.LENGTH_LONG,
-                FancyToast.ERROR,
-                true
-            )
-                .show()
+        FancyToast.makeText(
+            requireContext(),
+            errorMessage,
+            FancyToast.LENGTH_LONG,
+            FancyToast.ERROR,
+            true
+        ).show()
     }
 
-    private val editUserDataObserver = Observer<UserData> {
+    private val editUserDataObserver = Observer<UserDataResponse> {
         viewModel.getUserData()
     }
 
@@ -183,7 +186,6 @@ class ProfilePage : Fragment(R.layout.page_profile) {
                     )
                     takePhoto.launch(imageUri)
                 }
-
 
                 override fun onPermissionDenied(response: PermissionDeniedResponse) {
                     if (response.isPermanentlyDenied) {
