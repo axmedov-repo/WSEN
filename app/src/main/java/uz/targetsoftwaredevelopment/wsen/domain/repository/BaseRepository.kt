@@ -39,7 +39,7 @@ interface BaseRepository {
 
     fun editMyVideo(videoData: EditVideoRequest): Flow<Result<EditVideoResponse>>
 
-//    fun deleteMyVideo(videoData: EditVideoRequest)
+    fun deleteMyVideo(videoData: VideoData): Flow<Result<String>>
 
     fun getAllFavouriteVideos(): Flow<Result<AllFavouriteVideosResponse>>
 

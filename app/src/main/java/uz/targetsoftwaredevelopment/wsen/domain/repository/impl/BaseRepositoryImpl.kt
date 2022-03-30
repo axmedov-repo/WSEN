@@ -190,7 +190,15 @@ class BaseRepositoryImpl @Inject constructor(
         }
     }
 
-    /* override fun deleteMyVideo(videoData: EditVideoRequest) {
-
-     }*/
+    override fun deleteMyVideo(videoData: VideoData): Flow<Result<String>> = flow {
+        Log.d("DELETE_VIDEO", "REPOSITORY g kridi")
+        val response = baseApi.deleteMyVideo(
+            localStorage.token,
+            "${safeStorage.base_url}api/my-post/${videoData.id}/"
+        )
+        if (response.code() == 204) {
+        Log.d("DELETE_VIDEO", "REPOSITORY success")
+            emit(Result.success("Deleted"))
+        }
+    }
 }

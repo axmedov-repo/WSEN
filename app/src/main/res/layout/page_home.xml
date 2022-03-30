@@ -111,7 +111,7 @@
         <TextView
             android:id="@+id/txtHeaderVolunteers"
             style="@style/footer_headers_style"
-            android:text="8,281 UN\nVolunteers"
+            android:text="0"
             app:layout_constraintLeft_toLeftOf="@id/imgVolunteersNumber"
             app:layout_constraintRight_toRightOf="@id/imgVolunteersNumber"
             app:layout_constraintTop_toBottomOf="@id/imgVolunteersNumber" />
@@ -135,7 +135,7 @@
         <TextView
             android:id="@+id/txtHeaderLocation"
             style="@style/footer_headers_style"
-            android:text="81 %"
+            android:text="0 %"
             app:layout_constraintLeft_toLeftOf="@id/imgLocation"
             app:layout_constraintRight_toRightOf="@id/imgLocation"
             app:layout_constraintTop_toBottomOf="@id/imgLocation" />
@@ -159,7 +159,7 @@
         <TextView
             android:id="@+id/txtHeaderStatistics"
             style="@style/footer_headers_style"
-            android:text="2,570 UN\nVolunteers"
+            android:text="0 Volunteers"
             app:layout_constraintLeft_toLeftOf="@id/imgStatistics"
             app:layout_constraintRight_toRightOf="@id/imgStatistics"
             app:layout_constraintTop_toBottomOf="@id/imgStatistics" />

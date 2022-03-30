@@ -3,7 +3,6 @@ package uz.targetsoftwaredevelopment.wsen.presentation.ui.pages
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -25,6 +24,7 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
     private val binding by viewBinding(PageMyPostsBinding::bind)
     private val viewModel: MyPostsPageViewModel by viewModels<MyPostsPageViewModelImpl>()
     private lateinit var myPostsAdapter: MyPostsAdapter
+    private var deletingVideoPos: Int = 0
 
     private var editMyVideoClickedListener: ((VideoData) -> Unit)? = null
     fun setEditMyVideoClickedListener(f: (VideoData) -> Unit) {
@@ -42,15 +42,16 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
 
         myPostsAdapter =
             MyPostsAdapter(object : MyPostsAdapter.OnPostItemTouchListener {
-                override fun onMenuEdit(videoData: VideoData) {
+                override fun onMenuEdit(videoData: VideoData, pos: Int) {
                     editMyVideoClickedListener?.invoke(videoData)
                 }
 
-                override fun onPostClick(videoData: VideoData) {
+                override fun onPostClick(videoData: VideoData, pos: Int) {
                     watchMyVideoClickedListener?.invoke(videoData)
                 }
 
-                override fun onMenuDelete(videoData: VideoData) {
+                override fun onMenuDelete(videoData: VideoData, pos: Int) {
+                    deletingVideoPos = pos
                     val deleteDialog = AlertDialog.Builder(requireContext())
                     val dialogDeleteBinding = DialogDeleteBinding.inflate(layoutInflater)
                     deleteDialog.setView(dialogDeleteBinding.root)
@@ -64,14 +65,10 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
                         }
 
                         deletePostCv.setOnClickListener {
-                            // bu yerga postni ochirish kodi yoziladi
-
-                            FancyToast.makeText(requireContext(), getString(R.string.succed_delete_post), FancyToast.LENGTH_LONG, FancyToast.CONFUSING,
-                                R.drawable.delete_btn , false)
+                            viewModel.deleteMyVideo(videoData)
                             deleteBuilder.cancel()
                         }
                     }
-
                     deleteBuilder.show()
                 }
 
@@ -86,12 +83,26 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
 
         viewModel.allMyVideosLiveData.observe(viewLifecycleOwner, allMyVideosObserver)
         viewModel.errorLiveData.observe(viewLifecycleOwner, errorObserver)
+        viewModel.videoDeletedLiveData.observe(viewLifecycleOwner, videoDeleteObserver)
+    }
+
+    private val videoDeleteObserver = Observer<Unit> {
+        myPostsAdapter.notifyItemRemoved(deletingVideoPos)
+        FancyToast.makeText(
+            requireContext(),
+            getString(R.string.succed_delete_post),
+            FancyToast.LENGTH_LONG,
+            FancyToast.CONFUSING,
+            R.drawable.delete_btn,
+            false
+        )
     }
 
     private val allMyVideosObserver = Observer<List<VideoData?>> {
         if (it.isEmpty()) {
             binding.havePostTv.visible()
         } else {
+            myPostsAdapter.currentList.clear()
             myPostsAdapter.submitList(it)
         }
     }

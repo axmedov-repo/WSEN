@@ -37,10 +37,10 @@ class MyPostsAdapter(val listener:OnPostItemTouchListener)
                     popupMenu.setOnMenuItemClickListener {
                         when(it.itemId){
                             R.id.menu_edit_posts->{
-                                listener.onMenuEdit(videoData)
+                                listener.onMenuEdit(videoData, absoluteAdapterPosition)
                             }
                             R.id.menu_delete_posts->{
-                                listener.onMenuDelete(videoData)
+                                listener.onMenuDelete(videoData, absoluteAdapterPosition)
                             }
 //                            R.id.menu_waiting->{
 //                                listener.onMenuWaiting(videoData)
@@ -54,7 +54,7 @@ class MyPostsAdapter(val listener:OnPostItemTouchListener)
                     popupMenu.show()
                 }
                 imageCv.setOnClickListener {
-                    listener.onPostClick(videoData)
+                    listener.onPostClick(videoData, absoluteAdapterPosition)
                 }
 
             }
@@ -85,9 +85,9 @@ class MyPostsAdapter(val listener:OnPostItemTouchListener)
     }
 
     interface OnPostItemTouchListener{
-        fun onMenuEdit(videoData : VideoData)
-        fun onMenuDelete(videoData : VideoData)
-        fun onPostClick(videoData : VideoData)
+        fun onMenuEdit(videoData : VideoData, pos : Int)
+        fun onMenuDelete(videoData : VideoData, pos : Int)
+        fun onPostClick(videoData : VideoData, pos : Int)
 //        fun onMenuWaiting(videoData : VideoData)
 //        fun onMenuFinished(videoData : VideoData)
     }
