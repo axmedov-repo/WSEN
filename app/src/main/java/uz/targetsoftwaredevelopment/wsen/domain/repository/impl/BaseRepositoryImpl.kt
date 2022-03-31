@@ -214,7 +214,6 @@ class BaseRepositoryImpl @Inject constructor(
             emit(Result.success("Deleted"))
         }
     }.flowOn(Dispatchers.IO)
-    }
 
     override fun spamVideo(spamVideoRequest: SpamVideoRequest): Flow<Result<SpamVideoResponse>> =
         flow {

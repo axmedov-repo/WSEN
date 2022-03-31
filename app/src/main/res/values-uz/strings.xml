@@ -89,5 +89,5 @@
     <string name="contributors">Hissa qo\'shganlar</string>
     <string name="number_nof_volunteers">Ko\'ngillilar soni</string>
     <string name="percentage_of_work_done_nby_volunteers">Ko\'ngillilar tomonidan bajarilgan ishlarning foizi</string>
-    <string name="percentage_of_work_not_completed">Tugallanmagan ishlarning foizi</string>
+    <string name="percentage_of_work_not_completed">Tugallanmagan\nishlarning foizi</string>
 </resources>
