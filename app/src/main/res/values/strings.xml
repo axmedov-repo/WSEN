@@ -101,4 +101,7 @@
     <string name="fill_our_this_fields">Fill out this fields</string>
     <string name="succed_delete_post">This post was successfully deleted</string>
     <string name="contributors">Contributors</string>
+    <string name="number_nof_volunteers">Number\nof volunteers</string>
+    <string name="percentage_of_work_done_nby_volunteers">Percentage of work done\nby volunteers</string>
+    <string name="percentage_of_work_not_completed">Percentage of work not completed</string>
 </resources>

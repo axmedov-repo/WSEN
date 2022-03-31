@@ -24,9 +24,9 @@ class ContributeVideosAdapter(val listener : OnWishItemTouchListener):
                     listener.onPostClick(getItem(absoluteAdapterPosition))
                 }
 
-                wishVideoImg.setOnClickListener {
-                    listener.onWishClick(getItem(absoluteAdapterPosition))
-                }
+//                wishVideoImg.setOnClickListener {
+//                    listener.onWishClick(getItem(absoluteAdapterPosition))
+//                }
             }
         }
 
@@ -79,7 +79,7 @@ class ContributeVideosAdapter(val listener : OnWishItemTouchListener):
     }
 
     interface OnWishItemTouchListener {
-        fun onWishClick(videoData : VideoData)
+//        fun onWishClick(videoData : VideoData)
         fun onPostClick(videoData : VideoData)
     }
 }

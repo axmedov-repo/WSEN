@@ -57,11 +57,11 @@ class AllVideoRvAdapter(var listener : OnItemClickListener):
                     allVideoRvItemBinding.unlikeVideoImg.setImageResource(R.drawable.ic_heart)
                 }
                 allVideoRvItemBinding.unlikeVideoImg.isEnabled = false
-                val scope = CoroutineScope(Dispatchers.Default)
-                scope.launch {
-                    delay(2000L)
-                    allVideoRvItemBinding.unlikeVideoImg.isEnabled = true
-                }
+//                val scope = CoroutineScope(Dispatchers.Default)
+//                scope.launch {
+//                    delay(2000L)
+//                    allVideoRvItemBinding.unlikeVideoImg.isEnabled = true
+//                }
                 listener.onClickLike(getItem(absoluteAdapterPosition))
             }
 
