@@ -1,5 +1,7 @@
 package uz.targetsoftwaredevelopment.wsen.data.remote.api
 
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 import uz.targetsoftwaredevelopment.wsen.data.remote.requests.*
@@ -21,10 +23,15 @@ interface BaseApi {
     @GET("api/all-posts/")
     suspend fun getAllVideos(@Header("Authorization") token: String): Response<AllVideosResponse>
 
+    @Multipart
     @POST("api/my-post/")
     suspend fun addVideo(
         @Header("Authorization") token: String,
-        @Body data: AddVideoRequest
+        @Part("title") title: RequestBody,
+        @Part("location") location: RequestBody,
+        @Part("desc") desc: RequestBody,
+        @Part("category") category: RequestBody,
+        @Part video: MultipartBody.Part
     ): Response<AddVideoResponse>
 
     // client/me/userni id si/

@@ -11,4 +11,3 @@ data class Results(
     val data: List<VideoData?>? = null,
     val page_size: Int? = null
 )
-

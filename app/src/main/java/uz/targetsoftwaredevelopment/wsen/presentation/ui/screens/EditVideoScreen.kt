@@ -11,7 +11,9 @@ import com.google.android.exoplayer2.MediaItem
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.wsen.R
 import uz.targetsoftwaredevelopment.wsen.databinding.ScreenEditVideoBinding
+import uz.targetsoftwaredevelopment.wsen.utils.gone
 import uz.targetsoftwaredevelopment.wsen.utils.scope
+import uz.targetsoftwaredevelopment.wsen.utils.visible
 
 @AndroidEntryPoint
 class EditVideoScreen : Fragment(R.layout.screen_edit_video) {
@@ -21,33 +23,34 @@ class EditVideoScreen : Fragment(R.layout.screen_edit_video) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
+        progressBar.animate()
+        progressBar.visible()
 
         loadData()
 
-        player = ExoPlayer.Builder(requireContext()).build()
-        val onlineUri: Uri =
-            Uri.parse(args.videoData.video)
-        val mediaItem: MediaItem = MediaItem.fromUri(onlineUri)
-        editVideoView.player = player
-        player.setMediaItem(mediaItem)
-        player.prepare()
-
-
         btnEditVideo.setOnClickListener {
-            if(editTitleEt.text.isNotEmpty() && editDescriptionEt.text.isNotEmpty() && editLocationEt.text.isNotEmpty()){
+            if (editTitleEt.text.isNotEmpty() && editDescriptionEt.text.isNotEmpty() && editLocationEt.text.isNotEmpty()) {
                 // TODO: maluotlar olinib post qilinadi
             }
         }
-
-
     }
 
     private fun loadData() {
         binding.apply {
+            player = ExoPlayer.Builder(requireContext()).build()
+            val onlineUri: Uri =
+                Uri.parse(args.videoData.video)
+            val mediaItem: MediaItem = MediaItem.fromUri(onlineUri)
+            editVideoView.player = player
+            player.setMediaItem(mediaItem)
+            player.prepare()
+
             editTitleEt.setText(args.videoData.title)
             editDescriptionEt.setText(args.videoData.desc)
             editLocationEt.setText(args.videoData.location)
         }
+        binding.progressBar.clearAnimation()
+        binding.progressBar.gone()
     }
 
     override fun onStop() {

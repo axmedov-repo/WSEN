@@ -12,10 +12,10 @@ import uz.targetsoftwaredevelopment.wsen.R
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.wsen.databinding.ContributeVideosItemBinding
 
-class ContributeVideosAdapter(val listener : OnWishItemTouchListener):
-    ListAdapter<VideoData , ContributeVideosAdapter.MyViewHolder>(MyDiffUtil) {
+class ContributeVideosAdapter(val listener: OnWishItemTouchListener) :
+    ListAdapter<VideoData, ContributeVideosAdapter.MyViewHolder>(MyDiffUtil) {
 
-    inner class MyViewHolder(private val contributeVideosItemBinding : ContributeVideosItemBinding):
+    inner class MyViewHolder(private val contributeVideosItemBinding: ContributeVideosItemBinding) :
         RecyclerView.ViewHolder(contributeVideosItemBinding.root) {
 
         init {
@@ -30,9 +30,9 @@ class ContributeVideosAdapter(val listener : OnWishItemTouchListener):
             }
         }
 
-        fun onBind(videoData : VideoData) {
+        fun onBind(videoData: VideoData) {
             itemView.animation =
-                AnimationUtils.loadAnimation(itemView.context , R.anim.animation_one)
+                AnimationUtils.loadAnimation(itemView.context, R.anim.animation_one)
 
             contributeVideosItemBinding.apply {
                 Glide.with(wishImageView.context)
@@ -53,33 +53,34 @@ class ContributeVideosAdapter(val listener : OnWishItemTouchListener):
         }
     }
 
-    object MyDiffUtil:DiffUtil.ItemCallback<VideoData>() {
-        override fun areItemsTheSame(oldItem : VideoData , newItem : VideoData) : Boolean {
+    object MyDiffUtil : DiffUtil.ItemCallback<VideoData>() {
+        override fun areItemsTheSame(oldItem: VideoData, newItem: VideoData): Boolean {
             return oldItem == newItem
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem : VideoData , newItem : VideoData) : Boolean {
+        override fun areContentsTheSame(oldItem: VideoData, newItem: VideoData): Boolean {
             return oldItem.id == newItem.id
         }
     }
 
-    override fun onCreateViewHolder(parent : ViewGroup , viewType : Int) : MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
             ContributeVideosItemBinding.inflate(
-                LayoutInflater.from(parent.context) ,
-                parent ,
+                LayoutInflater.from(parent.context),
+                parent,
                 false
             )
         )
     }
 
-    override fun onBindViewHolder(holder : MyViewHolder , position : Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.onBind(getItem(position))
     }
 
     interface OnWishItemTouchListener {
-        fun onWishClick(videoData : VideoData)
-        fun onPostClick(videoData : VideoData)
+        fun onWishClick(videoData: VideoData)
+        fun onPostClick(videoData: VideoData)
     }
 }
+

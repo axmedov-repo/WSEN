@@ -1,6 +1,6 @@
 package uz.targetsoftwaredevelopment.wsen.data.remote.requests
 
 data class SpamVideoRequest(
-    val post: Any? = null, // postni id si
+    val post: Int? = null,
     val desc: String? = null
 )

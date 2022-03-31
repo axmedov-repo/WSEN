@@ -10,6 +10,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.wsen.R
+import uz.targetsoftwaredevelopment.wsen.data.remote.responses.SpamVideoResponse
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.wsen.databinding.DialogDeleteBinding
 import uz.targetsoftwaredevelopment.wsen.databinding.PageMyPostsBinding
@@ -38,7 +39,12 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
+        refresh.isRefreshing = true
         viewModel.getAllMyVideos()
+        refresh.setOnRefreshListener {
+            viewModel.getAllMyVideos()
+            refresh.isRefreshing = true
+        }
 
         myPostsAdapter =
             MyPostsAdapter(object : MyPostsAdapter.OnPostItemTouchListener {
@@ -66,6 +72,7 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
 
                         deletePostCv.setOnClickListener {
                             viewModel.deleteMyVideo(videoData)
+
                             deleteBuilder.cancel()
                         }
                     }
@@ -86,18 +93,6 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
         viewModel.videoDeletedLiveData.observe(viewLifecycleOwner, videoDeleteObserver)
     }
 
-    private val videoDeleteObserver = Observer<Unit> {
-        myPostsAdapter.notifyItemRemoved(deletingVideoPos)
-        FancyToast.makeText(
-            requireContext(),
-            getString(R.string.succed_delete_post),
-            FancyToast.LENGTH_LONG,
-            FancyToast.CONFUSING,
-            R.drawable.delete_btn,
-            false
-        )
-    }
-
     private val allMyVideosObserver = Observer<List<VideoData?>> {
         if (it.isEmpty()) {
             binding.havePostTv.visible()
@@ -105,6 +100,7 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
             myPostsAdapter.currentList.clear()
             myPostsAdapter.submitList(it)
         }
+        binding.refresh.isRefreshing = false
     }
 
     private val errorObserver = Observer<String> { errorMessage ->
@@ -118,5 +114,18 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
                 false
             ).show()
         }
+    }
+
+    private val videoDeleteObserver = Observer<Unit> {
+        myPostsAdapter.notifyItemRemoved(deletingVideoPos)
+        viewModel.getAllMyVideos()
+        FancyToast.makeText(
+            requireContext(),
+            getString(R.string.succed_delete_post),
+            FancyToast.LENGTH_LONG,
+            FancyToast.CONFUSING,
+            R.drawable.delete_btn,
+            false
+        )
     }
 }

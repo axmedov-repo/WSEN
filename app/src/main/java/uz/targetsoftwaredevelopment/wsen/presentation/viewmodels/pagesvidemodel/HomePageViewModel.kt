@@ -8,6 +8,7 @@ interface HomePageViewModel {
     val getMapImageLiveData: LiveData<String>
     val statisticsLiveData: LiveData<Statistics>
     val categoriesLiveData: LiveData<List<CategoriesItem?>?>
+    val errorLiveData: LiveData<String>
 
     fun getMapImageUrlString(imageUrl: String)
 

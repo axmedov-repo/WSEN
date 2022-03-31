@@ -70,7 +70,6 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
         }
 
         addVideoCv.setOnClickListener {
-            Log.d("ADDBTN", "add btn bosildi")
             if (videoUri != Uri.EMPTY && createTitleEt.text.isNotEmpty() && descriptionEt.text.isNotEmpty() ) {
                 getVideoFile(videoUri)
             } else {
@@ -103,7 +102,6 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
                 binding.descriptionEt.text.toString()
             )
         )
-        Log.d("ADDBTN", "Compressed video keldi: ${compressedVideoFile.name}")
     }
 
     private fun showPictureDialog() {
@@ -236,13 +234,11 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
 
         override fun onPreExecute() {
             super.onPreExecute()
-            Log.d("ADDBTN", "onPreExecute ga kirdi")
             binding.progressView.visible()
             binding.progressView.animate()
         }
 
         override fun doInBackground(vararg strings: String?): String {
-            Log.d("ADDBTN", "doInBackground ga kirdi")
             var videoPath: String? = null
             try {
                 var uri: Uri = Uri.parse(strings[1])
@@ -256,8 +252,8 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
         override fun onPostExecute(result: String) {
             super.onPostExecute(result)
             var file: File = File(result)
-            Log.d("ADDBTN", "onPostExecute ga kirdi")
             viewModel.videoCompressed(file)
         }
     }
 }
+

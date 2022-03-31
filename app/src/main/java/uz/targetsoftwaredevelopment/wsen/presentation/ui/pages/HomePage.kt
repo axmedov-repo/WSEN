@@ -18,14 +18,14 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import uz.targetsoftwaredevelopment.wsen.R
 import uz.targetsoftwaredevelopment.wsen.data.entities.AdData
-import uz.targetsoftwaredevelopment.wsen.data.remote.responses.CategoriesItem
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.Statistics
 import uz.targetsoftwaredevelopment.wsen.databinding.PageHomeBinding
 import uz.targetsoftwaredevelopment.wsen.presentation.ui.adapters.AdsAdapter
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.HomePageViewModel
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.impl.HomePageViewModelImpl
-import uz.targetsoftwaredevelopment.wsen.utils.getImageFile
+import uz.targetsoftwaredevelopment.wsen.utils.gone
 import uz.targetsoftwaredevelopment.wsen.utils.scope
+import uz.targetsoftwaredevelopment.wsen.utils.visible
 
 @AndroidEntryPoint
 class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback {
@@ -38,6 +38,8 @@ class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
+        progressBar.visible()
+        progressBar.animate()
         viewModel.getHomePageData()
         if (isFirstTime) {
             fillAdsList()
@@ -74,34 +76,13 @@ class HomePage : Fragment(R.layout.page_home), OnMapReadyCallback {
         }
 
         viewModel.statisticsLiveData.observe(viewLifecycleOwner, statisticsObserver)
-//        viewModel.categoriesLiveData.observe(viewLifecycleOwner, categoriesObserver)
     }
 
     private val statisticsObserver = Observer<Statistics> {
         binding.txtHeaderVolunteers.text = "${it.all_volunteers}"
-    }
+        binding.progressBar.clearAnimation()
+        binding.progressBar.gone()
 
-    private val categoriesObserver = Observer<List<CategoriesItem?>?> {
-        /* Glide.with(binding.imgBgEcoVideos.context)
-             .load(it[0]!!.icon)
-             .placeholder(R.drawable.ic_place_holder)
-             .error(R.drawable.ic_error)
-             .into(binding.imgBgEcoVideos)
-         binding.ecoVideoTv.text = it[0]!!.name
-
-         Glide.with(binding.imgBgMyVideos.context)
-             .load(it[1]!!.icon)
-             .placeholder(R.drawable.ic_place_holder)
-             .error(R.drawable.ic_error)
-             .into(binding.imgBgMyVideos)
-         binding.myVideoTv.text = it[1]!!.name
-
-         Glide.with(binding.imgBgAllVideos.context)
-             .load(it[2]!!.icon)
-             .placeholder(R.drawable.ic_place_holder)
-             .error(R.drawable.ic_error)
-             .into(binding.imgBgAllVideos)
-         binding.allVideoTv.text = it[2]!!.name*/
     }
 
     override fun onMapReady(googleMap: GoogleMap) {

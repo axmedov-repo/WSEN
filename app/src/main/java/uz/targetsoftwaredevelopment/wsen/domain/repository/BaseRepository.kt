@@ -44,4 +44,6 @@ interface BaseRepository {
     fun getAllFavouriteVideos(): Flow<Result<AllFavouriteVideosResponse>>
 
     fun changeLike(videoData: VideoData): Flow<Result<LikeVideoResponse>>
+
+    fun spamVideo(spamVideoRequest: SpamVideoRequest): Flow<Result<SpamVideoResponse>>
 }
