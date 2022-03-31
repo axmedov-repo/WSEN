@@ -15,6 +15,7 @@ data class LikeVideResponseData(
 	val video: String? = null,
 	val title: String? = null,
 	val chat_link: Any? = null,
+	val is_liked_by_currentUser:Boolean = false,
 	@field:SerializedName("updated_at")
 	val updayed_at: String? = null,
 	val location: String? = null,

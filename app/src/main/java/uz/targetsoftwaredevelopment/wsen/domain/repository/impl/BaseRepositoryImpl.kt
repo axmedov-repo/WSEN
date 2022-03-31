@@ -6,6 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.fold
 import uz.targetsoftwaredevelopment.wsen.data.enums.SplashOpenScreenTypes
 import uz.targetsoftwaredevelopment.wsen.data.local.LocalStorage
 import uz.targetsoftwaredevelopment.wsen.data.local.SafeStorage
@@ -159,7 +160,7 @@ class BaseRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             emit(Result.success(response.body()!!.results!!))
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     override fun editMyVideo(videoData: EditVideoRequest): Flow<Result<EditVideoResponse>> = flow {
         val response =
@@ -188,7 +189,7 @@ class BaseRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             emit(Result.success(response.body()!!))
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     override fun deleteMyVideo(videoData: VideoData): Flow<Result<String>> = flow {
         Log.d("DELETE_VIDEO", "REPOSITORY g kridi")
@@ -200,5 +201,5 @@ class BaseRepositoryImpl @Inject constructor(
         Log.d("DELETE_VIDEO", "REPOSITORY success")
             emit(Result.success("Deleted"))
         }
-    }
+    }.flowOn(Dispatchers.IO)
 }

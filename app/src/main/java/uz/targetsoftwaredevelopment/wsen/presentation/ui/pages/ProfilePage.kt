@@ -169,7 +169,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
                 val fileOutputStream = FileOutputStream(file)
                 openInputStream?.copyTo(fileOutputStream)
                 openInputStream?.close()
-//            val readBytes = file.readBytes()
+                val readBytes = file.readBytes()
             }
         }
 

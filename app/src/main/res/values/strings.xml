@@ -100,4 +100,5 @@
     <string name="video_success_add">The video was successfully added</string>
     <string name="fill_our_this_fields">Fill out this fields</string>
     <string name="succed_delete_post">This post was successfully deleted</string>
+    <string name="contributors">Contributors</string>
 </resources>

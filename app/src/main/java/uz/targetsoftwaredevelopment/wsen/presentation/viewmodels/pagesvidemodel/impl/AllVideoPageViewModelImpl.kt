@@ -1,12 +1,13 @@
 package uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.impl
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import uz.targetsoftwaredevelopment.wsen.R
+import uz.targetsoftwaredevelopment.wsen.app.App
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.LikeVideResponseData
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.wsen.domain.repository.BaseRepository
@@ -18,9 +19,9 @@ import javax.inject.Inject
 class AllVideoPageViewModelImpl @Inject constructor(private val baseRepository: BaseRepository) :
     ViewModel(), AllVideoPageViewModel {
     override val allVideosLiveData = MutableLiveData<List<VideoData?>?>()
-    override val errorLiveData = MutableLiveData<Unit>()
+    override val errorLiveData = MutableLiveData<String>()
 
-    override val changeLikeLiveData = MutableLiveData<LikeVideResponseData>()
+    override val changeLikeLiveData = MutableLiveData<LikeVideResponseData?>()
 
     override fun getAllVideos() {
         if (isConnected()) {
@@ -29,26 +30,26 @@ class AllVideoPageViewModelImpl @Inject constructor(private val baseRepository: 
                     allVideosLiveData.value = it
                 }
                 it.onFailure {
-                    errorLiveData.value = Unit
+                    errorLiveData.value = App.instance.getString(R.string.some_error)
                 }
             }.launchIn(viewModelScope)
         } else {
-            errorLiveData.value = Unit
+            errorLiveData.value = App.instance.getString(R.string.internet_disconnected)
         }
     }
 
     override fun changeLikeVideo(videoData : VideoData) {
         if(isConnected()){
             baseRepository.changeLike(videoData).onEach {
-                it.onSuccess {
-                    changeLikeLiveData.value = it.data!!
+                it.onSuccess {likeVideoResponse->
+                    changeLikeLiveData.value = likeVideoResponse.data
                 }
                 it.onFailure {
-                    errorLiveData.value = Unit
+                    errorLiveData.value = App.instance.getString(R.string.some_error)
                 }
             }.launchIn(viewModelScope)
         }else{
-            errorLiveData.value = Unit
+            errorLiveData.value = App.instance.getString(R.string.internet_disconnected)
         }
     }
 }

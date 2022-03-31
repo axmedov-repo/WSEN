@@ -102,7 +102,7 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
         if (it.isEmpty()) {
             binding.havePostTv.visible()
         } else {
-            myPostsAdapter.currentList.clear()
+//            myPostsAdapter.currentList.clear()
             myPostsAdapter.submitList(it)
         }
     }

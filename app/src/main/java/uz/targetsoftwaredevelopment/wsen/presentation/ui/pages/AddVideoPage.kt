@@ -45,7 +45,6 @@ import java.net.URISyntaxException
 class AddVideoPage : Fragment(R.layout.page_add_video) {
     private val binding by viewBinding(PageAddVideoBinding::bind)
     private val viewModel: AddVideoPageViewModel by viewModels<AddVidePageViewModelImpl>()
-
     //    private var videoView: VideoView? = null
     private val VIDEO_DIRECTORY = "/demonutsVideoooo"
     private val GALLERY = 1

@@ -6,8 +6,8 @@ import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
 
 interface AllVideoPageViewModel {
     val allVideosLiveData: LiveData<List<VideoData?>?>
-    val errorLiveData: LiveData<Unit>
     val changeLikeLiveData:LiveData<LikeVideResponseData?>
+    val errorLiveData: LiveData<String>
 
     fun getAllVideos()
 

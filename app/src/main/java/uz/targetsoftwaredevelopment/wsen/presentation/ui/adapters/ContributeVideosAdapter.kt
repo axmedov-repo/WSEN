@@ -38,7 +38,7 @@ class ContributeVideosAdapter(val listener : OnWishItemTouchListener):
                 Glide.with(wishImageView.context)
                     .load(videoData.preload_img)
                     .centerCrop()
-                    .placeholder(R.drawable.default_profile_img)
+                    .placeholder(R.drawable.default_profile_img2)
                     .into(wishImageView)
 
                 wishTitleTv.text = videoData.title

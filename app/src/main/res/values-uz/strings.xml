@@ -86,4 +86,5 @@
     <string name="video_success_add">Video muvaffaqiyatli qo\'shildi</string>
     <string name="fill_our_this_fields">Maydonlarni to\'ldiring</string>
     <string name="succed_delete_post">Bu post muaffaqqiyatli o\'chdi</string>
+    <string name="contributors">Hissa qo\'shganlar</string>
 </resources>

@@ -59,7 +59,7 @@ class ContributeVideosScreen : Fragment(R.layout.screen_contribute_videos) {
     private val errorObserver = Observer<String> { errorMessage ->
         if (errorMessage.equals(getString(R.string.internet_disconnected))) {}
         else {
-            FancyToast.makeText(requireContext(),errorMessage,FancyToast.LENGTH_LONG,FancyToast.ERROR,true)
+            FancyToast.makeText(requireContext(),errorMessage,FancyToast.LENGTH_LONG,FancyToast.ERROR,false)
         }
     }
 }
