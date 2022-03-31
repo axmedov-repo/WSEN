@@ -12,7 +12,7 @@ android {
     defaultConfig {
         resConfigs("en","uz")
         applicationId "uz.targetsoftwaredevelopment.wsen"
-        minSdk 25
+        minSdk 23
         targetSdk 32
         renderscriptTargetApi 19
         renderscriptSupportModeEnabled true

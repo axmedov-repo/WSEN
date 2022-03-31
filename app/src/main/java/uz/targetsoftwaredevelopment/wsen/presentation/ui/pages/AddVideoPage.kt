@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.MediaController
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -53,6 +54,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
     private lateinit var mediaController: MediaController
     private var isGranted = false
     private var videoUri: Uri = Uri.EMPTY
+    private lateinit var l : File
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
@@ -71,7 +73,16 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
 
         addVideoCv.setOnClickListener {
             if (videoUri != Uri.EMPTY && createTitleEt.text.isNotEmpty() && descriptionEt.text.isNotEmpty() ) {
-                getVideoFile(videoUri)
+                createTitleEt.isEnabled = false
+                createTitleEt.setTextColor(ContextCompat.getColor(requireContext(), R.color.color_grey))
+                descriptionEt.isEnabled = false
+                descriptionEt.setTextColor(ContextCompat.getColor(requireContext(), R.color.color_grey))
+                locationEt.isEnabled = false
+                locationEt.setTextColor(ContextCompat.getColor(requireContext(), R.color.color_grey))
+//                getVideoFile(videoUri)
+                binding.progressView.visible()
+                binding.progressView.animate()
+                viewModel.videoCompressed(l)
             } else {
                 FancyToast.makeText(requireContext(),getString(R.string.fill_our_this_fields),FancyToast.LENGTH_LONG,FancyToast.INFO,true)
                     .show()
@@ -85,6 +96,15 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
     private val addVideoObserver = Observer<AddVideoResponse> {
         binding.progressView.gone()
         binding.progressView.clearAnimation()
+        binding.apply {
+
+        createTitleEt.isEnabled = true
+        createTitleEt.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+        descriptionEt.isEnabled = true
+        descriptionEt.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+        locationEt.isEnabled = true
+        locationEt.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+        }
         binding.createTitleEt.setText("")
         binding.descriptionEt.setText("")
         binding.locationEt.setText("")
@@ -146,7 +166,12 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
             if (data != null) {
                 val contentURI = data.data
                 videoUri = contentURI!!
+                var file: File = File(contentURI.path)
+
                 val selectedVideoPath = getPath(contentURI)
+                l = File(selectedVideoPath)
+
+
                 binding.apply {
                     videoView.setVideoURI(contentURI)
 //                    videoView.requestFocus()
@@ -159,6 +184,8 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
             val contentURI = data!!.data
             videoUri = contentURI!!
             val recordedVideoPath = getPath(contentURI)
+            l = File(recordedVideoPath)
+
             binding.apply {
                 videoView.setVideoURI(contentURI)
 //                videoView.requestFocus()

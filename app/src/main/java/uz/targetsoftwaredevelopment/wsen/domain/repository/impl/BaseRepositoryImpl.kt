@@ -1,17 +1,15 @@
 package uz.targetsoftwaredevelopment.wsen.domain.repository.impl
 
+import android.R.attr.description
 import android.util.Log
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import uz.targetsoftwaredevelopment.wsen.data.enums.SplashOpenScreenTypes
 import uz.targetsoftwaredevelopment.wsen.data.local.LocalStorage
 import uz.targetsoftwaredevelopment.wsen.data.local.SafeStorage
@@ -19,6 +17,7 @@ import uz.targetsoftwaredevelopment.wsen.data.remote.api.BaseApi
 import uz.targetsoftwaredevelopment.wsen.data.remote.requests.*
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.*
 import uz.targetsoftwaredevelopment.wsen.domain.repository.BaseRepository
+import java.lang.NullPointerException
 import javax.inject.Inject
 
 
@@ -122,22 +121,25 @@ class BaseRepositoryImpl @Inject constructor(
 
     override fun addVideo(data: AddVideoRequest): Flow<Result<AddVideoResponse?>> =
         flow {
+
+            val requestBody = RequestBody.create("*/*".toMediaTypeOrNull(),  data.video!!)
             val response = baseApi.addVideo(
                 token = localStorage.token,
                 video = MultipartBody.Part.createFormData(
-                    "file",
-                    data.video!!.name,
-                    data.video.asRequestBody(
-                        data.video.extension.toMediaTypeOrNull()
-                    )
+                    "video",
+                    data.video.name,
+                    requestBody
                 ),
-                category = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), data.category.toString()),
-                desc = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), data.desc.toString()),
-                location = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), data.location.toString()),
-                title = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), data.title.toString()),
+                category = RequestBody.create("text/plain".toMediaTypeOrNull(), data.category.toString()),
+                desc = RequestBody.create("text/plain".toMediaTypeOrNull(), data.desc.toString()),
+                location = RequestBody.create("text/plain".toMediaTypeOrNull(), data.location.toString()),
+                title = RequestBody.create("text/plain".toMediaTypeOrNull(), data.title.toString()),
             )
             if (response.isSuccessful) {
                 emit(Result.success(response.body()))
+            } else {
+                //TOTO Handler
+                emit(Result.failure(NullPointerException()))
             }
         }.flowOn(Dispatchers.IO)
 

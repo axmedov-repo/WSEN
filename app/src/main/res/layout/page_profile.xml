@@ -12,6 +12,7 @@
         android:id="@+id/profile_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:visibility="invisible"
         android:layout_marginTop="25dp"
         android:scaleType="centerCrop"
         android:src="@drawable/default_profile_img2"
@@ -50,6 +51,7 @@
     <ImageView
         android:id="@+id/add_img"
         android:layout_width="25dp"
+        android:visibility="invisible"
         android:layout_height="25dp"
         android:contentDescription="@string/my_image"
         android:src="@drawable/pluss"

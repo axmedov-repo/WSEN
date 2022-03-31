@@ -28,7 +28,7 @@ class SplashScreen:Fragment(R.layout.screen_splash) {
     override fun onViewCreated(view : View , savedInstanceState : Bundle?) = binding.scope {
         super.onViewCreated(view , savedInstanceState)
         lifecycleScope.launchWhenResumed {
-            delay(2000L)
+            delay(1000L)
             viewModel.splashOpenScreenLiveData.observe(
                 viewLifecycleOwner ,
                 splashOpenScreenObserver

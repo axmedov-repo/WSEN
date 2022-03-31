@@ -10,7 +10,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.wsen.R
-import uz.targetsoftwaredevelopment.wsen.data.remote.responses.SpamVideoResponse
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.wsen.databinding.DialogDeleteBinding
 import uz.targetsoftwaredevelopment.wsen.databinding.PageMyPostsBinding
@@ -25,6 +24,7 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
     private val binding by viewBinding(PageMyPostsBinding::bind)
     private val viewModel: MyPostsPageViewModel by viewModels<MyPostsPageViewModelImpl>()
     private lateinit var myPostsAdapter: MyPostsAdapter
+    private val videosList  = ArrayList<VideoData?>()
     private var deletingVideoPos: Int = 0
 
     private var editMyVideoClickedListener: ((VideoData) -> Unit)? = null
@@ -97,8 +97,9 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
         if (it.isEmpty()) {
             binding.havePostTv.visible()
         } else {
-            myPostsAdapter.currentList.clear()
-            myPostsAdapter.submitList(it)
+            videosList.clear()
+            videosList.addAll(it)
+            myPostsAdapter.submitList(videosList)
         }
         binding.refresh.isRefreshing = false
     }
@@ -117,7 +118,6 @@ class MyPostsPage : Fragment(R.layout.page_my_posts) {
     }
 
     private val videoDeleteObserver = Observer<Unit> {
-        myPostsAdapter.notifyItemRemoved(deletingVideoPos)
         viewModel.getAllMyVideos()
         FancyToast.makeText(
             requireContext(),
