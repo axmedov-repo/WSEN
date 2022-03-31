@@ -72,7 +72,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
             if (videoUri != Uri.EMPTY && createTitleEt.text.isNotEmpty() && descriptionEt.text.isNotEmpty() ) {
                 getVideoFile(videoUri)
             } else {
-                FancyToast.makeText(requireContext(),getString(R.string.fill_our_this_fields),FancyToast.LENGTH_LONG,FancyToast.INFO,true)
+                FancyToast.makeText(requireContext(),getString(R.string.fill_our_this_fields),FancyToast.LENGTH_LONG,FancyToast.INFO,false)
                     .show()
             }
         }
@@ -88,7 +88,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
         binding.descriptionEt.setText("")
         binding.locationEt.setText("")
 
-        FancyToast.makeText(requireContext(),getString(R.string.video_success_add),FancyToast.LENGTH_LONG,FancyToast.SUCCESS,true)
+        FancyToast.makeText(requireContext(),getString(R.string.video_success_add),FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false)
             .show()
     }
 

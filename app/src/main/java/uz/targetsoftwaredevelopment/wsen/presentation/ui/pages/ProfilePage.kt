@@ -130,7 +130,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
             errorMessage,
             FancyToast.LENGTH_LONG,
             FancyToast.ERROR,
-            true
+            false
         ).show()
     }
 

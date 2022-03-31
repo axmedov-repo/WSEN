@@ -110,7 +110,7 @@ class AllVideoPage : Fragment(R.layout.page_all_video) {
     }
     private val errorLiveDataObserver = Observer<String> {errorMessage->
         if(errorMessage.equals(getString(R.string.some_error))){
-            FancyToast.makeText(requireContext(),"Some error",
+            FancyToast.makeText(requireContext(),getString(R.string.some_error),
                 FancyToast.LENGTH_LONG,FancyToast.DEFAULT,false).show()
         }
     }

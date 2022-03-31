@@ -124,7 +124,7 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
         } else {
             FancyToast.makeText(
                 requireContext(), errorMessage,
-                FancyToast.LENGTH_LONG, FancyToast.WARNING, true
+                FancyToast.LENGTH_LONG, FancyToast.WARNING, false
             ).show()
         }
     }
