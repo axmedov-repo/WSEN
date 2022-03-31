@@ -8,7 +8,9 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.targetsoftwaredevelopment.wsen.R
 import uz.targetsoftwaredevelopment.wsen.app.App
+import uz.targetsoftwaredevelopment.wsen.data.remote.requests.SpamVideoRequest
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.LikeVideResponseData
+import uz.targetsoftwaredevelopment.wsen.data.remote.responses.SpamVideoResponse
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.wsen.domain.repository.BaseRepository
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.AllVideoPageViewModel
@@ -20,6 +22,7 @@ class AllVideoPageViewModelImpl @Inject constructor(private val baseRepository: 
     ViewModel(), AllVideoPageViewModel {
     override val allVideosLiveData = MutableLiveData<List<VideoData?>?>()
     override val errorLiveData = MutableLiveData<String>()
+    override val spamVideoResponseLiveData = MutableLiveData<SpamVideoResponse>()
 
     override val changeLikeLiveData = MutableLiveData<LikeVideResponseData?>()
 
@@ -30,16 +33,16 @@ class AllVideoPageViewModelImpl @Inject constructor(private val baseRepository: 
                     allVideosLiveData.value = it
                 }
                 it.onFailure {
-                    errorLiveData.value = App.instance.getString(R.string.some_error)
+                    errorLiveData.value = it.message
                 }
             }.launchIn(viewModelScope)
         } else {
-            errorLiveData.value = App.instance.getString(R.string.internet_disconnected)
+            errorLiveData.value = "${R.string.internet_disconnected}"
         }
     }
 
-    override fun changeLikeVideo(videoData : VideoData) {
-        if(isConnected()){
+    override fun changeLikeVideo(videoData: VideoData) {
+        if (isConnected()) {
             baseRepository.changeLike(videoData).onEach {
                 it.onSuccess {likeVideoResponse->
                     changeLikeLiveData.value = likeVideoResponse.data
@@ -50,6 +53,21 @@ class AllVideoPageViewModelImpl @Inject constructor(private val baseRepository: 
             }.launchIn(viewModelScope)
         }else{
             errorLiveData.value = App.instance.getString(R.string.internet_disconnected)
+        } 
+    }
+
+    override fun spamVideo(spamVideoRequest: SpamVideoRequest) {
+        if (isConnected()) {
+            baseRepository.spamVideo(spamVideoRequest).onEach {
+                it.onSuccess {
+                    spamVideoResponseLiveData.value = it
+                }
+                it.onFailure {
+                    errorLiveData.value = it.message
+                }
+            }.launchIn(viewModelScope)
+        } else {
+            errorLiveData.value = "${R.string.internet_disconnected}"
         }
     }
 }

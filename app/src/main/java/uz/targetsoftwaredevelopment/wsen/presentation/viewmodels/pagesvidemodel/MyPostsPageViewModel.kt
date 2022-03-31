@@ -1,7 +1,8 @@
 package uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel
 
 import androidx.lifecycle.LiveData
-import uz.targetsoftwaredevelopment.wsen.data.remote.requests.EditVideoRequest
+import uz.targetsoftwaredevelopment.wsen.data.remote.requests.SpamVideoRequest
+import uz.targetsoftwaredevelopment.wsen.data.remote.responses.SpamVideoResponse
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
 
 interface MyPostsPageViewModel {

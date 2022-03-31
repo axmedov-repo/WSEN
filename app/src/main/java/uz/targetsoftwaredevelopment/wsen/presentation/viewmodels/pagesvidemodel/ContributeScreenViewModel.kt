@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.LikeVideResponseData
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
 
-interface WishPageViewModel {
+interface ContributeScreenViewModel {
     val favouriteVideosLiveData: LiveData<List<VideoData?>?>
     val likeChangedLiveData: LiveData<LikeVideResponseData>
     val errorLiveData: LiveData<String>

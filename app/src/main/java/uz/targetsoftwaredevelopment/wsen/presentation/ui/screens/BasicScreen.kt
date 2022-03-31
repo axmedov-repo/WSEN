@@ -37,7 +37,6 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
     NavigationView.OnNavigationItemSelectedListener {
     private val binding by viewBinding(ScreenBasicNavBinding::bind)
     private val viewModel: BasicScreenViewModel by viewModels<BasicScreenViewModelImpl>()
-    private val checkInternetReceiver = CheckInternetReceiver()
     private lateinit var drawerImage: ImageView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
@@ -181,14 +180,4 @@ class BasicScreen : Fragment(R.layout.screen_basic_nav),
         return true
     }
 
-    override fun onStart() {
-        val filter: IntentFilter = IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
-        requireContext().registerReceiver(checkInternetReceiver, filter)
-        super.onStart()
-    }
-
-    override fun onDestroy() {
-        requireContext().unregisterReceiver(checkInternetReceiver)
-        super.onDestroy()
-    }
 }

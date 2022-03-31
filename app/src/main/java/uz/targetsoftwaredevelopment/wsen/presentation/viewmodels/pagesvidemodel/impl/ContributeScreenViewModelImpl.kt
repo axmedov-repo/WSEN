@@ -10,13 +10,13 @@ import uz.targetsoftwaredevelopment.wsen.R
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.LikeVideResponseData
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.VideoData
 import uz.targetsoftwaredevelopment.wsen.domain.repository.BaseRepository
-import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.WishPageViewModel
+import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.ContributeScreenViewModel
 import uz.targetsoftwaredevelopment.wsen.utils.isConnected
 import javax.inject.Inject
 
 @HiltViewModel
-class WishPageViewModelImpl @Inject constructor(private val baseRepository: BaseRepository) :
-    ViewModel(), WishPageViewModel {
+class ContributeScreenViewModelImpl @Inject constructor(private val baseRepository: BaseRepository) :
+    ViewModel(), ContributeScreenViewModel {
 
     override val favouriteVideosLiveData = MutableLiveData<List<VideoData?>?>()
     override val likeChangedLiveData = MutableLiveData<LikeVideResponseData>()

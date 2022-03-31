@@ -13,9 +13,11 @@ import com.google.android.exoplayer2.MediaItem
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.wsen.R
 import uz.targetsoftwaredevelopment.wsen.databinding.ScreenWatchVideoBinding
+import uz.targetsoftwaredevelopment.wsen.utils.gone
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.screensviewmodel.WatchVideoScreenViewModel
 import uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.screensviewmodel.impl.WatchVideoScreenViewModelImpl
 import uz.targetsoftwaredevelopment.wsen.utils.scope
+import uz.targetsoftwaredevelopment.wsen.utils.visible
 
 @AndroidEntryPoint
 class WatchVideoScreen : Fragment(R.layout.screen_watch_video) {
@@ -27,7 +29,8 @@ class WatchVideoScreen : Fragment(R.layout.screen_watch_video) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = binding.scope {
         super.onViewCreated(view, savedInstanceState)
-
+        progressBar.animate()
+        progressBar.visible()
         loadData()
 //        viewModel.changeLikeLiveData.observe(viewLifecycleOwner,changeVideoObserver)
 //        isLike = args.videoData.is_liked_by_currentUser
@@ -56,7 +59,6 @@ class WatchVideoScreen : Fragment(R.layout.screen_watch_video) {
 
     private fun loadData() {
         binding.apply {
-
             player = ExoPlayer.Builder(requireContext()).build()
             val onlineUri: Uri = Uri.parse(args.videoData.video)
             val mediaItem: MediaItem = MediaItem.fromUri(onlineUri)
@@ -64,16 +66,16 @@ class WatchVideoScreen : Fragment(R.layout.screen_watch_video) {
             player.setMediaItem(mediaItem)
             player.prepare()
 
-            if(args.videoData.is_liked_by_currentUser){
+            if (args.videoData.is_liked_by_currentUser) {
                 likeVideoImg.setImageResource(R.drawable.ic_heart)
-            }else{
+            } else {
                 likeVideoImg.setImageResource(R.drawable.ic_heart_unlike)
             }
 
-            if(args.videoData.status=="1"){
+            if (args.videoData.status == "1") {
                 statusColor.setBackgroundResource(R.drawable.shape_status_waiting)
                 statusTextTv.text = getString(R.string.waiting)
-            }else{
+            } else {
                 statusColor.setBackgroundResource(R.drawable.shape_status_finished)
                 statusTextTv.text = getString(R.string.finished)
             }
@@ -95,7 +97,8 @@ class WatchVideoScreen : Fragment(R.layout.screen_watch_video) {
             dataMonthTv.text = monthData
 
             watchDescriptionTv.text = args.videoData.desc
-
+            progressBar.clearAnimation()
+            progressBar.gone()
         }
     }
 

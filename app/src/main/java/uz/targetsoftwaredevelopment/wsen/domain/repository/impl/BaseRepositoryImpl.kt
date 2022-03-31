@@ -6,7 +6,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.fold
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import uz.targetsoftwaredevelopment.wsen.data.enums.SplashOpenScreenTypes
 import uz.targetsoftwaredevelopment.wsen.data.local.LocalStorage
 import uz.targetsoftwaredevelopment.wsen.data.local.SafeStorage
@@ -117,10 +120,21 @@ class BaseRepositoryImpl @Inject constructor(
 
     override fun addVideo(data: AddVideoRequest): Flow<Result<AddVideoResponse?>> =
         flow {
-            Log.d("ADDBTN", "repositoryda addvideoga kirdi")
-            val response = baseApi.addVideo(localStorage.token, data)
+            val response = baseApi.addVideo(
+                token = localStorage.token,
+                video = MultipartBody.Part.createFormData(
+                    "file",
+                    data.video!!.name,
+                    data.video.asRequestBody(
+                        data.video.extension.toMediaTypeOrNull()
+                    )
+                ),
+                category = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), data.category.toString()),
+                desc = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), data.desc.toString()),
+                location = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), data.location.toString()),
+                title = RequestBody.create("multipart/form-data".toMediaTypeOrNull(), data.title.toString()),
+            )
             if (response.isSuccessful) {
-                Log.d("ADDBTN", "repositoryda success")
                 emit(Result.success(response.body()))
             }
         }.flowOn(Dispatchers.IO)
@@ -192,14 +206,21 @@ class BaseRepositoryImpl @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
     override fun deleteMyVideo(videoData: VideoData): Flow<Result<String>> = flow {
-        Log.d("DELETE_VIDEO", "REPOSITORY g kridi")
         val response = baseApi.deleteMyVideo(
             localStorage.token,
             "${safeStorage.base_url}api/my-post/${videoData.id}/"
         )
         if (response.code() == 204) {
-        Log.d("DELETE_VIDEO", "REPOSITORY success")
             emit(Result.success("Deleted"))
         }
     }.flowOn(Dispatchers.IO)
+    }
+
+    override fun spamVideo(spamVideoRequest: SpamVideoRequest): Flow<Result<SpamVideoResponse>> =
+        flow {
+            val response = baseApi.spamVideo(localStorage.token, spamVideoRequest)
+            if (response.isSuccessful) {
+                emit(Result.success(response.body()!!))
+            }
+        }
 }

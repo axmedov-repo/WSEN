@@ -1,6 +1,5 @@
 package uz.targetsoftwaredevelopment.wsen.presentation.viewmodels.pagesvidemodel.impl
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -29,22 +28,17 @@ class AddVidePageViewModelImpl @Inject constructor(private val baseRepository: B
     }
 
     override fun addVideo(data: AddVideoRequest) {
-        Log.d("ADDBTN", "viewmodelda addvideoga kirdi")
         if (isConnected()) {
             baseRepository.addVideo(data).onEach {
-                Log.d("ADDBTN", "viewmodelda internet connected")
                 it.onSuccess {
                     addVideoResponseLiveData.value = it
-                    Log.d("ADDBTN", "viewmodelda success")
                 }
                 it.onFailure {
-                    Log.d("ADDBTN", "viewmodelda failure")
                     errorLiveData.value = Unit
                 }
             }.launchIn(viewModelScope)
         } else {
             errorLiveData.value = Unit
-            Log.d("ADDBTN", "viewmodelda error")
         }
     }
 }
