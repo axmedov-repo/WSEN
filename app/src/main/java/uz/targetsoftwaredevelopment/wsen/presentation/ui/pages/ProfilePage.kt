@@ -130,7 +130,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
             errorMessage,
             FancyToast.LENGTH_LONG,
             FancyToast.ERROR,
-            true
+            false
         ).show()
     }
 
@@ -169,7 +169,7 @@ class ProfilePage : Fragment(R.layout.page_profile) {
                 val fileOutputStream = FileOutputStream(file)
                 openInputStream?.copyTo(fileOutputStream)
                 openInputStream?.close()
-//            val readBytes = file.readBytes()
+                val readBytes = file.readBytes()
             }
         }
 

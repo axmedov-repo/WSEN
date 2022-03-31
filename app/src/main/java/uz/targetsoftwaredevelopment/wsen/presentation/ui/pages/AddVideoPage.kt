@@ -46,7 +46,6 @@ import java.net.URISyntaxException
 class AddVideoPage : Fragment(R.layout.page_add_video) {
     private val binding by viewBinding(PageAddVideoBinding::bind)
     private val viewModel: AddVideoPageViewModel by viewModels<AddVidePageViewModelImpl>()
-
     //    private var videoView: VideoView? = null
     private val VIDEO_DIRECTORY = "/demonutsVideoooo"
     private val GALLERY = 1
@@ -84,7 +83,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
                 binding.progressView.animate()
                 viewModel.videoCompressed(l)
             } else {
-                FancyToast.makeText(requireContext(),getString(R.string.fill_our_this_fields),FancyToast.LENGTH_LONG,FancyToast.INFO,true)
+                FancyToast.makeText(requireContext(),getString(R.string.fill_our_this_fields),FancyToast.LENGTH_LONG,FancyToast.INFO,false)
                     .show()
             }
         }
@@ -109,7 +108,7 @@ class AddVideoPage : Fragment(R.layout.page_add_video) {
         binding.descriptionEt.setText("")
         binding.locationEt.setText("")
 
-        FancyToast.makeText(requireContext(),getString(R.string.video_success_add),FancyToast.LENGTH_LONG,FancyToast.SUCCESS,true)
+        FancyToast.makeText(requireContext(),getString(R.string.video_success_add),FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false)
             .show()
     }
 

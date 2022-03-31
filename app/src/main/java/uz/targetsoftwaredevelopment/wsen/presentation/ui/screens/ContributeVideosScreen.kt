@@ -1,6 +1,7 @@
 package uz.targetsoftwaredevelopment.wsen.presentation.ui.screens
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -34,11 +35,11 @@ class ContributeVideosScreen : Fragment(R.layout.screen_contribute_videos) {
 
         contributeVideosAdapter =
             ContributeVideosAdapter(object : ContributeVideosAdapter.OnWishItemTouchListener {
-                override fun onWishClick(videoData: VideoData) {
-                    viewModel.changeLike(videoData)
-                    //dialog keladi
-                    //ha bo'lsa unlike bo'ladi va MyContribute dan o'chirb ketadi
-                }
+//                override fun onWishClick(videoData: VideoData) {
+//                    viewModel.changeLike(videoData)
+//                    //dialog keladi
+//                    //ha bo'lsa unlike bo'ladi va MyContribute dan o'chirb ketadi
+//                }
 
                 override fun onPostClick(videoData: VideoData) {
                     findNavController().navigate(
@@ -48,6 +49,8 @@ class ContributeVideosScreen : Fragment(R.layout.screen_contribute_videos) {
                     )
                 }
             })
+
+        myVideosRv.adapter = contributeVideosAdapter
 
         favouriteToolbar.setNavigationOnClickListener {
             findNavController().popBackStack()
@@ -60,6 +63,14 @@ class ContributeVideosScreen : Fragment(R.layout.screen_contribute_videos) {
     private val favouriteVideosObserver = Observer<List<VideoData?>?> {
         contributeVideosAdapter.submitList(it)
         binding.refresh.isRefreshing = false
+        if(it!=null){
+            binding.myVideosRv.visibility = View.VISIBLE
+            binding.havePostTv.visibility = View.GONE
+        }else{
+            binding.myVideosRv.visibility = View.GONE
+            binding.havePostTv.visibility = View.VISIBLE
+        }
+
     }
 
     private val errorObserver = Observer<String> { errorMessage ->

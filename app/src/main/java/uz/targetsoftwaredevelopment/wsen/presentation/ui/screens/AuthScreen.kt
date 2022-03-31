@@ -145,7 +145,7 @@ class AuthScreen:Fragment(R.layout.screen_auth) {
             getString(R.string.successfully_registered) ,
             FancyToast.LENGTH_LONG ,
             FancyToast.SUCCESS ,
-            true
+            false
         ).show()
         binding.viewPager.currentItem = 0
     }
@@ -157,7 +157,7 @@ class AuthScreen:Fragment(R.layout.screen_auth) {
             getString(R.string.successfully_logged_in) ,
             FancyToast.LENGTH_LONG ,
             FancyToast.SUCCESS ,
-            true
+            false
         ).show()
         findNavController().navigate(AuthScreenDirections.actionAuthScreenToBasicScreen())
     }
@@ -170,7 +170,7 @@ class AuthScreen:Fragment(R.layout.screen_auth) {
                 getString(R.string.internet_disconnected),
                 FancyToast.LENGTH_LONG,
                 FancyToast.ERROR,
-                true
+                false
             ).show()
         } else {
             FancyToast.makeText(
@@ -178,7 +178,7 @@ class AuthScreen:Fragment(R.layout.screen_auth) {
                 getString(R.string.error_reg_login),
                 FancyToast.LENGTH_LONG,
                 FancyToast.ERROR,
-                true
+                false
             ).show()
         }
     }

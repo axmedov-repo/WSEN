@@ -7,6 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import uz.targetsoftwaredevelopment.wsen.R
+import uz.targetsoftwaredevelopment.wsen.app.App
 import uz.targetsoftwaredevelopment.wsen.data.remote.requests.SpamVideoRequest
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.LikeVideResponseData
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.SpamVideoResponse
@@ -23,7 +24,7 @@ class AllVideoPageViewModelImpl @Inject constructor(private val baseRepository: 
     override val errorLiveData = MutableLiveData<String>()
     override val spamVideoResponseLiveData = MutableLiveData<SpamVideoResponse>()
 
-    override val changeLikeLiveData = MutableLiveData<LikeVideResponseData>()
+    override val changeLikeLiveData = MutableLiveData<LikeVideResponseData?>()
 
     override fun getAllVideos() {
         if (isConnected()) {
@@ -43,16 +44,16 @@ class AllVideoPageViewModelImpl @Inject constructor(private val baseRepository: 
     override fun changeLikeVideo(videoData: VideoData) {
         if (isConnected()) {
             baseRepository.changeLike(videoData).onEach {
-                it.onSuccess {
-                    changeLikeLiveData.value = it.data!!
+                it.onSuccess {likeVideoResponse->
+                    changeLikeLiveData.value = likeVideoResponse.data
                 }
                 it.onFailure {
-                    errorLiveData.value = it.message
+                    errorLiveData.value = App.instance.getString(R.string.some_error)
                 }
             }.launchIn(viewModelScope)
-        } else {
-            errorLiveData.value = "${R.string.internet_disconnected}"
-        }
+        }else{
+            errorLiveData.value = App.instance.getString(R.string.internet_disconnected)
+        } 
     }
 
     override fun spamVideo(spamVideoRequest: SpamVideoRequest) {

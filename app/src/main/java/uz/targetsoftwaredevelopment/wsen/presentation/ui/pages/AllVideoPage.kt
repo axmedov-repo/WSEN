@@ -2,15 +2,19 @@ package uz.targetsoftwaredevelopment.wsen.presentation.ui.pages
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.shashank.sony.fancytoastlib.FancyToast
 import dagger.hilt.android.AndroidEntryPoint
 import uz.targetsoftwaredevelopment.wsen.R
+import uz.targetsoftwaredevelopment.wsen.app.App
 import uz.targetsoftwaredevelopment.wsen.data.remote.requests.SpamVideoRequest
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.LikeVideResponseData
 import uz.targetsoftwaredevelopment.wsen.data.remote.responses.SpamVideoResponse
@@ -46,6 +50,7 @@ class AllVideoPage : Fragment(R.layout.page_all_video) {
         viewModel.allVideosLiveData.observe(viewLifecycleOwner, allVideosObserver)
         viewModel.changeLikeLiveData.observe(viewLifecycleOwner, changeLikeObserver)
         viewModel.spamVideoResponseLiveData.observe(viewLifecycleOwner, spamVideoResponseObserver)
+        viewModel.errorLiveData.observe(viewLifecycleOwner,errorLiveDataObserver)
     }
 
     private fun loadAllVideoData() {
@@ -100,7 +105,14 @@ class AllVideoPage : Fragment(R.layout.page_all_video) {
 
     }
     private val changeLikeObserver = Observer<LikeVideResponseData?> {
-
+//        Toast.makeText(App.instance , "success" , Toast.LENGTH_SHORT).show()
+        viewModel.getAllVideos()
+    }
+    private val errorLiveDataObserver = Observer<String> {errorMessage->
+        if(errorMessage.equals(getString(R.string.some_error))){
+            FancyToast.makeText(requireContext(),getString(R.string.some_error),
+                FancyToast.LENGTH_LONG,FancyToast.DEFAULT,false).show()
+        }
     }
 
     private val spamVideoResponseObserver = Observer<SpamVideoResponse> {

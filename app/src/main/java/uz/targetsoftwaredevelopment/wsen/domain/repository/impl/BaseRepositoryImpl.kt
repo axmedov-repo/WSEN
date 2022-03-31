@@ -178,7 +178,7 @@ class BaseRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             emit(Result.success(response.body()!!.results!!))
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     override fun editMyVideo(videoData: EditVideoRequest): Flow<Result<EditVideoResponse>> = flow {
         val response =
@@ -207,7 +207,7 @@ class BaseRepositoryImpl @Inject constructor(
         if (response.isSuccessful) {
             emit(Result.success(response.body()!!))
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     override fun deleteMyVideo(videoData: VideoData): Flow<Result<String>> = flow {
         val response = baseApi.deleteMyVideo(
@@ -217,7 +217,7 @@ class BaseRepositoryImpl @Inject constructor(
         if (response.code() == 204) {
             emit(Result.success("Deleted"))
         }
-    }
+    }.flowOn(Dispatchers.IO)
 
     override fun spamVideo(spamVideoRequest: SpamVideoRequest): Flow<Result<SpamVideoResponse>> =
         flow {

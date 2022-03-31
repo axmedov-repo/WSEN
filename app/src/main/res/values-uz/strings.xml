@@ -86,4 +86,8 @@
     <string name="video_success_add">Video muvaffaqiyatli qo\'shildi</string>
     <string name="fill_our_this_fields">Maydonlarni to\'ldiring</string>
     <string name="succed_delete_post">Bu post muaffaqqiyatli o\'chdi</string>
+    <string name="contributors">Hissa qo\'shganlar</string>
+    <string name="number_nof_volunteers">Ko\'ngillilar soni</string>
+    <string name="percentage_of_work_done_nby_volunteers">Ko\'ngillilar tomonidan bajarilgan ishlarning foizi</string>
+    <string name="percentage_of_work_not_completed">Tugallanmagan\nishlarning foizi</string>
 </resources>

@@ -24,9 +24,9 @@ class ContributeVideosAdapter(val listener: OnWishItemTouchListener) :
                     listener.onPostClick(getItem(absoluteAdapterPosition))
                 }
 
-                wishVideoImg.setOnClickListener {
-                    listener.onWishClick(getItem(absoluteAdapterPosition))
-                }
+//                wishVideoImg.setOnClickListener {
+//                    listener.onWishClick(getItem(absoluteAdapterPosition))
+//                }
             }
         }
 
@@ -38,7 +38,7 @@ class ContributeVideosAdapter(val listener: OnWishItemTouchListener) :
                 Glide.with(wishImageView.context)
                     .load(videoData.preload_img)
                     .centerCrop()
-                    .placeholder(R.drawable.default_profile_img)
+                    .placeholder(R.drawable.default_profile_img2)
                     .into(wishImageView)
 
                 wishTitleTv.text = videoData.title
@@ -79,8 +79,8 @@ class ContributeVideosAdapter(val listener: OnWishItemTouchListener) :
     }
 
     interface OnWishItemTouchListener {
-        fun onWishClick(videoData: VideoData)
-        fun onPostClick(videoData: VideoData)
+//        fun onWishClick(videoData : VideoData)
+        fun onPostClick(videoData : VideoData)
     }
 }
 

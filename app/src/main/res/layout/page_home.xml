@@ -119,7 +119,7 @@
         <TextView
             android:id="@+id/txtDescriptionVolunteers"
             style="@style/footer_descriptions_style"
-            android:text="were deployed worldwide\nin 2019"
+            android:text="@string/number_nof_volunteers"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/txtDescriptionLocation"
             app:layout_constraintTop_toBottomOf="@id/txtHeaderVolunteers" />
@@ -143,7 +143,7 @@
         <TextView
             android:id="@+id/txtDescriptionLocation"
             style="@style/footer_descriptions_style"
-            android:text="UN Volunteers were from countries of the\nGlobal South"
+            android:text="@string/percentage_of_work_done_nby_volunteers"
             app:layout_constraintLeft_toRightOf="@id/txtDescriptionVolunteers"
             app:layout_constraintRight_toLeftOf="@id/txtDescriptionStatistics"
             app:layout_constraintTop_toBottomOf="@id/txtHeaderLocation" />
@@ -159,7 +159,8 @@
         <TextView
             android:id="@+id/txtHeaderStatistics"
             style="@style/footer_headers_style"
-            android:text="0 Volunteers"
+            android:layout_marginTop="16dp"
+            android:text="0%"
             app:layout_constraintLeft_toLeftOf="@id/imgStatistics"
             app:layout_constraintRight_toRightOf="@id/imgStatistics"
             app:layout_constraintTop_toBottomOf="@id/imgStatistics" />
@@ -167,7 +168,7 @@
         <TextView
             android:id="@+id/txtDescriptionStatistics"
             style="@style/footer_descriptions_style"
-            android:text="served with the\nUnited Nations Development Programme"
+            android:text="@string/percentage_of_work_not_completed"
             app:layout_constraintLeft_toRightOf="@id/txtDescriptionLocation"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtHeaderStatistics" />
